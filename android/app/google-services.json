@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "802935635704",
+    "project_id": "ecomplus-33376",
+    "storage_bucket": "ecomplus-33376.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802935635704:android:69ac652132a8592ecf850d",
+        "android_client_info": {
+          "package_name": "com.touchconnect.ecomplus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802935635704-raa2ifn6k7bfbh31c11r6o6f2csvmmmq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXZeMcWuLfQnz9fmGPUvH4MKUmCusXohc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802935635704-raa2ifn6k7bfbh31c11r6o6f2csvmmmq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "802935635704-v8a2j91apb1bs0jljp2lsngj6pi40hng.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.touchconnect.ecomplus"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
