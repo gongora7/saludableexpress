@@ -362,6 +362,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ],
                 ),
               ),
+              
+              if (widget._product.attributes.length > 0)
               Container(
                 padding: EdgeInsets.all(15.0),
                 child: Text(
@@ -369,7 +371,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
-              if (widget._product.attributes.length > 0)
                 buildAttributesList(widget._product.attributes),
               SizedBox(
                 height: 50.0,

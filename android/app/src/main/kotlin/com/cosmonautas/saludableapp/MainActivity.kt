@@ -1,4 +1,4 @@
-package com.touchconnect.ecomplus
+package com.cosmonautas.saludableapp
 
 
 import io.flutter.embedding.android.FlutterActivity

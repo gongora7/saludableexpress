@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Inicia Sesión"),
+        title: Text("Bienvenido"),
       ),
       body: Container(
         child: SingleChildScrollView(
@@ -34,20 +34,20 @@ class _LoginState extends State<Login> {
             child: Column(
               children: [
                 new Container(
-                    width: 120.0,
-                    height: 120.0,
+                    width: 130.0,
+                    height: 130.0,
                     decoration: new BoxDecoration(
-                        shape: BoxShape.circle,
+                        shape: BoxShape.rectangle,
                         image: new DecorationImage(
                             fit: BoxFit.fill,
                             image: new NetworkImage(
-                              "http://ecomplus2.touch-connect.online/images/media/2021/05/2aE2R20201.png",
+                              "https://store.saludableexpress.com/images/media/2021/06/thumbnail1622601274NjCig02302.png",
                             )))),
                 SizedBox(height: 16.0),
-                Text(
-                  "Inicia Sesión para continuar",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black54),
-                ),
+                /* Text(
+                  "Bienvenido a tu vida saludable",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                ),*/
                 SizedBox(
                   height: 16.0,
                 ),
@@ -100,11 +100,11 @@ class MyCustomFormState extends State<MyCustomForm> {
     return Form(
       key: _formKey,
       child: Container(
-        padding: EdgeInsets.all(50.0),
+        padding: EdgeInsets.all(60.0),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(4.0),
           boxShadow: [BoxShadow(
-                            color: Colors.blueAccent.withOpacity(0.5),
+                            color: Colors.lightGreen.withOpacity(0.5),
                             spreadRadius: 4,
                             blurRadius: 4,
                             offset: Offset(0, 0),
@@ -112,8 +112,7 @@ class MyCustomFormState extends State<MyCustomForm> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter, 
-            colors: [const Color.fromRGBO(61, 148, 242, 1), const Color.fromRGBO(5, 138, 255, 1)
-            ] 
+            colors: [const Color.fromRGBO(102, 174, 39, 0.4), const Color.fromRGBO(178, 239, 120, 0.6), const Color.fromRGBO(24, 167, 120, 0.9)]
             )
             ),
         child: Column(
@@ -131,7 +130,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 fillColor: Colors.white,
                 contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(16.0),
+                  borderRadius: new BorderRadius.circular(2.0),
                   borderSide: new BorderSide(
                     color: Colors.white70,
                   ),
@@ -158,7 +157,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                  fillColor: Colors.white70,
                 contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(16.0),
+                  borderRadius: new BorderRadius.circular(2.0),
                   borderSide: new BorderSide(
                     color: Colors.white70,
                   ),
@@ -190,8 +189,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                   width: double.maxFinite,
                   height: 40.0,
                   child: FlatButton(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-                      color: Colors.white30,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
+                      color: Colors.white60,
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
                           loginBloc.add(ProcessLogin(
@@ -199,8 +198,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                         }
                       },
                       child: Text(
-                        "Inicia Sesión",
-                        style: TextStyle(color: Colors.white),
+                        "Entrar",
+                        style: TextStyle(color: Colors.black38, fontWeight: FontWeight.w700),
                       )),
                 );
               },

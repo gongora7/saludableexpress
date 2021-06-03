@@ -36,6 +36,7 @@ import 'package:share/share.dart';
 
 import '../../models/drawer_menu_item.dart';
 import '../../utils/locale_utils/app_localization.dart';
+import '../../utils/theme_utils/app_themes.dart';
 import '../pages/home_page_1.dart';
 import '../pages/home_page_2.dart';
 import '../pages/home_page_4.dart';
@@ -51,8 +52,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
-  String navigationStyle = "both";
-  //String navigationStyle = "side";
+  //String navigationStyle = "both";
+  String navigationStyle = "side";
   Box _box;
   Box _userBox;
 
@@ -171,7 +172,7 @@ class _HomeState extends State<Home> {
                     ? null
                     : Theme(
                       data: Theme.of(context).copyWith(
-                        canvasColor: Colors.blueAccent[400],
+                        canvasColor: Theme.of(context).primaryColor,
                         primaryColor: Colors.white,
                         textTheme: Theme.of(context).textTheme.copyWith(
                           caption: TextStyle(color: Colors.white70)
@@ -680,7 +681,7 @@ class _HomeState extends State<Home> {
   AppBar getAppBar(BuildContext context) {
     return AppBar(
       //title: Text(AppLocalizations.of(context).translate('appname')),
-      title: Text('Ecom Plus'),
+      title: Text('Saludable Express'),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search),

@@ -369,8 +369,8 @@ class _ProductsState extends State<Products>
                     child: Container(
                       decoration: BoxDecoration(color: Colors.white),
                       child: Center(
-                        child: Hero(
-                         tag: product.productsId,
+                        //child: Hero(
+                        // tag: product.productsId,
                         child: CachedNetworkImage(
                           imageUrl:
                               ApiProvider.imageBaseUrl + product.productsImage,
@@ -381,7 +381,7 @@ class _ProductsState extends State<Products>
                                       value: downloadProgress.progress),
                           errorWidget: (context, url, error) => Icon(Icons.error),
                         ),
-                        ),
+                        //),
 
                       ),
                     ),
