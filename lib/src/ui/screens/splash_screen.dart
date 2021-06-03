@@ -49,50 +49,72 @@ class ScreenUi extends StatelessWidget {
     return new WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
+       
         body: Container(
+          decoration: BoxDecoration(
+            
+            image: DecorationImage(
+              image: AssetImage("assets/images/bgsplash.jpg"),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(Colors.orangeAccent.withOpacity(0.6), BlendMode.darken),
+             ),
+          ),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 100.0,
-                        height: 100.0,
-                        child: Image.asset(
-                          "assets/images/icon.png",
-                          fit: BoxFit.fill,
+          child: Align(
+            alignment: Alignment.bottomLeft,
+             child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                 
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                    
+                      children: [
+                        
+                       
+                            SizedBox(
+                            width: 120.0,
+                            height: 120.0,
+                            
+                            child: Positioned(
+                              top: 50.0,
+                              child: Image.asset(
+                                
+                                "assets/images/logose.png",
+                                fit: BoxFit.fill,
+                                
+                              ),
+                            ),
+                          ),
+                        
+                       /* Text(
+                          "Ecom Plus",
+                          style: TextStyle(color: Colors.white, fontSize: 35),
+                        ),*/
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 25),
+                          child: CircularProgressIndicator(),
                         ),
-                      ),
-                      Text(
-                        "Ecom Plus",
-                        style: TextStyle(color: Colors.white, fontSize: 35),
-                      ),
-                    ],
+                       /* Padding(
+                          padding: EdgeInsets.only(bottom: 50),
+                          child: Text("By Touch Online"),
+                        ),*/
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 25),
-                        child: CircularProgressIndicator(),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 50),
-                        child: Text("By Touch Online"),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
