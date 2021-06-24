@@ -114,8 +114,8 @@ class _ShippingMethodsState extends State<ShippingMethods> {
             bottom: 0,
             width: MediaQuery.of(context).size.width,
             child: FlatButton(
-              color: Colors.blueAccent[400],
-              height: 60.0,
+              color: Colors.green[500],
+              height: 70.0,
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onPressed: () {
                 Navigator.push(
@@ -129,7 +129,7 @@ class _ShippingMethodsState extends State<ShippingMethods> {
                             shippingTax,
                             selectedService)));
               },
-              child: Text("Ir al Pago", style: TextStyle(color: Colors.white),),
+              child: Text("Ir al Pago", style: TextStyle(fontSize: 16,color: Colors.white),),
             ),
           )
         ],
@@ -209,10 +209,13 @@ class RadioListBuilderState extends State<RadioListBuilder> {
             value = ind;
             widget.shippingServiceSelected(widget.shippingServices[index]);
           }),
-          title: Text(widget.shippingServices[index].name),
-          subtitle: Text(widget.shippingServices[index].shippingMethod),
+          title: Text(widget.shippingServices[index].name, 
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+          subtitle: Text(widget.shippingServices[index].shippingMethod, 
+          style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),),
           secondary:
-              Text("\$" + double.parse(widget.shippingServices[index].rate.toString()).toStringAsFixed(2)),
+              Text("\$" + double.parse(widget.shippingServices[index].rate.toString()).toStringAsFixed(2), 
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
         );
       },
       itemCount: widget.shippingServices.length,

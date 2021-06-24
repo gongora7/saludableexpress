@@ -135,6 +135,7 @@ class MyCustomFormState extends State<MyCustomForm> {
 
   Widget buildFormData(BuildContext context, MyAddress address) {
     return Container(
+      decoration: BoxDecoration(color: Colors.orange.shade50),
       padding: EdgeInsets.all(20.0),
       child: Column(
         
@@ -143,373 +144,408 @@ class MyCustomFormState extends State<MyCustomForm> {
                     width: 120.0,
                     height: 120.0,
                     decoration: new BoxDecoration(
-                        shape: BoxShape.circle,
+                        shape: BoxShape.rectangle,
                         image: new DecorationImage(
                             fit: BoxFit.fill,
                             image: new NetworkImage(
-                              "http://ecomplus2.touch-connect.online/images/media/2021/05/LhkMP19506.png",
+                              "http://store.saludableexpress.com/images/media/2021/06/thumbnail1624473536zN38A23401.png",
                             )))),
           SizedBox(height: 16.0),
-          Text('Agrega una dirección de envio', style: TextStyle(fontSize: 20.0),),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  TextFormField(
-                    controller: _firstNameController,
-                    decoration: InputDecoration(
-                      labelText: 'Nombre',
-                      fillColor: Colors.white,
-                      contentPadding: EdgeInsets.all(8.0),
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(16.0),
-                        borderSide: new BorderSide(),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'El campo no puede estar vacio';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  TextFormField(
-                    controller: _lastNameController,
-                    decoration: InputDecoration(
-                      labelText: 'Apellido',
-                      fillColor: Colors.white,
-                      contentPadding: EdgeInsets.all(8.0),
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(16.0),
-                        borderSide: new BorderSide(),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'El campo no puede estar vacio';
-                      }
-                      return null;
-                    },
-                  ),
-                 /* SizedBox(
-                    height: 16.0,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PlacePicker(
-                            apiKey: AppConstants.PLACE_PICKER_API_KEY,
-                            onPlacePicked: (result) {
-                              print(result.geometry.location.lat.toString() +
-                                  "---" +
-                                  result.geometry.location.lng.toString());
-                              setState(() {
-                                latitude = result.geometry.location.lat;
-                                longitude = result.geometry.location.lng;
-
-                                _addressController.text = result.formattedAddress;
-                              });
-                              Navigator.of(context).pop();
-                            },
-                            initialPosition: LatLng(0.0, 0.0),
-                            useCurrentLocation: true,
+          Text('¿Dónde quieres recibirnos?', style: TextStyle(fontSize: 16.0),),
+          SizedBox(height: 16.0),
+          Container(
+            child: Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    TextFormField(
+                      controller: _firstNameController,
+                      decoration: InputDecoration(
+                        prefixIcon: Padding(padding: EdgeInsets.all(1),
+                         child: Icon(Icons.person)),
+                        labelText: 'Nombre'.toUpperCase(),
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.all(10.0),
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(2.0),
+                          borderSide: new BorderSide(
+                            color: Colors.black45,
                           ),
                         ),
-                      );
-                    },
-                    child: Container(
-                      padding:
-                          EdgeInsets.only(top: 14, bottom: 14, left: 8, right: 8),
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black38),
-                          borderRadius: BorderRadius.circular(8.0)),
-                      child: Text(
-                        (latitude == null)
-                            ? "Location"
-                            : latitude.toString() + ", " + longitude.toString(),
-                        style: TextStyle(fontSize: 16, color: Colors.black54),
                       ),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'El campo no puede estar vacio';
+                        }
+                        return null;
+                      },
                     ),
-                  ),*/
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  TextFormField(
-                    controller: _addressController,
-                    decoration: InputDecoration(
-                      labelText: 'Dirección',
-                      fillColor: Colors.white,
-                      contentPadding: EdgeInsets.all(8.0),
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(16.0),
-                        borderSide: new BorderSide(),
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    TextFormField(
+                      controller: _lastNameController,
+                      decoration: InputDecoration(
+                        prefixIcon: Padding(padding: EdgeInsets.all(1),
+                         child: Icon(Icons.people)),
+                        labelText: 'Apellido'.toUpperCase(),
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.all(10.0),
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(2.0),
+                          borderSide: new BorderSide(
+                             color: Colors.black45,
+                          ),
+                        ),
                       ),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'El campo no puede estar vacio';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'El campo no puede estar vacio';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  (isChecked)
-                      ? Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(
-                                  top: 14, bottom: 14, left: 8, right: 8),
-                              width: double.maxFinite,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black38),
-                                  borderRadius: BorderRadius.circular(16.0)),
-                              child: Text(
-                                (defaultCountry == null)
-                                    ? "País"
-                                    : defaultCountry.countriesName,
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.black54),
+                   /* SizedBox(
+                      height: 16.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PlacePicker(
+                              apiKey: AppConstants.PLACE_PICKER_API_KEY,
+                              onPlacePicked: (result) {
+                                print(result.geometry.location.lat.toString() +
+                                    "---" +
+                                    result.geometry.location.lng.toString());
+                                setState(() {
+                                  latitude = result.geometry.location.lat;
+                                  longitude = result.geometry.location.lng;
+
+                                  _addressController.text = result.formattedAddress;
+                                });
+                                Navigator.of(context).pop();
+                              },
+                              initialPosition: LatLng(0.0, 0.0),
+                              useCurrentLocation: true,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding:
+                            EdgeInsets.only(top: 14, bottom: 14, left: 8, right: 8),
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black38),
+                            borderRadius: BorderRadius.circular(8.0)),
+                        child: Text(
+                          (latitude == null)
+                              ? "Location"
+                              : latitude.toString() + ", " + longitude.toString(),
+                          style: TextStyle(fontSize: 16, color: Colors.black54),
+                        ),
+                      ),
+                    ),*/
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    TextFormField(
+                      controller: _addressController,
+                      decoration: InputDecoration(
+                        prefixIcon: Padding(padding: EdgeInsets.all(1),
+                         child: Icon(Icons.location_history)),
+                        labelText: 'Dirección'.toUpperCase(),
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.all(10.0),
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(2.0),
+                          borderSide: new BorderSide(
+                             color: Colors.black45,),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'El campo no puede estar vacio';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    (isChecked)
+                        ? Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(
+                                    top: 14, bottom: 14, left: 8, right: 8),
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black45),
+                                    borderRadius: BorderRadius.circular(2.0)),
+                                child: Text(
+                                  (defaultCountry == null)
+                                      ? "País"
+                                      : defaultCountry.countriesName,
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.black54),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 16.0,
-                            ),
-                          ],
-                        )
-                      : StreamBuilder(
-                          stream: _addressBloc.countriesStream,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData || snapshot.data != null) {
-                              CountriesResponse response =
-                                  snapshot.data as CountriesResponse;
-                              if (response.success == "1" &&
-                                  response.data.length > 0) {
-                                return Column(
-                                  children: [
-                                    DropdownButtonFormField(
-                                      isExpanded: true,
-                                      hint: Text("País"),
-                                      decoration: InputDecoration(
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.all(8.0),
-                                        border: new OutlineInputBorder(
-                                          borderRadius:
-                                              new BorderRadius.circular(16.0),
-                                          borderSide: new BorderSide(),
+                              SizedBox(
+                                height: 16.0,
+                              ),
+                            ],
+                          )
+                        : StreamBuilder(
+                            stream: _addressBloc.countriesStream,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData || snapshot.data != null) {
+                                CountriesResponse response =
+                                    snapshot.data as CountriesResponse;
+                                if (response.success == "1" &&
+                                    response.data.length > 0) {
+                                  return Column(
+                                    children: [
+                                      DropdownButtonFormField(
+                                        isExpanded: true,
+                                        hint: Text("País".toUpperCase()),
+                                        decoration: InputDecoration(
+                                          prefixIcon: Padding(padding: EdgeInsets.all(1),
+                                          child: Icon(Icons.flag)),
+                                          fillColor: Colors.white,
+                                          contentPadding: EdgeInsets.all(10.0),
+                                          border: new OutlineInputBorder(
+                                            borderRadius:
+                                                new BorderRadius.circular(2.0),
+                                            borderSide: new BorderSide(
+                                               color: Colors.black45,
+                                            ),
+                                          ),
                                         ),
+                                        items: response.data.map((e) {
+                                          return new DropdownMenuItem(
+                                              value: e,
+                                              child: Text(e.countriesName));
+                                        }).toList(),
+                                        onChanged: (value) {
+                                          selectedCountry = value as Country;
+                                          _addressBloc.addressEventSink.add(
+                                              GetZones(
+                                                  selectedCountry.countriesId));
+                                        },
                                       ),
-                                      items: response.data.map((e) {
-                                        return new DropdownMenuItem(
-                                            value: e,
-                                            child: Text(e.countriesName));
-                                      }).toList(),
-                                      onChanged: (value) {
-                                        selectedCountry = value as Country;
-                                        _addressBloc.addressEventSink.add(
-                                            GetZones(
-                                                selectedCountry.countriesId));
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 16.0,
-                                    ),
-                                  ],
-                                );
+                                      SizedBox(
+                                        height: 16.0,
+                                      ),
+                                    ],
+                                  );
+                                } else {
+                                  return _buildLoadingField("Country");
+                                }
                               } else {
                                 return _buildLoadingField("Country");
                               }
-                            } else {
-                              return _buildLoadingField("Country");
-                            }
-                          },
-                        ),
-                  (isChecked)
-                      ? Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(
-                                  top: 14, bottom: 14, left: 8, right: 8),
-                              width: double.maxFinite,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black38),
-                                  borderRadius: BorderRadius.circular(16.0)),
-                              child: Text(
-                                (defaultZone == null)
-                                    ? "Zone"
-                                    : defaultZone.zoneName,
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.black54),
+                            },
+                          ),
+                    (isChecked)
+                        ? Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(
+                                    top: 14, bottom: 14, left: 8, right: 8),
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black38),
+                                    borderRadius: BorderRadius.circular(16.0)),
+                                child: Text(
+                                  (defaultZone == null)
+                                      ? "Zone"
+                                      : defaultZone.zoneName,
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.black54),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 16.0,
-                            ),
-                          ],
-                        )
-                      : StreamBuilder(
-                          stream: _addressBloc.zonesStream,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData || snapshot.data != null) {
-                              ZonesResponse response =
-                                  snapshot.data as ZonesResponse;
-                              if (response.success == "1" &&
-                                  response.data.length > 0) {
-                                return Column(
-                                  children: [
-                                    DropdownButtonFormField(
-                                      isExpanded: true,
-                                      hint: Text("Zone"),
-                                      decoration: InputDecoration(
-                                        fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.all(8.0),
-                                        border: new OutlineInputBorder(
-                                          borderRadius:
-                                              new BorderRadius.circular(16.0),
-                                          borderSide: new BorderSide(),
+                              SizedBox(
+                                height: 16.0,
+                              ),
+                            ],
+                          )
+                        : StreamBuilder(
+                            stream: _addressBloc.zonesStream,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData || snapshot.data != null) {
+                                ZonesResponse response =
+                                    snapshot.data as ZonesResponse;
+                                if (response.success == "1" &&
+                                    response.data.length > 0) {
+                                  return Column(
+                                    children: [
+                                      DropdownButtonFormField(
+                                        isExpanded: true,
+                                        hint: Text("Estado".toUpperCase()),
+                                        decoration: InputDecoration(
+                                          prefixIcon: Padding(padding: EdgeInsets.all(1),
+                                          child: Icon(Icons.pin_drop)),
+                                          fillColor: Colors.white,
+                                          contentPadding: EdgeInsets.all(10.0),
+                                          border: new OutlineInputBorder(
+                                            borderRadius:
+                                                new BorderRadius.circular(2.0),
+                                            borderSide: new BorderSide(
+                                               color: Colors.black45,
+
+                                            ),
+                                          ),
                                         ),
+                                        items: response.data.map((e) {
+                                          return new DropdownMenuItem(
+                                              value: e, child: Text(e.zoneName));
+                                        }).toList(),
+                                        onChanged: (value) {
+                                          selectedZone = value as Zone;
+                                        },
                                       ),
-                                      items: response.data.map((e) {
-                                        return new DropdownMenuItem(
-                                            value: e, child: Text(e.zoneName));
-                                      }).toList(),
-                                      onChanged: (value) {
-                                        selectedZone = value as Zone;
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 16.0,
-                                    ),
-                                  ],
-                                );
+                                      SizedBox(
+                                        height: 16.0,
+                                      ),
+                                    ],
+                                  );
+                                } else {
+                                  return _buildLoadingField("Zone");
+                                }
                               } else {
-                                return _buildLoadingField("Zone");
+                                return Container();
                               }
-                            } else {
-                              return Container();
-                            }
-                          },
+                            },
+                          ),
+                    TextFormField(
+                      controller: _cityController,
+                      decoration: InputDecoration(
+                        prefixIcon: Padding(padding: EdgeInsets.all(1),
+                                          child: Icon(Icons.pin_drop)),
+                        labelText: 'Ciudad'.toUpperCase(),
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.all(10.0),
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(2.0),
+                          borderSide: new BorderSide(
+                             color: Colors.black45,
+                          ),
                         ),
-                  TextFormField(
-                    controller: _cityController,
-                    decoration: InputDecoration(
-                      labelText: 'Ciudad',
-                      fillColor: Colors.white,
-                      contentPadding: EdgeInsets.all(8.0),
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(16.0),
-                        borderSide: new BorderSide(),
                       ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'El campo no puede estar vacio';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  TextFormField(
-                    controller: _postalCodeController,
-                    decoration: InputDecoration(
-                      labelText: 'Código Postal',
-                      fillColor: Colors.white,
-                      contentPadding: EdgeInsets.all(8.0),
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(16.0),
-                        borderSide: new BorderSide(),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'El campo no puede estar vacio';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  TextFormField(
-                    controller: _phoneController,
-                    decoration: InputDecoration(
-                      labelText: 'Teléfono',
-                      fillColor: Colors.white,
-                      contentPadding: EdgeInsets.all(8.0),
-                      border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(16.0),
-                        borderSide: new BorderSide(),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'El campo no puede estar vacio';
-                      }
-                      return null;
-                    },
-                  ),
-                  if (address != null)
-                    SwitchListTile(
-                      title: Text("Dirección de Envio Principal"),
-                      contentPadding: EdgeInsets.all(0.0),
-                      value: isChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          this.isChecked = value;
-                          if (!isChecked) {
-                            _firstNameController.clear();
-                            _lastNameController.clear();
-                            _addressController.clear();
-                            _cityController.clear();
-                            _postalCodeController.clear();
-                            //_phoneController.clear();
-                            selectedCountry = null;
-                            selectedZone = null;
-
-                            latitude = null;
-                            longitude = null;
-
-                            _addressBloc.addressEventSink.add(GetCountries());
-                          } else {
-                            _firstNameController.text = address.firstname;
-                            _lastNameController.text = address.lastname;
-                            _addressController.text = address.street;
-                            _cityController.text = address.city;
-                            _postalCodeController.text = address.postcode;
-                            //_phoneController.text = "";
-                            selectedCountry = defaultCountry;
-
-                            selectedZone = defaultZone;
-
-                            latitude =
-                                double.tryParse(address.latitude.toString());
-                            longitude =
-                                double.tryParse(address.longitude.toString());
-                          }
-                        });
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'El campo no puede estar vacio';
+                        }
+                        return null;
                       },
-                      activeColor: Theme.of(context).primaryColor,
                     ),
-                ],
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    TextFormField(
+                      controller: _postalCodeController,
+                      decoration: InputDecoration(
+                        prefixIcon: Padding(padding: EdgeInsets.all(1),
+                                          child: Icon(Icons.album)),
+                        labelText: 'Código Postal'.toUpperCase(),
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.all(10.0),
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(2.0),
+                          borderSide: new BorderSide(
+                             color: Colors.black45,
+                          ),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'El campo no puede estar vacio';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    TextFormField(
+                      controller: _phoneController,
+                      decoration: InputDecoration(
+                        prefixIcon: Padding(padding: EdgeInsets.all(1),
+                                          child: Icon(Icons.phone)),
+                        labelText: 'Teléfono'.toUpperCase(),
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.all(10.0),
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(2.0),
+                          borderSide: new BorderSide(
+                             color: Colors.black45,
+                          ),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'El campo no puede estar vacio';
+                        }
+                        return null;
+                      },
+                    ),
+                    if (address != null)
+                      SwitchListTile(
+                        title: Text("Dirección de Envio Principal"),
+                        contentPadding: EdgeInsets.all(0.0),
+                        value: isChecked,
+                        onChanged: (value) {
+                          setState(() {
+                            this.isChecked = value;
+                            if (!isChecked) {
+                              _firstNameController.clear();
+                              _lastNameController.clear();
+                              _addressController.clear();
+                              _cityController.clear();
+                              _postalCodeController.clear();
+                              _phoneController.clear();
+                              selectedCountry = null;
+                              selectedZone = null;
+
+                              latitude = null;
+                              longitude = null;
+
+                              _addressBloc.addressEventSink.add(GetCountries());
+                            } else {
+                              _firstNameController.text = address.firstname;
+                              _lastNameController.text = address.lastname;
+                              _addressController.text = address.street;
+                              _cityController.text = address.city;
+                              _postalCodeController.text = address.postcode;
+                              //_phoneController.text = "";
+                              selectedCountry = defaultCountry;
+
+                              selectedZone = defaultZone;
+
+                              latitude =
+                                  double.tryParse(address.latitude.toString());
+                              longitude =
+                                  double.tryParse(address.longitude.toString());
+                            }
+                          });
+                        },
+                        activeColor: Theme.of(context).primaryColor,
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
           Container(
             width: MediaQuery.of(context).size.width,
             child: FlatButton(
-              color: Colors.blueAccent[400],
+              color: Colors.green[500],
               height: 60.0,
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onPressed: () {
@@ -561,10 +597,12 @@ class MyCustomFormState extends State<MyCustomForm> {
               decoration: InputDecoration(
                 labelText: title,
                 fillColor: Colors.white,
-                contentPadding: EdgeInsets.all(8.0),
+                contentPadding: EdgeInsets.all(10.0),
                 border: new OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(16.0),
-                  borderSide: new BorderSide(),
+                  borderRadius: new BorderRadius.circular(2.0),
+                  borderSide: new BorderSide(
+                     color: Colors.black45,
+                  ),
                 ),
               ),
             ),
@@ -572,7 +610,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Container(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(10.0),
                   child: CircularProgressIndicator(),
                 ),
               ),

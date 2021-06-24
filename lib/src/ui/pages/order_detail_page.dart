@@ -19,7 +19,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detlles de la Orden"),
+        title: Text("Detalles de la Orden"),
       ),
       body: Column(
         children: [

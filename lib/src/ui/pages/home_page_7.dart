@@ -97,23 +97,45 @@ class _HomePage7State extends State<HomePage7> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "All Products",
-                    style: TextStyle(fontSize: 18),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.90,
+                    padding: EdgeInsets.only(top: 50.0, right: 20.0, left: 20.0),
+                    child: FittedBox(
+                       fit: BoxFit.cover,
+                         child:
+                          Text(
+                        "-  CATÁLOGO SALUDABLE  -".toUpperCase(),
+                       style: TextStyle(
+                          fontSize: 32, 
+                          backgroundColor: Colors.greenAccent[100],
+                         fontWeight: FontWeight.bold,
+                          color: Colors.green[600],
+                        ),
+                         textAlign: TextAlign.center, 
+                      ), 
+                     
+                          
+                      ),
                   ),
+                  
                 ],
               ),
             ),
           )
         ];
       },
-      body: Products(
-        "Newest",
-        "",
-        false,
-        false,
-        false,
-        widget._toProductDetailPage),
+      body: Container(
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          color: Colors.greenAccent[100]),
+              child: Products(
+          "Newest",
+          "",
+          false,
+          false,
+          false,
+          widget._toProductDetailPage),
+      ),
     );
 
   }
@@ -153,8 +175,8 @@ class _HomePage7State extends State<HomePage7> {
                           "newest", true, widget._toProductDetailPage)));
             },
             child: Container(
-              width: 120,
-              margin: EdgeInsets.all(2.0),
+              width: 160,
+              margin: EdgeInsets.all(8.0),
               child: Column(
                 children: [
                   Center(
@@ -164,7 +186,7 @@ class _HomePage7State extends State<HomePage7> {
                       decoration: BoxDecoration(
                           shape: BoxShape.circle, color: Colors.white),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50.0),
+                        borderRadius: BorderRadius.circular(16.0),
                         child: CachedNetworkImage(
                           imageUrl: ApiProvider.imageBaseUrl +
                               categories[index].image,
@@ -179,9 +201,27 @@ class _HomePage7State extends State<HomePage7> {
                       ),
                     ),
                   ),
-                  Text(categories[index].categoriesName),
+                  Text(categories[index].categoriesName.toUpperCase(), 
+                  style:TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold
+                    
+                    ),
+                    textAlign: TextAlign.center,
+                    ),
+
+
                   Text(
-                      categories[index].totalProducts.toString() + " Products"),
+                      categories[index].totalProducts.toString() + " Productos", 
+                      style: 
+                      TextStyle(
+                        fontSize: 16,
+                    fontWeight: FontWeight.bold
+                    
+                    ),
+                    textAlign: TextAlign.center,
+
+                      ),
                 ],
               ),
             ),

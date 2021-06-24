@@ -302,38 +302,58 @@ class _CategoryPageState extends State<CategoryPage> {
             widget._toShopFromCategory(categories[index].categoriesId);
           },
           child: Container(
-            margin: EdgeInsets.all(4.0),
+            margin: EdgeInsets.all(20.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Center(
                   child: Container(
+                   
+                    
                     width: 100.0,
-                    height: 120.0,
+                    height: 100.0,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle, color: Colors.white),
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          ApiProvider.imageBaseUrl + categories[index].image,
-                      fit: BoxFit.fill,
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) =>
-                              CircularProgressIndicator(
-                                  value: downloadProgress.progress),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    child: ClipRRect(
+                       borderRadius: BorderRadius.circular(16.0),
+                       child: CachedNetworkImage(
+                        imageUrl:
+                            ApiProvider.imageBaseUrl + categories[index].image,
+                        fit: BoxFit.fill,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                CircularProgressIndicator(
+                                    value: downloadProgress.progress),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: 20.0,
+                  width: 40.0,
+                  
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(categories[index].categoriesName),
+                    Text(categories[index].categoriesName.toUpperCase(), 
+                  style:TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold
+                    
+                    ),
+                    textAlign: TextAlign.center,),
                     Text(categories[index].totalProducts.toString() +
-                        " Productos"),
+                        " Productos", 
+                      style: 
+                      TextStyle(
+                        fontSize: 16,
+                    fontWeight: FontWeight.bold
+                    
+                    ),
+                    textAlign: TextAlign.center,
+),
                   ],
                 )
               ],

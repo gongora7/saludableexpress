@@ -14,11 +14,15 @@ import 'package:flutter_app1/src/models/product_models/product_attribute_value.d
 import 'package:flutter_app1/src/models/product_models/product_attributes.dart';
 import 'package:flutter_app1/src/repositories/products_repo.dart';
 import 'package:flutter_app1/src/ui/pages/home_page_1.dart';
+import 'package:flutter_app1/src/ui/screens/search_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
+
+import '../../../app_data.dart';
+import 'cart_screen.dart';
 
 // ignore: must_be_immutable
 class ProductDetailPage extends StatefulWidget {
@@ -89,6 +93,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     _box = await Hive.openBox('my_cartBox');
     return;
   }
+   void _toProductDetailPage(Product product) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ProductDetailPage(product)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,11 +104,56 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         appBar: AppBar(
           title: Text("Detalle de Producto"),
           actions: <Widget>[
-            IconButton(
+              IconButton(
+          icon: Icon(Icons.search),
+          iconSize: 30,
+          tooltip: 'Buscar',
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Search(_toProductDetailPage)));
+          },
+        ),
+             IconButton(
+          icon: new Stack(
+            children: <Widget>[
+              new Icon(Icons.shopping_cart, size: 30),
+              new Positioned(
+                right: 0,
+                child: new Container(
+                  padding: EdgeInsets.all(2),
+                  decoration: new BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  constraints: BoxConstraints(
+                    minWidth: 14,
+                    minHeight: 14,
+                  ),
+                  child: new Text(
+                    AppData.cartIds.length.toString(),
+                    style: new TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+            ],
+          ),
+          tooltip: 'Carrito',
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Cart()));
+          },
+        )
+           /* IconButton(
               icon: const Icon(Icons.share),
               tooltip: 'Share',
               onPressed: () {},
-            ),
+            ),*/
             /* IconButton(
               icon: const Icon(Icons.favorite_border),
               tooltip: 'Favorite',
@@ -163,8 +216,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             margin: EdgeInsets.only(top: 4.0),
                             child: Text("$discount% DESC",
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 12)),
-                            color: Colors.redAccent[400],
+                                    color: Colors.white, fontSize: 16)),
+                            color: Colors.orange.shade400,
                           ),
                         if (widget._product.isFeature == 1)
                           Container(
@@ -242,11 +295,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               ? Text("EN STOCK",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.blueAccent[400]))
+                                      color: Colors.green.shade600,
+                                      fontSize: 18.0))
                               : Text("NO STOCK",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.redAccent)),
+                                      color: Colors.orange.shade700,
+                                      fontSize: 18.0)),
                       ],
                     ),
                     Row(
@@ -261,18 +316,18 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               Text(
                                 widget._product.productsName,
                                 style: TextStyle(
-                                    fontSize: 26, fontWeight: FontWeight.bold),
+                                    fontSize: 22, fontWeight: FontWeight.bold),
                               ),
                               if (widget._product.categories.length > 0)
                                 Padding(
-                                    padding: EdgeInsets.only(top: 4),
+                                    padding: EdgeInsets.only(top: 8),
                                     child: Text(
                                       widget._product.categories[0]
                                           .categoriesName,
                                       style: TextStyle(
                                         fontStyle: FontStyle.italic,
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 20.0,
+                                        fontSize: 18.0,
                                       ),
                                     )),
                             ],
@@ -297,7 +352,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         Text(
                           quantity.toString(),
                           style: TextStyle(
-                              fontSize: 28, fontWeight: FontWeight.bold),
+                              fontSize: 35, fontWeight: FontWeight.bold),
                         ),
                         IconButton(
                             icon: IconTheme(
@@ -411,8 +466,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       color: (response.stock <= 0 &&
                               widget._product.productsType != 2)
-                          ? Colors.redAccent[400]
-                          : Colors.blueAccent[400],
+                          ? Colors.orange.shade600
+                          : Colors.green.shade600,
                       child: Row(children: [
                         Expanded(
                           child: Text(
@@ -421,12 +476,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                 : (response.stock <= 0)
                                     ? "Fuera de Stock"
                                     : "Agregar a Carrito",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.white, fontSize: 18),
                           ),
                         ),
                         (widget._product.productsType != 2)
                             ? Text("+\$" + totalPriceToBuy.toStringAsFixed(2),
-                                style: TextStyle(color: Colors.white))
+                                style: TextStyle(color: Colors.white, fontSize: 18))
                             : IconTheme(
                                 data: IconThemeData(color: Colors.white),
                                 child: Icon(Icons.open_in_new)),

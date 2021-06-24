@@ -29,18 +29,35 @@ class _ProductsByTypeState extends State<ProductsByType>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 1,
       child: Column(
         children: [
           TabBar(
-            labelColor: Colors.black,
+             unselectedLabelColor: Colors.lightGreen[100],
+             labelColor: Colors.green[600],
+             indicatorWeight: 2,
+             indicatorColor: Colors.green[600],
+            
             tabs: [
               Tab(
-              text: "Recomendados",
+                
+                child: (
+                  Text(
+                    "Nuevos Productos".toUpperCase(), 
+                    style: TextStyle(
+                      fontSize: 22, 
+                      fontWeight: FontWeight.bold
+                      ), 
+                      textAlign: TextAlign.center,
+                      
+                      )
+               ),
+              
             ),
-            Tab(
+
+            /*Tab(
               text: "Top Seller",
-            ),
+            ),*/
             
            /* Tab(
               text: "Most Liked",
@@ -56,7 +73,7 @@ class _ProductsByTypeState extends State<ProductsByType>
               Center(child: Text("Most Liked")),
 */
              Products("special", "", true, false, false, _toProductDetailPage),
-             Products("top seller", "", true, false, false, _toProductDetailPage),
+             /*Products("top seller", "", true, false, false, _toProductDetailPage),*/
              
               /* Products("most liked", "", true, false, false, _toProductDetailPage),*/
             ]),

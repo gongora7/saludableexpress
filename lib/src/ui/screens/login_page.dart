@@ -112,7 +112,12 @@ class MyCustomFormState extends State<MyCustomForm> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter, 
-            colors: [const Color.fromRGBO(102, 174, 39, 0.4), const Color.fromRGBO(178, 239, 120, 0.6), const Color.fromRGBO(24, 167, 120, 0.9)]
+            colors: [
+              const Color.fromRGBO(102, 174, 39, 0.2), 
+              const Color.fromRGBO(178, 239, 120, 0.4), 
+              const Color.fromRGBO(24, 167, 120, 0.7)],
+            
+           
             )
             ),
         child: Column(
@@ -125,14 +130,18 @@ class MyCustomFormState extends State<MyCustomForm> {
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
+                prefixIcon: Padding(padding: EdgeInsets.all(1),
+                child: Icon(Icons.email),
+                ),
                 hintText: 'Email',
-                hintStyle: TextStyle(color: Colors.white70),
-                fillColor: Colors.white,
+                hintStyle: TextStyle(color: Colors.black45),
+                fillColor: Colors.black87,
                 contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(2.0),
+                  
                   borderSide: new BorderSide(
-                    color: Colors.white70,
+                    color: Colors.black45,
                   ),
                 ),
               ),
@@ -152,14 +161,17 @@ class MyCustomFormState extends State<MyCustomForm> {
               enableSuggestions: false,
               autocorrect: false,
               decoration: InputDecoration(
+                prefixIcon: Padding(padding: EdgeInsets.all(1),
+                child: Icon(Icons.security),
+                ),
                 hintText: 'Password',
-                hintStyle: TextStyle(color: Colors.white70),
-                 fillColor: Colors.white70,
+                hintStyle: TextStyle(color: Colors.black45),
+                 fillColor: Colors.black87,
                 contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(2.0),
                   borderSide: new BorderSide(
-                    color: Colors.white70,
+                    color: Colors.black45
                   ),
                 ),
               ),
@@ -179,7 +191,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 },
                 child: Text(
                   "¿Olvidaste tu Password?",
-                  style: TextStyle(color: Colors.white70),
+                  style: TextStyle(color: Colors.black45),
                 ),
               ),
             ),
@@ -190,6 +202,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   height: 40.0,
                   child: FlatButton(
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
+                      
                       color: Colors.white60,
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
@@ -199,7 +212,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       },
                       child: Text(
                         "Entrar",
-                        style: TextStyle(color: Colors.black38, fontWeight: FontWeight.w700),
+                        style: TextStyle(color: Colors.black45, fontWeight: FontWeight.w700),
                       )),
                 );
               },
@@ -252,15 +265,15 @@ class MyCustomFormState extends State<MyCustomForm> {
                         height: 1,
                         child: DecoratedBox(
                             decoration: BoxDecoration(
-                          color: Colors.white70,
+                          color: Colors.black45,
                         )))),
-                Padding(padding: EdgeInsets.all(16.0), child: Text("o también:", style: TextStyle(color:Colors.white70),)),
+                Padding(padding: EdgeInsets.all(16.0), child: Text("o también:", style: TextStyle(color:Colors.black45),)),
                 Expanded(
                     child: SizedBox(
                         height: 1,
                         child: DecoratedBox(
                             decoration: BoxDecoration(
-                          color: Colors.white70,
+                          color: Colors.black45,
                         )))),
               ],
             ),
@@ -317,7 +330,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   },
                   child: Text(
                     "Regístrate",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black87),
                   ),
                 ),
               ],
@@ -346,7 +359,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   children: [
                     Text(
                       "¿Olvidaste tu Password?",
-                      style: TextStyle(fontSize: 16, color: Colors.black54),
+                      style: TextStyle(fontSize: 16, color: Colors.black45),
                     ),
                     Expanded(
                       child: SizedBox(
@@ -358,7 +371,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: 'Email',
-                        fillColor: Colors.blueAccent,
+                        fillColor: Colors.black87,
                         contentPadding: EdgeInsets.all(8.0),
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(16.0),
@@ -377,7 +390,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       width: double.maxFinite,
                       child: FlatButton(
                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-                          color: Colors.blueAccent[400],
+                          color: Colors.black87,
                           height: 40.0,
                           onPressed: () {
                             if (_emailForgotController.value

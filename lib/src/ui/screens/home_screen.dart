@@ -88,24 +88,24 @@ class _HomeState extends State<Home> {
         DrawerMenuItem('Home 9', Icons.home),
         DrawerMenuItem('Home 10', Icons.home),
       ]) : DrawerMenuItem("Inicio", Icons.home),
-      AppConstants.isDemoMode ? DrawerMenuItem('Categorías', Icons.category, <DrawerMenuItem>[
-        DrawerMenuItem('Category 1', Icons.category),
-        DrawerMenuItem('Category 2', Icons.category),
-        DrawerMenuItem('Category 3', Icons.category),
-        DrawerMenuItem('Category 4', Icons.category),
-        DrawerMenuItem('Category 5', Icons.category),
-        DrawerMenuItem('Category 6', Icons.category),
-      ]) : DrawerMenuItem("Categorías", Icons.category),
-      AppConstants.isDemoMode ? DrawerMenuItem('Tienda', Icons.store, <DrawerMenuItem>[
+      AppConstants.isDemoMode ? DrawerMenuItem('Categorías', Icons.card_travel, <DrawerMenuItem>[
+        DrawerMenuItem('Category 1', Icons.card_travel),
+        DrawerMenuItem('Category 2', Icons.card_travel),
+        DrawerMenuItem('Category 3', Icons.card_travel),
+        DrawerMenuItem('Category 4', Icons.card_travel),
+        DrawerMenuItem('Category 5', Icons.card_travel),
+        DrawerMenuItem('Category 6', Icons.card_travel),
+      ]) : DrawerMenuItem("Categorías", Icons.card_travel),
+      AppConstants.isDemoMode ? DrawerMenuItem('Tienda', Icons.shopping_basket, <DrawerMenuItem>[
         DrawerMenuItem('Newest', Icons.store),
-        DrawerMenuItem('Top Sellers', Icons.store),
-        DrawerMenuItem('Super Deals', Icons.store),
-        DrawerMenuItem('Most Liked', Icons.store),
-        DrawerMenuItem('Flash Sale', Icons.store),
-      ] ) : DrawerMenuItem("Tienda", Icons.store),
+        DrawerMenuItem('Top Sellers', Icons.shopping_basket),
+        DrawerMenuItem('Super Deals', Icons.shopping_basket),
+        DrawerMenuItem('Most Liked', Icons.shopping_basket),
+        DrawerMenuItem('Flash Sale', Icons.shopping_basket),
+      ] ) : DrawerMenuItem("Tienda", Icons.shopping_basket),
       //DrawerMenuItem("My Account", Icons.person),
-      DrawerMenuItem("Mis Pedidos", Icons.assignment),
-      DrawerMenuItem("Mis Direcciones", Icons.location_on),
+      DrawerMenuItem("Mis Pedidos", Icons.assignment_sharp),
+      //DrawerMenuItem("Mis Direcciones", Icons.location_city),
     /* DrawerMenuItem("My Favorites", Icons.favorite),
 
       DrawerMenuItem("Intro", Icons.integration_instructions),
@@ -194,13 +194,13 @@ class _HomeState extends State<Home> {
                           ),
                           BottomNavigationBarItem(
                             label: "Categorías",
-                            icon: Icon(Icons.category_rounded),
-                            activeIcon: Icon(Icons.category_outlined),
+                            icon: Icon(Icons.card_travel_outlined),
+                            activeIcon: Icon(Icons.card_travel_rounded),
                           ),
                           BottomNavigationBarItem(
                             label: "Tienda",
-                            icon: Icon(Icons.store_rounded),
-                            activeIcon: Icon(Icons.store_outlined),
+                            icon: Icon(Icons.shop_outlined),
+                            activeIcon: Icon(Icons.shop_rounded),
 
                           ),
                           /* BottomNavigationBarItem(
@@ -257,10 +257,11 @@ class _HomeState extends State<Home> {
             color: Theme.of(context).primaryColor,
           ),
           child: Stack(children: [
+             
             DrawerHeader(
               child: Row(
                 children: [
-                  new Container(
+                 new Container(
                     width: 80.0,
                     height: 80.0,
                     decoration: new BoxDecoration(shape: BoxShape.circle),
@@ -268,7 +269,7 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.circular(50.0),
                       child: CachedNetworkImage(
                         imageUrl:
-                            "http://ecomplus2.touch-connect.online/images/media/2021/05/ioAZH18510.png",
+                            "http://store.saludableexpress.com/images/media/2021/06/thumbnail1624495981v19jV23507.png",
                         fit: BoxFit.fill,
                         progressIndicatorBuilder:
                             (context, url, downloadProgress) =>
@@ -279,7 +280,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: 14,
                   ),
                   Expanded(
                     child: Column(
@@ -290,12 +291,12 @@ class _HomeState extends State<Home> {
 
                             ? "Bienvenido " +
                                 AppData.user.firstName != null ? AppData.user.firstName : "" +
-                                " " +
+                                " " + 
                                 AppData.user.lastName != null ? AppData.user.lastName : ""
-                            : "Login & Registro"),
+                            : "Login & Registro", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
 
                         SizedBox(
-                          height: 4,
+                          height: 8,
                         ),
                         Text(
                           (AppData.user != null)
@@ -304,7 +305,7 @@ class _HomeState extends State<Home> {
                               : "Inicia Sesión ó crea una cuenta",
 
                           style: new TextStyle(
-                              fontSize: 14.0, color: Colors.black54),
+                              fontSize: 14.0, color: Colors.black54, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
                         ),
                       ],
                     ),
@@ -422,8 +423,8 @@ class _HomeState extends State<Home> {
   Widget _buildTiles(DrawerMenuItem root) {
     if (root.children.isEmpty) {
       return ListTile(
-        leading: Icon(root.iconData),
-        title: Text(root.title),
+        leading: Icon(root.iconData, size: 30, color: Colors.orange.shade500),
+        title: Text(root.title.toUpperCase(), style: TextStyle(fontSize: 16),),
         onTap: () {
           Navigator.pop(context);
           mapSelectedItem(root.title);
@@ -654,7 +655,7 @@ class _HomeState extends State<Home> {
         AppData.user = null;
         AppData.data.removeLast();
         AppData.data.add(DrawerMenuItem(
-            (AppData.user != null) ? "Cerrar Sesión" : "Iniciar Sesión", Icons.login));
+            (AppData.user != null) ? "Cerrar Sesión" : "Iniciar Sesión", Icons.login_rounded));
         break;
 /*
       case "ProductDetailsPage":
@@ -685,6 +686,7 @@ class _HomeState extends State<Home> {
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search),
+          iconSize: 30,
           tooltip: 'Buscar',
           onPressed: () {
             Navigator.push(
@@ -696,7 +698,9 @@ class _HomeState extends State<Home> {
         IconButton(
           icon: new Stack(
             children: <Widget>[
-              new Icon(Icons.shopping_cart),
+              new Icon(Icons.shopping_cart, size: 30),
+              
+              
               new Positioned(
                 right: 0,
                 child: new Container(

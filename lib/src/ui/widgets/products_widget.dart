@@ -506,8 +506,8 @@ class _ProductsState extends State<Products>
                             },
                             color: (product.defaultStock <= 0 &&
                                     product.productsType == 0)
-                                ? Colors.redAccent[400]
-                                : Colors.blueAccent[400],
+                                ? Colors.orangeAccent[400]
+                                : Colors.greenAccent[400],
                             child: Text(
                               (widget.type == "wishlist")
                                   ? "Eliminar"
@@ -535,22 +535,22 @@ class _ProductsState extends State<Products>
                       if (discount != null && discount != 0)
                         Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 5.0, vertical: 2.0),
-                          margin: EdgeInsets.only(top: 2.0),
+                              horizontal: 7.0, vertical: 4.0),
+                          margin: EdgeInsets.only(top: 4.0),
                           child: Text("$discount% OFF",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 12)),
-                          color: Colors.redAccent[400],
+                                  TextStyle(color: Colors.white, fontSize: 13)),
+                          color: Colors.orangeAccent,
                         ),
                       if (product.isFeature == 1)
                         Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 5.0, vertical: 2.0),
-                          margin: EdgeInsets.only(top: 2.0),
+                              horizontal: 7.0, vertical: 4.0),
+                          margin: EdgeInsets.only(top: 4.0),
                           child: Text("RECOMENDADO",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 12)),
-                          color: Colors.redAccent[400],
+                                  TextStyle(color: Colors.white, fontSize: 13)),
+                          color: Colors.orange[600],
                         ),
                     ],
                   ),
@@ -562,7 +562,7 @@ class _ProductsState extends State<Products>
                   margin: EdgeInsets.all(2.0),
                   child: Text("NUEVO",
                       style: TextStyle(color: Colors.white, fontSize: 12)),
-                  color: Colors.red[800],
+                  color: Colors.orange[800],
                 ),
               if (AppData.cartIds.contains(product.productsId))
                 Opacity(
@@ -646,7 +646,7 @@ class _ProductsState extends State<Products>
                                   style: TextStyle(
                                       color: Colors.grey[600],
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 15)),
+                                      fontSize: 20)),
                               Row(
                                 children: [
                                   Expanded(
@@ -1040,7 +1040,7 @@ class _FilterDialogBuilderState extends State<FilterDialogBuilder> {
                 children: [
                   Padding(
                       padding: EdgeInsets.all(16),
-                      child: Text("Product Price")),
+                      child: Text("Precios de Producto")),
                   Padding(
                     padding: EdgeInsets.only(left: 16, right: 16),
                     child: Row(
@@ -1048,13 +1048,13 @@ class _FilterDialogBuilderState extends State<FilterDialogBuilder> {
                         Text(
                           AppData.currencySymbol +
                               values.start.toStringAsFixed(2),
-                          style: TextStyle(fontSize: 12),
+                          style: TextStyle(fontSize: 16),
                         ),
                         Expanded(child: Container()),
                         Text(
                           AppData.currencySymbol +
                               values.end.toStringAsFixed(2),
-                          style: TextStyle(fontSize: 12),
+                          style: TextStyle(fontSize: 16),
                         ),
                       ],
                     ),
@@ -1127,9 +1127,9 @@ class _FilterDialogBuilderState extends State<FilterDialogBuilder> {
               Expanded(
                 child: FlatButton(
                     shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0)),
+                        borderRadius: new BorderRadius.circular(0.0)),
                     height: 45,
-                    color: Colors.grey,
+                    color: Colors.orange.shade300,
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     onPressed: () {
                       Navigator.pop(context);
@@ -1142,9 +1142,9 @@ class _FilterDialogBuilderState extends State<FilterDialogBuilder> {
               Expanded(
                 child: FlatButton(
                     shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0)),
+                        borderRadius: new BorderRadius.circular(0.0)),
                     height: 45,
-                    color: Colors.green[800],
+                    color: Colors.grey,
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     onPressed: () {
                       ProductPostPrice selectedPrice = ProductPostPrice();
@@ -1163,9 +1163,9 @@ class _FilterDialogBuilderState extends State<FilterDialogBuilder> {
               Expanded(
                 child: FlatButton(
                     shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0)),
+                        borderRadius: new BorderRadius.circular(0.0)),
                     height: 45,
-                    color: Theme.of(context).primaryColor,
+                    color: Colors.green.shade400,
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     onPressed: () {
                       ProductPostPrice selectedPrice = ProductPostPrice();

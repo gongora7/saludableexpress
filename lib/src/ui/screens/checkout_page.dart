@@ -93,101 +93,108 @@ class _CheckoutState extends State<Checkout> {
       appBar: AppBar(
         title: Text("Tu Orden"),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(4.0),
-                child: Column(
-                  children: [
-                    buildProductsList(widget.cartProducts, widget.cartEntries),
-                    buildBillingAddressCard(widget.billingAddress),
-                    buildShippingAddressCard(widget.shippingAddress),
-                    buildShippingMethodCard(widget.shippingService),
-                    buildPaymentMethodsCard(),
-                    buildPriceList(),
-                    BlocConsumer<OrderBloc, OrderState>(
-                      builder: (BuildContext context, state) {
-                        return Container();
-                      },
-                      listener: (BuildContext context, state) {
-                        if (state is PlaceOrderInitial) {
-                        } else if (state is PlaceOrderLoading) {
-                          showLoaderDialog(context);
-                        } else if (state is PlaceOrderLoaded) {
-                          AddToOrderResponse addToOrderResponse =
-                              state.addToOrderResponse;
-                          if (addToOrderResponse.success == "1") {
-                            for (int i = widget.cartEntries.length;
-                                i > 0;
-                                i--) {
-                              _box.deleteAt(i - 1);
-                            }
-                            Navigator.pop(context);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ThankYou()));
-                          } else {
-                            if (addToOrderResponse.products_id != null) {
+      body: Container(
+        padding: EdgeInsets.all(5.0),
+        color: Colors.orange.shade50,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      buildProductsList(widget.cartProducts, widget.cartEntries),
+                      buildBillingAddressCard(widget.billingAddress),
+                      buildShippingAddressCard(widget.shippingAddress),
+                      buildShippingMethodCard(widget.shippingService),
+                      buildPaymentMethodsCard(),
+                      buildPriceList(),
+                      BlocConsumer<OrderBloc, OrderState>(
+                        builder: (BuildContext context, state) {
+                          return Container();
+                        },
+                        listener: (BuildContext context, state) {
+                          if (state is PlaceOrderInitial) {
+                          } else if (state is PlaceOrderLoading) {
+                            showLoaderDialog(context);
+                          } else if (state is PlaceOrderLoaded) {
+                            AddToOrderResponse addToOrderResponse =
+                                state.addToOrderResponse;
+                            if (addToOrderResponse.success == "1") {
+                              for (int i = widget.cartEntries.length;
+                                  i > 0;
+                                  i--) {
+                                _box.deleteAt(i - 1);
+                              }
                               Navigator.pop(context);
-                              int count = 0;
-                              Navigator.popUntil(context, (route) {
-                                return count++ == 3;
-                              });
-                              Navigator.pop(
-                                  context, addToOrderResponse.message);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ThankYou()));
+                            } else {
+                              if (addToOrderResponse.products_id != null) {
+                                Navigator.pop(context);
+                                int count = 0;
+                                Navigator.popUntil(context, (route) {
+                                  return count++ == 3;
+                                });
+                                Navigator.pop(
+                                    context, addToOrderResponse.message);
+                              }
                             }
+                          } else if (state is PlaceOrderError) {
+                            Navigator.pop(context);
                           }
-                        } else if (state is PlaceOrderError) {
-                          Navigator.pop(context);
-                        }
-                      },
-                    )
-                  ],
+                        },
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Container(
-            width: double.infinity,
-            child: Row(
-              children: [
-                Expanded(
-                    child: FlatButton(
-                        color: Colors.red[800],
-                        height: 70.0,
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        child: Text(
-                          "Cancelar",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          int count = 0;
-                          Navigator.popUntil(context, (route) {
-                            return count++ == 4;
-                          });
-                        })),
-                Expanded(
-                    child: FlatButton(
-                        color: (selectedPaymentMethod.name != null)
-                            ? Colors.blueAccent[400]
-                            : Colors.blueAccent[200],
+            Container(
+              width: double.infinity,
+              child: Row(
+                children: [
+                  Container(
+                    
+                    child: Expanded(
+                        child: FlatButton(
+                            color: Colors.orange[500],
                             height: 70.0,
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        onPressed: () {
-                          if (selectedPaymentMethod.name != null)
-                            placeOrderNow();
-                        },
-                        child: Text(
-                          "Confirmar",
-                          style: TextStyle(color: Colors.white),
-                        ))),
-              ],
-            ),
-          )
-        ],
+                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            child: Text(
+                              "Cancelar",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onPressed: () {
+                              int count = 0;
+                              Navigator.popUntil(context, (route) {
+                                return count++ == 4;
+                              });
+                            })),
+                  ),
+                  Expanded(
+                      child: FlatButton(
+                          color: (selectedPaymentMethod.name != null)
+                              ? Colors.green[500]
+                              : Colors.green[200],
+                              height: 70.0,
+                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          onPressed: () {
+                            if (selectedPaymentMethod.name != null)
+                              placeOrderNow();
+                          },
+                          child: Text(
+                            "Confirmar",
+                            style: TextStyle(color: Colors.white),
+                          ))),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -195,33 +202,37 @@ class _CheckoutState extends State<Checkout> {
   Widget buildBillingAddressCard(Address billingAddress) {
     return Card(
       margin: EdgeInsets.all(4.0),
-      child: Padding(
-        padding: EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text("Dirección de Facturación:", 
-            style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
-            SizedBox(
-              height: 8.0,
-            ),
-            Text(
-              billingAddress.deliveryFirstName +
-                  " " +
-                  billingAddress.deliveryLastName,
-              style: TextStyle(color: Colors.black54, fontSize: 16.0),
-            ),
-            Text(
-              billingAddress.deliveryStreetAddress +
-                  ", " +
-                  billingAddress.deliveryCity,
-              style: TextStyle(color: Colors.black54, fontSize: 16.0),
-            ),
-            Text(
-              billingAddress.deliveryPhone,
-              style: TextStyle(color: Colors.black54, fontSize: 16.0),
-            ),
-          ],
+      child: Container(
+        color: Colors.orange.shade400,
+        
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text("Dirección de Facturación:", 
+              style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                billingAddress.deliveryFirstName.toUpperCase() +
+                    " " +
+                    billingAddress.deliveryLastName.toUpperCase(),
+                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+              ),
+              Text(
+                billingAddress.deliveryStreetAddress.toUpperCase() +
+                    ", " +
+                    billingAddress.deliveryCity.toUpperCase(),
+                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+              ),
+              Text(
+                billingAddress.deliveryPhone,
+                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -230,33 +241,36 @@ class _CheckoutState extends State<Checkout> {
   Widget buildShippingAddressCard(Address shippingAddress) {
     return Card(
       margin: EdgeInsets.all(4.0),
-      child: Padding(
-        padding: EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text("Dirección de Envío:",
-            style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
-            SizedBox(
-              height: 8.0,
-            ),
-            Text(
-              shippingAddress.deliveryFirstName +
-                  " " +
-                  shippingAddress.deliveryLastName,
-              style: TextStyle(color: Colors.black54, fontSize: 16.0),
-            ),
-            Text(
-              shippingAddress.deliveryStreetAddress +
-                  ", " +
-                  shippingAddress.deliveryCity,
-              style: TextStyle(color: Colors.black54, fontSize: 16.0),
-            ),
-            Text(
-              shippingAddress.deliveryPhone,
-              style: TextStyle(color: Colors.black54, fontSize: 16.0),
-            ),
-          ],
+      child: Container(
+        color: Colors.orange.shade300,
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text("Dirección de Envío:",
+              style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                shippingAddress.deliveryFirstName.toUpperCase() +
+                    " " +
+                    shippingAddress.deliveryLastName.toUpperCase(),
+                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+              ),
+              Text(
+                shippingAddress.deliveryStreetAddress.toUpperCase() +
+                    ", " +
+                    shippingAddress.deliveryCity.toUpperCase(),
+                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+              ),
+              Text(
+                shippingAddress.deliveryPhone,
+                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -265,21 +279,24 @@ class _CheckoutState extends State<Checkout> {
   Widget buildShippingMethodCard(ShippingService shippingService) {
     return Card(
       margin: EdgeInsets.all(4.0),
-      child: Padding(
-        padding: EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text("Método de Envío:", 
-            style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
-            SizedBox(
-              height: 8.0,
-            ),
-            Text(
-              shippingService.shippingMethod,
-              style: TextStyle(color: Colors.black54, fontSize: 16.0),
-            ),
-          ],
+      child: Container(
+        color: Colors.orange.shade200,
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text("Método de Envío:", 
+              style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                shippingService.shippingMethod.toUpperCase(),
+                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -311,30 +328,33 @@ class _CheckoutState extends State<Checkout> {
             },
             child: Card(
               margin: EdgeInsets.all(4.0),
-              child: Padding(
-                padding: EdgeInsets.all(12.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text("Métodos de Pago", 
-                          style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
-                          SizedBox(
-                            height: 8.0,
-                          ),
-                          Text(
-                            selectedPaymentMethod.name == null
-                                ? "Elegir un método de pago"
-                                : selectedPaymentMethod.name,
-                            style: TextStyle(color: Colors.black54, fontSize: 16.0),
-                          )
-                        ],
+              child: Container(
+                color: Colors.orange.shade100,
+                child: Padding(
+                  padding: EdgeInsets.all(12.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text("Métodos de Pago", 
+                            style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+                            SizedBox(
+                              height: 8.0,
+                            ),
+                            Text(
+                              selectedPaymentMethod.name == null
+                                  ? "Elegir un método de pago".toUpperCase()
+                                  : selectedPaymentMethod.name.toUpperCase(),
+                              style: TextStyle(color: Colors.black54, fontSize: 16.0),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    Icon(Icons.arrow_drop_down),
-                  ],
+                      Icon(Icons.arrow_drop_down),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -412,160 +432,169 @@ class _CheckoutState extends State<Checkout> {
 
         return Card(
           margin: EdgeInsets.all(4),
-          child: Row(children: [
-            Container(
-              width: 140,
-              height: 140,
-              child: CachedNetworkImage(
-                imageUrl: ApiProvider.imageBaseUrl + product.productsImage,
-                fit: BoxFit.contain,
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    CircularProgressIndicator(value: downloadProgress.progress),
-                errorWidget: (context, url, error) => Icon(Icons.error),
+          child: Container(
+            color: Colors.orange.shade500,
+            child: Row(children: [
+              Container(
+                padding: EdgeInsets.all(3.0),
+                
+                width: 120,
+                height: 120,
+                child: CachedNetworkImage(
+                  imageUrl: ApiProvider.imageBaseUrl + product.productsImage,
+                  fit: BoxFit.contain,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      CircularProgressIndicator(value: downloadProgress.progress),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(12),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(product.productsName),
-                            if (product.categories.length > 0)
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(product.productsName.toUpperCase(), 
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                              if (product.categories.length > 0)
+                                Text(
+                                  product.categories[0].categoriesName.toUpperCase(),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black54, fontStyle: FontStyle.italic),
+                                ),
+                            ]),
+                       Divider(
+                          height: 20.0,
+                          color: Colors.orange.shade400,
+                        ),
+                        Row(children: [
+                          Expanded(
+                              child: Text(
+                            "Precio",
+                            style: TextStyle(fontSize: 16, color: Colors.black54, fontWeight: FontWeight.bold),
+                          )),
+                          (discount != null && discount != 0)
+                              ? Row(
+                                  children: [
+                                    Text(
+                                      "\$" +
+                                          double.parse(product.productsPrice
+                                                  .toString())
+                                              .toStringAsFixed(2),
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.black54,
+                                          decoration: TextDecoration.lineThrough),
+                                    ),
+                                    SizedBox(width: 4),
+                                    Text("\$" +
+                                        double.parse(
+                                                product.discountPrice.toString())
+                                            .toStringAsFixed(2)),
+                                  ],
+                                )
+                              : Text("\$" +
+                                  double.parse(product.productsPrice.toString())
+                                      .toStringAsFixed(2), style: TextStyle(fontWeight: FontWeight.bold)),
+                        ]),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: cartProductAttributes.length,
+                          itemBuilder: (context, index) {
+                            return Row(children: [
+                              Expanded(
+                                  child: Text(
+                                cartProductAttributes[index].option.name,
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.black54),
+                              )),
                               Text(
-                                product.categories[0].categoriesName,
+                                cartProductAttributes[index].values[0].value,
                                 style: TextStyle(
                                     fontSize: 16, color: Colors.black54),
                               ),
-                          ]),
-                      Divider(
-                        color: Colors.grey,
-                      ),
-                      Row(children: [
-                        Expanded(
-                            child: Text(
-                          "Precio",
-                          style: TextStyle(fontSize: 16, color: Colors.black54),
-                        )),
-                        (discount != null && discount != 0)
-                            ? Row(
-                                children: [
-                                  Text(
-                                    "\$" +
-                                        double.parse(product.productsPrice
-                                                .toString())
-                                            .toStringAsFixed(2),
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.black54,
-                                        decoration: TextDecoration.lineThrough),
-                                  ),
-                                  SizedBox(width: 4),
-                                  Text("\$" +
-                                      double.parse(
-                                              product.discountPrice.toString())
-                                          .toStringAsFixed(2)),
-                                ],
-                              )
-                            : Text("\$" +
-                                double.parse(product.productsPrice.toString())
-                                    .toStringAsFixed(2)),
-                      ]),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: cartProductAttributes.length,
-                        itemBuilder: (context, index) {
-                          return Row(children: [
-                            Expanded(
-                                child: Text(
-                              cartProductAttributes[index].option.name,
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.black54),
-                            )),
-                            Text(
-                              cartProductAttributes[index].values[0].value,
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.black54),
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(cartProductAttributes[index]
-                                    .values[0]
-                                    .pricePrefix +
-                                "\$" +
-                                double.parse(cartProductAttributes[index]
-                                        .values[0]
-                                        .price
-                                        .toString())
-                                    .toStringAsFixed(2)),
-                          ]);
-                        },
-                      ),
-                      Row(children: [
-                        Expanded(
-                            child: Text(
-                          "Cantidad",
-                          style: TextStyle(fontSize: 16, color: Colors.black54),
-                        )),
-                        Text("x " + product.customerBasketQuantity.toString()),
-                      ]),
-                      Divider(
-                        color: Colors.grey,
-                      ),
-                      Row(children: [
-                        Expanded(
-                            child: Text(
-                          "Precio Total",
-                          style: TextStyle(fontSize: 16, color: Colors.black54),
-                        )),
-                        (discount != null && discount != 0)
-                            ? Row(
-                                children: [
-                                  Text(
-                                    "\$" +
-                                        ((double.parse(product.productsPrice
-                                                        .toString()) +
-                                                    attrsPrice) *
-                                                cartEntry.quantity)
-                                            .toStringAsFixed(2),
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.black54,
-                                        decoration: TextDecoration.lineThrough),
-                                  ),
-                                  SizedBox(width: 4),
-                                  Text(
-                                    "\$" +
-                                        ((double.parse(product.discountPrice
-                                                        .toString()) +
-                                                    attrsPrice) *
-                                                cartEntry.quantity)
-                                            .toStringAsFixed(2),
-                                    style: TextStyle(
-                                        color: Theme.of(context).primaryColor),
-                                  ),
-                                ],
-                              )
-                            : Text(
-                                "\$" +
-                                    ((double.parse(product.productsPrice
-                                                    .toString()) +
-                                                attrsPrice) *
-                                            cartEntry.quantity)
-                                        .toStringAsFixed(2),
-                                style: TextStyle(
-                                    color: Theme.of(context).primaryColor),
+                              SizedBox(
+                                width: 8,
                               ),
-                      ])
-                    ]),
-              ),
-            )
-          ]),
+                              Text(cartProductAttributes[index]
+                                      .values[0]
+                                      .pricePrefix +
+                                  "\$" +
+                                  double.parse(cartProductAttributes[index]
+                                          .values[0]
+                                          .price
+                                          .toString())
+                                      .toStringAsFixed(2)),
+                            ]);
+                          },
+                        ),
+                        Row(children: [
+                          Expanded(
+                              child: Text(
+                            "Cantidad",
+                            style: TextStyle(fontSize: 16, color: Colors.black54, fontWeight: FontWeight.bold),
+                          )),
+                          Text(" x " + product.customerBasketQuantity.toString(), style: TextStyle(fontWeight: FontWeight.bold),),
+                        ]),
+                        Divider(
+                          color: Colors.black45,
+                        ),
+                        Row(children: [
+                          Expanded(
+                              child: Text(
+                            "Precio Total",
+                            style: TextStyle(fontSize: 16, color: Colors.black54, fontWeight: FontWeight.bold,),
+                          )),
+                          (discount != null && discount != 0)
+                              ? Row(
+                                  children: [
+                                    Text(
+                                      "\$" +
+                                          ((double.parse(product.productsPrice
+                                                          .toString()) +
+                                                      attrsPrice) *
+                                                  cartEntry.quantity)
+                                              .toStringAsFixed(2),
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.black54,
+                                          decoration: TextDecoration.lineThrough, fontWeight: FontWeight.bold,),
+                                    ),
+                                    SizedBox(width: 4),
+                                    Text(
+                                      "\$" +
+                                          ((double.parse(product.discountPrice
+                                                          .toString()) +
+                                                      attrsPrice) *
+                                                  cartEntry.quantity)
+                                              .toStringAsFixed(2),
+                                      style: TextStyle(
+                                          //color: Theme.of(context).primaryColor),
+                                          color: Colors.black45, fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                )
+                              : Text(
+                                  "\$" +
+                                      ((double.parse(product.productsPrice
+                                                      .toString()) +
+                                                  attrsPrice) *
+                                              cartEntry.quantity)
+                                          .toStringAsFixed(2),
+                                  style: TextStyle(
+                                      //color: Theme.of(context).primaryColor),
+                                      color: Colors.black45, fontWeight: FontWeight.bold),
+                                ),
+                        ])
+                      ]),
+                ),
+              )
+            ]),
+          ),
         );
       },
     );
@@ -844,7 +873,7 @@ class _CheckoutState extends State<Checkout> {
       child: Column(
         children: [
           Row(children: [
-            Text("Subtotal"),
+            Text("Subtotal", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
             Expanded(child: SizedBox()),
             Text("\$" + subtotalPrice.toStringAsFixed(2)),
           ]),
@@ -852,7 +881,7 @@ class _CheckoutState extends State<Checkout> {
             height: 4,
           ),
           Row(children: [
-            Text("Descuento"),
+            Text("Descuento", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
             Expanded(child: SizedBox()),
             Text("\$" + discountPrice.toStringAsFixed(2)),
           ]),
@@ -860,23 +889,23 @@ class _CheckoutState extends State<Checkout> {
             height: 4,
           ),
           Row(children: [
-            Text("Tax"),
+            Text("Impuestos", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
             Expanded(child: SizedBox()),
             Text("\$" + double.parse(widget.shippingTax).toStringAsFixed(2)),
           ]),
-          SizedBox(
+         /* SizedBox(
             height: 4,
           ),
           Row(children: [
             Text("Gastos de Empaque"),
             Expanded(child: SizedBox()),
             Text("\$0.00"),
-          ]),
+          ]),*/
           SizedBox(
             height: 4,
           ),
           Row(children: [
-            Text("Cargos de Envío"),
+            Text("Costo de Envío", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
             Expanded(child: SizedBox()),
             Text("\$" +
                 double.parse(widget.shippingService.rate.toString())
@@ -886,12 +915,13 @@ class _CheckoutState extends State<Checkout> {
             height: 4,
           ),
           Row(children: [
-            Text("Total"),
+            Text("Total", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
             Expanded(child: SizedBox()),
             Text(
               "\$" + totalPrice.toStringAsFixed(2),
               style: TextStyle(
-                  fontSize: 18, color: Theme.of(context).primaryColor),
+                 fontSize: 18, color: Colors.orange.shade600,fontWeight: FontWeight.bold ),
+                  //fontSize: 18, color: Theme.of(context).primaryColor),
             ),
           ]),
         ],

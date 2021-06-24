@@ -95,65 +95,86 @@ class _ProductsByCategoriesState extends State<ProductsByCategories>
   Widget buildColumnWithData(BuildContext context, CategoriesResponse data) {
     return DefaultTabController(
       length: data.categoriesData.length + 1,
-      child: Column(
-        children: [
-          TabBar(
-              labelColor: Colors.black,
-              controller: _cardController,
-              isScrollable: true,
-              tabs: List.generate(
-                data.categoriesData.length + 1,
-                (index) => Tab(
-                    icon: (widget.isTabHasIcon)
-                        ? index == 0
-                            ? Icon(Icons.list)
-                            : Container(
-                                width: 45.0,
-                                height: 45.0,
-                                padding: EdgeInsets.all(4.0),
-                                child: CachedNetworkImage(
-                                  imageUrl: ApiProvider.imageBaseUrl +
-                                      data.categoriesData[index - 1].icon,
-                                  fit: BoxFit.fill,
-                                  progressIndicatorBuilder:
-                                      (context, url, downloadProgress) =>
-                                          CircularProgressIndicator(
-                                              value: downloadProgress.progress),
-                                  errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
-                                ),
-                              )
-                        : null,
-                    text: index == 0
-                        ? "Todo"
-                        : data.categoriesData[index - 1].categoriesName),
-              )),
-          Expanded(
-            child: TabBarView(
+      //INICIA COLUMNA
+      child: Container(
+        //color: Colors.amber.shade50,
+        child: Column(
+          children: [
+            TabBar(
+                labelColor: Colors.orange[50],
+                labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                labelPadding: EdgeInsets.symmetric(horizontal: 20.0),
+                unselectedLabelColor: Colors.orange[200],
+                indicatorWeight: 3,
+                indicatorColor: Colors.orange[400],
+                indicator: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        /* topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)*/),
+                    color: Colors.orange.shade300),
+
                 controller: _cardController,
-                children:
-                    List.generate(data.categoriesData.length + 1, (index) {
-                  if (index == 0) {
-                    return Products(
-                        widget.productsType,
-                        "",
-                        false,
-                        widget.isBottomBarVisible,
-                        widget.isNextPageAutoLoad,
-                        _toProductDetailPage);
-                  } else {
-                    return Products(
-                        "Nuevos",
-                        data.categoriesData[index - 1].categoriesId.toString(),
-                        false,
-                        widget.isBottomBarVisible,
-                        widget.isNextPageAutoLoad,
-                        _toProductDetailPage);
-                  }
-                })),
-          ),
-        ],
+                isScrollable: true,
+                tabs: List.generate(
+                  data.categoriesData.length + 1,
+                  (index) => Tab(
+                      icon: (widget.isTabHasIcon)
+                          ? index == 0
+                              ? Icon(Icons.list)
+                              : Container(
+                                  width: 45.0,
+                                  height: 45.0,
+                                  padding: EdgeInsets.all(4.0),
+                                  child: CachedNetworkImage(
+                                    imageUrl: ApiProvider.imageBaseUrl +
+                                        data.categoriesData[index - 1].icon,
+                                    fit: BoxFit.fill,
+                                    progressIndicatorBuilder:
+                                        (context, url, downloadProgress) =>
+                                            CircularProgressIndicator(
+                                                value: downloadProgress.progress),
+                                    errorWidget: (context, url, error) =>
+                                        Icon(Icons.error),
+                                  ),
+                                )
+                          : null,
+                      text: index == 0
+                          ? "Todo".toUpperCase()
+                          : data.categoriesData[index - 1].categoriesName.toUpperCase()),
+                )),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: TabBarView(
+                    controller: _cardController,
+                    children:
+                        List.generate(data.categoriesData.length + 1, (index) {
+                      if (index == 0) {
+                        return Products(
+                            widget.productsType,
+                            "",
+                            false,
+                            widget.isBottomBarVisible,
+                            widget.isNextPageAutoLoad,
+                            _toProductDetailPage);
+                      } else {
+                        return Products(
+                            "Nuevos",
+                            data.categoriesData[index - 1].categoriesId.toString(),
+                            false,
+                            widget.isBottomBarVisible,
+                            widget.isNextPageAutoLoad,
+                            _toProductDetailPage);
+                      }
+                    })),
+              ),
+            ),
+          ],
+        ),
       ),
+
+
+      //Termina Columna
     );
   }
 

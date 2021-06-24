@@ -99,7 +99,10 @@ class MyCustomFormState extends State<MyCustomForm> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter, 
-            colors: [const Color.fromRGBO(102, 174, 39, 0.4), const Color.fromRGBO(178, 239, 120, 0.6), const Color.fromRGBO(24, 167, 120, 0.9)] 
+            colors: [
+              const Color.fromRGBO(102, 174, 39, 0.2), 
+              const Color.fromRGBO(178, 239, 120, 0.4), 
+              const Color.fromRGBO(24, 167, 120, 0.7)] 
             )
             ),
         child: Column(
@@ -110,14 +113,17 @@ class MyCustomFormState extends State<MyCustomForm> {
               controller: _firstNameController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
+                prefixIcon: Padding(padding: EdgeInsets.all(1),
+                child: Icon(Icons.person),
+                ),
                 hintText: 'Nombre',
-                 hintStyle: TextStyle(color: Colors.white70),
-                fillColor: Colors.white,
+                 hintStyle: TextStyle(color: Colors.black45),
+                fillColor: Colors.black87,
                 contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(2.0),
                   borderSide: new BorderSide(
-                    color: Colors.white70,
+                    color: Colors.black45,
                   ),
                 ),
               ),
@@ -135,14 +141,17 @@ class MyCustomFormState extends State<MyCustomForm> {
               controller: _lastNameController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
+                prefixIcon: Padding(padding: EdgeInsets.all(1),
+                child: Icon(Icons.people),
+                ),
                 hintText: 'Apellido',
-                hintStyle: TextStyle(color: Colors.white70),
-                fillColor: Colors.white,
+                hintStyle: TextStyle(color: Colors.black45),
+                fillColor: Colors.black87,
                 contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(2.0),
                   borderSide: new BorderSide(
-                    color: Colors.white70,
+                    color: Colors.black45,
                   ),
                 ),
               ),
@@ -160,14 +169,17 @@ class MyCustomFormState extends State<MyCustomForm> {
               controller: _phoneNumberController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
+                prefixIcon: Padding(padding: EdgeInsets.all(1),
+                child: Icon(Icons.phone_iphone),
+                ),
                 hintText: 'Teléfono',
-                hintStyle: TextStyle(color: Colors.white70),
-                fillColor: Colors.white,
-                contentPadding: EdgeInsets.all(8.0),
+                hintStyle: TextStyle(color: Colors.black45),
+                fillColor: Colors.black87,
+                contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(2.0),
                   borderSide: new BorderSide(
-                    color: Colors.white70,
+                    color: Colors.black45,
                   ),
                 ),
               ),
@@ -182,17 +194,21 @@ class MyCustomFormState extends State<MyCustomForm> {
               height: 16.0,
             ),
             TextFormField(
+              
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
+                prefixIcon: Padding(padding: EdgeInsets.all(1),
+                child: Icon(Icons.mail),
+                ),
                 hintText: 'Email',
-                hintStyle: TextStyle(color: Colors.white70),
-                fillColor: Colors.white,
-                contentPadding: EdgeInsets.all(8.0),
+                hintStyle: TextStyle(color: Colors.black45),
+                fillColor: Colors.black87,
+                contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(2.0),
                   borderSide: new BorderSide(
-                    color: Colors.white70,
+                    color: Colors.black45,
                   ),
                 ),
               ),
@@ -212,14 +228,18 @@ class MyCustomFormState extends State<MyCustomForm> {
               enableSuggestions: false,
               autocorrect: false,
               decoration: InputDecoration(
+                prefixIcon: Padding(padding: EdgeInsets.all(1),
+                child: Icon(Icons.security),
+                ),
+                
                 hintText: 'Password',
-                hintStyle: TextStyle(color: Colors.white70),
-                fillColor: Colors.white,
-                contentPadding: EdgeInsets.all(8.0),
+                 hintStyle: TextStyle(color: Colors.black45),
+                fillColor: Colors.black87,
+                contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(2.0),
                   borderSide: new BorderSide(
-                    color: Colors.white70,
+                    color: Colors.black45,
                   ),
                 ),
               ),
@@ -238,7 +258,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               height: 40.0,
               child: FlatButton(
                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
-                  color: Colors.white30,
+                  color: Colors.white60,
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
                       loginBloc.add(ProcessRegistration(
@@ -253,7 +273,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   },
                   child: Text(
                     "Regístrate",
-                    style: TextStyle(color: Colors.black38, fontWeight: FontWeight.w700),
+                     style: TextStyle(color: Colors.black45, fontWeight: FontWeight.w700),
                   )),
             ),
             SizedBox(
@@ -269,7 +289,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   },
                   child: Text(
                     "Inicia Sesión",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black87),
                   ),
                 ),
               ],

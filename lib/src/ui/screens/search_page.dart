@@ -105,7 +105,7 @@ class _SearchState extends State<Search> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(25.0),
             child: Text(
               "Productos",
               style: TextStyle(fontSize: 16.0),
@@ -118,12 +118,12 @@ class _SearchState extends State<Search> {
             if (products.isNotEmpty) {
               return ListTile(
                 leading: Container(
-                  width: 50.0,
-                  height: 50.0,
+                  width: 70.0,
+                  height: 70.0,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle, color: Colors.white),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25.0),
+                    borderRadius: BorderRadius.circular(12.0),
                     child: CachedNetworkImage(
                       imageUrl: ApiProvider.imageBaseUrl +
                           products[index].productsImage,
@@ -142,8 +142,11 @@ class _SearchState extends State<Search> {
                     : ""),
                 trailing: Icon(Icons.navigate_next),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ProductDetailPage.fromSearch(products[index].productsId)));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProductDetailPage.fromSearch(
+                              products[index].productsId)));
                 },
               );
             } else
@@ -151,7 +154,7 @@ class _SearchState extends State<Search> {
           },
         ),
         Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(25.0),
             child: Text(
               "Categorías",
               style: TextStyle(fontSize: 16.0),
@@ -176,6 +179,7 @@ class _SearchState extends State<Search> {
       itemCount: categories.length,
       itemBuilder: (context, index) {
         return ListTile(
+          contentPadding: EdgeInsets.all(16.0),
           onTap: () {
             //widget._toShopFromCategory(categories[index].categoriesId);
             Navigator.push(
@@ -185,12 +189,12 @@ class _SearchState extends State<Search> {
                         "newest", true, widget._toProductDetailPage)));
           },
           leading: Container(
-            width: 50.0,
-            height: 50.0,
+            width: 70.0,
+            height: 70.0,
             decoration:
                 BoxDecoration(shape: BoxShape.circle, color: Colors.white),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(25.0),
+              borderRadius: BorderRadius.circular(12.0),
               child: CachedNetworkImage(
                 imageUrl: ApiProvider.imageBaseUrl + categories[index].image,
                 fit: BoxFit.fill,
@@ -200,9 +204,15 @@ class _SearchState extends State<Search> {
               ),
             ),
           ),
-          title: Text(categories[index].categoriesName),
-          subtitle:
-              Text(categories[index].totalProducts.toString() + " Productos"),
+          title: Text(
+            categories[index].categoriesName.toUpperCase(),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(
+            categories[index].totalProducts.toString() +
+                " Productos".toUpperCase(),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
           trailing: Icon(Icons.navigate_next),
         );
       },

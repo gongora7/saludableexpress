@@ -10,6 +10,8 @@ import 'package:flutter_app1/src/models/cart_entry.dart';
 import 'package:flutter_app1/src/models/product_models/product.dart';
 import 'package:flutter_app1/src/models/product_models/product_attributes.dart';
 import 'package:flutter_app1/src/repositories/products_repo.dart';
+import 'package:flutter_app1/src/ui/screens/product_detail_page.dart';
+import 'package:flutter_app1/src/ui/screens/search_page.dart';
 import 'package:flutter_app1/src/ui/screens/shipping_address_page.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -37,12 +39,27 @@ class _CartState extends State<Cart> {
     super.dispose();
     _productsBloc.dispose();
   }
-
+void _toProductDetailPage(Product product) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ProductDetailPage(product)));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Carrito"),
+        actions: <Widget>[
+              IconButton(
+          icon: Icon(Icons.search),
+          iconSize: 30,
+          tooltip: 'Buscar',
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Search(_toProductDetailPage)));
+          },
+        ),],
       ),
       body: ValueListenableBuilder(
         valueListenable: _box.listenable(),
@@ -121,7 +138,16 @@ class _CartState extends State<Cart> {
                     children: [
                       Expanded(child: buildProductsList(data, list)),
                       Container(
-                        decoration: new BoxDecoration(color: Colors.white),
+                        decoration: new BoxDecoration(
+                          color: Colors.orange.shade50,
+                          boxShadow: [BoxShadow(
+                            color: Colors.orange.withOpacity(0.3),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3),
+                           )]
+                         ),
+                          
                         child: Column(
                           children: [
                             Padding(
@@ -130,7 +156,7 @@ class _CartState extends State<Cart> {
                                 children: [
                                   Row(children: [
                                     Text(
-                                      "Subtotal",
+                                      "Subtotal".toUpperCase(),
                                       style: TextStyle(
                                           fontSize: 20.0,
                                           fontWeight: FontWeight.bold),
@@ -139,15 +165,15 @@ class _CartState extends State<Cart> {
                                     Text(
                                         "\$" + subtotalPrice.toStringAsFixed(2),
                                         style: TextStyle(
-                                            color: Colors.blueAccent,
-                                            fontSize: 18.0)),
+                                            color: Colors.orange.shade800,
+                                            fontSize: 22.0, fontWeight: FontWeight.bold)),
                                   ]),
                                   SizedBox(
-                                    height: 4,
+                                    height: 6,
                                   ),
-                                  Divider(height: 5.0, color: Colors.white),
+                                 //Divider(height: 3.0),
                                   Row(children: [
-                                    Text("Descuento",
+                                    Text("Descuento".toUpperCase(),
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             fontWeight: FontWeight.bold)),
@@ -155,26 +181,25 @@ class _CartState extends State<Cart> {
                                     Text(
                                       "\$" + discountPrice.toStringAsFixed(2),
                                       style: TextStyle(
-                                          color: Colors.redAccent,
-                                          fontSize: 18.0),
+                                          color: Colors.orange.shade800,
+                                          fontSize: 22.0, fontWeight: FontWeight.bold),
                                     ),
                                   ]),
                                   SizedBox(
-                                    height: 4,
+                                    height: 20,
                                   ),
-                                  Divider(height: 5.0, color: Colors.white),
+                                  //Divider(height: 3.0),
                                   Row(children: [
-                                    Text("Total",
+                                    Text("Total".toUpperCase(),
                                         style: TextStyle(
-                                            fontSize: 22.0,
+                                            fontSize: 20.0,
                                             fontWeight: FontWeight.bold)),
                                     Expanded(child: SizedBox()),
                                     Text(
                                       "\$" + totalPrice.toStringAsFixed(2),
                                       style: TextStyle(
-                                          fontSize: 22.0,
-                                          color:
-                                              Theme.of(context).primaryColor),
+                                          fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.orange.shade800
+                                          ),
                                     ),
                                   ]),
                                 ],
@@ -183,7 +208,7 @@ class _CartState extends State<Cart> {
                             Container(
                               width: MediaQuery.of(context).size.width,
                               child: FlatButton(
-                                color: Colors.blueAccent[400],
+                                color: Colors.green[500],
                                 height: 70.0,
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.shrinkWrap,
@@ -195,7 +220,7 @@ class _CartState extends State<Cart> {
                                 onPressed: () async {
                                   if (AppData.user == null) {
                                     Scaffold.of(context).showSnackBar(
-                                        SnackBar(content: Text("Login First")));
+                                        SnackBar(content: Text("Inicia Sesión para continuar", style: TextStyle(fontSize: 14),)));
                                     return;
                                   }
                                   String message = await Navigator.push(
@@ -257,12 +282,12 @@ class _CartState extends State<Cart> {
                       height: 15.0,
                     ),
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(2.0),
                       child: FlatButton(
-                        color: Colors.blueAccent[400],
+                        color: Colors.greenAccent[500],
                         height: 50.0,
                         child: Text(
-                          "Explorar Tienda",
+                          "Ver más productos saludables",
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () {
@@ -278,267 +303,289 @@ class _CartState extends State<Cart> {
   }
 
   Widget buildProductsList(List<Product> products, List<CartEntry> list) {
-    return Padding(
-      padding: EdgeInsets.all(4),
-      child: ListView.builder(
-        itemCount: products.length,
-        itemBuilder: (context, index) {
-          CartEntry cartEntry = list[index];
-          List<ProductAttribute> cartProductAttributes =
-              new List<ProductAttribute>();
-          json.decode(cartEntry.attributes).forEach((v) {
-            cartProductAttributes.add(new ProductAttribute.fromJson(v));
-          });
-          Product product = products[index];
-          if (product.productsId == null) {
-            return Container();
-          } else {
-            int discount = _calculateDiscount(
-                product.productsPrice, product.discountPrice);
-
-            double attrsPrice = 0.0;
-            cartProductAttributes.forEach((element) {
-              attrsPrice += double.parse(element.values[0].price.toString());
+    return Container(
+       color: Colors.orange.shade100,
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: ListView.builder(
+          itemCount: products.length,
+          itemBuilder: (context, index) {
+            CartEntry cartEntry = list[index];
+            List<ProductAttribute> cartProductAttributes =
+                new List<ProductAttribute>();
+            json.decode(cartEntry.attributes).forEach((v) {
+              cartProductAttributes.add(new ProductAttribute.fromJson(v));
             });
+            Product product = products[index];
+            if (product.productsId == null) {
+              return Container();
+            } else {
+              int discount = _calculateDiscount(
+                  product.productsPrice, product.discountPrice);
 
-            return Card(
-              margin: EdgeInsets.all(4),
-              child: Row(children: [
-                Container(
-                  width: 140,
-                  height: 140,
-                  child: CachedNetworkImage(
-                    imageUrl: ApiProvider.imageBaseUrl + product.productsImage,
-                    fit: BoxFit.contain,
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) =>
-                            CircularProgressIndicator(
-                                value: downloadProgress.progress),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+              double attrsPrice = 0.0;
+              cartProductAttributes.forEach((element) {
+                attrsPrice += double.parse(element.values[0].price.toString());
+              });
+
+              return Card(
+                color: Colors.orange.shade50,
+                
+                 margin: EdgeInsets.all(4),
+                 child: Row(children: [
+                  Container(
+                     
+                  padding: EdgeInsets.all(4.0),
+                    width: 150,
+                    height: 150,
+                    child: CachedNetworkImage(
+                      imageUrl: ApiProvider.imageBaseUrl + product.productsImage,
+                      fit: BoxFit.contain,
+                      
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) =>
+                              CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(15),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Row(children: [
-                            Expanded(
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      product.productsName,
-                                      style: TextStyle(
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Divider(height: 3.0, color: Colors.white),
-                                    if (product.categories.length > 0)
-                                      Text(
-                                        product.categories[0].categoriesName,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontStyle: FontStyle.italic,
-                                            color: Colors.black54),
-                                      ),
-                                  ]),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                _productsBloc.cart_products_event_sink
-                                    .add(DeleteCartProduct(index));
-                                _box.deleteAt(index);
-                              },
-                              child: IconTheme(
-                                  data: IconThemeData(
-                                      color: Theme.of(context).primaryColor),
-                                  child: Icon(
-                                    Icons.delete_outline,
-                                    size: 40.0,
-                                  )),
-                            ),
-                          ]),
-                          Divider(
-                            color: Colors.grey,
-                          ),
-                          Row(children: [
-                            Expanded(
-                                child: Text(
-                              "Precio",
-                              style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            (discount != null && discount != 0)
-                                ? Row(
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(children: [
+                              Expanded(
+                                child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "\$" +
-                                            double.parse(product.productsPrice
-                                                    .toString())
-                                                .toStringAsFixed(2),
+                                        product.productsName,
                                         style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.black54,
-                                            decoration:
-                                                TextDecoration.lineThrough),
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w600),
                                       ),
-                                      SizedBox(width: 4),
-                                      Text("\$" +
-                                          double.parse(product.discountPrice
-                                                  .toString())
-                                              .toStringAsFixed(2)),
-                                    ],
-                                  )
-                                : Text("\$" +
-                                    double.parse(
-                                            product.productsPrice.toString())
-                                        .toStringAsFixed(2)),
-                          ]),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: cartProductAttributes.length,
-                            itemBuilder: (context, index) {
-                              return Row(children: [
-                                Expanded(
-                                    child: Text(
-                                  cartProductAttributes[index].option.name,
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.black54),
-                                )),
-                                Text(
-                                  cartProductAttributes[index].values[0].value,
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.black54),
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Text(cartProductAttributes[index]
-                                        .values[0]
-                                        .pricePrefix +
-                                    "\$" +
-                                    double.parse(cartProductAttributes[index]
-                                            .values[0]
-                                            .price
-                                            .toString())
-                                        .toStringAsFixed(2)),
-                              ]);
-                            },
-                          ),
-                          Divider(height: 10.0, color: Colors.white),
-                          Row(children: [
-                            Expanded(
-                                child: Text(
-                              "Cantidad",
-                              style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            GestureDetector(
-                              onTap: () {
-                                if (cartEntry.quantity > 1) {
+                                      SizedBox(height: 5.0),
+                                      //Divider(height: 3.0, color: Colors.white),
+                                      if (product.categories.length > 0)
+                                        Text(
+                                          product.categories[0].categoriesName,
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontStyle: FontStyle.italic,
+                                              color: Colors.black45),
+                                        ),
+                                    ]),
+                              ),
+                              GestureDetector(
+                                onTap: () {
                                   _productsBloc.cart_products_event_sink
-                                      .add(DecrementCartProductQuantity(index));
-                                  cartEntry.quantity--;
-                                  _box.putAt(index, cartEntry);
-                                }
-                              },
-                              child: IconTheme(
-                                  data: IconThemeData(
-                                      color: Theme.of(context).primaryColor),
-                                  child: Icon(Icons.remove_circle, size: 30.0)),
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              product.customerBasketQuantity.toString(),
-                              style: TextStyle(
-                                  fontSize: 16.0, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                cartEntry.quantity++;
-                                _productsBloc.cart_products_event_sink
-                                    .add(IncrementCartProductQuantity(index));
-                                _box.putAt(index, cartEntry);
-                              },
-                              child: IconTheme(
-                                  data: IconThemeData(
-                                      color: Theme.of(context).primaryColor),
-                                  child: Icon(Icons.add_circle, size: 30.0)),
-                            ),
-                          ]),
-                          Divider(
-                            color: Colors.grey,
-                          ),
-                          Divider(height: 10.0, color: Colors.white),
-                          Row(children: [
-                            Expanded(
-                                child: Text(
-                              "Precio Total",
-                              style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            (discount != null && discount != 0)
-                                ? Row(
-                                    children: [
-                                      Text(
-                                        "\$" +
-                                            ((double.parse(product.productsPrice
-                                                            .toString()) +
-                                                        attrsPrice) *
-                                                    cartEntry.quantity)
-                                                .toStringAsFixed(2),
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.black54,
-                                            decoration:
-                                                TextDecoration.lineThrough),
-                                      ),
-                                      SizedBox(width: 4),
-                                      Text(
-                                        "\$" +
-                                            ((double.parse(product.discountPrice
-                                                            .toString()) +
-                                                        attrsPrice) *
-                                                    cartEntry.quantity)
-                                                .toStringAsFixed(2),
-                                        style: TextStyle(
-                                            color:
-                                                Theme.of(context).primaryColor),
-                                      ),
-                                    ],
-                                  )
-                                : Text(
-                                    "\$" +
-                                        ((double.parse(product.productsPrice
-                                                        .toString()) +
-                                                    attrsPrice) *
-                                                cartEntry.quantity)
-                                            .toStringAsFixed(2),
+                                      .add(DeleteCartProduct(index));
+                                  _box.deleteAt(index);
+                                },
+                                child: IconTheme(
+                                    data: IconThemeData(
+                                        color: Colors.orange.shade600),
+                                    child: Icon(
+                                      Icons.delete_sweep_sharp,
+                                      size: 50.0,
+                                    )),
+                              ),
+                            ]),
+                            SizedBox(height:10.0),
+                            Row(children: [
+                              Expanded(
+                                  child: Text(
+                                "Precio".toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Colors.black45,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                              (discount != null && discount != 0)
+                                  ? Row(
+                                      children: [
+                                        Text(
+                                          "\$" +
+                                              double.parse(product.productsPrice
+                                                      .toString())
+                                                  .toStringAsFixed(2),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.black45,
+                                              decoration:
+                                                  TextDecoration.lineThrough),
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text("\$" +
+                                            double.parse(product.discountPrice
+                                                    .toString())
+                                                .toStringAsFixed(2), style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.orange.shade600,
+                                              ),),
+                                      ],
+                                    )
+                                  : Text("\$" +
+                                      double.parse(
+                                              product.productsPrice.toString())
+                                          .toStringAsFixed(2), style: TextStyle(color: Colors.black, 
+                                          fontSize: 18, 
+                                          fontWeight: FontWeight.bold),),
+                            ]),
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: cartProductAttributes.length,
+                              itemBuilder: (context, index) {
+                                return Row(children: [
+                                  Expanded(
+                                      child: Text(
+                                    cartProductAttributes[index].option.name,
                                     style: TextStyle(
-                                        color: Theme.of(context).primaryColor),
+                                        fontSize: 14, color: Colors.black54),
+                                  )),
+                                  Text(
+                                    cartProductAttributes[index].values[0].value,
+                                    style: TextStyle(
+                                        fontSize: 14, color: Colors.black54),
                                   ),
-                          ])
-                        ]),
-                  ),
-                )
-              ]),
-            );
-          }
-        },
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(cartProductAttributes[index]
+                                          .values[0]
+                                          .pricePrefix +
+                                      "\$" +
+                                      double.parse(cartProductAttributes[index]
+                                              .values[0]
+                                              .price
+                                              .toString())
+                                          .toStringAsFixed(2)),
+                                ]);
+                              },
+                            ),
+                            //Divider(height: 10.0, color: Colors.white),
+                            SizedBox(
+                                height: 8,
+                              ),
+                            Row(children: [
+                              Expanded(
+                                  child: Text(
+                                "Cantidad".toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Colors.black45,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                              GestureDetector(
+                                onTap: () {
+                                  if (cartEntry.quantity > 1) {
+                                    _productsBloc.cart_products_event_sink
+                                        .add(DecrementCartProductQuantity(index));
+                                    cartEntry.quantity--;
+                                    _box.putAt(index, cartEntry);
+                                  }
+                                },
+                                child: IconTheme(
+                                    data: IconThemeData(
+                                        //color: Theme.of(context).primaryColor),
+                                        color: Colors.orange.shade800),
+                                    child: Icon(Icons.remove_circle, size: 30.0)),
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                product.customerBasketQuantity.toString(),
+                                style: TextStyle(
+                                    fontSize: 20.0, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  cartEntry.quantity++;
+                                  _productsBloc.cart_products_event_sink
+                                      .add(IncrementCartProductQuantity(index));
+                                  _box.putAt(index, cartEntry);
+                                },
+                                child: IconTheme(
+                                    data: IconThemeData(
+                                        color: Colors.orange.shade800),
+                                    child: Icon(Icons.add_circle, size: 30.0)),
+                              ),
+                            ]),
+                            
+                            SizedBox(height:10.0),
+                            Row(children: [
+                              Expanded(
+                                  child: Text(
+                                "Total".toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: Colors.black45,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                              (discount != null && discount != 0)
+                                  ? Row(
+                                      children: [
+                                        Text(
+                                          "\$" +
+                                              ((double.parse(product.productsPrice
+                                                              .toString()) +
+                                                          attrsPrice) *
+                                                      cartEntry.quantity)
+                                                  .toStringAsFixed(2),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.black54,
+                                              decoration:
+                                                  TextDecoration.lineThrough),
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          "\$" +
+                                              ((double.parse(product.discountPrice
+                                                              .toString()) +
+                                                          attrsPrice) *
+                                                      cartEntry.quantity)
+                                                  .toStringAsFixed(2),
+                                          style: TextStyle(
+                                              //color: Theme.of(context).primaryColor),
+                                              color: Colors.orange.shade800, 
+                                              fontSize: 18, 
+                                              fontWeight: FontWeight.bold
+                                              ),
+                                        ),
+                                      ],
+                                    )
+                                  : Text(
+                                      "\$" +
+                                          ((double.parse(product.productsPrice
+                                                          .toString()) +
+                                                      attrsPrice) *
+                                                  cartEntry.quantity)
+                                              .toStringAsFixed(2),
+                                      style: TextStyle(
+                                          //color: Theme.of(context).primaryColor),
+                                          color: Colors.orange.shade800, 
+                                          fontSize: 18, 
+                                          fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                            ])
+                          ]),
+                    ),
+                  )
+                ]),
+              );
+            }
+          },
+        ),
       ),
     );
   }
