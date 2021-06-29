@@ -107,7 +107,7 @@ class _HomePage7State extends State<HomePage7> {
                         "-  CATÁLOGO SALUDABLE  -".toUpperCase(),
                        style: TextStyle(
                           fontSize: 32, 
-                          backgroundColor: Colors.greenAccent[100],
+                          backgroundColor: Colors.pinkAccent[100],
                          fontWeight: FontWeight.bold,
                           color: Colors.green[600],
                         ),
