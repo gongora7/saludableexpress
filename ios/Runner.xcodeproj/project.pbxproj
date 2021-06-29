@@ -397,7 +397,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cosmonautas.saludableapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appgoritmo.easystoremx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -541,7 +541,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cosmonautas.saludableapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appgoritmo.easystoremx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -577,7 +577,7 @@
 					"$(PROJECT_DIR)/Flutter",
 				);
 				MARKETING_VERSION = 2.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cosmonautas.saludableapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appgoritmo.easystoremx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
