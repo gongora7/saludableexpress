@@ -3,6 +3,6 @@
     <string name="app_name">Saludable Express.</string>
 
     <string name="facebook_app_id">482196956216405</string>
-    <string name="fb_login_protocol_scheme">fb1330370640657911</string>
+    <string name="fb_login_protocol_scheme">fb482196956216405</string>
 
 </resources>
