@@ -1,11 +1,11 @@
 class AppConstants {
 
-  static final ECOMMERCE_URL = "https://store.saludableexpress.com/";
-  static final CONSUMER_KEY = "8372e1d916062386052577213f";
-  static final CONSUMER_SECRET = "a2eae9a51606238605f480c868";
+  static final ECOMMERCE_URL = "https://demo.easystore.com.mx/";
+  static final CONSUMER_KEY = "5b7a5d7016250104336d211c6a";
+  static final CONSUMER_SECRET = "ae3979ef16250104335b4b0ddb";
 
-  static final ONESIGNAL_APP_ID = "9da37736-4721-4de1-b759-501c8554bdfd"; //daac7f04-b3f2-440d-b610-0189be23aaaa
-  static final PLACE_PICKER_API_KEY = "AIzaSyAeaxmZ8-hjYTbr7oQb9r6i7VHXYYE46z4";
+  static final ONESIGNAL_APP_ID = "785447b3-7225-4ea6-8442-319ce03385f2";
+  static final PLACE_PICKER_API_KEY = "AIzaSyDkXfL6S7qQwbi1e4ZpPReqNqGLKuBguI8";
 
   static final bool isDemoMode = false;
 }

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "97224884708",
+    "project_id": "easy-store-demo",
+    "storage_bucket": "easy-store-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97224884708:android:8e6777949311bf614947f1",
+        "android_client_info": {
+          "package_name": "com.appgoritmo.easystoremx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97224884708-vi8bsddbkoap31crpcpbqtammg00tiem.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB17UtrXHsdFQC5ATEHvPnPZK0V15s5LfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97224884708-vi8bsddbkoap31crpcpbqtammg00tiem.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "97224884708-fms4jb5i3grdh9k4vqm7vv1vk3mnl36q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appgoritmo.easystoremx"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Saludable Express</string>
+	<string>Easy Store Demo</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Saludable Express</string>
+	<string>Easy Store Demo</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.cosmonautas.saludableapp</string>
+				<string>com.appgoritmo.easystoremx</string>
 			</array>
 		</dict>
 		<dict>
@@ -49,35 +49,35 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb482196956216405</string>
+				<string>fb245035473709705</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>482196956216405</string>
+	<string>245035473709705</string>
 	<key>FacebookClientToken</key>
-	<string>Saludable Express</string>
+	<string>Easy Store Demo</string>
 	<key>FacebookDisplayName</key>
-	<string>Saludable Express</string>
+	<string>Easy Store Demo</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>fbapi</string>
-		<string>fbapi20130214</string>
-		<string>fbapi20130410</string>
-		<string>fbapi20130702</string>
-		<string>fbapi20131010</string>
-		<string>fbapi20131219</string>
-		<string>fbapi20140410</string>
-		<string>fbapi20140116</string>
-		<string>fbapi20150313</string>
-		<string>fbapi20150629</string>
-		<string>fbapi20160328</string>
-		<string>fbauth</string>
-		<string>fb-messenger-share-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
+		 <string>fbapi</string>
+         <string>fbapi20130214</string>
+         <string>fbapi20130410</string>
+         <string>fbapi20130702</string>
+         <string>fbapi20131010</string>
+         <string>fbapi20131219</string>
+         <string>fbapi20140410</string>
+         <string>fbapi20140116</string>
+         <string>fbapi20150313</string>
+         <string>fbapi20150629</string>
+         <string>fbapi20160328</string>
+         <string>fbauth</string>
+         <string>fb-messenger-share-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

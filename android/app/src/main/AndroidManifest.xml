@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.cosmonautas.saludableapp">
+    package="com.appgoritmo.easystoremx">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -16,7 +16,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:icon="@mipmap/ic_launcher"
-        android:label="Saludable Express"
+        android:label="Easy Store Demo"
         tools:replace="android:label">
         <activity
             android:name=".MainActivity"
@@ -70,7 +70,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA7kx0PpVHcBdTlHYa3Yp_XU2-44HVWHLo" />
+            android:value="AIzaSyDkXfL6S7qQwbi1e4ZpPReqNqGLKuBguI8" />
 
         <!--Brain tree-->
 
