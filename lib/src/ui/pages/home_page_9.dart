@@ -108,14 +108,8 @@ class _HomePage9State extends State<HomePage9> {
         ];
       },
       body: Products(
-          "Newest",
-          "",
-          false,
-          false,
-          false,
-          widget._toProductDetailPage),
+          "Newest", "", false, false, false, widget._toProductDetailPage),
     );
-
   }
 
   Widget buildUI() {
@@ -159,9 +153,8 @@ class _HomePage9State extends State<HomePage9> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          Shop(categories[index].categoriesId, "newest", true, _toProductDetailPage)));
-
+                      builder: (context) => Shop(categories[index].categoriesId,
+                          "newest", true, _toProductDetailPage)));
             },
             child: Container(
               margin: EdgeInsets.all(2.0),
@@ -180,21 +173,26 @@ class _HomePage9State extends State<HomePage9> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50.0),
                           child: CachedNetworkImage(
-                            imageUrl:
-                            ApiProvider.imageBaseUrl + categories[index].image,
+                            imageUrl: ApiProvider.imageBaseUrl +
+                                categories[index].image,
                             fit: BoxFit.fill,
                             progressIndicatorBuilder:
                                 (context, url, downloadProgress) =>
-                                CircularProgressIndicator(
-                                    value: downloadProgress.progress),
-                            errorWidget: (context, url, error) => Icon(Icons.error),
+                                    CircularProgressIndicator(
+                                        value: downloadProgress.progress),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  Text(categories[index].categoriesName, textAlign: TextAlign.center,),
-                  Text(categories[index].totalProducts.toString() + " Products"),
+                  Text(
+                    categories[index].categoriesName,
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                      categories[index].totalProducts.toString() + " Products"),
                 ],
               ),
             ),
@@ -203,8 +201,6 @@ class _HomePage9State extends State<HomePage9> {
       ),
     );
   }
-
-
 }
 
 List<Category> getParentCategories(CategoriesResponse categoriesResponse) {
@@ -216,7 +212,6 @@ List<Category> getParentCategories(CategoriesResponse categoriesResponse) {
   return categories;
 }
 
-
 Widget buildColumnWithData(
     BuildContext context, BannersResponse bannersResponse) {
   return CarouselSlider.builder(
@@ -224,7 +219,7 @@ Widget buildColumnWithData(
         viewportFraction: 1,
         initialPage: 0,
         enableInfiniteScroll:
-        bannersResponse.bannersData.length > 1 ? false : false,
+            bannersResponse.bannersData.length > 1 ? false : false,
         reverse: false,
         autoPlay: true,
         autoPlayInterval: Duration(seconds: 3),
@@ -235,7 +230,7 @@ Widget buildColumnWithData(
         scrollDirection: Axis.horizontal,
       ),
       itemCount: bannersResponse.bannersData.length,
-      itemBuilder: (BuildContext context, int itemIndex) {
+      itemBuilder: (BuildContext context, int itemIndex, _) {
         return Container(
           width: MediaQuery.of(context).size.width,
           child: CachedNetworkImage(

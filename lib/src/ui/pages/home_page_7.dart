@@ -1,21 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app1/app_data.dart';
 import 'package:flutter_app1/src/api/api_provider.dart';
 import 'package:flutter_app1/src/api/responses/banners_response.dart';
 import 'package:flutter_app1/src/api/responses/categories_response.dart';
-import 'package:flutter_app1/src/api/responses/products_response.dart';
 import 'package:flutter_app1/src/blocs/banners/banners_bloc.dart';
 import 'package:flutter_app1/src/blocs/categories/categories_bloc.dart';
-import 'package:flutter_app1/src/blocs/products/products_bloc.dart';
 import 'package:flutter_app1/src/models/categories_response/category.dart';
 import 'package:flutter_app1/src/models/product_models/product.dart';
-import 'package:flutter_app1/src/models/product_models/product_post_model.dart';
 import 'package:flutter_app1/src/repositories/banners_repo.dart';
-import 'package:flutter_app1/src/repositories/categories_repo.dart';
 import 'package:flutter_app1/src/ui/pages/shop.dart';
-import 'package:flutter_app1/src/ui/widgets/products_by_categories.dart';
 import 'package:flutter_app1/src/ui/widgets/products_by_type.dart';
 import 'package:flutter_app1/src/ui/widgets/products_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -99,25 +93,22 @@ class _HomePage7State extends State<HomePage7> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.90,
-                    padding: EdgeInsets.only(top: 50.0, right: 20.0, left: 20.0),
+                    padding:
+                        EdgeInsets.only(top: 50.0, right: 20.0, left: 20.0),
                     child: FittedBox(
-                       fit: BoxFit.cover,
-                         child:
-                          Text(
+                      fit: BoxFit.cover,
+                      child: Text(
                         "-  CATÁLOGO SALUDABLE  -".toUpperCase(),
-                       style: TextStyle(
-                          fontSize: 32, 
+                        style: TextStyle(
+                          fontSize: 32,
                           backgroundColor: Colors.greenAccent[100],
-                         fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold,
                           color: Colors.green[600],
                         ),
-                         textAlign: TextAlign.center, 
-                      ), 
-                     
-                          
+                        textAlign: TextAlign.center,
                       ),
+                    ),
                   ),
-                  
                 ],
               ),
             ),
@@ -126,18 +117,11 @@ class _HomePage7State extends State<HomePage7> {
       },
       body: Container(
         padding: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-          color: Colors.greenAccent[100]),
-              child: Products(
-          "Newest",
-          "",
-          false,
-          false,
-          false,
-          widget._toProductDetailPage),
+        decoration: BoxDecoration(color: Colors.greenAccent[100]),
+        child: Products(
+            "Newest", "", false, false, false, widget._toProductDetailPage),
       ),
     );
-
   }
 
   Widget buildUI() {
@@ -169,10 +153,12 @@ class _HomePage7State extends State<HomePage7> {
           return InkWell(
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Shop(categories[index].categoriesId,
-                          "newest", true, widget._toProductDetailPage)));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Shop(categories[index].categoriesId,
+                      "newest", true, widget._toProductDetailPage),
+                ),
+              );
             },
             child: Container(
               width: 160,
@@ -193,35 +179,24 @@ class _HomePage7State extends State<HomePage7> {
                           fit: BoxFit.fill,
                           progressIndicatorBuilder:
                               (context, url, downloadProgress) =>
-                              CircularProgressIndicator(
-                                  value: downloadProgress.progress),
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
                         ),
                       ),
                     ),
                   ),
-                  Text(categories[index].categoriesName.toUpperCase(), 
-                  style:TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold
-                    
-                    ),
-                    textAlign: TextAlign.center,
-                    ),
-
-
                   Text(
-                      categories[index].totalProducts.toString() + " Productos", 
-                      style: 
-                      TextStyle(
-                        fontSize: 16,
-                    fontWeight: FontWeight.bold
-                    
-                    ),
+                    categories[index].categoriesName.toUpperCase(),
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
-
-                      ),
+                  ),
+                  Text(
+                    categories[index].totalProducts.toString() + " Productos",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
             ),
@@ -230,8 +205,6 @@ class _HomePage7State extends State<HomePage7> {
       ),
     );
   }
-
-
 }
 
 List<Category> getParentCategories(CategoriesResponse categoriesResponse) {
@@ -243,7 +216,6 @@ List<Category> getParentCategories(CategoriesResponse categoriesResponse) {
   return categories;
 }
 
-
 Widget buildColumnWithData(
     BuildContext context, BannersResponse bannersResponse) {
   return CarouselSlider.builder(
@@ -251,7 +223,7 @@ Widget buildColumnWithData(
         viewportFraction: 1,
         initialPage: 0,
         enableInfiniteScroll:
-        bannersResponse.bannersData.length > 1 ? false : false,
+            bannersResponse.bannersData.length > 1 ? false : false,
         reverse: false,
         autoPlay: true,
         autoPlayInterval: Duration(seconds: 3),
@@ -262,7 +234,7 @@ Widget buildColumnWithData(
         scrollDirection: Axis.horizontal,
       ),
       itemCount: bannersResponse.bannersData.length,
-      itemBuilder: (BuildContext context, int itemIndex) {
+      itemBuilder: (BuildContext context, int itemIndex, _) {
         return Container(
           width: MediaQuery.of(context).size.width,
           child: CachedNetworkImage(

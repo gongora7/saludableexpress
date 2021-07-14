@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:braintree_payment/braintree_payment.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/app_data.dart';
@@ -37,8 +36,6 @@ class Checkout extends StatefulWidget {
 
   Checkout(this.cartEntries, this.cartProducts, this.shippingAddress,
       this.billingAddress, this.shippingTax, this.shippingService);
-
-  
 
   @override
   _CheckoutState createState() => _CheckoutState();
@@ -104,7 +101,8 @@ class _CheckoutState extends State<Checkout> {
                   padding: EdgeInsets.all(10.0),
                   child: Column(
                     children: [
-                      buildProductsList(widget.cartProducts, widget.cartEntries),
+                      buildProductsList(
+                          widget.cartProducts, widget.cartEntries),
                       buildBillingAddressCard(widget.billingAddress),
                       buildShippingAddressCard(widget.shippingAddress),
                       buildShippingMethodCard(widget.shippingService),
@@ -158,12 +156,12 @@ class _CheckoutState extends State<Checkout> {
               child: Row(
                 children: [
                   Container(
-                    
                     child: Expanded(
                         child: FlatButton(
                             color: Colors.orange[500],
                             height: 70.0,
-                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            materialTapTargetSize:
+                                MaterialTapTargetSize.shrinkWrap,
                             child: Text(
                               "Cancelar",
                               style: TextStyle(color: Colors.white),
@@ -180,8 +178,9 @@ class _CheckoutState extends State<Checkout> {
                           color: (selectedPaymentMethod.name != null)
                               ? Colors.green[500]
                               : Colors.green[200],
-                              height: 70.0,
-                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          height: 70.0,
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
                           onPressed: () {
                             if (selectedPaymentMethod.name != null)
                               placeOrderNow();
@@ -204,14 +203,14 @@ class _CheckoutState extends State<Checkout> {
       margin: EdgeInsets.all(4.0),
       child: Container(
         color: Colors.orange.shade400,
-        
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text("Dirección de Facturación:", 
-              style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+              Text("Dirección de Facturación:",
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
               SizedBox(
                 height: 8.0,
               ),
@@ -249,7 +248,8 @@ class _CheckoutState extends State<Checkout> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text("Dirección de Envío:",
-              style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
               SizedBox(
                 height: 8.0,
               ),
@@ -286,8 +286,9 @@ class _CheckoutState extends State<Checkout> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text("Método de Envío:", 
-              style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+              Text("Método de Envío:",
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
               SizedBox(
                 height: 8.0,
               ),
@@ -338,8 +339,10 @@ class _CheckoutState extends State<Checkout> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Text("Métodos de Pago", 
-                            style:TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+                            Text("Métodos de Pago",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0)),
                             SizedBox(
                               height: 8.0,
                             ),
@@ -347,7 +350,8 @@ class _CheckoutState extends State<Checkout> {
                               selectedPaymentMethod.name == null
                                   ? "Elegir un método de pago".toUpperCase()
                                   : selectedPaymentMethod.name.toUpperCase(),
-                              style: TextStyle(color: Colors.black54, fontSize: 16.0),
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 16.0),
                             )
                           ],
                         ),
@@ -437,14 +441,14 @@ class _CheckoutState extends State<Checkout> {
             child: Row(children: [
               Container(
                 padding: EdgeInsets.all(3.0),
-                
                 width: 120,
                 height: 120,
                 child: CachedNetworkImage(
                   imageUrl: ApiProvider.imageBaseUrl + product.productsImage,
                   fit: BoxFit.contain,
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      CircularProgressIndicator(value: downloadProgress.progress),
+                      CircularProgressIndicator(
+                          value: downloadProgress.progress),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
@@ -457,16 +461,20 @@ class _CheckoutState extends State<Checkout> {
                         Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(product.productsName.toUpperCase(), 
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                              Text(product.productsName.toUpperCase(),
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
                               if (product.categories.length > 0)
                                 Text(
-                                  product.categories[0].categoriesName.toUpperCase(),
+                                  product.categories[0].categoriesName
+                                      .toUpperCase(),
                                   style: TextStyle(
-                                      fontSize: 14, color: Colors.black54, fontStyle: FontStyle.italic),
+                                      fontSize: 14,
+                                      color: Colors.black54,
+                                      fontStyle: FontStyle.italic),
                                 ),
                             ]),
-                       Divider(
+                        Divider(
                           height: 20.0,
                           color: Colors.orange.shade400,
                         ),
@@ -474,7 +482,10 @@ class _CheckoutState extends State<Checkout> {
                           Expanded(
                               child: Text(
                             "Precio",
-                            style: TextStyle(fontSize: 16, color: Colors.black54, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black54,
+                                fontWeight: FontWeight.bold),
                           )),
                           (discount != null && discount != 0)
                               ? Row(
@@ -487,18 +498,23 @@ class _CheckoutState extends State<Checkout> {
                                       style: TextStyle(
                                           fontSize: 16,
                                           color: Colors.black54,
-                                          decoration: TextDecoration.lineThrough),
+                                          decoration:
+                                              TextDecoration.lineThrough),
                                     ),
                                     SizedBox(width: 4),
                                     Text("\$" +
-                                        double.parse(
-                                                product.discountPrice.toString())
+                                        double.parse(product.discountPrice
+                                                .toString())
                                             .toStringAsFixed(2)),
                                   ],
                                 )
-                              : Text("\$" +
-                                  double.parse(product.productsPrice.toString())
-                                      .toStringAsFixed(2), style: TextStyle(fontWeight: FontWeight.bold)),
+                              : Text(
+                                  "\$" +
+                                      double.parse(
+                                              product.productsPrice.toString())
+                                          .toStringAsFixed(2),
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
                         ]),
                         ListView.builder(
                           shrinkWrap: true,
@@ -536,9 +552,15 @@ class _CheckoutState extends State<Checkout> {
                           Expanded(
                               child: Text(
                             "Cantidad",
-                            style: TextStyle(fontSize: 16, color: Colors.black54, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black54,
+                                fontWeight: FontWeight.bold),
                           )),
-                          Text(" x " + product.customerBasketQuantity.toString(), style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(
+                            " x " + product.customerBasketQuantity.toString(),
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ]),
                         Divider(
                           color: Colors.black45,
@@ -547,7 +569,11 @@ class _CheckoutState extends State<Checkout> {
                           Expanded(
                               child: Text(
                             "Precio Total",
-                            style: TextStyle(fontSize: 16, color: Colors.black54, fontWeight: FontWeight.bold,),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold,
+                            ),
                           )),
                           (discount != null && discount != 0)
                               ? Row(
@@ -560,9 +586,11 @@ class _CheckoutState extends State<Checkout> {
                                                   cartEntry.quantity)
                                               .toStringAsFixed(2),
                                       style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.black54,
-                                          decoration: TextDecoration.lineThrough, fontWeight: FontWeight.bold,),
+                                        fontSize: 16,
+                                        color: Colors.black54,
+                                        decoration: TextDecoration.lineThrough,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                     SizedBox(width: 4),
                                     Text(
@@ -574,7 +602,8 @@ class _CheckoutState extends State<Checkout> {
                                               .toStringAsFixed(2),
                                       style: TextStyle(
                                           //color: Theme.of(context).primaryColor),
-                                          color: Colors.black45, fontWeight: FontWeight.bold),
+                                          color: Colors.black45,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 )
@@ -587,7 +616,8 @@ class _CheckoutState extends State<Checkout> {
                                           .toStringAsFixed(2),
                                   style: TextStyle(
                                       //color: Theme.of(context).primaryColor),
-                                      color: Colors.black45, fontWeight: FontWeight.bold),
+                                      color: Colors.black45,
+                                      fontWeight: FontWeight.bold),
                                 ),
                         ])
                       ]),
@@ -607,7 +637,6 @@ class _CheckoutState extends State<Checkout> {
 
     if (selectedPaymentMethod.method == "braintree_card") {
       brainTreeTokenizationKeys = selectedPaymentMethod.publicKey;
-      payWithBraintree();
     }
     if (selectedPaymentMethod.method == "stripe") {
       FullScreenDialog _myDialog = new FullScreenDialog(_onStripeDetailsAdded);
@@ -619,16 +648,6 @@ class _CheckoutState extends State<Checkout> {
           ));
     }
   }
-
-  void payWithBraintree() async {
-    BraintreePayment braintreePayment = new BraintreePayment();
-    var data = await braintreePayment.showDropIn(
-        nonce: brainTreeTokenizationKeys, amount: "2.0", enableGooglePay: true, nameRequired:true, googleMerchantId: "955xt546rmxhn7zs", inSandbox: true);
-    print("Response of the payment $data['paymentNonce']");
-    paymentMethodNonce = data['paymentNonce'];
-    placeOrderNow();
-  }
-
 
   void _onStripeDetailsAdded(
       String cardNumber, String cardExpiryMonth, String cardExpiryYear) {
@@ -873,7 +892,10 @@ class _CheckoutState extends State<Checkout> {
       child: Column(
         children: [
           Row(children: [
-            Text("Subtotal", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+            Text(
+              "Subtotal",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             Expanded(child: SizedBox()),
             Text("\$" + subtotalPrice.toStringAsFixed(2)),
           ]),
@@ -881,7 +903,10 @@ class _CheckoutState extends State<Checkout> {
             height: 4,
           ),
           Row(children: [
-            Text("Descuento", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+            Text(
+              "Descuento",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             Expanded(child: SizedBox()),
             Text("\$" + discountPrice.toStringAsFixed(2)),
           ]),
@@ -889,11 +914,14 @@ class _CheckoutState extends State<Checkout> {
             height: 4,
           ),
           Row(children: [
-            Text("Impuestos", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+            Text(
+              "Impuestos",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             Expanded(child: SizedBox()),
             Text("\$" + double.parse(widget.shippingTax).toStringAsFixed(2)),
           ]),
-         /* SizedBox(
+          /* SizedBox(
             height: 4,
           ),
           Row(children: [
@@ -905,7 +933,10 @@ class _CheckoutState extends State<Checkout> {
             height: 4,
           ),
           Row(children: [
-            Text("Costo de Envío", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+            Text(
+              "Costo de Envío",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             Expanded(child: SizedBox()),
             Text("\$" +
                 double.parse(widget.shippingService.rate.toString())
@@ -915,13 +946,18 @@ class _CheckoutState extends State<Checkout> {
             height: 4,
           ),
           Row(children: [
-            Text("Total", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+            Text(
+              "Total",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             Expanded(child: SizedBox()),
             Text(
               "\$" + totalPrice.toStringAsFixed(2),
               style: TextStyle(
-                 fontSize: 18, color: Colors.orange.shade600,fontWeight: FontWeight.bold ),
-                  //fontSize: 18, color: Theme.of(context).primaryColor),
+                  fontSize: 18,
+                  color: Colors.orange.shade600,
+                  fontWeight: FontWeight.bold),
+              //fontSize: 18, color: Theme.of(context).primaryColor),
             ),
           ]),
         ],
@@ -1046,15 +1082,15 @@ class FullScreenDialogState extends State<FullScreenDialog> {
               new TextField(
                 controller: _cardNumberController,
                 maxLength: 16,
-                decoration:
-                    new InputDecoration.collapsed(hintText: 'Número de Tarjeta'),
+                decoration: new InputDecoration.collapsed(
+                    hintText: 'Número de Tarjeta'),
               ),
               SizedBox(
                 height: 16.0,
               ),
               new TextField(
-                decoration:
-                    new InputDecoration.collapsed(hintText: 'Més de Expiración'),
+                decoration: new InputDecoration.collapsed(
+                    hintText: 'Més de Expiración'),
                 maxLength: 2,
                 controller: _cardExpiryMonthController,
               ),
@@ -1062,8 +1098,8 @@ class FullScreenDialogState extends State<FullScreenDialog> {
                 height: 16.0,
               ),
               new TextField(
-                decoration:
-                    new InputDecoration.collapsed(hintText: 'Año de Expiración'),
+                decoration: new InputDecoration.collapsed(
+                    hintText: 'Año de Expiración'),
                 maxLength: 2,
                 controller: _cardExpiryYearController,
               ),

@@ -41,13 +41,6 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            url "https://cardinalcommerce.bintray.com/android"
-            credentials {
-                username 'braintree-team-sdk@cardinalcommerce'
-                password '220cc9476025679c4e5c843666c27d97cfb0f951'
-            }
-        }
     }
 }
 
@@ -92,7 +85,6 @@ flutter {
 }
 
 dependencies {
-    implementation 'com.braintreepayments.api:drop-in:4.5.0'
     implementation 'io.card:android-sdk:5.+'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

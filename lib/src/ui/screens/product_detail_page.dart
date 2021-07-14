@@ -93,7 +93,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     _box = await Hive.openBox('my_cartBox');
     return;
   }
-   void _toProductDetailPage(Product product) {
+
+  void _toProductDetailPage(Product product) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => ProductDetailPage(product)));
   }
@@ -104,52 +105,52 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         appBar: AppBar(
           title: Text("Detalle de Producto"),
           actions: <Widget>[
-              IconButton(
-          icon: Icon(Icons.search),
-          iconSize: 30,
-          tooltip: 'Buscar',
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Search(_toProductDetailPage)));
-          },
-        ),
-             IconButton(
-          icon: new Stack(
-            children: <Widget>[
-              new Icon(Icons.shopping_cart, size: 30),
-              new Positioned(
-                right: 0,
-                child: new Container(
-                  padding: EdgeInsets.all(2),
-                  decoration: new BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  constraints: BoxConstraints(
-                    minWidth: 14,
-                    minHeight: 14,
-                  ),
-                  child: new Text(
-                    AppData.cartIds.length.toString(),
-                    style: new TextStyle(
-                      color: Colors.white,
-                      fontSize: 11,
+            IconButton(
+              icon: Icon(Icons.search),
+              iconSize: 30,
+              tooltip: 'Buscar',
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Search(_toProductDetailPage)));
+              },
+            ),
+            IconButton(
+              icon: new Stack(
+                children: <Widget>[
+                  new Icon(Icons.shopping_cart, size: 30),
+                  new Positioned(
+                    right: 0,
+                    child: new Container(
+                      padding: EdgeInsets.all(2),
+                      decoration: new BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      constraints: BoxConstraints(
+                        minWidth: 14,
+                        minHeight: 14,
+                      ),
+                      child: new Text(
+                        AppData.cartIds.length.toString(),
+                        style: new TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              )
-            ],
-          ),
-          tooltip: 'Carrito',
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Cart()));
-          },
-        )
-           /* IconButton(
+                  )
+                ],
+              ),
+              tooltip: 'Carrito',
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Cart()));
+              },
+            )
+            /* IconButton(
               icon: const Icon(Icons.share),
               tooltip: 'Share',
               onPressed: () {},
@@ -411,22 +412,20 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     ),
                     Html(
                       data: widget._product.productsDescription,
-                      defaultTextStyle: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.w400),
                     ),
                   ],
                 ),
               ),
-              
+
               if (widget._product.attributes.length > 0)
-              Container(
-                padding: EdgeInsets.all(15.0),
-                child: Text(
-                  "Elige tu Producto",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Container(
+                  padding: EdgeInsets.all(15.0),
+                  child: Text(
+                    "Elige tu Producto",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-                buildAttributesList(widget._product.attributes),
+              buildAttributesList(widget._product.attributes),
               SizedBox(
                 height: 50.0,
               )
@@ -481,7 +480,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         ),
                         (widget._product.productsType != 2)
                             ? Text("+\$" + totalPriceToBuy.toStringAsFixed(2),
-                                style: TextStyle(color: Colors.white, fontSize: 18))
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18))
                             : IconTheme(
                                 data: IconThemeData(color: Colors.white),
                                 child: Icon(Icons.open_in_new)),
@@ -561,39 +561,39 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return Column(
       children: [
         CarouselSlider.builder(
-            options: CarouselOptions(
-              height: 250.0,
-              viewportFraction: 1,
-              initialPage: 0,
-              enableInfiniteScroll: images.length > 1 ? false : false,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: Duration(seconds: 3),
-              autoPlayAnimationDuration: Duration(milliseconds: 600),
-              autoPlayCurve: Curves.linear,
-              enlargeCenterPage: false,
-              onPageChanged: (index, reason) {},
-              scrollDirection: Axis.horizontal,
-            ),
-            itemCount: images.length,
-            itemBuilder: (BuildContext context, int itemIndex) {
-              return Container(
-                width: MediaQuery.of(context).size.width,
-                child: Hero(
-                  tag: images[itemIndex].productsId,
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        ApiProvider.imageBaseUrl + images[itemIndex].image,
-                    fit: BoxFit.contain,
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => Center(
-                            child: CircularProgressIndicator(
-                                value: downloadProgress.progress)),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
+          options: CarouselOptions(
+            height: 250.0,
+            viewportFraction: 1,
+            initialPage: 0,
+            enableInfiniteScroll: images.length > 1 ? false : false,
+            reverse: false,
+            autoPlay: true,
+            autoPlayInterval: Duration(seconds: 3),
+            autoPlayAnimationDuration: Duration(milliseconds: 600),
+            autoPlayCurve: Curves.linear,
+            enlargeCenterPage: false,
+            onPageChanged: (index, reason) {},
+            scrollDirection: Axis.horizontal,
+          ),
+          itemCount: images.length,
+          itemBuilder: (BuildContext context, int itemIndex, _) {
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              child: Hero(
+                tag: images[itemIndex].productsId,
+                child: CachedNetworkImage(
+                  imageUrl: ApiProvider.imageBaseUrl + images[itemIndex].image,
+                  fit: BoxFit.contain,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(
+                          child: CircularProgressIndicator(
+                              value: downloadProgress.progress)),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
-              );
-            }),
+              ),
+            );
+          },
+        ),
       ],
     );
   }

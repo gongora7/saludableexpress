@@ -122,7 +122,8 @@ class _HomePage1State extends State<HomePage1> {
 */
         ];
       },
-      body: ProductsByCategories(0, "Newest", false, false, false, _toProductDetailPage),
+      body: ProductsByCategories(
+          0, "Newest", false, false, false, _toProductDetailPage),
     );
 
     /*Column(
@@ -219,7 +220,7 @@ Widget buildColumnWithData(
         scrollDirection: Axis.horizontal,
       ),
       itemCount: bannersResponse.bannersData.length,
-      itemBuilder: (BuildContext context, int itemIndex) {
+      itemBuilder: (BuildContext context, int itemIndex, _) {
         return Container(
           width: MediaQuery.of(context).size.width,
           child: CachedNetworkImage(

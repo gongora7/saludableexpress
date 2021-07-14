@@ -251,7 +251,7 @@ class _ProductsState extends State<Products>
                                 Navigator.pop(context);
                               },
                               title: Text('Precio: Bajo - Alto')),
-                        /*  ListTile(
+                          /*  ListTile(
                               onTap: () {
                                 this.type = "top seller";
                                 _getProducts();
@@ -298,7 +298,7 @@ class _ProductsState extends State<Products>
                 ),
               ),
             ),
-           /* IconButton(
+            /* IconButton(
               icon: Icon((!isGrid) ? Icons.border_all : Icons.list),
               tooltip: 'List / Grid',
               onPressed: () {
@@ -348,16 +348,13 @@ class _ProductsState extends State<Products>
     int discount =
         _calculateDiscount(product.productsPrice, product.discountPrice);
 
-
     return Container(
       padding: EdgeInsets.all(5.0),
-      
       child: GestureDetector(
         onTap: () {
           _toProductDetailPage(product);
         },
         child: new Card(
-          
           child: Stack(
             children: [
               Column(
@@ -379,10 +376,10 @@ class _ProductsState extends State<Products>
                               (context, url, downloadProgress) =>
                                   CircularProgressIndicator(
                                       value: downloadProgress.progress),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                         //),
-
                       ),
                     ),
                   ),
@@ -413,12 +410,13 @@ class _ProductsState extends State<Products>
                                                           .toString())
                                                       .toStringAsFixed(2),
                                               style: TextStyle(
-                                                  decoration:
-                                                      TextDecoration.lineThrough),
+                                                  decoration: TextDecoration
+                                                      .lineThrough),
                                             ),
                                             SizedBox(width: 4),
                                             Text(AppData.currencySymbol +
-                                                double.parse(product.discountPrice
+                                                double.parse(product
+                                                        .discountPrice
                                                         .toString())
                                                     .toStringAsFixed(2)),
                                           ],
@@ -436,13 +434,17 @@ class _ProductsState extends State<Products>
                                               LikeProduct(product.productsId));
                                         else
                                           _productsBloc.likeEventSink.add(
-                                              UnlikeProduct(product.productsId));
+                                              UnlikeProduct(
+                                                  product.productsId));
                                         product.isLiked =
-                                            (product.isLiked == "1") ? "0" : "1";
+                                            (product.isLiked == "1")
+                                                ? "0"
+                                                : "1";
                                       });
                                       Scaffold.of(context)
                                           .removeCurrentSnackBar();
-                                      Scaffold.of(context).showSnackBar(SnackBar(
+                                      Scaffold.of(context)
+                                          .showSnackBar(SnackBar(
                                         content: Text("Liked"),
                                       ));
                                     },
@@ -458,11 +460,9 @@ class _ProductsState extends State<Products>
                           ],
                         ),
                       ),
-
                       Container(
                         child: FlatButton(
-
-                          onPressed: () {
+                            onPressed: () {
                               if (widget.type == "wishlist") {
                                 setState(() {
                                   _productsBloc.likeEventSink
@@ -494,7 +494,8 @@ class _ProductsState extends State<Products>
                                   _box.add(cartEntry);
                                   Scaffold.of(context).removeCurrentSnackBar();
                                   Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text("Producto Agregado al carrito"),
+                                    content:
+                                        Text("Producto Agregado al carrito"),
                                   ));
                                 } else {
                                   Scaffold.of(context).removeCurrentSnackBar();
@@ -631,14 +632,14 @@ class _ProductsState extends State<Products>
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              FlutterRatingBarIndicator(
-                                rating: double.parse(product.rating),
-                                itemCount: 5,
-                                itemSize: 15.0,
-                                itemPadding: EdgeInsets.all(2.0),
-                                emptyColor: Colors.grey,
-                                fillColor: Theme.of(context).primaryColor,
-                              ),
+                              // FlutterRatingBarIndicator(
+                              //   rating: double.parse(product.rating),
+                              //   itemCount: 5,
+                              //   itemSize: 15.0,
+                              //   itemPadding: EdgeInsets.all(2.0),
+                              //   emptyColor: Colors.grey,
+                              //   fillColor: Theme.of(context).primaryColor,
+                              // ),
                               if (product.categories.length > 0)
                                 Text(product.categories[0].categoriesName),
                               Text(product.productsName,
