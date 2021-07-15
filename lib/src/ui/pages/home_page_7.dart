@@ -99,25 +99,21 @@ class _HomePage7State extends State<HomePage7> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 0.90,
-                    padding: EdgeInsets.only(top: 50.0, right: 20.0, left: 20.0),
+                    padding:
+                        EdgeInsets.only(top: 50.0, right: 20.0, left: 20.0),
                     child: FittedBox(
-                       fit: BoxFit.cover,
-                         child:
-                          Text(
+                      fit: BoxFit.cover,
+                      child: Text(
                         "-  CATÁLOGO SALUDABLE  -".toUpperCase(),
-                       style: TextStyle(
-                          fontSize: 32, 
-                          backgroundColor: Colors.greenAccent[100],
-                         fontWeight: FontWeight.bold,
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
                           color: Colors.green[600],
                         ),
-                         textAlign: TextAlign.center, 
-                      ), 
-                     
-                          
+                        textAlign: TextAlign.center,
                       ),
+                    ),
                   ),
-                  
                 ],
               ),
             ),
@@ -126,18 +122,11 @@ class _HomePage7State extends State<HomePage7> {
       },
       body: Container(
         padding: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-          color: Colors.greenAccent[100]),
-              child: Products(
-          "Newest",
-          "",
-          false,
-          false,
-          false,
-          widget._toProductDetailPage),
+        decoration: BoxDecoration(color: Colors.white),
+        child: Products(
+            "Newest", "", false, false, false, widget._toProductDetailPage),
       ),
     );
-
   }
 
   Widget buildUI() {
@@ -193,35 +182,24 @@ class _HomePage7State extends State<HomePage7> {
                           fit: BoxFit.fill,
                           progressIndicatorBuilder:
                               (context, url, downloadProgress) =>
-                              CircularProgressIndicator(
-                                  value: downloadProgress.progress),
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
                         ),
                       ),
                     ),
                   ),
-                  Text(categories[index].categoriesName.toUpperCase(), 
-                  style:TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold
-                    
-                    ),
-                    textAlign: TextAlign.center,
-                    ),
-
-
                   Text(
-                      categories[index].totalProducts.toString() + " Productos", 
-                      style: 
-                      TextStyle(
-                        fontSize: 16,
-                    fontWeight: FontWeight.bold
-                    
-                    ),
+                    categories[index].categoriesName.toUpperCase(),
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
-
-                      ),
+                  ),
+                  Text(
+                    categories[index].totalProducts.toString() + " Productos",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
             ),
@@ -230,8 +208,6 @@ class _HomePage7State extends State<HomePage7> {
       ),
     );
   }
-
-
 }
 
 List<Category> getParentCategories(CategoriesResponse categoriesResponse) {
@@ -243,7 +219,6 @@ List<Category> getParentCategories(CategoriesResponse categoriesResponse) {
   return categories;
 }
 
-
 Widget buildColumnWithData(
     BuildContext context, BannersResponse bannersResponse) {
   return CarouselSlider.builder(
@@ -251,7 +226,7 @@ Widget buildColumnWithData(
         viewportFraction: 1,
         initialPage: 0,
         enableInfiniteScroll:
-        bannersResponse.bannersData.length > 1 ? false : false,
+            bannersResponse.bannersData.length > 1 ? false : false,
         reverse: false,
         autoPlay: true,
         autoPlayInterval: Duration(seconds: 3),
