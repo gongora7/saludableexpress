@@ -15,8 +15,14 @@ class BillingAddress extends StatelessWidget {
   List<CartEntry> cartEntries;
   List<Product> cartProducts;
   Address shippingAddress;
+  double totalPrice;
 
-  BillingAddress(this.cartEntries, this.cartProducts, this.shippingAddress);
+  BillingAddress({
+    this.cartEntries,
+    this.cartProducts,
+    this.shippingAddress,
+    this.totalPrice,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +41,12 @@ class BillingAddress extends StatelessWidget {
         body: Stack(
           fit: StackFit.expand,
           children: [
-            MyCustomForm(cartEntries, cartProducts, shippingAddress),
+            MyCustomForm(
+              cartEntries: cartEntries,
+              cartProducts: cartProducts,
+              shippingAddress: shippingAddress,
+              totalPrice: totalPrice,
+            ),
           ],
         ),
       ),
@@ -48,8 +59,14 @@ class MyCustomForm extends StatefulWidget {
   List<CartEntry> cartEntries;
   List<Product> cartProducts;
   Address shippingAddress;
+  double totalPrice;
 
-  MyCustomForm(this.cartEntries, this.cartProducts, this.shippingAddress);
+  MyCustomForm({
+    this.cartEntries,
+    this.cartProducts,
+    this.shippingAddress,
+    this.totalPrice,
+  });
 
   @override
   MyCustomFormState createState() {
@@ -503,13 +520,17 @@ class MyCustomFormState extends State<MyCustomForm> {
                       billingAddress.deliveryLong = "";
 
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ShippingMethods(
-                                  widget.cartEntries,
-                                  widget.cartProducts,
-                                  widget.shippingAddress,
-                                  billingAddress)));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ShippingMethods(
+                            cartEntries: widget.cartEntries,
+                            cartProducts: widget.cartProducts,
+                            shippingAddress: widget.shippingAddress,
+                            billingAddress: billingAddress,
+                            totalPrice: widget.totalPrice,
+                          ),
+                        ),
+                      );
                     }
                   },
                   child: Text(

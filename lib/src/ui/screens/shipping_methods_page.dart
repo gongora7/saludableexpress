@@ -17,9 +17,15 @@ class ShippingMethods extends StatefulWidget {
   List<Product> cartProducts;
   Address shippingAddress;
   Address billingAddress;
+  double totalPrice;
 
-  ShippingMethods(this.cartEntries, this.cartProducts, this.shippingAddress,
-      this.billingAddress);
+  ShippingMethods({
+    this.cartEntries,
+    this.cartProducts,
+    this.shippingAddress,
+    this.billingAddress,
+    this.totalPrice,
+  });
 
   @override
   _ShippingMethodsState createState() => _ShippingMethodsState();
@@ -43,9 +49,11 @@ class _ShippingMethodsState extends State<ShippingMethods> {
     getRatesPost.state = widget.shippingAddress.deliveryZone.zoneName;
     getRatesPost.postcode = widget.shippingAddress.deliveryPostCode;
     getRatesPost.zone = widget.shippingAddress.deliveryZone.zoneName;
-    getRatesPost.taxZoneId = widget.shippingAddress.deliveryZone.zoneId.toString();
+    getRatesPost.taxZoneId =
+        widget.shippingAddress.deliveryZone.zoneId.toString();
     getRatesPost.country = widget.shippingAddress.deliveryCountry.countriesName;
-    getRatesPost.countryId = widget.shippingAddress.deliveryCountry.countriesId.toString();
+    getRatesPost.countryId =
+        widget.shippingAddress.deliveryCountry.countriesId.toString();
     getRatesPost.telephone = widget.shippingAddress.deliveryPhone;
 
     getRatesPost.productsWeight = 0;
@@ -119,17 +127,24 @@ class _ShippingMethodsState extends State<ShippingMethods> {
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Checkout(
-                            widget.cartEntries,
-                            widget.cartProducts,
-                            widget.shippingAddress,
-                            widget.billingAddress,
-                            shippingTax,
-                            selectedService)));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Checkout(
+                      cartEntries: widget.cartEntries,
+                      cartProducts: widget.cartProducts,
+                      shippingAddress: widget.shippingAddress,
+                      billingAddress: widget.billingAddress,
+                      shippingTax: shippingTax,
+                      shippingService: selectedService,
+                      totalPrice: widget.totalPrice,
+                    ),
+                  ),
+                );
               },
-              child: Text("Ir al Pago", style: TextStyle(fontSize: 16,color: Colors.white),),
+              child: Text(
+                "Ir al Pago",
+                style: TextStyle(fontSize: 16, color: Colors.white),
+              ),
             ),
           )
         ],
@@ -209,17 +224,26 @@ class RadioListBuilderState extends State<RadioListBuilder> {
             value = ind;
             widget.shippingServiceSelected(widget.shippingServices[index]);
           }),
-          title: Text(widget.shippingServices[index].name, 
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-          subtitle: Text(widget.shippingServices[index].shippingMethod, 
-          style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold),),
-          secondary:
-              Text("\$" + double.parse(widget.shippingServices[index].rate.toString()).toStringAsFixed(2), 
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
+          title: Text(
+            widget.shippingServices[index].name,
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(
+            widget.shippingServices[index].shippingMethod,
+            style: TextStyle(
+                fontSize: 18,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.bold),
+          ),
+          secondary: Text(
+            "\$" +
+                double.parse(widget.shippingServices[index].rate.toString())
+                    .toStringAsFixed(2),
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
         );
       },
       itemCount: widget.shippingServices.length,
     );
   }
 }
-

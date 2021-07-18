@@ -195,10 +195,13 @@ class _CartState extends State<Cart> {
                                   ),
                                   //Divider(height: 3.0),
                                   Row(children: [
-                                    Text("Total".toUpperCase(),
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold)),
+                                    Text(
+                                      "Total".toUpperCase(),
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                     Expanded(child: SizedBox()),
                                     Text(
                                       "\$" + totalPrice.toStringAsFixed(2),
@@ -233,10 +236,15 @@ class _CartState extends State<Cart> {
                                     return;
                                   }
                                   String message = await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ShippingAddress(list, data)));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ShippingAddress(
+                                        cartEntries: list,
+                                        cartProducts: data,
+                                        totalPrice: totalPrice,
+                                      ),
+                                    ),
+                                  );
                                   if (message != null && message.isNotEmpty) {
                                     Scaffold.of(context)
                                         .removeCurrentSnackBar();

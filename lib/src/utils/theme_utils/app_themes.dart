@@ -13,7 +13,7 @@ final appThemeData = {
     primaryColor: Color.fromRGBO(102, 174, 39, 1.0),
   ),
   AppTheme.GreenDark: ThemeData(
-    brightness: Brightness.dark,
+    brightness: Brightness.light,
     primaryColor: Color.fromRGBO(0, 143, 48, 1.0),
   ),
   AppTheme.OrangeLight: ThemeData(
@@ -21,7 +21,7 @@ final appThemeData = {
     primaryColor: Color.fromRGBO(249, 196, 12, 1.0),
   ),
   AppTheme.OrangeDark: ThemeData(
-    brightness: Brightness.dark,
+    brightness: Brightness.light,
     primaryColor: Color.fromRGBO(240, 152, 30, 1.0),
   ),
 };

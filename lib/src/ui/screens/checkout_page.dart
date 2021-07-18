@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/app_data.dart';
+import 'package:flutter_app1/constants.dart';
 import 'package:flutter_app1/src/api/api_provider.dart';
 import 'package:flutter_app1/src/api/responses/att_to_order_response.dart';
 import 'package:flutter_app1/src/blocs/checkout/checkout_bloc.dart';
@@ -33,9 +34,17 @@ class Checkout extends StatefulWidget {
   Address billingAddress;
   String shippingTax;
   ShippingService shippingService;
+  double totalPrice;
 
-  Checkout(this.cartEntries, this.cartProducts, this.shippingAddress,
-      this.billingAddress, this.shippingTax, this.shippingService);
+  Checkout({
+    this.cartEntries,
+    this.cartProducts,
+    this.shippingAddress,
+    this.billingAddress,
+    this.shippingTax,
+    this.shippingService,
+    this.totalPrice,
+  });
 
   @override
   _CheckoutState createState() => _CheckoutState();
@@ -320,9 +329,11 @@ class _CheckoutState extends State<Checkout> {
                 builder: (context) {
                   return Dialog(
                     child: RadioListBuilder(
-                        _getFilteredPaymentMethods(
-                            state.paymentMethodsResponse.data),
-                        _onPaymentMethodSelected),
+                      _getFilteredPaymentMethods(
+                        state.paymentMethodsResponse.data,
+                      ),
+                      _onPaymentMethodSelected,
+                    ),
                   );
                 },
               );
@@ -650,24 +661,36 @@ class _CheckoutState extends State<Checkout> {
   }
 
   void _onStripeDetailsAdded(
-      String cardNumber, String cardExpiryMonth, String cardExpiryYear) {
+    String cardNumber,
+    String cardExpiryMonth,
+    String cardExpiryYear,
+    String cardCvc,
+    String cardUserName,
+  ) {
     final CreditCard testCard = CreditCard(
       number: cardNumber,
       expMonth: int.tryParse(cardExpiryMonth),
       expYear: int.tryParse(cardExpiryYear),
+      cvc: cardCvc,
+      name: cardUserName,
+      brand: 'visa',
     );
 
-    StripePayment.createTokenWithCard(
-      testCard,
-    ).then((token) {
-      print('Received ${token.tokenId}');
-      paymentMethodNonce = token.tokenId;
+    print("soy el pago");
+
+    StripePayment.createPaymentMethod(
+      PaymentMethodRequest(
+        card: testCard,
+      ),
+    ).then((paymentMethod) {
+      print('Received ${paymentMethod.card}');
+      paymentMethodNonce = paymentMethod.id;
       placeOrderNow();
       //_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Received ${token.tokenId}')));
     }).catchError(setError);
   }
 
-  void _showStripeCardDialog(PaymentMethodObj stripe) {
+  void showStripeCardDialog(PaymentMethodObj stripe) {
     AlertDialog alert = AlertDialog(
       content: new Column(
         children: [
@@ -1051,8 +1074,13 @@ class FullScreenDialog extends StatefulWidget {
   String _stripeExpiryMonth = "";
   String _stripeExpiryYear = "";
 
-  Function(String cardNumber, String cardExpiryMonth, String cardExpiryYear)
-      _onStripeDetailsAdded;
+  Function(
+    String cardNumber,
+    String cardExpiryMonth,
+    String cardExpiryYear,
+    String cardCvc,
+    String cardUser,
+  ) _onStripeDetailsAdded;
 
   FullScreenDialog(this._onStripeDetailsAdded);
 
@@ -1061,11 +1089,55 @@ class FullScreenDialog extends StatefulWidget {
 }
 
 class FullScreenDialogState extends State<FullScreenDialog> {
+  TextEditingController _cardNameUserController = new TextEditingController();
+  TextEditingController _cardCvcController = new TextEditingController();
   TextEditingController _cardNumberController = new TextEditingController();
   TextEditingController _cardExpiryMonthController =
       new TextEditingController();
 
   TextEditingController _cardExpiryYearController = new TextEditingController();
+
+  void onStripeDetailsAddeds(
+    String cardNumber,
+    String cardExpiryMonth,
+    String cardExpiryYear,
+    String cardCvc,
+    String cardUserName,
+  ) {
+    final CreditCard testCard = CreditCard(
+      number: cardNumber,
+      expMonth: int.tryParse(cardExpiryMonth),
+      expYear: int.tryParse(cardExpiryYear),
+      name: cardUserName,
+      cvc: cardCvc,
+    );
+
+    print("soy el pago ${testCard.number}");
+
+    StripePayment.createPaymentMethod(
+      PaymentMethodRequest(
+        card: testCard,
+      ),
+    ).then((paymentMethod) {
+      print('correcto ${paymentMethod.billingDetails.email}');
+      print(JsonEncoder.withIndent(' ').convert(paymentMethod));
+
+      StripePayment.confirmPaymentIntent(PaymentIntent(
+        clientSecret: AppConstants.STRIPE_SECRET,
+        paymentMethodId: paymentMethod.id,
+      )).then((paymentIntentResult) {
+        print(JsonEncoder.withIndent(' ').convert(paymentIntentResult));
+      }).catchError((e) {
+        print(e);
+      });
+
+      // paymentMethodNonce = paymentMethod.id;
+      // placeOrderNow();
+      //_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Received ${token.tokenId}')));
+    }).catchError((e) {
+      print(e);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1077,11 +1149,22 @@ class FullScreenDialogState extends State<FullScreenDialog> {
           child: new ListView(
             children: <Widget>[
               SizedBox(
-                height: 16.0,
+                height: 26.0,
+              ),
+              new TextField(
+                controller: _cardNameUserController,
+                maxLength: 16,
+                decoration: new InputDecoration.collapsed(
+                  hintText: 'Nombre del titular',
+                ),
+              ),
+              SizedBox(
+                height: 26.0,
               ),
               new TextField(
                 controller: _cardNumberController,
                 maxLength: 16,
+                keyboardType: TextInputType.number,
                 decoration: new InputDecoration.collapsed(
                     hintText: 'Número de Tarjeta'),
               ),
@@ -1089,6 +1172,7 @@ class FullScreenDialogState extends State<FullScreenDialog> {
                 height: 16.0,
               ),
               new TextField(
+                keyboardType: TextInputType.number,
                 decoration: new InputDecoration.collapsed(
                     hintText: 'Més de Expiración'),
                 maxLength: 2,
@@ -1098,6 +1182,7 @@ class FullScreenDialogState extends State<FullScreenDialog> {
                 height: 16.0,
               ),
               new TextField(
+                keyboardType: TextInputType.number,
                 decoration: new InputDecoration.collapsed(
                     hintText: 'Año de Expiración'),
                 maxLength: 2,
@@ -1106,20 +1191,44 @@ class FullScreenDialogState extends State<FullScreenDialog> {
               SizedBox(
                 height: 16.0,
               ),
+              new TextField(
+                keyboardType: TextInputType.number,
+                decoration: new InputDecoration.collapsed(
+                  hintText: 'CVC',
+                ),
+                maxLength: 3,
+                controller: _cardCvcController,
+              ),
+              SizedBox(
+                height: 16.0,
+              ),
               new Row(
                 children: <Widget>[
                   new Expanded(
-                      child: new RaisedButton(
+                      child: new TextButton(
+                    style: ButtonStyle(
+                      elevation: MaterialStateProperty.all(2.3),
+                    ),
                     onPressed: () {
-                      widget._stripeExpiryYear = _cardExpiryYearController.text;
-                      widget._stripeExpiryMonth =
-                          _cardExpiryMonthController.text;
-                      widget._stripeCardNumber = _cardNumberController.text;
-                      widget._onStripeDetailsAdded(
-                          _cardNumberController.text,
-                          _cardExpiryMonthController.text,
-                          _cardExpiryYearController.text);
-                      Navigator.pop(context);
+                      // widget._stripeExpiryYear = _cardExpiryYearController.text;
+                      // widget._stripeExpiryMonth =
+                      //     _cardExpiryMonthController.text;
+                      // widget._stripeCardNumber = _cardNumberController.text;
+                      onStripeDetailsAddeds(
+                        _cardNumberController.text,
+                        _cardExpiryMonthController.text,
+                        _cardExpiryYearController.text,
+                        _cardCvcController.text,
+                        _cardNameUserController.text,
+                      );
+                      // widget._onStripeDetailsAdded(
+                      //   _cardNumberController.text,
+                      //   _cardExpiryMonthController.text,
+                      //   _cardExpiryYearController.text,
+                      //   _cardCvcController.text,
+                      //   _cardNameUserController.text,
+                      // );
+                      // Navigator.pop(context);
                     },
                     child: new Text("Confirmar"),
                   ))
