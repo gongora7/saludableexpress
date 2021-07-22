@@ -72,19 +72,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA7kx0PpVHcBdTlHYa3Yp_XU2-44HVWHLo" />
 
-        <!--Brain tree-->
-
-        <activity android:name="com.braintreepayments.api.BraintreeBrowserSwitchActivity"
-            android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="${applicationId}.braintree" />
-            </intent-filter>
-        </activity>
-
-        <meta-data android:name="com.google.android.gms.wallet.api.enabled" android:value="true"/>
+    
 
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

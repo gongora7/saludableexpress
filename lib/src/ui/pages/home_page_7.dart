@@ -1,21 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app1/app_data.dart';
 import 'package:flutter_app1/src/api/api_provider.dart';
 import 'package:flutter_app1/src/api/responses/banners_response.dart';
 import 'package:flutter_app1/src/api/responses/categories_response.dart';
-import 'package:flutter_app1/src/api/responses/products_response.dart';
 import 'package:flutter_app1/src/blocs/banners/banners_bloc.dart';
 import 'package:flutter_app1/src/blocs/categories/categories_bloc.dart';
-import 'package:flutter_app1/src/blocs/products/products_bloc.dart';
 import 'package:flutter_app1/src/models/categories_response/category.dart';
 import 'package:flutter_app1/src/models/product_models/product.dart';
-import 'package:flutter_app1/src/models/product_models/product_post_model.dart';
 import 'package:flutter_app1/src/repositories/banners_repo.dart';
-import 'package:flutter_app1/src/repositories/categories_repo.dart';
 import 'package:flutter_app1/src/ui/pages/shop.dart';
-import 'package:flutter_app1/src/ui/widgets/products_by_categories.dart';
 import 'package:flutter_app1/src/ui/widgets/products_by_type.dart';
 import 'package:flutter_app1/src/ui/widgets/products_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -107,6 +101,10 @@ class _HomePage7State extends State<HomePage7> {
                         "-  CATÁLOGO SALUDABLE  -".toUpperCase(),
                         style: TextStyle(
                           fontSize: 32,
+<<<<<<< HEAD
+=======
+                          backgroundColor: Colors.greenAccent[100],
+>>>>>>> stripe-fix
                           fontWeight: FontWeight.bold,
                           color: Colors.green[600],
                         ),
@@ -122,7 +120,11 @@ class _HomePage7State extends State<HomePage7> {
       },
       body: Container(
         padding: EdgeInsets.all(10.0),
+<<<<<<< HEAD
         decoration: BoxDecoration(color: Colors.white),
+=======
+        decoration: BoxDecoration(color: Colors.greenAccent[100]),
+>>>>>>> stripe-fix
         child: Products(
             "Newest", "", false, false, false, widget._toProductDetailPage),
       ),
@@ -158,10 +160,12 @@ class _HomePage7State extends State<HomePage7> {
           return InkWell(
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Shop(categories[index].categoriesId,
-                          "newest", true, widget._toProductDetailPage)));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Shop(categories[index].categoriesId,
+                      "newest", true, widget._toProductDetailPage),
+                ),
+              );
             },
             child: Container(
               width: 160,
@@ -237,7 +241,7 @@ Widget buildColumnWithData(
         scrollDirection: Axis.horizontal,
       ),
       itemCount: bannersResponse.bannersData.length,
-      itemBuilder: (BuildContext context, int itemIndex) {
+      itemBuilder: (BuildContext context, int itemIndex, _) {
         return Container(
           width: MediaQuery.of(context).size.width,
           child: CachedNetworkImage(

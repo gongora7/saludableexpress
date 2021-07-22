@@ -94,8 +94,10 @@ class _HomePage3State extends State<HomePage3> {
               ],
             ),
           ),
-          Container(height: 220,
-              child: Products("top seller", "", true, false, false, _toProductDetailPage)),
+          Container(
+              height: 220,
+              child: Products(
+                  "top seller", "", true, false, false, _toProductDetailPage)),
           Container(
             padding: new EdgeInsets.all(14.0),
             child: Row(
@@ -110,7 +112,8 @@ class _HomePage3State extends State<HomePage3> {
           ),
           Container(
               height: 220,
-              child: Products("special", "", true, false, false, _toProductDetailPage)),
+              child: Products(
+                  "special", "", true, false, false, _toProductDetailPage)),
           Container(
             padding: new EdgeInsets.all(14.0),
             child: Row(
@@ -125,8 +128,8 @@ class _HomePage3State extends State<HomePage3> {
           ),
           Container(
               height: 220,
-              child: Products("most liked", "", true, false, false, _toProductDetailPage)),
-
+              child: Products(
+                  "most liked", "", true, false, false, _toProductDetailPage)),
         ],
       ),
     );
@@ -140,7 +143,7 @@ Widget buildColumnWithData(
         viewportFraction: 1,
         initialPage: 0,
         enableInfiniteScroll:
-        bannersResponse.bannersData.length > 1 ? false : false,
+            bannersResponse.bannersData.length > 1 ? false : false,
         reverse: false,
         autoPlay: true,
         autoPlayInterval: Duration(seconds: 3),
@@ -151,7 +154,7 @@ Widget buildColumnWithData(
         scrollDirection: Axis.horizontal,
       ),
       itemCount: bannersResponse.bannersData.length,
-      itemBuilder: (BuildContext context, int itemIndex) {
+      itemBuilder: (BuildContext context, int itemIndex, _) {
         return Container(
           width: MediaQuery.of(context).size.width,
           child: CachedNetworkImage(

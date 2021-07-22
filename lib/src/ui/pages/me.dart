@@ -14,7 +14,6 @@ class Me extends StatefulWidget {
 }
 
 class _MeState extends State<Me> {
-
   bool isPushNotificationsChecked = true;
   bool isLocalNotificationsChecked = true;
 
@@ -56,10 +55,11 @@ class _MeState extends State<Me> {
                 ),
                 Text(
                   (AppData.user != null)
-                      ? "Bienvenido " +
-                          AppData.user.firstName != null ? AppData.user.firstName : "" +
-                          " " +
-                          AppData.user.lastName != null ? AppData.user.lastName : ""
+                      ? "Bienvenido " + AppData.user.firstName != null
+                          ? AppData.user.firstName
+                          : "" + " " + AppData.user.lastName != null
+                              ? AppData.user.lastName
+                              : ""
                       : "Login & Registro",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16.0),
@@ -69,7 +69,11 @@ class _MeState extends State<Me> {
                 ),
                 Text(
                   (AppData.user != null)
-                      ? AppData.user.email != null ? AppData.user.email : "" + "\n" + AppData.user.phone != null ? AppData.user.phone : ""
+                      ? AppData.user.email != null
+                          ? AppData.user.email
+                          : "" + "\n" + AppData.user.phone != null
+                              ? AppData.user.phone
+                              : ""
                       : "Por favor inicia sesión o crea",
                   textAlign: TextAlign.center,
                   style: new TextStyle(fontSize: 14.0, color: Colors.black54),
@@ -81,7 +85,6 @@ class _MeState extends State<Me> {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             children: [
-
               /*SwitchListTile(
                 title: Text("Local Notifications"),
                 value: isLocalNotificationsChecked,
@@ -148,7 +151,7 @@ class _MeState extends State<Me> {
                 title: Text("My Orders"),
                 trailing: Icon(Icons.navigate_next),
                 onTap: () {
-                  widget._mapSelectedItem("My Orders");
+                  widget._mapSelectedItem("My Ordersasd");
                 },
               ),
               ListTile(
@@ -157,9 +160,10 @@ class _MeState extends State<Me> {
                 trailing: Icon(Icons.navigate_next),
                 onTap: () {
                   widget._mapSelectedItem("My Addresses");
+                  print('widget._mapSelectedItem("My Addresses")');
                 },
               ),
-             /* ListTile(
+              /* ListTile(
                 leading: Icon(Icons.favorite),
                 title: Text("My Favorites"),
                 trailing: Icon(Icons.navigate_next),
@@ -204,11 +208,12 @@ class _MeState extends State<Me> {
                 title: Text((AppData.user != null) ? "Logout" : "Login"),
                 trailing: Icon(Icons.navigate_next),
                 onTap: () {
-                  widget._mapSelectedItem((AppData.user != null) ? "Logout" : "Login");
+                  widget._mapSelectedItem(
+                      (AppData.user != null) ? "Logout" : "Login");
                 },
               ),
 
-             /* ListTile(
+              /* ListTile(
                 leading: Icon(Icons.assignment_return),
                 title: Text("Refund Policy"),
                 trailing: Icon(Icons.navigate_next),
