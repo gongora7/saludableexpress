@@ -116,7 +116,7 @@ class _HomeState extends State<Home> {
       DrawerMenuItem("Contact Us", Icons.message),
       DrawerMenuItem("About", Icons.info),
       DrawerMenuItem("Share App", Icons.share),
-      DrawerMenuItem("Rate & Review", Icons.rate_review), 
+      DrawerMenuItem("Rate & Review", Icons.rate_review),
       DrawerMenuItem("Settings", Icons.settings),*/
       DrawerMenuItem(
           (AppData.user != null) ? "Cerrar Sesión" : "Iniciar Sesión",
@@ -238,16 +238,16 @@ class _HomeState extends State<Home> {
   Widget _buildDrawerHeader(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pop(context);
-        if (AppData.user != null)
-          _selectCurrentItem(4);
-/*
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MyAccount()));
-*/
-        else
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Login()));
+//         Navigator.pop(context);
+//         if (AppData.user != null)
+//           _selectCurrentItem(4);
+// /*
+//           Navigator.push(
+//               context, MaterialPageRoute(builder: (context) => MyAccount()));
+// */
+//         else
+//           Navigator.push(
+//               context, MaterialPageRoute(builder: (context) => Login()));
       },
       child: Container(
           decoration: BoxDecoration(

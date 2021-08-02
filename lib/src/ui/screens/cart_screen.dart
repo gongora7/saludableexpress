@@ -49,7 +49,7 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Carrit0"),
+        title: Text("Carrito"),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),

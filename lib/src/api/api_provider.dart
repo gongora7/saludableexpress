@@ -47,6 +47,9 @@ class ApiProvider {
           (RequestOptions options, RequestInterceptorHandler handler) async {
         var customHeaders = {
           'content-type': 'application/json',
+          'consumer-key': generateMd5(AppConstants.CONSUMER_KEY),
+          'consumer-secret': generateMd5(AppConstants.CONSUMER_SECRET),
+          'consumer-nonce': getRandomString(32),
           'consumer-device-id': '516598gtv5b346byrj5af1',
           'consumer-ip': '192.168.1.1'
         };
