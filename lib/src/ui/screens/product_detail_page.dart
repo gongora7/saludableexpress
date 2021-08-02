@@ -40,7 +40,7 @@ class ProductDetailPage extends StatefulWidget {
 class _ProductDetailPageState extends State<ProductDetailPage> {
   ProductsBloc _productsBloc;
 
-  List<ProductAttribute> selectedAttributesList = List<ProductAttribute>();
+  List<ProductAttribute> selectedAttributesList = <ProductAttribute>[];
 
   Box _box;
 
@@ -62,7 +62,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   void _initLogic() {
-    List<String> attrIds = new List();
+    List<String> attrIds = [];
     attributePrice = 0.0;
     for (int i = 0; i < widget._product.attributes.length; i++) {
       attrIds.add(widget._product.attributes[i].values[0].productsAttributesId
@@ -75,11 +75,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             widget._product.attributes[i].values[0].price.toString());
     }
 
-    selectedAttributesList = List<ProductAttribute>();
+    selectedAttributesList = <ProductAttribute>[];
     for (int i = 0; i < widget._product.attributes.length; i++) {
       ProductAttribute attribute = new ProductAttribute();
       attribute.option = widget._product.attributes[i].option;
-      attribute.values = List<ProductAttributeValue>();
+      attribute.values = <ProductAttributeValue>[];
       attribute.values.add(widget._product.attributes[i].values[0]);
       selectedAttributesList.add(attribute);
     }
@@ -540,7 +540,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   int _calculateDiscount(productsPrice, discountPrice) {
     if (discountPrice == null) discountPrice = productsPrice;
     double discount = (productsPrice - discountPrice) / productsPrice * 100;
-    return num.parse(discount.toStringAsFixed(0));
+    return num.parse(discount.toStringAsFixed(0)) as int;
   }
 
   bool _isNewlyAdded(String dateAdded) {
@@ -628,7 +628,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   void attributeSelected(ProductAttributeValue value, int position) {
     selectedAttributesList[position].values[0] = value;
-    List<String> attrIds = new List();
+    List<String> attrIds = [];
     attributePrice = 0.0;
     selectedAttributesList.forEach((element) {
       attrIds.add(element.values[0].productsAttributesId.toString());
@@ -672,7 +672,7 @@ class RadioListBuilderState extends State<RadioListBuilder> {
         return RadioListTile(
           value: index,
           groupValue: value,
-          onChanged: (ind) => setState(() {
+          onChanged: (dynamic ind) => setState(() {
             value = ind;
             widget.attributeSelected(widget.values[ind], widget.position);
           }),

@@ -12,7 +12,7 @@ class ProductAttribute {
         ? new ProductAttributeOption.fromJson(json['option'])
         : null;
     if (json['values'] != null) {
-      values = new List<ProductAttributeValue>();
+      values = <ProductAttributeValue>[];
       json['values'].forEach((v) {
         values.add(new ProductAttributeValue.fromJson(v));
       });

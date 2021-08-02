@@ -167,7 +167,7 @@ class SearchProduct {
     discountPrice = json['discount_price'];
     currency = json['currency'];
     if (json['categories'] != null) {
-      categories = new List<SearchProductCategory>();
+      categories = <SearchProductCategory>[];
       json['categories'].forEach((v) {
         categories.add(new SearchProductCategory.fromJson(v));
       });

@@ -15,12 +15,12 @@ class BannersBloc {
   final BannersRepo bannersRepo;
 
   // init and get StreamController
-  final _bannersStreamController = StreamController<BannersResponse>();
+  final _bannersStreamController = StreamController<BannersResponse?>();
 
-  StreamSink<BannersResponse> get banners_sink => _bannersStreamController.sink;
+  StreamSink<BannersResponse?> get banners_sink => _bannersStreamController.sink;
 
   // expose data from stream
-  Stream<BannersResponse> get banners_stream => _bannersStreamController.stream;
+  Stream<BannersResponse?> get banners_stream => _bannersStreamController.stream;
 
   final _bannersEventController = StreamController<BannersEvent>();
 

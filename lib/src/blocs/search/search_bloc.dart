@@ -17,7 +17,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       yield SearchLoading();
       try {
         SearchResponse response = await searchRepo.fetchSearchData(event.query);
-        if (response.success == "1" && response.productData.products.isNotEmpty) {
+        if (response.success == "1" && response.productData!.products!.isNotEmpty) {
           yield SearchLoaded(response);
         } else {
           yield SearchError(response.message);

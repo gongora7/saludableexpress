@@ -61,7 +61,7 @@ class _ShippingMethodsState extends State<ShippingMethods> {
     getRatesPost.languageId = "1";
     getRatesPost.currencyCode = "USD";
 
-    List<GetRatesPostProduct> productPost = List<GetRatesPostProduct>();
+    List<GetRatesPostProduct> productPost = <GetRatesPostProduct>[];
     for (int i = 0; i < widget.cartEntries.length; i++) {
       CartEntry tempCartEntry = widget.cartEntries[i];
       Product tempProduct = widget.cartProducts[i];
@@ -160,7 +160,7 @@ class _ShippingMethodsState extends State<ShippingMethods> {
   }
 
   List<ShippingService> readServices(GetRatesResponse shippingMethodsResponse) {
-    List<ShippingService> services = List<ShippingService>();
+    List<ShippingService> services = <ShippingService>[];
 
     shippingTax = shippingMethodsResponse.data.tax;
 
@@ -220,7 +220,7 @@ class RadioListBuilderState extends State<RadioListBuilder> {
         return RadioListTile(
           value: index,
           groupValue: value,
-          onChanged: (ind) => setState(() {
+          onChanged: (dynamic ind) => setState(() {
             value = ind;
             widget.shippingServiceSelected(widget.shippingServices[index]);
           }),

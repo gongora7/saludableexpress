@@ -7,7 +7,7 @@ class ThemeState extends Equatable {
   final ThemeData themeData;
 
   ThemeState({
-    @required this.themeData,
+    this.themeData,
   }) : super();
 
   @override

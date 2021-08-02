@@ -156,7 +156,7 @@ class RadioListBuilderState extends State<RadioListBuilder> {
           isThreeLine: true,
           value: index,
           groupValue: value,
-          onChanged: (ind) => setState(() {
+          onChanged: (dynamic ind) => setState(() {
             value = ind;
             widget.shippingServiceSelected(widget.shippingServices[index]);
           }),

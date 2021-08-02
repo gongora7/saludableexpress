@@ -69,7 +69,7 @@ class FakeUserRepo extends UserRepo {
   }
 
   @override
-  Future<LoginResponse> loginWithGmail(String idToken, String customerId, String givenName, String familyName, String email, String imageUrl) {
+  Future<LoginResponse> loginWithGmail(String idToken, String customerId, String? givenName, String? familyName, String email, String imageUrl) {
     throw UnimplementedError();
   }
 

@@ -150,7 +150,7 @@ class _HomeState extends State<Home> {
       },
       child: ValueListenableBuilder(
         valueListenable: _box.listenable(),
-        builder: (context, value, child) {
+        builder: (context, dynamic value, child) {
           AppData.cartIds.clear();
           Map<dynamic, dynamic> raw = value.toMap();
           raw.values.forEach((element) {

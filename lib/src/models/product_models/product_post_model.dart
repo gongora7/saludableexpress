@@ -30,7 +30,7 @@ class ProductPostModel {
     customersId = json['customers_id'];
     productsId = json['products_id'];
     if (json['filters'] != null) {
-      filters = new List<ProductPostFilter>();
+      filters = <ProductPostFilter>[];
       json['filters'].forEach((v) {
         filters.add(new ProductPostFilter.fromJson(v));
       });

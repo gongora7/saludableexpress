@@ -50,7 +50,7 @@ class GetRatesPost {
     languageId = json['language_id'];
     currencyCode = json['currency_code'];
     if (json['products'] != null) {
-      products = new List<GetRatesPostProduct>();
+      products = <GetRatesPostProduct>[];
       json['products'].forEach((v) {
         products.add(new GetRatesPostProduct.fromJson(v));
       });

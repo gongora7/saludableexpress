@@ -1,9 +1,9 @@
 class SearchProductCategory {
-  int categoriesId;
-  String categoriesName;
-  String categoriesImage;
-  String categoriesIcon;
-  int parentId;
+  int? categoriesId;
+  String? categoriesName;
+  String? categoriesImage;
+  String? categoriesIcon;
+  int? parentId;
 
   SearchProductCategory(
       {this.categoriesId,

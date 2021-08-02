@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
@@ -21,7 +22,7 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
   }
 
   Stream<LanguageState> _mapLanguageLoadStartedToState() async* {
-    final sharedPrefService = await SharedPreferencesService.instance;
+    final sharedPrefService = await (SharedPreferencesService.instance as FutureOr<SharedPreferencesService>);
 
     final defaultLanguageCode = sharedPrefService.languageCode;
     Locale locale;
@@ -38,7 +39,7 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
 
   Stream<LanguageState> _mapLanguageSelectedToState(
       Language selectedLanguage) async* {
-    final sharedPrefService = await SharedPreferencesService.instance;
+    final sharedPrefService = await (SharedPreferencesService.instance as FutureOr<SharedPreferencesService>);
     final defaultLanguageCode = sharedPrefService.languageCode;
 
     if (selectedLanguage == Language.AR &&

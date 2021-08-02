@@ -10,7 +10,7 @@ class AppLocalizations {
 
   /// Helper method to keep the code in the widgets concise
   /// Localizations are accessed using an InheritedWidget "of" syntax
-  static AppLocalizations of(BuildContext context) {
+  static AppLocalizations? of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
@@ -18,7 +18,7 @@ class AppLocalizations {
   static const LocalizationsDelegate<AppLocalizations> delegate =
   _AppLocalizationsDelegate();
 
-  Map<String, String> _localizedStrings;
+  late Map<String, String> _localizedStrings;
 
   Future<bool> load() async {
     String jsonString =
@@ -32,7 +32,7 @@ class AppLocalizations {
     return true;
   }
 
-  String translate(String key) {
+  String? translate(String key) {
     return _localizedStrings[key];
   }
 }

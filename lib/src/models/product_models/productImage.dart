@@ -1,9 +1,9 @@
 class ProductImages {
-  int id;
-  int productsId;
-  String image;
-  String htmlcontent;
-  int sortOrder;
+  int? id;
+  int? productsId;
+  String? image;
+  String? htmlcontent;
+  int? sortOrder;
 
   ProductImages(
       {this.id, this.productsId, this.image, this.htmlcontent, this.sortOrder});

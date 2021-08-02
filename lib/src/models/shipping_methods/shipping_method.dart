@@ -13,7 +13,7 @@ class ShippingMethod {
     message = json['message'];
     name = json['name'];
     if (json['services'] != null) {
-      services = new List<ShippingService>();
+      services = <ShippingService>[];
       json['services'].forEach((v) {
         services.add(new ShippingService.fromJson(v));
       });

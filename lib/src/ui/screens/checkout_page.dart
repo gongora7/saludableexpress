@@ -395,7 +395,7 @@ class _CheckoutState extends State<Checkout> {
           _calculateDiscount(product.productsPrice, product.discountPrice);
 
       List<ProductAttribute> cartProductAttributes =
-          new List<ProductAttribute>();
+          <ProductAttribute>[];
       json.decode(cartEntry.attributes).forEach((v) {
         cartProductAttributes.add(new ProductAttribute.fromJson(v));
       });
@@ -435,7 +435,7 @@ class _CheckoutState extends State<Checkout> {
             _calculateDiscount(product.productsPrice, product.discountPrice);
 
         List<ProductAttribute> cartProductAttributes =
-            new List<ProductAttribute>();
+            <ProductAttribute>[];
         json.decode(cartEntry.attributes).forEach((v) {
           cartProductAttributes.add(new ProductAttribute.fromJson(v));
         });
@@ -646,9 +646,9 @@ class _CheckoutState extends State<Checkout> {
       this.selectedPaymentMethod = paymentMethod;
     });
 
-    if (selectedPaymentMethod.method == "braintree_card") {
+    /*if (selectedPaymentMethod.method == "braintree_card") {
       brainTreeTokenizationKeys = selectedPaymentMethod.publicKey;
-    }
+    }*/
     if (selectedPaymentMethod.method == "stripe") {
       FullScreenDialog _myDialog = new FullScreenDialog(_onStripeDetailsAdded);
       Navigator.push(
@@ -828,7 +828,7 @@ class _CheckoutState extends State<Checkout> {
 
   List<PostProduct> getPostProductList(
       List<Product> cartProducts, List<CartEntry> cartEntries) {
-    List<PostProduct> postProducts = new List<PostProduct>();
+    List<PostProduct> postProducts = <PostProduct>[];
 
     for (int i = 0; i < cartProducts.length; i++) {
       PostProduct postProduct = PostProduct();
@@ -840,7 +840,7 @@ class _CheckoutState extends State<Checkout> {
           tempCartProduct.productsPrice, tempCartProduct.discountPrice);
 
       List<ProductAttribute> cartProductAttributes =
-          new List<ProductAttribute>();
+          <ProductAttribute>[];
       json.decode(tempCartEntry.attributes).forEach((v) {
         cartProductAttributes.add(new ProductAttribute.fromJson(v));
       });
@@ -882,11 +882,11 @@ class _CheckoutState extends State<Checkout> {
 
   List<PostProductAttribute> getPostProductAttributes(String attributes) {
     List<PostProductAttribute> postProductAttributes =
-        List<PostProductAttribute>();
+        <PostProductAttribute>[];
 
     if (attributes != null) {
       List<ProductAttribute> cartProductAttributes =
-          new List<ProductAttribute>();
+          <ProductAttribute>[];
       json.decode(attributes).forEach((v) {
         cartProductAttributes.add(new ProductAttribute.fromJson(v));
       });
@@ -990,9 +990,9 @@ class _CheckoutState extends State<Checkout> {
 
   void _setupPaymentMethods(List<PaymentMethodObj> paymentMethods) {
     for (int i = 0; i < paymentMethods.length; i++) {
-      if (paymentMethods[i].method == "braintree_card") {
+     /* if (paymentMethods[i].method == "braintree_card") {
         brainTreeTokenizationKeys = selectedPaymentMethod.publicKey;
-      }
+      } */
       if (paymentMethods[i].method == "stripe") {
         StripePayment.setOptions(
             StripeOptions(publishableKey: paymentMethods[i].publicKey));
@@ -1002,10 +1002,10 @@ class _CheckoutState extends State<Checkout> {
 
   List<PaymentMethodObj> _getFilteredPaymentMethods(
       List<PaymentMethodObj> data) {
-    List<PaymentMethodObj> filteredPaymentMethods = List<PaymentMethodObj>();
+    List<PaymentMethodObj> filteredPaymentMethods = <PaymentMethodObj>[];
 
     for (int i = 0; i < data.length; i++) {
-      if (data[i].method == "braintree_card" ||
+      if (/*data[i].method == "braintree_card" || */
           data[i].method == "stripe" ||
           data[i].method == "cod") {
         filteredPaymentMethods.add(data[i]);
@@ -1025,7 +1025,7 @@ Widget buildLoading() {
 int _calculateDiscount(productsPrice, discountPrice) {
   if (discountPrice == null) discountPrice = productsPrice;
   double discount = (productsPrice - discountPrice) / productsPrice * 100;
-  return num.parse(discount.toStringAsFixed(0));
+  return num.parse(discount.toStringAsFixed(0)) as int;
 }
 
 class RadioListBuilder extends StatefulWidget {
@@ -1056,7 +1056,7 @@ class RadioListBuilderState extends State<RadioListBuilder> {
         return RadioListTile(
           value: index,
           groupValue: value,
-          onChanged: (ind) => setState(() {
+          onChanged: (dynamic ind) => setState(() {
             value = ind;
             Navigator.pop(context);
             widget.onPaymentMethodSelected(widget.paymentMethods[index]);

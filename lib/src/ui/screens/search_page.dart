@@ -303,7 +303,7 @@ class _SearchState extends State<Search> {
   int _calculateDiscount(productsPrice, discountPrice) {
     if (discountPrice == null) discountPrice = productsPrice;
     double discount = (productsPrice - discountPrice) / productsPrice * 100;
-    return num.parse(discount.toStringAsFixed(0));
+    return num.parse(discount.toStringAsFixed(0)) as int;
   }
 
   bool _isNewlyAdded(String dateAdded) {

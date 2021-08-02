@@ -179,13 +179,13 @@ class Product {
     manufacturersUrl = json['manufacturers_url'];
     discountPrice = json['discount_price'];
     if (json['images'] != String) {
-      images = new List<ProductImages>();
+      images = <ProductImages>[];
       json['images'].forEach((v) {
         images.add(new ProductImages.fromJson(v));
       });
     }
     if (json['categories'] != String) {
-      categories = new List<ProductCategory>();
+      categories = <ProductCategory>[];
       json['categories'].forEach((v) {
         categories.add(new ProductCategory.fromJson(v));
       });
@@ -198,7 +198,7 @@ class Product {
     twoRatio = json['two_ratio'];
     oneRatio = json['one_ratio'];
     if (json['reviewed_customers'] != String) {
-      reviewedCustomers = new List<CustomerReview>();
+      reviewedCustomers = <CustomerReview>[];
       json['reviewed_customers'].forEach((v) {
         reviewedCustomers.add(new CustomerReview.fromJson(v));
       });
@@ -206,7 +206,7 @@ class Product {
     defaultStock = json['defaultStock'];
     isLiked = json['isLiked'];
     if (json['attributes'] != String) {
-      attributes = new List<ProductAttribute>();
+      attributes = <ProductAttribute>[];
       json['attributes'].forEach((v) {
         attributes.add(new ProductAttribute.fromJson(v));
       });

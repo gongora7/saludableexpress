@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "877102355954-gs5l1kccop610senfq451fjit05rde69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cosmonautas.saludableapp",
+            "certificate_hash": "82a0119aaede12e9394af07168d8819e45e2d55b"
+          }
+        },
+        {
+          "client_id": "877102355954-sgssrnu1btpvimcpu77sut22c2dcei85.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cosmonautas.saludableapp",
+            "certificate_hash": "d77b274531decdfa0fb3fe5d8d2ee474fadf28ea"
+          }
+        },
+        {
           "client_id": "877102355954-1fm58bvnsjq38touag1nvb7qls2b91m8.apps.googleusercontent.com",
           "client_type": 3
         }

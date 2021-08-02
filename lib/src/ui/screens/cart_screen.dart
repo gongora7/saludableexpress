@@ -49,7 +49,7 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Carrit0"),
+        title: Text("Carrito"),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
@@ -66,9 +66,9 @@ class _CartState extends State<Cart> {
       ),
       body: ValueListenableBuilder(
         valueListenable: _box.listenable(),
-        builder: (BuildContext context, box, Widget child) {
+        builder: (BuildContext context, dynamic box, Widget child) {
           if (list == null) {
-            list = new List<CartEntry>();
+            list = <CartEntry>[];
             Map<dynamic, dynamic> raw = box.toMap();
             raw.values.forEach((element) {
               list.add(element);
@@ -101,7 +101,7 @@ class _CartState extends State<Cart> {
                         product.productsPrice, product.discountPrice);
 
                     List<ProductAttribute> cartProductAttributes =
-                        new List<ProductAttribute>();
+                        <ProductAttribute>[];
                     json.decode(cartEntry.attributes).forEach((v) {
                       cartProductAttributes
                           .add(new ProductAttribute.fromJson(v));
@@ -329,7 +329,7 @@ class _CartState extends State<Cart> {
           itemBuilder: (context, index) {
             CartEntry cartEntry = list[index];
             List<ProductAttribute> cartProductAttributes =
-                new List<ProductAttribute>();
+                <ProductAttribute>[];
             json.decode(cartEntry.attributes).forEach((v) {
               cartProductAttributes.add(new ProductAttribute.fromJson(v));
             });
@@ -626,6 +626,6 @@ class _CartState extends State<Cart> {
   int _calculateDiscount(productsPrice, discountPrice) {
     if (discountPrice == null) discountPrice = productsPrice;
     double discount = (productsPrice - discountPrice) / productsPrice * 100;
-    return num.parse(discount.toStringAsFixed(0));
+    return num.parse(discount.toStringAsFixed(0)) as int;
   }
 }

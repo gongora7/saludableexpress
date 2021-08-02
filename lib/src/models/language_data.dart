@@ -1,13 +1,13 @@
 class LanguageData {
-  int languagesId;
-  String name;
-  String code;
-  String image;
-  String directory;
-  int sortOrder;
-  String direction;
-  int status;
-  int isDefault;
+  int? languagesId;
+  String? name;
+  String? code;
+  String? image;
+  String? directory;
+  int? sortOrder;
+  String? direction;
+  int? status;
+  int? isDefault;
 
   LanguageData(
       {this.languagesId,

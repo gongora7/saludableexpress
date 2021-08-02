@@ -190,7 +190,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                                   return new DropdownMenuItem(
                                       value: e, child: Text(e.countriesName));
                                 }).toList(),
-                                onChanged: (value) {
+                                onChanged: (dynamic value) {
                                   selectedCountry = value as Country;
                                   _addressBloc.addressEventSink.add(
                                       GetZones(selectedCountry.countriesId));
@@ -234,7 +234,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                                   return new DropdownMenuItem(
                                       value: e, child: Text(e.zoneName));
                                 }).toList(),
-                                onChanged: (value) {
+                                onChanged: (dynamic value) {
                                   selectedZone = value as Zone;
                                 },
                               ),

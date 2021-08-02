@@ -272,7 +272,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                                                   value: e,
                                                   child: Text(e.countriesName));
                                             }).toList(),
-                                            onChanged: (value) {
+                                            onChanged: (dynamic value) {
                                               selectedCountry =
                                                   value as Country;
                                               _addressBloc.addressEventSink.add(
@@ -350,7 +350,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                                                   value: e,
                                                   child: Text(e.zoneName));
                                             }).toList(),
-                                            onChanged: (value) {
+                                            onChanged: (dynamic value) {
                                               selectedZone = value as Zone;
                                             },
                                           ),

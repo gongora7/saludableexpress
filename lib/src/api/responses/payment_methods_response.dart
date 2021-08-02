@@ -10,6 +10,7 @@ class PaymentMethodsResponse {
   PaymentMethodsResponse.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
+      
       data = new List<PaymentMethodObj>();
       json['data'].forEach((v) {
         data.add(new PaymentMethodObj.fromJson(v));
@@ -28,7 +29,7 @@ class PaymentMethodsResponse {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['success'] = this.success;
     if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     data['message'] = this.message;
     return data;

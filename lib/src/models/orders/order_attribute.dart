@@ -1,12 +1,12 @@
 class OrderAttribute {
-  int ordersProductsAttributesId;
-  int ordersId;
-  int ordersProductsId;
-  int productsId;
-  String productsOptions;
-  String productsOptionsValues;
-  String optionsValuesPrice;
-  String pricePrefix;
+  int? ordersProductsAttributesId;
+  int? ordersId;
+  int? ordersProductsId;
+  int? productsId;
+  String? productsOptions;
+  String? productsOptionsValues;
+  String? optionsValuesPrice;
+  String? pricePrefix;
 
   OrderAttribute(
       {this.ordersProductsAttributesId,

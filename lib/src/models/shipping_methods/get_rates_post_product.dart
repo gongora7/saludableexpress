@@ -1,11 +1,11 @@
 class GetRatesPostProduct {
-  int productId;
-  int customerBasketQuantity;
+  int? productId;
+  int? customerBasketQuantity;
   var finalPrice;
   var price;
   var total;
-  String unit;
-  String weight;
+  String? unit;
+  String? weight;
 
   GetRatesPostProduct(
       {this.productId,
