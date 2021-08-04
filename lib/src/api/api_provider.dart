@@ -360,7 +360,7 @@ class ApiProvider {
           "entry_city": address.deliveryCity,
           "entry_country_id": address.deliveryCountry.countriesId,
           "entry_zone_id": address.deliveryZone.zoneId,
-          "is_default": 0
+          "is_default": 1
         }),
       );
       return AddAddressResponse.fromJson(json.decode(response.data));
