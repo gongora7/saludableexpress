@@ -1,7 +1,7 @@
 import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app1/app_data.dart';
 import 'package:flutter_app1/constants.dart';
 import 'package:flutter_app1/src/api/api_provider.dart';
@@ -1119,9 +1119,10 @@ class FullScreenDialogState extends State<FullScreenDialog> {
     ).then((paymentMethod) {
       print('correcto ${paymentMethod.billingDetails.email}');
       print(JsonEncoder.withIndent(' ').convert(paymentMethod));
-
       StripePayment.confirmPaymentIntent(PaymentIntent(
-        clientSecret: AppConstants.STRIPE_SECRET,
+        clientSecret: dotenv.env['STRIPE_SECRET'],
+
+        // clientSecret: AppConstants.STRIPE_SECRET,
         paymentMethodId: paymentMethod.id,
       )).then((paymentIntentResult) {
         print(JsonEncoder.withIndent(' ').convert(paymentIntentResult));
@@ -1226,7 +1227,7 @@ class FullScreenDialogState extends State<FullScreenDialog> {
                         _cardCvcController.text,
                         _cardNameUserController.text,
                       );
-                      Navigator.pop(context);
+                      // Navigator.pop(context);
                     },
                     child: new Text("Confirmar"),
                   ))

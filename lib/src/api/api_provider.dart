@@ -182,6 +182,24 @@ class ApiProvider {
     }
   }
 
+  Future<Map<String, dynamic>> createPaymentIntent(
+      String amount, String currency) async {
+    try {
+      Map<String, dynamic> body = {
+        'amount':
+            amount, // amount charged will be specified when the method is called
+        'currency': 'MXN', // the currency
+        'payment_method_types[]': 'card' //card
+      };
+      Response response = await _dio.post(_baseUrl + "paymentIntent", //api url
+          data: jsonEncode(body));
+      return jsonDecode(response.data); //decode the response to json
+    } catch (error) {
+      print('Error occured : ${error.toString()}');
+    }
+    return null;
+  }
+
   Future<AddToOrderResponse> addToOrder(PostOrder postOrder) async {
     try {
       Response response = await _dio.post(

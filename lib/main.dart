@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app1/constants.dart';
 import 'package:flutter_app1/src/models/cart_entry.dart';
 import 'package:flutter_app1/src/models/user.dart';
@@ -11,6 +12,7 @@ Box cartEntriesBox;
 Box userBox;
 
 Future<void> main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
 
   var appDocumentDir = await getApplicationDocumentsDirectory();
