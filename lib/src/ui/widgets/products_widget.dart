@@ -976,7 +976,7 @@ class _ProductsState extends State<Products>
 
 /*
     postModel = ProductPostModel();
-    postModel.currencyCode = "USD";
+    postModel.currencyCode = "MXN";
     postModel.languageId = 1;
     postModel.pageNumber = 0;
     postModel.type = this.type;
