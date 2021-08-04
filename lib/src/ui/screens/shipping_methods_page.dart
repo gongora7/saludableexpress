@@ -59,7 +59,7 @@ class _ShippingMethodsState extends State<ShippingMethods> {
     getRatesPost.productsWeight = 0;
     getRatesPost.productsWeightUnit = "g";
     getRatesPost.languageId = "1";
-    getRatesPost.currencyCode = "USD";
+    getRatesPost.currencyCode = "MXN";
 
     List<GetRatesPostProduct> productPost = List<GetRatesPostProduct>();
     for (int i = 0; i < widget.cartEntries.length; i++) {

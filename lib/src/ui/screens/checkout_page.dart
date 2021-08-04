@@ -676,7 +676,7 @@ class _CheckoutState extends State<Checkout> {
       brand: 'visa',
     );
 
-    print("soy el pago");
+    // print("soy el pago");
 
     StripePayment.createPaymentMethod(
       PaymentMethodRequest(
@@ -821,7 +821,7 @@ class _CheckoutState extends State<Checkout> {
 
     postOrder.transaction_id = "";
 
-    postOrder.currency_code = "USD";
+    postOrder.currency_code = "MXN";
 
     orderBloc.add(PlaceOrder(postOrder));
   }
@@ -1005,9 +1005,7 @@ class _CheckoutState extends State<Checkout> {
     List<PaymentMethodObj> filteredPaymentMethods = List<PaymentMethodObj>();
 
     for (int i = 0; i < data.length; i++) {
-      if (data[i].method == "braintree_card" ||
-          data[i].method == "stripe" ||
-          data[i].method == "cod") {
+      if (data[i].method == "stripe" || data[i].method == "cod") {
         filteredPaymentMethods.add(data[i]);
       }
     }
@@ -1221,14 +1219,14 @@ class FullScreenDialogState extends State<FullScreenDialog> {
                         _cardCvcController.text,
                         _cardNameUserController.text,
                       );
-                      // widget._onStripeDetailsAdded(
-                      //   _cardNumberController.text,
-                      //   _cardExpiryMonthController.text,
-                      //   _cardExpiryYearController.text,
-                      //   _cardCvcController.text,
-                      //   _cardNameUserController.text,
-                      // );
-                      // Navigator.pop(context);
+                      widget._onStripeDetailsAdded(
+                        _cardNumberController.text,
+                        _cardExpiryMonthController.text,
+                        _cardExpiryYearController.text,
+                        _cardCvcController.text,
+                        _cardNameUserController.text,
+                      );
+                      Navigator.pop(context);
                     },
                     child: new Text("Confirmar"),
                   ))

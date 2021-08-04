@@ -288,7 +288,7 @@ class ApiProvider {
         data: jsonEncode({
           "searchValue": query,
           "language_id": 1,
-          "currency_code": "USD",
+          "currency_code": "MXN",
         }),
       );
       return SearchResponse.fromJson(json.decode(response.data));
@@ -305,7 +305,7 @@ class ApiProvider {
         data: jsonEncode({
           "customers_id": AppData.user != null ? AppData.user.id : "",
           "language_id": 1,
-          "currency_code": "USD",
+          "currency_code": "MXN",
         }),
       );
       return OrdersResponse.fromJson(json.decode(response.data));

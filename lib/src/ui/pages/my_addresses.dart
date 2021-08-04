@@ -34,16 +34,17 @@ class _MyAddressesState extends State<MyAddresses> {
       appBar: AppBar(
         title: Text("Mis direcciones"),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            tooltip: 'Add Address',
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AddAddressPage(_getAddresses)));
-            },
-          ),
+          // IconButton(
+          //   icon: Icon(Icons.add),
+          //   tooltip: 'Add Address',
+          //   onPressed: () {
+          //     Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => AddAddressPage(_getAddresses)));
+          //   },
+
+          // ),
         ],
       ),
       body: BlocBuilder<MyAddressBloc, MyAddressState>(
@@ -160,20 +161,24 @@ class RadioListBuilderState extends State<RadioListBuilder> {
             value = ind;
             widget.shippingServiceSelected(widget.shippingServices[index]);
           }),
-          title: Text("Address # " + widget.shippingServices[index].addressId.toString()),
-          subtitle: Text(widget.shippingServices[index].firstname + " " + widget.shippingServices[index].lastname
-              + "\n" + widget.shippingServices[index].street + ", " + widget.shippingServices[index].city
-              + "\n" + widget.shippingServices[index].zoneName + ", " + widget.shippingServices[index].countryName
-          ),
+          title: Text("Direccion # " +
+              widget.shippingServices[index].addressId.toString()),
+          subtitle: Text(widget.shippingServices[index].firstname +
+              " " +
+              widget.shippingServices[index].lastname +
+              "\n" +
+              widget.shippingServices[index].street +
+              ", " +
+              widget.shippingServices[index].city +
+              "\n" +
+              widget.shippingServices[index].zoneName +
+              ", " +
+              widget.shippingServices[index].countryName),
           secondary: IconButton(
             icon: Icon(Icons.delete),
             tooltip: 'Delete',
-            onPressed: () {
-               
-
-            },
+            onPressed: () {},
           ),
-
         );
       },
       itemCount: widget.shippingServices.length,

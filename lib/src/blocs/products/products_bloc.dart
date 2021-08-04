@@ -35,7 +35,8 @@ class ProductsBloc {
   final _stockStreamController = StreamController<StockResponse>();
   final _stockEventController = StreamController<ProductsEvent>();
 
-  final _likeStreamController = StreamController<LikeProductResponse>.broadcast();
+  final _likeStreamController =
+      StreamController<LikeProductResponse>.broadcast();
   final _likeEventController = StreamController<ProductsEvent>();
 
   StreamSink<ProductsResponse> get products_sink =>
@@ -60,8 +61,10 @@ class ProductsBloc {
   Stream<Product> get singleProductStream =>
       _singleProductStreanController.stream;
 
-  StreamSink<LikeProductResponse> get likeProductSink => _likeStreamController.sink;
-  Stream<LikeProductResponse> get likeProductStream => _likeStreamController.stream;
+  StreamSink<LikeProductResponse> get likeProductSink =>
+      _likeStreamController.sink;
+  Stream<LikeProductResponse> get likeProductStream =>
+      _likeStreamController.stream;
 
   Sink<ProductsEvent> get likeEventSink => _likeEventController.sink;
 
@@ -117,7 +120,7 @@ class ProductsBloc {
         cartProducts = [];
         for (int i = 0; i < event.productsIds.length; i++) {
           ProductPostModel postModel = ProductPostModel();
-          postModel.currencyCode = "USD";
+          postModel.currencyCode = "MXN";
           postModel.languageId = 1;
           postModel.productsId = event.productsIds[i].id;
 
@@ -159,7 +162,7 @@ class ProductsBloc {
     _singleProductEventController.stream.listen((event) async {
       if (event is GetSingleProduct) {
         ProductPostModel postModel = ProductPostModel();
-        postModel.currencyCode = "USD";
+        postModel.currencyCode = "MXN";
         postModel.languageId = 1;
         postModel.productsId = event.productId;
 
@@ -175,19 +178,20 @@ class ProductsBloc {
     });
 
     _likeEventController.stream.listen((event) async {
-      if (event is LikeProduct){
-
-        if(_isDisposed) return;
-        LikeProductResponse data = await productsRepo.likeProduct(event.productId);
+      if (event is LikeProduct) {
+        if (_isDisposed) return;
+        LikeProductResponse data =
+            await productsRepo.likeProduct(event.productId);
         if (data.success == "1" && data.productData.length > 0) {
           if (_isDisposed) return;
           likeProductSink.add(data);
         } else {
           likeProductSink.add(data);
         }
-      } else if(event is UnlikeProduct) {
-        if(_isDisposed) return;
-        LikeProductResponse data = await productsRepo.unlikeProduct(event.productId);
+      } else if (event is UnlikeProduct) {
+        if (_isDisposed) return;
+        LikeProductResponse data =
+            await productsRepo.unlikeProduct(event.productId);
         if (data.success == "1" && data.productData.length > 0) {
           if (_isDisposed) return;
           likeProductSink.add(data);
@@ -195,10 +199,7 @@ class ProductsBloc {
           likeProductSink.add(data);
         }
       }
-
     });
-
-
   }
 
   bool _isDisposed = false;

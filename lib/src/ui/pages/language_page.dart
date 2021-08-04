@@ -25,7 +25,7 @@ class _LanguagesPageState extends State<LanguagesPage> {
     LanguageData english = new LanguageData();
     english.languagesId = 0;
     english.name = "English";
-    english.code = "USD";
+    english.code = "MXN";
     english.image = "";
     english.directory = "ltr";
     english.sortOrder = 1;
