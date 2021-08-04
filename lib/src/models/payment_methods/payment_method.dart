@@ -1,3 +1,5 @@
+import 'package:flutter_app1/constants.dart';
+
 class PaymentMethodObj {
   String authToken;
   String clientId;
@@ -23,7 +25,7 @@ class PaymentMethodObj {
   PaymentMethodObj.fromJson(Map<String, dynamic> json) {
     authToken = json['auth_token'];
     clientId = json['client_id'];
-    clientSecret = json['client_secret'];
+    clientSecret = AppConstants.STRIPE_SECRET;
     environment = json['environment'];
     name = json['name'];
     publicKey = json['public_key'];

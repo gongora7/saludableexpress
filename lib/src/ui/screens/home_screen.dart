@@ -108,7 +108,7 @@ class _HomeState extends State<Home> {
           : DrawerMenuItem("Tienda", Icons.shopping_basket),
       //DrawerMenuItem("My Account", Icons.person),
       DrawerMenuItem("Mis Pedidos", Icons.assignment_sharp),
-      //DrawerMenuItem("Mis Direcciones", Icons.location_city),
+      DrawerMenuItem("Mis Direcciones", Icons.location_city),
       /* DrawerMenuItem("My Favorites", Icons.favorite),
 
       DrawerMenuItem("Intro", Icons.integration_instructions),
