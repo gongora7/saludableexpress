@@ -821,7 +821,7 @@ class _CheckoutState extends State<Checkout> {
 
     postOrder.transaction_id = "";
 
-    postOrder.currency_code = "USD";
+    postOrder.currency_code = "MXN";
 
     orderBloc.add(PlaceOrder(postOrder));
   }

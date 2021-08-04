@@ -41,10 +41,11 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
     final sharedPrefService = await SharedPreferencesService.instance;
     final defaultLanguageCode = sharedPrefService.languageCode;
 
-    if (selectedLanguage == Language.AR &&
+    /*if (selectedLanguage == Language.AR &&
         defaultLanguageCode != LanguageKeys.ar) {
       yield* _loadLanguage(sharedPrefService, 'ar', 'AR');
-    } else if (selectedLanguage == Language.EN &&
+    } else */
+    if (selectedLanguage == Language.EN &&
         defaultLanguageCode != LanguageKeys.en) {
       yield* _loadLanguage(sharedPrefService, 'en', 'US');
     }
