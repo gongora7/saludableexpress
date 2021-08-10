@@ -10,6 +10,7 @@ class PaymentMethodsResponse {
   PaymentMethodsResponse.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
+      // ignore: deprecated_member_use
       data = new List<PaymentMethodObj>();
       json['data'].forEach((v) {
         data.add(new PaymentMethodObj.fromJson(v));

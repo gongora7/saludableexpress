@@ -42,19 +42,22 @@ class ApiProvider {
     BaseOptions options =
         BaseOptions(receiveTimeout: 15000, connectTimeout: 15000);
     _dio = Dio(options);
-    _dio.interceptors
-        .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
-      var customHeaders = {
-        'content-type': 'application/json',
-        'consumer-key': generateMd5(AppConstants.CONSUMER_KEY),
-        'consumer-secret': generateMd5(AppConstants.CONSUMER_SECRET),
-        'consumer-nonce': getRandomString(32),
-        'consumer-device-id': '516598gtv5b346byrj5af1',
-        'consumer-ip': '192.168.1.1'
-      };
-      options.headers.addAll(customHeaders);
-      return options;
-    }));
+    _dio.interceptors.add(InterceptorsWrapper(
+      onRequest:
+          (RequestOptions options, RequestInterceptorHandler handler) async {
+        var customHeaders = {
+          'content-type': 'application/json',
+          'consumer-key': generateMd5(AppConstants.CONSUMER_KEY),
+          'consumer-secret': generateMd5(AppConstants.CONSUMER_SECRET),
+          'consumer-nonce': getRandomString(32),
+          'consumer-device-id': '516598gtv5b346byrj5af1',
+          'consumer-ip': '192.168.1.1'
+        };
+        options.headers.addAll(customHeaders);
+        handler.next(options);
+        return options;
+      },
+    ));
     _dio.interceptors.add(LoggingInterceptor());
   }
 
@@ -179,6 +182,24 @@ class ApiProvider {
     }
   }
 
+  Future<Map<String, dynamic>> createPaymentIntent(
+      String amount, String currency) async {
+    try {
+      Map<String, dynamic> body = {
+        'amount':
+            amount, // amount charged will be specified when the method is called
+        'currency': 'MXN', // the currency
+        'payment_method_types[]': 'card' //card
+      };
+      Response response = await _dio.post(_baseUrl + "paymentIntent", //api url
+          data: jsonEncode(body));
+      return jsonDecode(response.data); //decode the response to json
+    } catch (error) {
+      print('Error occured : ${error.toString()}');
+    }
+    return null;
+  }
+
   Future<AddToOrderResponse> addToOrder(PostOrder postOrder) async {
     try {
       Response response = await _dio.post(
@@ -285,7 +306,7 @@ class ApiProvider {
         data: jsonEncode({
           "searchValue": query,
           "language_id": 1,
-          "currency_code": "USD",
+          "currency_code": "MXN",
         }),
       );
       return SearchResponse.fromJson(json.decode(response.data));
@@ -302,7 +323,7 @@ class ApiProvider {
         data: jsonEncode({
           "customers_id": AppData.user != null ? AppData.user.id : "",
           "language_id": 1,
-          "currency_code": "USD",
+          "currency_code": "MXN",
         }),
       );
       return OrdersResponse.fromJson(json.decode(response.data));
@@ -339,7 +360,7 @@ class ApiProvider {
           "entry_city": address.deliveryCity,
           "entry_country_id": address.deliveryCountry.countriesId,
           "entry_zone_id": address.deliveryZone.zoneId,
-          "is_default": 0
+          "is_default": 1
         }),
       );
       return AddAddressResponse.fromJson(json.decode(response.data));
@@ -405,24 +426,25 @@ class ApiProvider {
     if (error is DioError) {
       DioError dioError = error as DioError;
       switch (dioError.type) {
-        case DioErrorType.CANCEL:
-          errorDescription = "Request to API server was cancelled";
+        case DioErrorType.cancel:
+          errorDescription =
+              "=======Request to API server was cancelled===========";
           break;
-        case DioErrorType.CONNECT_TIMEOUT:
+        case DioErrorType.connectTimeout:
           errorDescription = "Connection timeout with API server";
           break;
-        case DioErrorType.DEFAULT:
+        case DioErrorType.other:
           errorDescription =
               "Connection to API server failed due to internet connection";
           break;
-        case DioErrorType.RECEIVE_TIMEOUT:
+        case DioErrorType.receiveTimeout:
           errorDescription = "Receive timeout in connection with API server";
           break;
-        case DioErrorType.RESPONSE:
+        case DioErrorType.response:
           errorDescription =
               "Received invalid status code: ${dioError.response.statusCode}";
           break;
-        case DioErrorType.SEND_TIMEOUT:
+        case DioErrorType.sendTimeout:
           errorDescription = "Send timeout in connection with API server";
           break;
       }
@@ -437,8 +459,14 @@ class ApiProvider {
         'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
     Random _rnd = Random();
 
-    return String.fromCharCodes(Iterable.generate(
-        length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+    return String.fromCharCodes(
+      Iterable.generate(
+        length,
+        (_) => _chars.codeUnitAt(
+          _rnd.nextInt(_chars.length),
+        ),
+      ),
+    );
   }
 
   String generateMd5(String input) {

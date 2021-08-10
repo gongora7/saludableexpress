@@ -128,12 +128,7 @@ class _HomePage8State extends State<HomePage8> {
         ];
       },
       body: Products(
-          "Newest",
-          "",
-          false,
-          false,
-          false,
-          widget._toProductDetailPage),
+          "Newest", "", false, false, false, widget._toProductDetailPage),
     );
   }
 
@@ -190,8 +185,8 @@ class _HomePage8State extends State<HomePage8> {
                           fit: BoxFit.fill,
                           progressIndicatorBuilder:
                               (context, url, downloadProgress) =>
-                              CircularProgressIndicator(
-                                  value: downloadProgress.progress),
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
                         ),
@@ -217,7 +212,7 @@ class _HomePage8State extends State<HomePage8> {
           viewportFraction: 1,
           initialPage: 0,
           enableInfiniteScroll:
-          bannersResponse.bannersData.length > 1 ? false : false,
+              bannersResponse.bannersData.length > 1 ? false : false,
           reverse: false,
           autoPlay: true,
           autoPlayInterval: Duration(seconds: 3),
@@ -228,7 +223,7 @@ class _HomePage8State extends State<HomePage8> {
           scrollDirection: Axis.horizontal,
         ),
         itemCount: bannersResponse.bannersData.length,
-        itemBuilder: (BuildContext context, int itemIndex) {
+        itemBuilder: (BuildContext context, int itemIndex, _) {
           return Container(
             width: MediaQuery.of(context).size.width,
             child: CachedNetworkImage(

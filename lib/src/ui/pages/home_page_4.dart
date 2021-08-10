@@ -161,6 +161,7 @@ class _HomePage4State extends State<HomePage4> {
       },
     );
   }
+
   Widget buildColumnWithData2(BuildContext context, List<Category> categories) {
     int count;
     if (MediaQuery.of(context).orientation == Orientation.landscape)
@@ -181,9 +182,8 @@ class _HomePage4State extends State<HomePage4> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        Shop(categories[index].categoriesId, "newest", true, _toProductDetailPage)));
-
+                    builder: (context) => Shop(categories[index].categoriesId,
+                        "newest", true, _toProductDetailPage)));
           },
           child: Container(
             margin: EdgeInsets.all(2.0),
@@ -202,14 +202,15 @@ class _HomePage4State extends State<HomePage4> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(50.0),
                         child: CachedNetworkImage(
-                          imageUrl:
-                          ApiProvider.imageBaseUrl + categories[index].image,
+                          imageUrl: ApiProvider.imageBaseUrl +
+                              categories[index].image,
                           fit: BoxFit.fill,
                           progressIndicatorBuilder:
                               (context, url, downloadProgress) =>
-                              CircularProgressIndicator(
-                                  value: downloadProgress.progress),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
                     ),
@@ -232,7 +233,7 @@ class _HomePage4State extends State<HomePage4> {
           viewportFraction: 1,
           initialPage: 0,
           enableInfiniteScroll:
-          bannersResponse.bannersData.length > 1 ? false : false,
+              bannersResponse.bannersData.length > 1 ? false : false,
           reverse: false,
           autoPlay: true,
           autoPlayInterval: Duration(seconds: 3),
@@ -243,7 +244,7 @@ class _HomePage4State extends State<HomePage4> {
           scrollDirection: Axis.horizontal,
         ),
         itemCount: bannersResponse.bannersData.length,
-        itemBuilder: (BuildContext context, int itemIndex) {
+        itemBuilder: (BuildContext context, int itemIndex, _) {
           return Container(
             width: MediaQuery.of(context).size.width,
             child: CachedNetworkImage(
@@ -268,10 +269,7 @@ class _HomePage4State extends State<HomePage4> {
     }
     return categories;
   }
-
-
 }
-
 
 List<Category> getParentCategories(CategoriesResponse categoriesResponse) {
   List<Category> categories = [];

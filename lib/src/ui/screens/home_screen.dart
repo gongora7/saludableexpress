@@ -44,7 +44,6 @@ import '../pages/home_page_4.dart';
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 int _page = 0;
 
-
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -74,48 +73,54 @@ class _HomeState extends State<Home> {
     AppData.user = _userBox.get("current_user");
 
     AppData.data = <DrawerMenuItem>[
-
-      AppConstants.isDemoMode ?
-      DrawerMenuItem('Inicio', Icons.home, <DrawerMenuItem>[
-        DrawerMenuItem('Home 1', Icons.home),
-        DrawerMenuItem('Home 2', Icons.home),
-        DrawerMenuItem('Home 3', Icons.home),
-        DrawerMenuItem('Home 4', Icons.home),
-        DrawerMenuItem('Home 5', Icons.home),
-        DrawerMenuItem('Home 6', Icons.home),
-        DrawerMenuItem('Home 7', Icons.home),
-        DrawerMenuItem('Home 8', Icons.home),
-        DrawerMenuItem('Home 9', Icons.home),
-        DrawerMenuItem('Home 10', Icons.home),
-      ]) : DrawerMenuItem("Inicio", Icons.home),
-      AppConstants.isDemoMode ? DrawerMenuItem('Categorías', Icons.card_travel, <DrawerMenuItem>[
-        DrawerMenuItem('Category 1', Icons.card_travel),
-        DrawerMenuItem('Category 2', Icons.card_travel),
-        DrawerMenuItem('Category 3', Icons.card_travel),
-        DrawerMenuItem('Category 4', Icons.card_travel),
-        DrawerMenuItem('Category 5', Icons.card_travel),
-        DrawerMenuItem('Category 6', Icons.card_travel),
-      ]) : DrawerMenuItem("Categorías", Icons.card_travel),
-      AppConstants.isDemoMode ? DrawerMenuItem('Tienda', Icons.shopping_basket, <DrawerMenuItem>[
-        DrawerMenuItem('Newest', Icons.store),
-        DrawerMenuItem('Top Sellers', Icons.shopping_basket),
-        DrawerMenuItem('Super Deals', Icons.shopping_basket),
-        DrawerMenuItem('Most Liked', Icons.shopping_basket),
-        DrawerMenuItem('Flash Sale', Icons.shopping_basket),
-      ] ) : DrawerMenuItem("Tienda", Icons.shopping_basket),
+      AppConstants.isDemoMode
+          ? DrawerMenuItem('Inicio', Icons.home, <DrawerMenuItem>[
+              DrawerMenuItem('Home 1', Icons.home),
+              DrawerMenuItem('Home 2', Icons.home),
+              DrawerMenuItem('Home 3', Icons.home),
+              DrawerMenuItem('Home 4', Icons.home),
+              DrawerMenuItem('Home 5', Icons.home),
+              DrawerMenuItem('Home 6', Icons.home),
+              DrawerMenuItem('Home 7', Icons.home),
+              DrawerMenuItem('Home 8', Icons.home),
+              DrawerMenuItem('Home 9', Icons.home),
+              DrawerMenuItem('Home 10', Icons.home),
+            ])
+          : DrawerMenuItem("Inicio", Icons.home),
+      AppConstants.isDemoMode
+          ? DrawerMenuItem('Categorías', Icons.card_travel, <DrawerMenuItem>[
+              DrawerMenuItem('Category 1', Icons.card_travel),
+              DrawerMenuItem('Category 2', Icons.card_travel),
+              DrawerMenuItem('Category 3', Icons.card_travel),
+              DrawerMenuItem('Category 4', Icons.card_travel),
+              DrawerMenuItem('Category 5', Icons.card_travel),
+              DrawerMenuItem('Category 6', Icons.card_travel),
+            ])
+          : DrawerMenuItem("Categorías", Icons.card_travel),
+      AppConstants.isDemoMode
+          ? DrawerMenuItem('Tienda', Icons.shopping_basket, <DrawerMenuItem>[
+              DrawerMenuItem('Newest', Icons.store),
+              DrawerMenuItem('Top Sellers', Icons.shopping_basket),
+              DrawerMenuItem('Super Deals', Icons.shopping_basket),
+              DrawerMenuItem('Most Liked', Icons.shopping_basket),
+              DrawerMenuItem('Flash Sale', Icons.shopping_basket),
+            ])
+          : DrawerMenuItem("Tienda", Icons.shopping_basket),
       //DrawerMenuItem("My Account", Icons.person),
       DrawerMenuItem("Mis Pedidos", Icons.assignment_sharp),
-      //DrawerMenuItem("Mis Direcciones", Icons.location_city),
-    /* DrawerMenuItem("My Favorites", Icons.favorite),
+      DrawerMenuItem("Mis Direcciones", Icons.location_city),
+      /* DrawerMenuItem("My Favorites", Icons.favorite),
 
       DrawerMenuItem("Intro", Icons.integration_instructions),
       DrawerMenuItem("News", Icons.web),
       DrawerMenuItem("Contact Us", Icons.message),
       DrawerMenuItem("About", Icons.info),
       DrawerMenuItem("Share App", Icons.share),
-      DrawerMenuItem("Rate & Review", Icons.rate_review), 
+      DrawerMenuItem("Rate & Review", Icons.rate_review),
       DrawerMenuItem("Settings", Icons.settings),*/
-      DrawerMenuItem((AppData.user != null) ? "Cerrar Sesión" : "Iniciar Sesión", Icons.login)
+      DrawerMenuItem(
+          (AppData.user != null) ? "Cerrar Sesión" : "Iniciar Sesión",
+          Icons.login)
     ];
   }
 
@@ -171,39 +176,34 @@ class _HomeState extends State<Home> {
                 (navigationStyle != "bottom" && navigationStyle != "both")
                     ? null
                     : Theme(
-                      data: Theme.of(context).copyWith(
-                        canvasColor: Theme.of(context).primaryColor,
-                        primaryColor: Colors.white,
-                        textTheme: Theme.of(context).textTheme.copyWith(
-                          caption: TextStyle(color: Colors.white70)
-                        )
-                      ),
-                      
-                      child: BottomNavigationBar(
-                        type: BottomNavigationBarType.fixed,
-                        currentIndex: _selectedIndex,
-                        onTap: (value) {
-                          _selectCurrentItem(value);
-                        },
-                        items: [
-                          BottomNavigationBarItem(
-
-                            label: "Inicio",  
-                            icon: Icon(Icons.home_rounded),
-                            activeIcon: Icon(Icons.home_outlined),
-                          ),
-                          BottomNavigationBarItem(
-                            label: "Categorías",
-                            icon: Icon(Icons.card_travel_outlined),
-                            activeIcon: Icon(Icons.card_travel_rounded),
-                          ),
-                          BottomNavigationBarItem(
-                            label: "Tienda",
-                            icon: Icon(Icons.shop_outlined),
-                            activeIcon: Icon(Icons.shop_rounded),
-
-                          ),
-                          /* BottomNavigationBarItem(
+                        data: Theme.of(context).copyWith(
+                            canvasColor: Theme.of(context).primaryColor,
+                            primaryColor: Colors.white,
+                            textTheme: Theme.of(context).textTheme.copyWith(
+                                caption: TextStyle(color: Colors.white70))),
+                        child: BottomNavigationBar(
+                          type: BottomNavigationBarType.fixed,
+                          currentIndex: _selectedIndex,
+                          onTap: (value) {
+                            _selectCurrentItem(value);
+                          },
+                          items: [
+                            BottomNavigationBarItem(
+                              label: "Inicio",
+                              icon: Icon(Icons.home_rounded),
+                              activeIcon: Icon(Icons.home_outlined),
+                            ),
+                            BottomNavigationBarItem(
+                              label: "Categorías",
+                              icon: Icon(Icons.card_travel_outlined),
+                              activeIcon: Icon(Icons.card_travel_rounded),
+                            ),
+                            BottomNavigationBarItem(
+                              label: "Tienda",
+                              icon: Icon(Icons.shop_outlined),
+                              activeIcon: Icon(Icons.shop_rounded),
+                            ),
+                            /* BottomNavigationBarItem(
                             label: "News",
                             icon: Icon(Icons.library_books),
                           ),
@@ -211,17 +211,14 @@ class _HomeState extends State<Home> {
                             label: "Me",
                             icon: Icon(Icons.account_box),
                           ), */
-                        ],
-                      ),),
-
+                          ],
+                        ),
+                      ),
           );
         },
       ),
     );
   }
-  
-
-  
 
   Widget buildDrawer() {
     return Drawer(
@@ -241,27 +238,26 @@ class _HomeState extends State<Home> {
   Widget _buildDrawerHeader(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pop(context);
-        if (AppData.user != null)
-          _selectCurrentItem(4);
-/*
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MyAccount()));
-*/
-        else
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Login()));
+//         Navigator.pop(context);
+//         if (AppData.user != null)
+//           _selectCurrentItem(4);
+// /*
+//           Navigator.push(
+//               context, MaterialPageRoute(builder: (context) => MyAccount()));
+// */
+//         else
+//           Navigator.push(
+//               context, MaterialPageRoute(builder: (context) => Login()));
       },
       child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
           ),
           child: Stack(children: [
-             
             DrawerHeader(
               child: Row(
                 children: [
-                 new Container(
+                  new Container(
                     width: 80.0,
                     height: 80.0,
                     decoration: new BoxDecoration(shape: BoxShape.circle),
@@ -287,25 +283,33 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text((AppData.user != null)
-
-                            ? "Bienvenido " +
-                                AppData.user.firstName != null ? AppData.user.firstName : "" +
-                                " " + 
-                                AppData.user.lastName != null ? AppData.user.lastName : ""
-                            : "Login & Registro", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-
+                        Text(
+                          (AppData.user != null)
+                              ? "Bienvenido " + AppData.user.firstName != null
+                                  ? AppData.user.firstName
+                                  : "" + " " + AppData.user.lastName != null
+                                      ? AppData.user.lastName
+                                      : ""
+                              : "Login & Registro",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
                         SizedBox(
                           height: 8,
                         ),
                         Text(
                           (AppData.user != null)
-
-                              ? AppData.user.email != null ? AppData.user.email : "" + "\n" + AppData.user.phone != null ? AppData.user.phone : ""
+                              ? AppData.user.email != null
+                                  ? AppData.user.email
+                                  : "" + "\n" + AppData.user.phone != null
+                                      ? AppData.user.phone
+                                      : ""
                               : "Inicia Sesión ó crea una cuenta",
-
                           style: new TextStyle(
-                              fontSize: 14.0, color: Colors.black54, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
+                              fontSize: 14.0,
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic),
                         ),
                       ],
                     ),
@@ -387,10 +391,9 @@ class _HomeState extends State<Home> {
       '/': (context) {
         return [
           defaultHomePage,
-
-          CategoryPage(int.tryParse(AppData.settings.categoryStyle), false, _toShopFromCategory),
+          CategoryPage(int.tryParse(AppData.settings.categoryStyle), false,
+              _toShopFromCategory),
           Shop(0, "nuevos", false, _toProductDetailPage),
-
           News(false),
           Me(mapSelectedItem),
         ].elementAt(index);
@@ -424,7 +427,10 @@ class _HomeState extends State<Home> {
     if (root.children.isEmpty) {
       return ListTile(
         leading: Icon(root.iconData, size: 30, color: Colors.orange.shade500),
-        title: Text(root.title.toUpperCase(), style: TextStyle(fontSize: 16),),
+        title: Text(
+          root.title.toUpperCase(),
+          style: TextStyle(fontSize: 16),
+        ),
         onTap: () {
           Navigator.pop(context);
           mapSelectedItem(root.title);
@@ -629,7 +635,9 @@ class _HomeState extends State<Home> {
         break;
       case "News":
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => News(true)));
+          context,
+          MaterialPageRoute(builder: (context) => News(true)),
+        );
         break;
       case "Contact Us":
         Navigator.push(
@@ -655,7 +663,8 @@ class _HomeState extends State<Home> {
         AppData.user = null;
         AppData.data.removeLast();
         AppData.data.add(DrawerMenuItem(
-            (AppData.user != null) ? "Cerrar Sesión" : "Iniciar Sesión", Icons.login_rounded));
+            (AppData.user != null) ? "Cerrar Sesión" : "Iniciar Sesión",
+            Icons.login_rounded));
         break;
 /*
       case "ProductDetailsPage":
@@ -699,8 +708,6 @@ class _HomeState extends State<Home> {
           icon: new Stack(
             children: <Widget>[
               new Icon(Icons.shopping_cart, size: 30),
-              
-              
               new Positioned(
                 right: 0,
                 child: new Container(

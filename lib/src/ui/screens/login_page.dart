@@ -30,7 +30,6 @@ class _LoginState extends State<Login> {
           child: Container(
             width: double.maxFinite,
             margin: EdgeInsets.all(20.0),
-             
             child: Column(
               children: [
                 new Container(
@@ -102,36 +101,35 @@ class MyCustomFormState extends State<MyCustomForm> {
       child: Container(
         padding: EdgeInsets.all(60.0),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4.0),
-          boxShadow: [BoxShadow(
-                            color: Colors.lightGreen.withOpacity(0.5),
-                            spreadRadius: 4,
-                            blurRadius: 4,
-                            offset: Offset(0, 0),
-                          )],
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter, 
-            colors: [
-              const Color.fromRGBO(102, 174, 39, 0.2), 
-              const Color.fromRGBO(178, 239, 120, 0.4), 
-              const Color.fromRGBO(24, 167, 120, 0.7)],
-            
-           
-            )
-            ),
+            borderRadius: BorderRadius.circular(4.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.lightGreen.withOpacity(0.5),
+                spreadRadius: 4,
+                blurRadius: 4,
+                offset: Offset(0, 0),
+              )
+            ],
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                const Color.fromRGBO(102, 174, 39, 0.2),
+                const Color.fromRGBO(178, 239, 120, 0.4),
+                const Color.fromRGBO(24, 167, 120, 0.7)
+              ],
+            )),
         child: Column(
-          
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
-          
           children: <Widget>[
             TextFormField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                prefixIcon: Padding(padding: EdgeInsets.all(1),
-                child: Icon(Icons.email),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(1),
+                  child: Icon(Icons.email),
                 ),
                 hintText: 'Email',
                 hintStyle: TextStyle(color: Colors.black45),
@@ -139,7 +137,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                 contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(2.0),
-                  
                   borderSide: new BorderSide(
                     color: Colors.black45,
                   ),
@@ -161,18 +158,17 @@ class MyCustomFormState extends State<MyCustomForm> {
               enableSuggestions: false,
               autocorrect: false,
               decoration: InputDecoration(
-                prefixIcon: Padding(padding: EdgeInsets.all(1),
-                child: Icon(Icons.security),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(1),
+                  child: Icon(Icons.security),
                 ),
                 hintText: 'Password',
                 hintStyle: TextStyle(color: Colors.black45),
-                 fillColor: Colors.black87,
+                fillColor: Colors.black87,
                 contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(2.0),
-                  borderSide: new BorderSide(
-                    color: Colors.black45
-                  ),
+                  borderSide: new BorderSide(color: Colors.black45),
                 ),
               ),
               validator: (value) {
@@ -185,7 +181,6 @@ class MyCustomFormState extends State<MyCustomForm> {
             Container(
               alignment: Alignment.centerRight,
               child: FlatButton(
-                
                 onPressed: () {
                   buildForgotPasswordDialog(context, loginBloc);
                 },
@@ -201,8 +196,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                   width: double.maxFinite,
                   height: 40.0,
                   child: FlatButton(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
-                      
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(2.0)),
                       color: Colors.white60,
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
@@ -212,7 +207,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                       },
                       child: Text(
                         "Entrar",
-                        style: TextStyle(color: Colors.black45, fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            color: Colors.black45, fontWeight: FontWeight.w700),
                       )),
                 );
               },
@@ -224,7 +220,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                   AppData.user = state.user;
                   AppData.data.removeLast();
                   AppData.data.add(DrawerMenuItem(
-                      (AppData.user != null) ? "Logout" : "Login", Icons.login));
+                      (AppData.user != null) ? "Logout" : "Login",
+                      Icons.login));
                   _userBox.put("current_user", state.user);
                   if (_isDialogShowing) {
                     Navigator.pop(context);
@@ -267,7 +264,12 @@ class MyCustomFormState extends State<MyCustomForm> {
                             decoration: BoxDecoration(
                           color: Colors.black45,
                         )))),
-                Padding(padding: EdgeInsets.all(16.0), child: Text("o también:", style: TextStyle(color:Colors.black45),)),
+                Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "o también:",
+                      style: TextStyle(color: Colors.black45),
+                    )),
                 Expanded(
                     child: SizedBox(
                         height: 1,
@@ -307,7 +309,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 SizedBox(
                   width: 8.0,
                 ),
-               /* IconButton(
+                /* IconButton(
                   icon: Image.asset(
                     "assets/images/login_with_phone.png",
                     fit: BoxFit.fill,
@@ -323,7 +325,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("No tienes una cuenta?"),
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Register()));
@@ -349,7 +351,8 @@ class MyCustomFormState extends State<MyCustomForm> {
 
           return Dialog(
             child: Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
               height: 180,
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
@@ -389,7 +392,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                     Container(
                       width: double.maxFinite,
                       child: FlatButton(
-                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.0)),
                           color: Colors.black87,
                           height: 40.0,
                           onPressed: () {
@@ -455,31 +459,37 @@ class MyCustomFormState extends State<MyCustomForm> {
     signInWithGoogle(_googleSignIn, _auth);
   }
 
-  Future<FirebaseUser> signInWithGoogle(GoogleSignIn _googleSignIn, FirebaseAuth _auth) async {
+  Future<User> signInWithGoogle(
+      GoogleSignIn _googleSignIn, FirebaseAuth _auth) async {
     GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
     GoogleSignInAuthentication googleSignInAuthentication =
-    await googleSignInAccount.authentication;
-    AuthCredential credential = GoogleAuthProvider.getCredential(
+        await googleSignInAccount.authentication;
+    AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
     );
-    AuthResult authResult = await _auth.signInWithCredential(credential);
+    UserCredential authResult = await _auth.signInWithCredential(credential);
 
     var _user = authResult.user;
     assert(!_user.isAnonymous);
     assert(await _user.getIdToken() != null);
-    FirebaseUser currentUser = await _auth.currentUser();
-    assert(_user.uid == currentUser.uid);
+
     //model.state =ViewState.Idle;
     print("User Name: ${_user.displayName}");
     print("User Email ${_user.email}");
 
-
-    loginBloc.add(ProcessLoginWithGmail(googleSignInAuthentication.idToken, googleSignInAccount.id, _user.displayName, _user.displayName, googleSignInAccount.email, googleSignInAccount.photoUrl.toString() != null ? googleSignInAccount.photoUrl.toString() : ""));
+    loginBloc.add(ProcessLoginWithGmail(
+        googleSignInAuthentication.idToken,
+        googleSignInAccount.id,
+        _user.displayName,
+        _user.displayName,
+        googleSignInAccount.email,
+        googleSignInAccount.photoUrl.toString() != null
+            ? googleSignInAccount.photoUrl.toString()
+            : ""));
   }
 
   void signInFB() async {
-
     final res = await fb.logIn(permissions: [
       FacebookPermission.publicProfile,
       FacebookPermission.email,
@@ -493,8 +503,7 @@ class MyCustomFormState extends State<MyCustomForm> {
         final imageUrl = await fb.getProfileImageUrl(width: 100);
         print('Your profile image: $imageUrl');
         final email = await fb.getUserEmail();
-        if (email != null)
-          print('And your email is $email');
+        if (email != null) print('And your email is $email');
 
         loginBloc.add(ProcessLoginWithFacebook(accessToken.token));
 
@@ -505,6 +514,5 @@ class MyCustomFormState extends State<MyCustomForm> {
         print('Error while log in: ${res.error}');
         break;
     }
-
   }
 }

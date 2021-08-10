@@ -94,15 +94,16 @@ class _HomePage6State extends State<HomePage6> {
                     height: 220,
                     child: Products("top seller", "", true, false, false,
                         widget._toProductDetailPage)),
-                if (AppData.banners != null && AppData.banners.bannersData.isNotEmpty)
+                if (AppData.banners != null &&
+                    AppData.banners.bannersData.isNotEmpty)
                   Container(
                     width: MediaQuery.of(context).size.width,
                     child: CachedNetworkImage(
                       imageUrl: ApiProvider.imageBaseUrl +
                           AppData.banners.bannersData[0].image,
                       fit: BoxFit.cover,
-                      progressIndicatorBuilder: (context, url, downloadProgress) =>
-                          Center(
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) => Center(
                               child: CircularProgressIndicator(
                                   value: downloadProgress.progress)),
                       errorWidget: (context, url, error) => Icon(Icons.error),
@@ -126,12 +127,7 @@ class _HomePage6State extends State<HomePage6> {
         ];
       },
       body: Products(
-          "Newest",
-          "",
-          false,
-          false,
-          false,
-          widget._toProductDetailPage),
+          "Newest", "", false, false, false, widget._toProductDetailPage),
     );
   }
 
@@ -226,7 +222,7 @@ class _HomePage6State extends State<HomePage6> {
           scrollDirection: Axis.horizontal,
         ),
         itemCount: bannersResponse.bannersData.length,
-        itemBuilder: (BuildContext context, int itemIndex) {
+        itemBuilder: (BuildContext context, int itemIndex, _) {
           return Container(
             width: MediaQuery.of(context).size.width,
             child: CachedNetworkImage(

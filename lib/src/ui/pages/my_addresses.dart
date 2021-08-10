@@ -4,6 +4,7 @@ import 'package:flutter_app1/src/blocs/my_address/my_address_bloc.dart';
 import 'package:flutter_app1/src/models/address/address.dart';
 import 'package:flutter_app1/src/models/address/my_address.dart';
 import 'package:flutter_app1/src/ui/pages/add_address_page.dart';
+import 'package:flutter_app1/src/ui/screens/shipping_address_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyAddresses extends StatefulWidget {
@@ -160,20 +161,26 @@ class RadioListBuilderState extends State<RadioListBuilder> {
             value = ind;
             widget.shippingServiceSelected(widget.shippingServices[index]);
           }),
-          title: Text("Address # " + widget.shippingServices[index].addressId.toString()),
-          subtitle: Text(widget.shippingServices[index].firstname + " " + widget.shippingServices[index].lastname
-              + "\n" + widget.shippingServices[index].street + ", " + widget.shippingServices[index].city
-              + "\n" + widget.shippingServices[index].zoneName + ", " + widget.shippingServices[index].countryName
-          ),
-          secondary: IconButton(
+          title: Text("Direccion # " +
+              widget.shippingServices[index].addressId.toString()),
+          subtitle: Text(widget.shippingServices[index].firstname +
+              " " +
+              widget.shippingServices[index].lastname +
+              "\n" +
+              widget.shippingServices[index].street +
+              ", " +
+              widget.shippingServices[index].city +
+              "\n" +
+              widget.shippingServices[index].zoneName +
+              ", " +
+              widget.shippingServices[index].countryName),
+          /* secondary: IconButton(
             icon: Icon(Icons.delete),
             tooltip: 'Delete',
             onPressed: () {
-               
-
+            
             },
-          ),
-
+          ), */
         );
       },
       itemCount: widget.shippingServices.length,

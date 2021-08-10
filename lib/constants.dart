@@ -1,5 +1,4 @@
 class AppConstants {
-
   static final ECOMMERCE_URL = "https://demo.easystore.com.mx/";
   static final CONSUMER_KEY = "5b7a5d7016250104336d211c6a";
   static final CONSUMER_SECRET = "ae3979ef16250104335b4b0ddb";

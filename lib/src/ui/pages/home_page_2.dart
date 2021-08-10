@@ -85,7 +85,8 @@ class _HomePage2State extends State<HomePage2> {
                   })),
         ];
       },
-      body: ProductsByCategories(0, "Newest", false, false, true, _toProductDetailPage),
+      body: ProductsByCategories(
+          0, "Newest", false, false, true, _toProductDetailPage),
     );
   }
 }
@@ -97,7 +98,7 @@ Widget buildColumnWithData(
         viewportFraction: 1,
         initialPage: 0,
         enableInfiniteScroll:
-        bannersResponse.bannersData.length > 1 ? false : false,
+            bannersResponse.bannersData.length > 1 ? false : false,
         reverse: false,
         autoPlay: true,
         autoPlayInterval: Duration(seconds: 3),
@@ -108,7 +109,7 @@ Widget buildColumnWithData(
         scrollDirection: Axis.horizontal,
       ),
       itemCount: bannersResponse.bannersData.length,
-      itemBuilder: (BuildContext context, int itemIndex) {
+      itemBuilder: (BuildContext context, int itemIndex, _) {
         return Container(
           width: MediaQuery.of(context).size.width,
           child: CachedNetworkImage(

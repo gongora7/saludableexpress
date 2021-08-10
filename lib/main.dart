@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app1/constants.dart';
 import 'package:flutter_app1/src/models/cart_entry.dart';
 import 'package:flutter_app1/src/models/user.dart';
@@ -11,6 +12,7 @@ Box cartEntriesBox;
 Box userBox;
 
 Future<void> main() async {
+  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
 
   var appDocumentDir = await getApplicationDocumentsDirectory();
@@ -20,32 +22,27 @@ Future<void> main() async {
   cartEntriesBox = await Hive.openBox('my_cartBox');
   userBox = await Hive.openBox('my_userBox');
 
-
   //Remove this method to stop OneSignal Debugging
-   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
 
-  OneSignal.shared.init(
-      AppConstants.ONESIGNAL_APP_ID,
-      iOSSettings: {
-        OSiOSSettings.autoPrompt: false,
-        OSiOSSettings.inAppLaunchUrl: false
-      } 
-  ); 
-  OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification); 
+  OneSignal.shared.setAppId(
+    AppConstants.ONESIGNAL_APP_ID,
+  ); // OneSignal.shared.(OSNotificationDisplayType.notification);
 
-
-   OneSignal.shared.setSubscriptionObserver((OSSubscriptionStateChanges changes) async {
+  OneSignal.shared
+      .setSubscriptionObserver((OSSubscriptionStateChanges changes) async {
     // will be called whenever the subscription changes
     //(ie. user gets registered with OneSignal and gets a user ID)
-    var status = await OneSignal.shared.getPermissionSubscriptionState();
-    if (status.subscriptionStatus.subscribed){
-      String onesignalUserId = status.subscriptionStatus.userId;
-      print('Player ID: ' + onesignalUserId);
-    }
-  }); 
+    var status = await OneSignal.shared.getDeviceState();
+    // if (status.subscriptionStatus.subscribed) {
+    //   String onesignalUserId = status.subscriptionStatus.userId;
+    //   print('Player ID: ' + onesignalUserId);
+    // }
+  });
 
 // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
-  await OneSignal.shared.promptUserForPushNotificationPermission(fallbackToSettings: true);
+  await OneSignal.shared
+      .promptUserForPushNotificationPermission(fallbackToSettings: true);
 
   runApp(RestartWidget(child: MyApp()));
 }

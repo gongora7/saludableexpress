@@ -18,8 +18,13 @@ import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 class ShippingAddress extends StatelessWidget {
   List<CartEntry> cartEntries;
   List<Product> cartProducts;
+  double totalPrice;
 
-  ShippingAddress(this.cartEntries, this.cartProducts);
+  ShippingAddress({
+    this.cartEntries,
+    this.cartProducts,
+    this.totalPrice,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,11 @@ class ShippingAddress extends StatelessWidget {
         body: Stack(
           fit: StackFit.expand,
           children: [
-            MyCustomForm(cartEntries, cartProducts),
+            MyCustomForm(
+              cartEntries: cartEntries,
+              cartProducts: cartProducts,
+              totalPrice: totalPrice,
+            ),
           ],
         ),
       ),
@@ -50,8 +59,13 @@ class ShippingAddress extends StatelessWidget {
 class MyCustomForm extends StatefulWidget {
   List<CartEntry> cartEntries;
   List<Product> cartProducts;
+  double totalPrice;
 
-  MyCustomForm(this.cartEntries, this.cartProducts);
+  MyCustomForm({
+    this.cartEntries,
+    this.cartProducts,
+    this.totalPrice,
+  });
 
   @override
   MyCustomFormState createState() {
@@ -138,20 +152,22 @@ class MyCustomFormState extends State<MyCustomForm> {
       decoration: BoxDecoration(color: Colors.orange.shade50),
       padding: EdgeInsets.all(20.0),
       child: Column(
-        
         children: [
           new Container(
-                    width: 120.0,
-                    height: 120.0,
-                    decoration: new BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        image: new DecorationImage(
-                            fit: BoxFit.fill,
-                            image: new NetworkImage(
-                              "http://store.saludableexpress.com/images/media/2021/06/thumbnail1624473536zN38A23401.png",
-                            )))),
+              width: 120.0,
+              height: 120.0,
+              decoration: new BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  image: new DecorationImage(
+                      fit: BoxFit.fill,
+                      image: new NetworkImage(
+                        "http://store.saludableexpress.com/images/media/2021/06/thumbnail1624473536zN38A23401.png",
+                      )))),
           SizedBox(height: 16.0),
-          Text('¿Dónde quieres recibirnos?', style: TextStyle(fontSize: 16.0),),
+          Text(
+            '¿Dónde quieres recibirnos?',
+            style: TextStyle(fontSize: 16.0),
+          ),
           SizedBox(height: 16.0),
           Container(
             child: Expanded(
@@ -164,8 +180,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                     TextFormField(
                       controller: _firstNameController,
                       decoration: InputDecoration(
-                        prefixIcon: Padding(padding: EdgeInsets.all(1),
-                         child: Icon(Icons.person)),
+                        prefixIcon: Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Icon(Icons.person)),
                         labelText: 'Nombre'.toUpperCase(),
                         fillColor: Colors.white,
                         contentPadding: EdgeInsets.all(10.0),
@@ -189,15 +206,16 @@ class MyCustomFormState extends State<MyCustomForm> {
                     TextFormField(
                       controller: _lastNameController,
                       decoration: InputDecoration(
-                        prefixIcon: Padding(padding: EdgeInsets.all(1),
-                         child: Icon(Icons.people)),
+                        prefixIcon: Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Icon(Icons.people)),
                         labelText: 'Apellido'.toUpperCase(),
                         fillColor: Colors.white,
                         contentPadding: EdgeInsets.all(10.0),
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(2.0),
                           borderSide: new BorderSide(
-                             color: Colors.black45,
+                            color: Colors.black45,
                           ),
                         ),
                       ),
@@ -208,7 +226,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                         return null;
                       },
                     ),
-                   /* SizedBox(
+                    /* SizedBox(
                       height: 16.0,
                     ),
                     GestureDetector(
@@ -257,15 +275,17 @@ class MyCustomFormState extends State<MyCustomForm> {
                     TextFormField(
                       controller: _addressController,
                       decoration: InputDecoration(
-                        prefixIcon: Padding(padding: EdgeInsets.all(1),
-                         child: Icon(Icons.location_history)),
+                        prefixIcon: Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Icon(Icons.location_history)),
                         labelText: 'Dirección'.toUpperCase(),
                         fillColor: Colors.white,
                         contentPadding: EdgeInsets.all(10.0),
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(2.0),
                           borderSide: new BorderSide(
-                             color: Colors.black45,),
+                            color: Colors.black45,
+                          ),
                         ),
                       ),
                       validator: (value) {
@@ -315,15 +335,16 @@ class MyCustomFormState extends State<MyCustomForm> {
                                         isExpanded: true,
                                         hint: Text("País".toUpperCase()),
                                         decoration: InputDecoration(
-                                          prefixIcon: Padding(padding: EdgeInsets.all(1),
-                                          child: Icon(Icons.flag)),
+                                          prefixIcon: Padding(
+                                              padding: EdgeInsets.all(1),
+                                              child: Icon(Icons.flag)),
                                           fillColor: Colors.white,
                                           contentPadding: EdgeInsets.all(10.0),
                                           border: new OutlineInputBorder(
                                             borderRadius:
                                                 new BorderRadius.circular(2.0),
                                             borderSide: new BorderSide(
-                                               color: Colors.black45,
+                                              color: Colors.black45,
                                             ),
                                           ),
                                         ),
@@ -389,22 +410,23 @@ class MyCustomFormState extends State<MyCustomForm> {
                                         isExpanded: true,
                                         hint: Text("Estado".toUpperCase()),
                                         decoration: InputDecoration(
-                                          prefixIcon: Padding(padding: EdgeInsets.all(1),
-                                          child: Icon(Icons.pin_drop)),
+                                          prefixIcon: Padding(
+                                              padding: EdgeInsets.all(1),
+                                              child: Icon(Icons.pin_drop)),
                                           fillColor: Colors.white,
                                           contentPadding: EdgeInsets.all(10.0),
                                           border: new OutlineInputBorder(
                                             borderRadius:
                                                 new BorderRadius.circular(2.0),
                                             borderSide: new BorderSide(
-                                               color: Colors.black45,
-
+                                              color: Colors.black45,
                                             ),
                                           ),
                                         ),
                                         items: response.data.map((e) {
                                           return new DropdownMenuItem(
-                                              value: e, child: Text(e.zoneName));
+                                              value: e,
+                                              child: Text(e.zoneName));
                                         }).toList(),
                                         onChanged: (value) {
                                           selectedZone = value as Zone;
@@ -426,15 +448,16 @@ class MyCustomFormState extends State<MyCustomForm> {
                     TextFormField(
                       controller: _cityController,
                       decoration: InputDecoration(
-                        prefixIcon: Padding(padding: EdgeInsets.all(1),
-                                          child: Icon(Icons.pin_drop)),
+                        prefixIcon: Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Icon(Icons.pin_drop)),
                         labelText: 'Ciudad'.toUpperCase(),
                         fillColor: Colors.white,
                         contentPadding: EdgeInsets.all(10.0),
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(2.0),
                           borderSide: new BorderSide(
-                             color: Colors.black45,
+                            color: Colors.black45,
                           ),
                         ),
                       ),
@@ -451,15 +474,16 @@ class MyCustomFormState extends State<MyCustomForm> {
                     TextFormField(
                       controller: _postalCodeController,
                       decoration: InputDecoration(
-                        prefixIcon: Padding(padding: EdgeInsets.all(1),
-                                          child: Icon(Icons.album)),
+                        prefixIcon: Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Icon(Icons.album)),
                         labelText: 'Código Postal'.toUpperCase(),
                         fillColor: Colors.white,
                         contentPadding: EdgeInsets.all(10.0),
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(2.0),
                           borderSide: new BorderSide(
-                             color: Colors.black45,
+                            color: Colors.black45,
                           ),
                         ),
                       ),
@@ -476,15 +500,16 @@ class MyCustomFormState extends State<MyCustomForm> {
                     TextFormField(
                       controller: _phoneController,
                       decoration: InputDecoration(
-                        prefixIcon: Padding(padding: EdgeInsets.all(1),
-                                          child: Icon(Icons.phone)),
+                        prefixIcon: Padding(
+                            padding: EdgeInsets.all(1),
+                            child: Icon(Icons.phone)),
                         labelText: 'Teléfono'.toUpperCase(),
                         fillColor: Colors.white,
                         contentPadding: EdgeInsets.all(10.0),
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(2.0),
                           borderSide: new BorderSide(
-                             color: Colors.black45,
+                            color: Colors.black45,
                           ),
                         ),
                       ),
@@ -523,7 +548,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                               _addressController.text = address.street;
                               _cityController.text = address.city;
                               _postalCodeController.text = address.postcode;
-                              //_phoneController.text = "";
+                              _phoneController.text = '3333333333';
                               selectedCountry = defaultCountry;
 
                               selectedZone = defaultZone;
@@ -555,7 +580,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                   Address shippingAddress = Address();
                   shippingAddress.deliveryFirstName = _firstNameController.text;
                   shippingAddress.deliveryLastName = _lastNameController.text;
-                  shippingAddress.deliveryStreetAddress = _addressController.text;
+                  shippingAddress.deliveryStreetAddress =
+                      _addressController.text;
                   shippingAddress.deliveryCity = _cityController.text;
                   shippingAddress.deliveryPostCode = _postalCodeController.text;
                   shippingAddress.deliveryPhone = _phoneController.text;
@@ -570,10 +596,16 @@ class MyCustomFormState extends State<MyCustomForm> {
                       .add(AddAddress(shippingAddress));
 
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => BillingAddress(widget.cartEntries,
-                              widget.cartProducts, shippingAddress)));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BillingAddress(
+                        cartEntries: widget.cartEntries,
+                        cartProducts: widget.cartProducts,
+                        shippingAddress: shippingAddress,
+                        totalPrice: widget.totalPrice,
+                      ),
+                    ),
+                  );
                 }
               },
               child: Text(
@@ -601,7 +633,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 border: new OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(2.0),
                   borderSide: new BorderSide(
-                     color: Colors.black45,
+                    color: Colors.black45,
                   ),
                 ),
               ),

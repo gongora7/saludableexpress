@@ -117,7 +117,7 @@ Widget buildColumnWithData(BuildContext context, NewsResponse newsResponse) {
         scrollDirection: Axis.horizontal,
       ),
       itemCount: newsResponse.newsData.length,
-      itemBuilder: (BuildContext context, int itemIndex) {
+      itemBuilder: (BuildContext context, int itemIndex, _) {
         return Container(
           width: MediaQuery.of(context).size.width,
           child: CachedNetworkImage(

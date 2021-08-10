@@ -1,12 +1,13 @@
 import 'dart:developer';
 
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' as dio;
 
-class LoggingInterceptor extends Interceptor {
+class LoggingInterceptor extends dio.Interceptor {
   int _maxCharactersPerLine = 200;
 
   @override
-  Future onRequest(RequestOptions options) {
+  Future onRequest(
+      dio.RequestOptions options, dio.RequestInterceptorHandler handler) {
     print("--> ${options.method} ${options.path}");
     //print("Content type: ${options.contentType}");
     print(options.headers);
@@ -14,25 +15,31 @@ class LoggingInterceptor extends Interceptor {
     log(" \n<-- START PARAMS: \n" +
         responseAsString +
         "\nEND PARAMS -->\n<-- END HTTP");
-    return super.onRequest(options);
+    handler.next(options);
   }
 
   @override
-  Future onResponse(Response response) {
+  Future onResponse(
+    dio.Response response,
+    dio.ResponseInterceptorHandler handler,
+  ) {
     print(
-        "<-- ${response.statusCode} ${response.request.method} ${response.request.path}");
+        "<-- ${response.statusCode} ${response.data} ${response.statusMessage}");
     String responseAsString = response.data.toString();
     log(" \n<-- START RESPONSE: \n" +
         responseAsString +
         "\nEND RESPONSE -->\n<-- END HTTP");
-    return super.onResponse(response);
+    handler.next(response);
   }
 
   @override
-  Future onError(DioError err) {
+  Future onError(
+    dio.DioError err,
+    dio.ErrorInterceptorHandler handler,
+  ) {
     print("<-- Error -->");
     print(err.error);
     print(err.message);
-    return super.onError(err);
+    handler.next(err);
   }
 }

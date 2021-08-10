@@ -39,27 +39,30 @@ class _CartState extends State<Cart> {
     super.dispose();
     _productsBloc.dispose();
   }
-void _toProductDetailPage(Product product) {
+
+  void _toProductDetailPage(Product product) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => ProductDetailPage(product)));
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Carrito"),
         actions: <Widget>[
-              IconButton(
-          icon: Icon(Icons.search),
-          iconSize: 30,
-          tooltip: 'Buscar',
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Search(_toProductDetailPage)));
-          },
-        ),],
+          IconButton(
+            icon: Icon(Icons.search),
+            iconSize: 30,
+            tooltip: 'Buscar',
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Search(_toProductDetailPage)));
+            },
+          ),
+        ],
       ),
       body: ValueListenableBuilder(
         valueListenable: _box.listenable(),
@@ -139,15 +142,15 @@ void _toProductDetailPage(Product product) {
                       Expanded(child: buildProductsList(data, list)),
                       Container(
                         decoration: new BoxDecoration(
-                          color: Colors.orange.shade50,
-                          boxShadow: [BoxShadow(
-                            color: Colors.orange.withOpacity(0.3),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3),
-                           )]
-                         ),
-                          
+                            color: Colors.orange.shade50,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.orange.withOpacity(0.3),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: Offset(0, 3),
+                              )
+                            ]),
                         child: Column(
                           children: [
                             Padding(
@@ -166,12 +169,13 @@ void _toProductDetailPage(Product product) {
                                         "\$" + subtotalPrice.toStringAsFixed(2),
                                         style: TextStyle(
                                             color: Colors.orange.shade800,
-                                            fontSize: 22.0, fontWeight: FontWeight.bold)),
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.bold)),
                                   ]),
                                   SizedBox(
                                     height: 6,
                                   ),
-                                 //Divider(height: 3.0),
+                                  //Divider(height: 3.0),
                                   Row(children: [
                                     Text("Descuento".toUpperCase(),
                                         style: TextStyle(
@@ -182,7 +186,8 @@ void _toProductDetailPage(Product product) {
                                       "\$" + discountPrice.toStringAsFixed(2),
                                       style: TextStyle(
                                           color: Colors.orange.shade800,
-                                          fontSize: 22.0, fontWeight: FontWeight.bold),
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ]),
                                   SizedBox(
@@ -190,16 +195,20 @@ void _toProductDetailPage(Product product) {
                                   ),
                                   //Divider(height: 3.0),
                                   Row(children: [
-                                    Text("Total".toUpperCase(),
-                                        style: TextStyle(
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold)),
+                                    Text(
+                                      "Total".toUpperCase(),
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                     Expanded(child: SizedBox()),
                                     Text(
                                       "\$" + totalPrice.toStringAsFixed(2),
                                       style: TextStyle(
-                                          fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.orange.shade800
-                                          ),
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.orange.shade800),
                                     ),
                                   ]),
                                 ],
@@ -219,15 +228,23 @@ void _toProductDetailPage(Product product) {
                                 ),
                                 onPressed: () async {
                                   if (AppData.user == null) {
-                                    Scaffold.of(context).showSnackBar(
-                                        SnackBar(content: Text("Inicia Sesión para continuar", style: TextStyle(fontSize: 14),)));
+                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                        content: Text(
+                                      "Inicia Sesión para continuar",
+                                      style: TextStyle(fontSize: 14),
+                                    )));
                                     return;
                                   }
                                   String message = await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ShippingAddress(list, data)));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ShippingAddress(
+                                        cartEntries: list,
+                                        cartProducts: data,
+                                        totalPrice: totalPrice,
+                                      ),
+                                    ),
+                                  );
                                   if (message != null && message.isNotEmpty) {
                                     Scaffold.of(context)
                                         .removeCurrentSnackBar();
@@ -297,14 +314,14 @@ void _toProductDetailPage(Product product) {
                     )
                   ],
                 ),
-              ],      
+              ],
             ),
           );
   }
 
   Widget buildProductsList(List<Product> products, List<CartEntry> list) {
     return Container(
-       color: Colors.orange.shade100,
+      color: Colors.orange.shade100,
       child: Padding(
         padding: EdgeInsets.all(8),
         child: ListView.builder(
@@ -330,18 +347,16 @@ void _toProductDetailPage(Product product) {
 
               return Card(
                 color: Colors.orange.shade50,
-                
-                 margin: EdgeInsets.all(4),
-                 child: Row(children: [
+                margin: EdgeInsets.all(4),
+                child: Row(children: [
                   Container(
-                     
-                  padding: EdgeInsets.all(4.0),
+                    padding: EdgeInsets.all(4.0),
                     width: 150,
                     height: 150,
                     child: CachedNetworkImage(
-                      imageUrl: ApiProvider.imageBaseUrl + product.productsImage,
+                      imageUrl:
+                          ApiProvider.imageBaseUrl + product.productsImage,
                       fit: BoxFit.contain,
-                      
                       progressIndicatorBuilder:
                           (context, url, downloadProgress) =>
                               CircularProgressIndicator(
@@ -358,7 +373,8 @@ void _toProductDetailPage(Product product) {
                             Row(children: [
                               Expanded(
                                 child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         product.productsName,
@@ -393,7 +409,7 @@ void _toProductDetailPage(Product product) {
                                     )),
                               ),
                             ]),
-                            SizedBox(height:10.0),
+                            SizedBox(height: 10.0),
                             Row(children: [
                               Expanded(
                                   child: Text(
@@ -418,22 +434,29 @@ void _toProductDetailPage(Product product) {
                                                   TextDecoration.lineThrough),
                                         ),
                                         SizedBox(width: 4),
-                                        Text("\$" +
-                                            double.parse(product.discountPrice
-                                                    .toString())
-                                                .toStringAsFixed(2), style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.orange.shade600,
-                                              ),),
+                                        Text(
+                                          "\$" +
+                                              double.parse(product.discountPrice
+                                                      .toString())
+                                                  .toStringAsFixed(2),
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.orange.shade600,
+                                          ),
+                                        ),
                                       ],
                                     )
-                                  : Text("\$" +
-                                      double.parse(
-                                              product.productsPrice.toString())
-                                          .toStringAsFixed(2), style: TextStyle(color: Colors.black, 
-                                          fontSize: 18, 
-                                          fontWeight: FontWeight.bold),),
+                                  : Text(
+                                      "\$" +
+                                          double.parse(product.productsPrice
+                                                  .toString())
+                                              .toStringAsFixed(2),
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                             ]),
                             ListView.builder(
                               shrinkWrap: true,
@@ -448,7 +471,9 @@ void _toProductDetailPage(Product product) {
                                         fontSize: 14, color: Colors.black54),
                                   )),
                                   Text(
-                                    cartProductAttributes[index].values[0].value,
+                                    cartProductAttributes[index]
+                                        .values[0]
+                                        .value,
                                     style: TextStyle(
                                         fontSize: 14, color: Colors.black54),
                                   ),
@@ -469,8 +494,8 @@ void _toProductDetailPage(Product product) {
                             ),
                             //Divider(height: 10.0, color: Colors.white),
                             SizedBox(
-                                height: 8,
-                              ),
+                              height: 8,
+                            ),
                             Row(children: [
                               Expanded(
                                   child: Text(
@@ -483,8 +508,8 @@ void _toProductDetailPage(Product product) {
                               GestureDetector(
                                 onTap: () {
                                   if (cartEntry.quantity > 1) {
-                                    _productsBloc.cart_products_event_sink
-                                        .add(DecrementCartProductQuantity(index));
+                                    _productsBloc.cart_products_event_sink.add(
+                                        DecrementCartProductQuantity(index));
                                     cartEntry.quantity--;
                                     _box.putAt(index, cartEntry);
                                   }
@@ -493,7 +518,8 @@ void _toProductDetailPage(Product product) {
                                     data: IconThemeData(
                                         //color: Theme.of(context).primaryColor),
                                         color: Colors.orange.shade800),
-                                    child: Icon(Icons.remove_circle, size: 30.0)),
+                                    child:
+                                        Icon(Icons.remove_circle, size: 30.0)),
                               ),
                               SizedBox(
                                 width: 8,
@@ -501,7 +527,8 @@ void _toProductDetailPage(Product product) {
                               Text(
                                 product.customerBasketQuantity.toString(),
                                 style: TextStyle(
-                                    fontSize: 20.0, fontWeight: FontWeight.bold),
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 width: 8,
@@ -519,8 +546,8 @@ void _toProductDetailPage(Product product) {
                                     child: Icon(Icons.add_circle, size: 30.0)),
                               ),
                             ]),
-                            
-                            SizedBox(height:10.0),
+
+                            SizedBox(height: 10.0),
                             Row(children: [
                               Expanded(
                                   child: Text(
@@ -535,7 +562,8 @@ void _toProductDetailPage(Product product) {
                                       children: [
                                         Text(
                                           "\$" +
-                                              ((double.parse(product.productsPrice
+                                              ((double.parse(product
+                                                              .productsPrice
                                                               .toString()) +
                                                           attrsPrice) *
                                                       cartEntry.quantity)
@@ -549,17 +577,17 @@ void _toProductDetailPage(Product product) {
                                         SizedBox(width: 4),
                                         Text(
                                           "\$" +
-                                              ((double.parse(product.discountPrice
+                                              ((double.parse(product
+                                                              .discountPrice
                                                               .toString()) +
                                                           attrsPrice) *
                                                       cartEntry.quantity)
                                                   .toStringAsFixed(2),
                                           style: TextStyle(
                                               //color: Theme.of(context).primaryColor),
-                                              color: Colors.orange.shade800, 
-                                              fontSize: 18, 
-                                              fontWeight: FontWeight.bold
-                                              ),
+                                              color: Colors.orange.shade800,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                       ],
                                     )
@@ -572,10 +600,9 @@ void _toProductDetailPage(Product product) {
                                               .toStringAsFixed(2),
                                       style: TextStyle(
                                           //color: Theme.of(context).primaryColor),
-                                          color: Colors.orange.shade800, 
-                                          fontSize: 18, 
-                                          fontWeight: FontWeight.bold
-                                      ),
+                                          color: Colors.orange.shade800,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
                                     ),
                             ])
                           ]),
