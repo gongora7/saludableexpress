@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/src/models/stripe/tarjeta_credito.dart';
+import 'package:flutter_app1/src/services/stripe_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app1/app_data.dart';
 import 'package:flutter_app1/constants.dart';
@@ -35,6 +37,7 @@ class Checkout extends StatefulWidget {
   String shippingTax;
   ShippingService shippingService;
   double totalPrice;
+  CreditCard cardPayment;
 
   Checkout({
     this.cartEntries,
@@ -44,6 +47,7 @@ class Checkout extends StatefulWidget {
     this.shippingTax,
     this.shippingService,
     this.totalPrice,
+    this.cardPayment,
   });
 
   @override
@@ -822,7 +826,6 @@ class _CheckoutState extends State<Checkout> {
     postOrder.transaction_id = "";
 
     postOrder.currency_code = "MXN";
-
     orderBloc.add(PlaceOrder(postOrder));
   }
 
@@ -1101,43 +1104,43 @@ class FullScreenDialogState extends State<FullScreenDialog> {
     String cardExpiryYear,
     String cardCvc,
     String cardUserName,
-  ) {
-    final CreditCard testCard = CreditCard(
-      number: cardNumber,
-      expMonth: int.tryParse(cardExpiryMonth),
-      expYear: int.tryParse(cardExpiryYear),
+  ) async {
+    final TarjetaCredito testCard = TarjetaCredito(
+      cardNumber: cardNumber,
+      cvv: cardCvc,
+      expiracyMonth: int.tryParse(cardExpiryMonth),
+      expiracyYear: int.tryParse(cardExpiryYear),
       name: cardUserName,
-      cvc: cardCvc,
     );
+    AppData.tarjetaCredito = testCard;
+    // print("soy el pago ${testCard.number}");
 
-    print("soy el pago ${testCard.number}");
+    // StripePayment.createPaymentMethod(
+    //   PaymentMethodRequest(
+    //     card: testCard,
+    //   ),
+    // ).then((paymentMethod) {
+    //   print('correcto ${paymentMethod.billingDetails.email}');
+    //   print(JsonEncoder.withIndent(' ').convert(paymentMethod));
+    //   StripePayment.confirmPaymentIntent(PaymentIntent(
+    //     clientSecret:
+    //         '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',
+    //     // clientSecret: dotenv.env['STRIPE_SECRET'],
 
-    StripePayment.createPaymentMethod(
-      PaymentMethodRequest(
-        card: testCard,
-      ),
-    ).then((paymentMethod) {
-      print('correcto ${paymentMethod.billingDetails.email}');
-      print(JsonEncoder.withIndent(' ').convert(paymentMethod));
-      StripePayment.confirmPaymentIntent(PaymentIntent(
-        clientSecret:
-            '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',
-        // clientSecret: dotenv.env['STRIPE_SECRET'],
+    //     // clientSecret: AppConstants.STRIPE_SECRET,
+    //     paymentMethodId: paymentMethod.id,
+    //   )).then((paymentIntentResult) {
+    //     print(JsonEncoder.withIndent(' ').convert(paymentIntentResult));
+    //   }).catchError((e) {
+    //     print(e);
+    //   });
 
-        // clientSecret: AppConstants.STRIPE_SECRET,
-        paymentMethodId: paymentMethod.id,
-      )).then((paymentIntentResult) {
-        print(JsonEncoder.withIndent(' ').convert(paymentIntentResult));
-      }).catchError((e) {
-        print(e);
-      });
-
-      // paymentMethodNonce = paymentMethod.id;
-      // placeOrderNow();
-      //_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Received ${token.tokenId}')));
-    }).catchError((e) {
-      print(e);
-    });
+    //   // paymentMethodNonce = paymentMethod.id;
+    //   // placeOrderNow();
+    //   //_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Received ${token.tokenId}')));
+    // }).catchError((e) {
+    //   print(e);
+    // });
   }
 
   @override
@@ -1210,7 +1213,7 @@ class FullScreenDialogState extends State<FullScreenDialog> {
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(2.3),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       // widget._stripeExpiryYear = _cardExpiryYearController.text;
                       // widget._stripeExpiryMonth =
                       //     _cardExpiryMonthController.text;
@@ -1222,13 +1225,22 @@ class FullScreenDialogState extends State<FullScreenDialog> {
                         _cardCvcController.text,
                         _cardNameUserController.text,
                       );
-                      widget._onStripeDetailsAdded(
-                        _cardNumberController.text,
-                        _cardExpiryMonthController.text,
-                        _cardExpiryYearController.text,
-                        _cardCvcController.text,
-                        _cardNameUserController.text,
-                      );
+                      Navigator.pop(context);
+
+                      // onStripeDetailsAddeds(
+                      //   _cardNumberController.text,
+                      //   _cardExpiryMonthController.text,
+                      //   _cardExpiryYearController.text,
+                      //   _cardCvcController.text,
+                      //   _cardNameUserController.text,
+                      // );
+                      // widget._onStripeDetailsAdded(
+                      //   _cardNumberController.text,
+                      //   _cardExpiryMonthController.text,
+                      //   _cardExpiryYearController.text,
+                      //   _cardCvcController.text,
+                      //   _cardNameUserController.text,
+                      // );
                       // Navigator.pop(context);
                     },
                     child: new Text("Confirmar"),

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_app1/src/api/responses/att_to_order_response.dart';
+import 'package:flutter_app1/src/models/stripe/tarjeta_credito.dart';
 
 abstract class OrderState extends Equatable {
   const OrderState();

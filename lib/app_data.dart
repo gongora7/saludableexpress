@@ -1,4 +1,5 @@
 import 'package:flutter_app1/src/api/responses/languages_response.dart';
+import 'package:flutter_app1/src/models/stripe/tarjeta_credito.dart';
 
 import 'src/api/responses/banners_response.dart';
 import 'src/api/responses/categories_response.dart';
@@ -15,5 +16,5 @@ class AppData {
   static List<int> cartIds = List<int>();
   static LanguagesResponse languages;
   static String currencySymbol = "\$";
-
+  static TarjetaCredito tarjetaCredito;
 }

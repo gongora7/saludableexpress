@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_app1/src/models/checkout/post_order.dart';
+import 'package:flutter_app1/src/models/stripe/tarjeta_credito.dart';
 
 abstract class OrderEvent extends Equatable {
   const OrderEvent();

@@ -53,6 +53,7 @@ class PostOrder {
   var total_tax;
   String transaction_id;
   String guest_status;
+  String payment_sripe;
 
   PostOrder(
       {this.billing_city,
@@ -104,7 +105,8 @@ class PostOrder {
       this.totalPrice,
       this.total_tax,
       this.transaction_id,
-      this.guest_status});
+      this.guest_status,
+      this.payment_sripe});
 
   PostOrder.fromJson(Map<String, dynamic> json) {
     billing_city = json['billing_city'];
@@ -167,6 +169,7 @@ class PostOrder {
     total_tax = json['total_tax'];
     transaction_id = json['transaction_id'];
     guest_status = json['guest_status'];
+    payment_sripe = json['payment_sripe'];
   }
 
   Map<String, dynamic> toJson() {
@@ -225,6 +228,7 @@ class PostOrder {
     data['total_tax'] = this.total_tax;
     data['transaction_id'] = this.transaction_id;
     data['guest_status'] = this.guest_status;
+    data['payment_sripe'] = this.payment_sripe;
     return data;
   }
 }
