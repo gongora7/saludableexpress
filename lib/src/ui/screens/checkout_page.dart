@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/src/models/stripe/tarjeta_credito.dart';
+import 'package:flutter_app1/src/repositories/checkout_repo.dart';
+import 'package:flutter_app1/src/repositories/cupon_desc_repo.dart';
 import 'package:flutter_app1/src/services/stripe_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app1/app_data.dart';
@@ -38,6 +40,7 @@ class Checkout extends StatefulWidget {
   ShippingService shippingService;
   double totalPrice;
   CreditCard cardPayment;
+  String codeCupon;
 
   Checkout({
     this.cartEntries,
@@ -48,6 +51,7 @@ class Checkout extends StatefulWidget {
     this.shippingService,
     this.totalPrice,
     this.cardPayment,
+    this.codeCupon,
   });
 
   @override
@@ -120,6 +124,7 @@ class _CheckoutState extends State<Checkout> {
                       buildShippingAddressCard(widget.shippingAddress),
                       buildShippingMethodCard(widget.shippingService),
                       buildPaymentMethodsCard(),
+                      buildCuponCard(),
                       buildPriceList(),
                       BlocConsumer<OrderBloc, OrderState>(
                         builder: (BuildContext context, state) {
@@ -215,7 +220,7 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade400,
+        color: Colors.orange.shade500,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -254,7 +259,7 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade300,
+        color: Colors.orange.shade400,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -293,7 +298,7 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade200,
+        color: Colors.orange.shade300,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -345,7 +350,7 @@ class _CheckoutState extends State<Checkout> {
             child: Card(
               margin: EdgeInsets.all(4.0),
               child: Container(
-                color: Colors.orange.shade100,
+                color: Colors.orange.shade200,
                 child: Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Row(
@@ -384,6 +389,81 @@ class _CheckoutState extends State<Checkout> {
           return buildLoading();
         }
       },
+    );
+  }
+
+  //Felipe: Se agrega widget para capturar el cupon
+  Widget buildCuponCard() {
+    final cuponField = TextEditingController();
+
+    return Card(
+      margin: EdgeInsets.all(4.0),
+      child: Container(
+        color: Colors.orange.shade100,
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text("Cupón de descuento:",
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+              SizedBox(
+                height: 8.0,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(
+                      controller: cuponField,
+                      decoration: InputDecoration(
+                        labelText: 'Ingresa tu cupón',
+                        labelStyle: TextStyle(color: Colors.black),
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.all(8.0),
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(8.0),
+                          borderSide: new BorderSide(
+                            color: Colors.orange,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.orange,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: FlatButton(
+                        shape: new UnderlineInputBorder(
+                            borderRadius: new BorderRadius.circular(8.0),
+                            borderSide: new BorderSide()),
+                        color: Colors.orange[500],
+                        height: 45.0,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        child: Text(
+                          "Canjear",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () async {
+                          final resDescuento =
+                              RealCuponDescRepo().getDescuento(cuponField.text);
+
+                          SnackBar(content: Text('Error al aplicar el cupón'));
+                        }),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -452,7 +532,7 @@ class _CheckoutState extends State<Checkout> {
         return Card(
           margin: EdgeInsets.all(4),
           child: Container(
-            color: Colors.orange.shade500,
+            color: Colors.orange.shade600,
             child: Row(children: [
               Container(
                 padding: EdgeInsets.all(3.0),
