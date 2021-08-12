@@ -285,7 +285,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
+                /* IconButton(
                   icon: Image.asset(
                     "assets/images/login_with_google.png",
                     fit: BoxFit.fill,
@@ -308,7 +308,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ),
                 SizedBox(
                   width: 8.0,
-                ),
+                ),*/
                 /* IconButton(
                   icon: Image.asset(
                     "assets/images/login_with_phone.png",

@@ -12,8 +12,8 @@ import 'package:flutter_app1/src/models/product_models/product.dart';
 import 'package:flutter_app1/src/models/address/zone.dart';
 import 'package:flutter_app1/src/repositories/address_repo.dart';
 import 'package:flutter_app1/src/ui/screens/billing_address_page.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+/*import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_place_picker/google_maps_place_picker.dart';*/
 
 class ShippingAddress extends StatelessWidget {
   List<CartEntry> cartEntries;
