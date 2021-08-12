@@ -14,7 +14,7 @@ class ProductsByCategories extends StatefulWidget {
   final Function(Product product) _toProductDetailPage;
   bool isBottomBarVisible = false;
   bool isNextPageAutoLoad = false;
-  bool isTabHasIcon = false;
+  bool isTabHasIcon = true;
   String productsType;
   int selectedCategoryId = 0;
 
@@ -96,23 +96,26 @@ class _ProductsByCategoriesState extends State<ProductsByCategories>
     return DefaultTabController(
       length: data.categoriesData.length + 1,
       //INICIA COLUMNA
+
       child: Container(
         //color: Colors.amber.shade50,
         child: Column(
           children: [
             TabBar(
                 labelColor: Colors.orange[50],
-                labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                labelPadding: EdgeInsets.symmetric(horizontal: 20.0),
+                labelStyle:
+                    TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                labelPadding:
+                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 unselectedLabelColor: Colors.orange[200],
-                indicatorWeight: 3,
+                indicatorWeight: 20,
                 indicatorColor: Colors.orange[400],
                 indicator: BoxDecoration(
                     borderRadius: BorderRadius.only(
                         /* topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10)*/),
+                        topRight: Radius.circular(10)*/
+                        ),
                     color: Colors.orange.shade300),
-
                 controller: _cardController,
                 isScrollable: true,
                 tabs: List.generate(
@@ -122,17 +125,17 @@ class _ProductsByCategoriesState extends State<ProductsByCategories>
                           ? index == 0
                               ? Icon(Icons.list)
                               : Container(
-                                  width: 45.0,
-                                  height: 45.0,
-                                  padding: EdgeInsets.all(4.0),
+                                  width: 80.0,
+                                  height: 80.0,
+                                  margin: EdgeInsets.only(bottom: 10.0),
                                   child: CachedNetworkImage(
                                     imageUrl: ApiProvider.imageBaseUrl +
                                         data.categoriesData[index - 1].icon,
                                     fit: BoxFit.fill,
-                                    progressIndicatorBuilder:
-                                        (context, url, downloadProgress) =>
-                                            CircularProgressIndicator(
-                                                value: downloadProgress.progress),
+                                    progressIndicatorBuilder: (context, url,
+                                            downloadProgress) =>
+                                        CircularProgressIndicator(
+                                            value: downloadProgress.progress),
                                     errorWidget: (context, url, error) =>
                                         Icon(Icons.error),
                                   ),
@@ -140,11 +143,12 @@ class _ProductsByCategoriesState extends State<ProductsByCategories>
                           : null,
                       text: index == 0
                           ? "Todo".toUpperCase()
-                          : data.categoriesData[index - 1].categoriesName.toUpperCase()),
+                          : data.categoriesData[index - 1].categoriesName
+                              .toUpperCase()),
                 )),
+            SizedBox(height: 30.0),
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(10),
                 child: TabBarView(
                     controller: _cardController,
                     children:
@@ -160,7 +164,8 @@ class _ProductsByCategoriesState extends State<ProductsByCategories>
                       } else {
                         return Products(
                             "Nuevos",
-                            data.categoriesData[index - 1].categoriesId.toString(),
+                            data.categoriesData[index - 1].categoriesId
+                                .toString(),
                             false,
                             widget.isBottomBarVisible,
                             widget.isNextPageAutoLoad,
@@ -172,7 +177,6 @@ class _ProductsByCategoriesState extends State<ProductsByCategories>
           ],
         ),
       ),
-
 
       //Termina Columna
     );

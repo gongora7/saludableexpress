@@ -138,9 +138,9 @@ class _ProductsState extends State<Products>
   Widget buildGridView(ProductsResponse productsResponse) {
     int count;
     if (MediaQuery.of(context).orientation == Orientation.landscape)
-      count = 3;
-    else
       count = 2;
+    else
+      count = 1;
     if (productsResponse.productData.length != dataSize) {
       isPageLoading = false;
       dataSize = productsResponse.productData.length;
@@ -383,147 +383,157 @@ class _ProductsState extends State<Products>
                       ),
                     ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(6),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(product.productsName,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15)),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: (discount != null && discount != 0)
-                                      ? Row(
-                                          children: [
-                                            Text(
-                                              AppData.currencySymbol +
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10.0),
+                          bottomRight: Radius.circular(10.0)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(6),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(product.productsName,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Colors.grey[600],
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15)),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: (discount != null && discount != 0)
+                                        ? Row(
+                                            children: [
+                                              Text(
+                                                AppData.currencySymbol +
+                                                    double.parse(product
+                                                            .productsPrice
+                                                            .toString())
+                                                        .toStringAsFixed(2),
+                                                style: TextStyle(
+                                                    decoration: TextDecoration
+                                                        .lineThrough),
+                                              ),
+                                              SizedBox(width: 4),
+                                              Text(AppData.currencySymbol +
                                                   double.parse(product
-                                                          .productsPrice
+                                                          .discountPrice
                                                           .toString())
-                                                      .toStringAsFixed(2),
-                                              style: TextStyle(
-                                                  decoration: TextDecoration
-                                                      .lineThrough),
-                                            ),
-                                            SizedBox(width: 4),
-                                            Text(AppData.currencySymbol +
-                                                double.parse(product
-                                                        .discountPrice
-                                                        .toString())
-                                                    .toStringAsFixed(2)),
-                                          ],
-                                        )
-                                      : Text(AppData.currencySymbol +
-                                          double.parse(product.productsPrice
-                                                  .toString())
-                                              .toStringAsFixed(2)),
-                                ),
-                                GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        if (product.isLiked == "0")
-                                          _productsBloc.likeEventSink.add(
-                                              LikeProduct(product.productsId));
-                                        else
-                                          _productsBloc.likeEventSink.add(
-                                              UnlikeProduct(
-                                                  product.productsId));
-                                        product.isLiked =
-                                            (product.isLiked == "1")
-                                                ? "0"
-                                                : "1";
-                                      });
-                                      Scaffold.of(context)
-                                          .removeCurrentSnackBar();
-                                      Scaffold.of(context)
-                                          .showSnackBar(SnackBar(
-                                        content: Text("Liked"),
-                                      ));
-                                    },
-                                    child: IconTheme(
-                                        data: IconThemeData(
-                                            color:
-                                                Theme.of(context).primaryColor),
-                                        child: Icon((product.isLiked == "1")
-                                            ? Icons.favorite
-                                            : Icons.favorite_border))),
-                              ],
-                            )
-                          ],
+                                                      .toStringAsFixed(2)),
+                                            ],
+                                          )
+                                        : Text(AppData.currencySymbol +
+                                            double.parse(product.productsPrice
+                                                    .toString())
+                                                .toStringAsFixed(2)),
+                                  ),
+                                  GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          if (product.isLiked == "0")
+                                            _productsBloc.likeEventSink.add(
+                                                LikeProduct(
+                                                    product.productsId));
+                                          else
+                                            _productsBloc.likeEventSink.add(
+                                                UnlikeProduct(
+                                                    product.productsId));
+                                          product.isLiked =
+                                              (product.isLiked == "1")
+                                                  ? "0"
+                                                  : "1";
+                                        });
+                                        Scaffold.of(context)
+                                            .removeCurrentSnackBar();
+                                        Scaffold.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text("Liked"),
+                                        ));
+                                      },
+                                      child: IconTheme(
+                                          data: IconThemeData(
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          child: Icon((product.isLiked == "1")
+                                              ? Icons.favorite
+                                              : Icons.favorite_border))),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        child: FlatButton(
-                            onPressed: () {
-                              if (widget.type == "wishlist") {
-                                setState(() {
-                                  _productsBloc.likeEventSink
-                                      .add(UnlikeProduct(product.productsId));
-                                });
-                                //Scaffold.of(context).showSnackBar(SnackBar(content: Text("Removed")));
-                                return;
-                              }
-                              if (product.productsType != 0) {
-                                _toProductDetailPage(product);
-                              } else {
-                                if (product.defaultStock > 0) {
-                                  Map<dynamic, dynamic> raw = _box.toMap();
-                                  List cartItems = raw.values.toList();
-
-                                  for (int i = 0; i < cartItems.length; i++) {
-                                    CartEntry entry = cartItems[i];
-                                    if (entry.id == product.productsId) {
-                                      entry.quantity++;
-                                      _box.putAt(i, entry);
-                                      return;
-                                    }
-                                  }
-
-                                  CartEntry cartEntry = CartEntry();
-                                  cartEntry.id = product.productsId;
-                                  cartEntry.quantity = 1;
-                                  cartEntry.attributes = "[]";
-                                  _box.add(cartEntry);
-                                  Scaffold.of(context).removeCurrentSnackBar();
-                                  Scaffold.of(context).showSnackBar(SnackBar(
-                                    content:
-                                        Text("Producto Agregado al carrito"),
-                                  ));
-                                } else {
-                                  Scaffold.of(context).removeCurrentSnackBar();
-                                  Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text("Fuera de Stock"),
-                                  ));
+                        Container(
+                          child: FlatButton(
+                              onPressed: () {
+                                if (widget.type == "wishlist") {
+                                  setState(() {
+                                    _productsBloc.likeEventSink
+                                        .add(UnlikeProduct(product.productsId));
+                                  });
+                                  //Scaffold.of(context).showSnackBar(SnackBar(content: Text("Removed")));
+                                  return;
                                 }
-                              }
-                            },
-                            color: (product.defaultStock <= 0 &&
-                                    product.productsType == 0)
-                                ? Colors.orangeAccent[400]
-                                : Colors.greenAccent[400],
-                            child: Text(
-                              (widget.type == "wishlist")
-                                  ? "Eliminar"
-                                  : (product.productsType != 0)
-                                      ? "Ver Producto"
-                                      : (product.defaultStock > 0)
-                                          ? "Agregar a Carrito"
-                                          : "Fuera de Stock",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap),
-                        width: double.infinity,
-                      ),
-                    ],
+                                if (product.productsType != 0) {
+                                  _toProductDetailPage(product);
+                                } else {
+                                  if (product.defaultStock > 0) {
+                                    Map<dynamic, dynamic> raw = _box.toMap();
+                                    List cartItems = raw.values.toList();
+
+                                    for (int i = 0; i < cartItems.length; i++) {
+                                      CartEntry entry = cartItems[i];
+                                      if (entry.id == product.productsId) {
+                                        entry.quantity++;
+                                        _box.putAt(i, entry);
+                                        return;
+                                      }
+                                    }
+
+                                    CartEntry cartEntry = CartEntry();
+                                    cartEntry.id = product.productsId;
+                                    cartEntry.quantity = 1;
+                                    cartEntry.attributes = "[]";
+                                    _box.add(cartEntry);
+                                    Scaffold.of(context)
+                                        .removeCurrentSnackBar();
+                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text(
+                                          "El producto se agregó al carrito"),
+                                    ));
+                                  } else {
+                                    Scaffold.of(context)
+                                        .removeCurrentSnackBar();
+                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text("Sin Stock"),
+                                    ));
+                                  }
+                                }
+                              },
+                              color: (product.defaultStock <= 0 &&
+                                      product.productsType == 0)
+                                  ? Color.fromRGBO(224, 49, 51, 1.0)
+                                  : Color.fromRGBO(90, 0, 132, 1.0),
+                              child: Text(
+                                (widget.type == "wishlist")
+                                    ? "Eliminar"
+                                    : (product.productsType != 0)
+                                        ? "Ver Producto"
+                                        : (product.defaultStock > 0)
+                                            ? "Agregado a bolsa"
+                                            : "Sin Stock",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap),
+                          width: double.infinity,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -748,7 +758,8 @@ class _ProductsState extends State<Products>
                                   _box.add(cartEntry);
                                   Scaffold.of(context).removeCurrentSnackBar();
                                   Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text("Product Added to Cart"),
+                                    content: Text(
+                                        "El producto se agregó al carrito"),
                                   ));
                                 } else {
                                   Scaffold.of(context).removeCurrentSnackBar();
@@ -768,8 +779,8 @@ class _ProductsState extends State<Products>
                                   : (product.productsType != 0)
                                       ? "Ver Producto"
                                       : (product.defaultStock > 0)
-                                          ? "Agregar a Carrito"
-                                          : "Fuera de Stock",
+                                          ? "Agregar a bolsa"
+                                          : "Sin Stock",
                               style: TextStyle(color: Colors.white),
                             ),
                             materialTapTargetSize:

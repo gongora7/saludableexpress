@@ -85,8 +85,10 @@ class _HomePage2State extends State<HomePage2> {
                   })),
         ];
       },
-      body: ProductsByCategories(
-          0, "Newest", false, false, true, _toProductDetailPage),
+      body: Container(
+        child: ProductsByCategories(
+            0, "Newest", false, false, true, _toProductDetailPage),
+      ),
     );
   }
 }

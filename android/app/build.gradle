@@ -49,11 +49,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
-def keystoreProperties = new Properties()
+ def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
+} 
 
 android {
 
@@ -79,7 +79,8 @@ android {
     }
 
     signingConfigs {
-        release {
+       
+       release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
             storeFile file(keystoreProperties['storeFile'])
@@ -87,7 +88,8 @@ android {
         }
     }
     buildTypes {
-        release {
+        
+      release {
             signingConfig signingConfigs.release
 
             minifyEnabled true
@@ -95,7 +97,7 @@ android {
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-        }
+        } 
     }
 
 }

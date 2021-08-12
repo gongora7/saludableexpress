@@ -98,7 +98,7 @@ class _HomePage7State extends State<HomePage7> {
                     child: FittedBox(
                       fit: BoxFit.cover,
                       child: Text(
-                        "-  CATÁLOGO SALUDABLE  -".toUpperCase(),
+                        "-  NUEVOS PRODUCTOS -".toUpperCase(),
                         style: TextStyle(
                           fontSize: 32,
                           backgroundColor: Colors.pinkAccent[100],

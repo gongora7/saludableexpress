@@ -16,7 +16,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:icon="@mipmap/ic_launcher"
-        android:label="Easy Store Demo"
+        android:label="Easy Store"
         tools:replace="android:label">
         <activity
             android:name=".MainActivity"

@@ -304,7 +304,7 @@ class _CartState extends State<Cart> {
                         color: Colors.greenAccent[500],
                         height: 50.0,
                         child: Text(
-                          "Ver más productos saludables",
+                          "Ver todo",
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () {

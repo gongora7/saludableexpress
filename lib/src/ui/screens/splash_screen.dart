@@ -49,50 +49,42 @@ class ScreenUi extends StatelessWidget {
     return new WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-       
         body: Container(
           decoration: BoxDecoration(
-            
             image: DecorationImage(
               image: AssetImage("assets/images/bgsplash.jpg"),
               fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(Colors.orangeAccent.withOpacity(0.6), BlendMode.darken),
-             ),
+              colorFilter: ColorFilter.mode(
+                  Colors.redAccent.withOpacity(0.6), BlendMode.darken),
+            ),
           ),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Align(
             alignment: Alignment.bottomLeft,
-             child: Center(
+            child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                 
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                    
                       children: [
-                        
-                       
-                            SizedBox(
-                            width: 120.0,
-                            height: 120.0,
-                            
-                            child: Positioned(
-                              top: 50.0,
-                              child: Image.asset(
-                                
-                                "assets/images/logose.png",
-                                fit: BoxFit.fill,
-                                
-                              ),
+                        SizedBox(
+                          width: 120.0,
+                          height: 120.0,
+                          child: Positioned(
+                            top: 50.0,
+                            child: Image.asset(
+                              "assets/images/logose.png",
+                              fit: BoxFit.fill,
                             ),
                           ),
-                        
-                       /* Text(
+                        ),
+
+                        /* Text(
                           "Ecom Plus",
                           style: TextStyle(color: Colors.white, fontSize: 35),
                         ),*/
@@ -106,7 +98,7 @@ class ScreenUi extends StatelessWidget {
                           padding: EdgeInsets.only(bottom: 25),
                           child: CircularProgressIndicator(),
                         ),
-                       /* Padding(
+                        /* Padding(
                           padding: EdgeInsets.only(bottom: 50),
                           child: Text("By Touch Online"),
                         ),*/

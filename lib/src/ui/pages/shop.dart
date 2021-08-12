@@ -8,19 +8,21 @@ class Shop extends StatelessWidget {
   bool isHeaderVisible;
   int selectedCategoryId = 0;
 
-  Shop(this.selectedCategoryId, this.productsType, this.isHeaderVisible, this._toProductDetailPage);
+  Shop(this.selectedCategoryId, this.productsType, this.isHeaderVisible,
+      this._toProductDetailPage);
 
   @override
   Widget build(BuildContext context) {
     return isHeaderVisible
         ? Scaffold(
-          appBar: AppBar(
-              title: Text("Catálogo Saludable"),
+            appBar: AppBar(
+              title: Text("Nuevos Productos"),
             ),
             body: buildUI(),
           )
         : buildUI();
   }
 
-  Widget buildUI() => ProductsByCategories(selectedCategoryId, productsType, true, true, false, _toProductDetailPage);
+  Widget buildUI() => ProductsByCategories(selectedCategoryId, productsType,
+      true, true, false, _toProductDetailPage);
 }

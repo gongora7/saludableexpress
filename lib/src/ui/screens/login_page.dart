@@ -23,12 +23,19 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bienvenido"),
+        backgroundColor: Color.fromRGBO(90, 0, 132, 1),
+        title: Text("Inicia Sesión"),
       ),
       body: Container(
+        padding: EdgeInsets.all(40.0),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: new AssetImage("assets/images/bglogin.png"))),
         child: SingleChildScrollView(
           child: Container(
             width: double.maxFinite,
+            height: double.maxFinite,
             margin: EdgeInsets.all(20.0),
             child: Column(
               children: [
@@ -36,19 +43,30 @@ class _LoginState extends State<Login> {
                     width: 130.0,
                     height: 130.0,
                     decoration: new BoxDecoration(
+                        borderRadius: BorderRadius.circular(80),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.white.withOpacity(0.6),
+                            spreadRadius: 5,
+                            blurRadius: 10,
+                            offset: Offset(0, 5),
+                          )
+                        ],
                         shape: BoxShape.rectangle,
                         image: new DecorationImage(
                             fit: BoxFit.fill,
-                            image: new NetworkImage(
+                            image: AssetImage("assets/images/logoes.png")
+                            /* image: new NetworkImage(
                               "https://store.saludableexpress.com/images/media/2021/06/thumbnail1622601274NjCig02302.png",
-                            )))),
+                            )*/
+                            ))),
                 SizedBox(height: 16.0),
                 /* Text(
-                  "Bienvenido a tu vida saludable",
+                  "Bienvenido a Easy Store",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
                 ),*/
                 SizedBox(
-                  height: 16.0,
+                  height: 80.0,
                 ),
                 MyCustomForm(),
               ],
@@ -99,26 +117,26 @@ class MyCustomFormState extends State<MyCustomForm> {
     return Form(
       key: _formKey,
       child: Container(
-        padding: EdgeInsets.all(60.0),
+        /* padding: EdgeInsets.all(30.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4.0),
             boxShadow: [
-              BoxShadow(
-                color: Colors.lightGreen.withOpacity(0.5),
+              /*   BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 4,
                 blurRadius: 4,
                 offset: Offset(0, 0),
-              )
+              )*/
             ],
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color.fromRGBO(102, 174, 39, 0.2),
-                const Color.fromRGBO(178, 239, 120, 0.4),
-                const Color.fromRGBO(24, 167, 120, 0.7)
+                const Color.fromRGBO(255, 255, 255, 0.2),
+                const Color.fromRGBO(255, 255, 255, 0.4),
+                const Color.fromRGBO(255, 255, 255, 0.7)
               ],
-            )),
+            )),*/
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,20 +144,26 @@ class MyCustomFormState extends State<MyCustomForm> {
             TextFormField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
+              style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    borderSide:
+                        BorderSide(color: Color.fromRGBO(224, 49, 51, 1))),
                 prefixIcon: Padding(
                   padding: EdgeInsets.all(1),
-                  child: Icon(Icons.email),
+                  child: Icon(Icons.email, color: Colors.white),
                 ),
                 hintText: 'Email',
-                hintStyle: TextStyle(color: Colors.black45),
-                fillColor: Colors.black87,
-                contentPadding: EdgeInsets.all(10.0),
+                focusColor: Colors.white,
+                hintStyle: TextStyle(color: Colors.white),
+                fillColor: Colors.white,
+                labelStyle: TextStyle(color: Colors.white),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
                 enabledBorder: new OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(2.0),
-                  borderSide: new BorderSide(
-                    color: Colors.black45,
-                  ),
+                  borderRadius: new BorderRadius.circular(8.0),
+                  borderSide: new BorderSide(color: Colors.white),
                 ),
               ),
               validator: (value) {
@@ -155,20 +179,27 @@ class MyCustomFormState extends State<MyCustomForm> {
             TextFormField(
               controller: _passwordController,
               obscureText: true,
+              style: TextStyle(color: Colors.white),
               enableSuggestions: false,
               autocorrect: false,
               decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    borderSide:
+                        BorderSide(color: Color.fromRGBO(224, 49, 51, 1))),
                 prefixIcon: Padding(
                   padding: EdgeInsets.all(1),
-                  child: Icon(Icons.security),
+                  child: Icon(Icons.security, color: Colors.white),
                 ),
                 hintText: 'Password',
-                hintStyle: TextStyle(color: Colors.black45),
-                fillColor: Colors.black87,
-                contentPadding: EdgeInsets.all(10.0),
+                hintStyle: TextStyle(color: Colors.white),
+                fillColor: Colors.white,
+                labelStyle: TextStyle(color: Colors.white),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
                 enabledBorder: new OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(2.0),
-                  borderSide: new BorderSide(color: Colors.black45),
+                  borderRadius: new BorderRadius.circular(8.0),
+                  borderSide: new BorderSide(color: Colors.white),
                 ),
               ),
               validator: (value) {
@@ -178,6 +209,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                 return null;
               },
             ),
+            SizedBox(
+              height: 24.0,
+            ),
             Container(
               alignment: Alignment.centerRight,
               child: FlatButton(
@@ -186,7 +220,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 },
                 child: Text(
                   "¿Olvidaste tu Password?",
-                  style: TextStyle(color: Colors.black45),
+                  style: TextStyle(color: Colors.white, fontSize: 16.0),
                 ),
               ),
             ),
@@ -194,11 +228,11 @@ class MyCustomFormState extends State<MyCustomForm> {
               builder: (context, state) {
                 return Container(
                   width: double.maxFinite,
-                  height: 40.0,
+                  height: 60.0,
                   child: FlatButton(
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(2.0)),
-                      color: Colors.white60,
+                          borderRadius: BorderRadius.circular(8.0)),
+                      color: Colors.white,
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
                           loginBloc.add(ProcessLogin(
@@ -208,7 +242,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                       child: Text(
                         "Entrar",
                         style: TextStyle(
-                            color: Colors.black45, fontWeight: FontWeight.w700),
+                            color: Colors.black45,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18.0),
                       )),
                 );
               },
@@ -253,7 +289,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               },
             ),
             SizedBox(
-              height: 16.0,
+              height: 24.0,
             ),
             Row(
               children: [
@@ -262,30 +298,31 @@ class MyCustomFormState extends State<MyCustomForm> {
                         height: 1,
                         child: DecoratedBox(
                             decoration: BoxDecoration(
-                          color: Colors.black45,
+                          color: Colors.white,
                         )))),
                 Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Text(
                       "o también:",
-                      style: TextStyle(color: Colors.black45),
+                      style: TextStyle(color: Colors.white),
                     )),
                 Expanded(
                     child: SizedBox(
                         height: 1,
                         child: DecoratedBox(
                             decoration: BoxDecoration(
-                          color: Colors.black45,
+                          color: Colors.white,
                         )))),
               ],
             ),
             SizedBox(
-              height: 16.0,
+              height: 24.0,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
+                  iconSize: 50,
                   icon: Image.asset(
                     "assets/images/login_with_google.png",
                     fit: BoxFit.fill,
@@ -298,6 +335,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   width: 8.0,
                 ),
                 IconButton(
+                  iconSize: 50,
                   icon: Image.asset(
                     "assets/images/login_with_fb.png",
                     fit: BoxFit.fill,
@@ -324,7 +362,8 @@ class MyCustomFormState extends State<MyCustomForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("No tienes una cuenta?"),
+                Text("No tienes una cuenta?",
+                    style: TextStyle(color: Colors.white, fontSize: 16.0)),
                 TextButton(
                   onPressed: () {
                     Navigator.push(context,
@@ -332,7 +371,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   },
                   child: Text(
                     "Regístrate",
-                    style: TextStyle(color: Colors.black87),
+                    style: TextStyle(color: Colors.white, fontSize: 16.0),
                   ),
                 ),
               ],
@@ -362,7 +401,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   children: [
                     Text(
                       "¿Olvidaste tu Password?",
-                      style: TextStyle(fontSize: 16, color: Colors.black45),
+                      style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                     Expanded(
                       child: SizedBox(
@@ -374,7 +413,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: 'Email',
-                        fillColor: Colors.black87,
+                        fillColor: Colors.white,
                         contentPadding: EdgeInsets.all(8.0),
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(16.0),

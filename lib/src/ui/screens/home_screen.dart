@@ -51,8 +51,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
-  //String navigationStyle = "both";
-  String navigationStyle = "side";
+  String navigationStyle = "both";
+  //String navigationStyle = "side";
   Box _box;
   Box _userBox;
 
@@ -177,11 +177,14 @@ class _HomeState extends State<Home> {
                     ? null
                     : Theme(
                         data: Theme.of(context).copyWith(
-                            canvasColor: Theme.of(context).primaryColor,
+                            // canvasColor: Theme.of(context).primaryColor,
+                            canvasColor: Colors.white,
                             primaryColor: Colors.white,
                             textTheme: Theme.of(context).textTheme.copyWith(
                                 caption: TextStyle(color: Colors.white70))),
                         child: BottomNavigationBar(
+                          selectedItemColor: Colors.redAccent,
+                          unselectedItemColor: Colors.grey,
                           type: BottomNavigationBarType.fixed,
                           currentIndex: _selectedIndex,
                           onTap: (value) {
@@ -189,19 +192,22 @@ class _HomeState extends State<Home> {
                           },
                           items: [
                             BottomNavigationBarItem(
-                              label: "Inicio",
+                              label: "Home",
                               icon: Icon(Icons.home_rounded),
-                              activeIcon: Icon(Icons.home_outlined),
+                              activeIcon: Icon(Icons.home_filled,
+                                  color: Color.fromRGBO(224, 49, 51, 1)),
                             ),
                             BottomNavigationBarItem(
                               label: "Categorías",
                               icon: Icon(Icons.card_travel_outlined),
-                              activeIcon: Icon(Icons.card_travel_rounded),
+                              activeIcon: Icon(Icons.card_travel_sharp,
+                                  color: Color.fromRGBO(224, 49, 51, 1)),
                             ),
                             BottomNavigationBarItem(
                               label: "Tienda",
                               icon: Icon(Icons.shop_outlined),
-                              activeIcon: Icon(Icons.shop_rounded),
+                              activeIcon: Icon(Icons.shop_sharp,
+                                  color: Color.fromRGBO(224, 49, 51, 1)),
                             ),
                             /* BottomNavigationBarItem(
                             label: "News",
@@ -690,8 +696,9 @@ class _HomeState extends State<Home> {
 
   AppBar getAppBar(BuildContext context) {
     return AppBar(
+      backgroundColor: Color.fromRGBO(90, 0, 132, 1),
       //title: Text(AppLocalizations.of(context).translate('appname')),
-      title: Text('Saludable Express'),
+      title: Text('Easy Store'),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search),
