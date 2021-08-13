@@ -10,12 +10,15 @@ CuponResponse cuponResponseFromJson(String str) =>
 String cuponResponseToJson(CuponResponse data) => json.encode(data.toJson());
 
 class CuponResponse {
+  CuponResponse({
+    this.success,
+    this.data,
+    this.message,
+  });
+
   String success;
   List<Datum> data;
   String message;
-  int error;
-
-  CuponResponse({this.success, this.data, this.message, this.error});
 
   factory CuponResponse.fromJson(Map<String, dynamic> json) => CuponResponse(
         success: json["success"],
@@ -59,31 +62,31 @@ class Datum {
     this.updatedAt,
   });
 
-  String coupansId;
+  int coupansId;
   String code;
-  String dateCreated;
-  String dateModified;
+  dynamic dateCreated;
+  dynamic dateModified;
   String description;
   String discountType;
-  String amount;
+  int amount;
   DateTime expiryDate;
-  String usageCount;
-  String individualUse;
+  int usageCount;
+  int individualUse;
   List<dynamic> productIds;
   List<dynamic> excludeProductIds;
-  String usageLimit;
-  String usageLimitPerUser;
-  String limitUsageToXItems;
-  String freeShipping;
+  dynamic usageLimit;
+  dynamic usageLimitPerUser;
+  int limitUsageToXItems;
+  int freeShipping;
   List<dynamic> productCategories;
   List<dynamic> excludedProductCategories;
-  String excludeSaleItems;
+  int excludeSaleItems;
   String minimumAmount;
   String maximumAmount;
   List<dynamic> emailRestrictions;
   List<dynamic> usedBy;
   DateTime createdAt;
-  String updatedAt;
+  dynamic updatedAt;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         coupansId: json["coupans_id"],

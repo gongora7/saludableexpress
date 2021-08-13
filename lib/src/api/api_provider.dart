@@ -483,7 +483,7 @@ class ApiProvider {
       return cuponResponseFromJson(response.data);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-      return CuponResponse(error: 1);
+      return CuponResponse(success: "0");
     }
   }
 }

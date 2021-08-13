@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,6 @@ class Checkout extends StatefulWidget {
   ShippingService shippingService;
   double totalPrice;
   CreditCard cardPayment;
-  String codeCupon;
 
   Checkout({
     this.cartEntries,
@@ -51,7 +51,6 @@ class Checkout extends StatefulWidget {
     this.shippingService,
     this.totalPrice,
     this.cardPayment,
-    this.codeCupon,
   });
 
   @override
@@ -66,6 +65,7 @@ class _CheckoutState extends State<Checkout> {
   double subtotalPrice = 0.0;
   double discountPrice = 0.0;
   double totalPrice = 0.0;
+  int percetnDesc = 0;
 
   Box _box;
 
@@ -416,9 +416,24 @@ class _CheckoutState extends State<Checkout> {
                   Expanded(
                     flex: 2,
                     child: TextFormField(
+                      enabled: discountPrice != 0.00 ? false : null,
                       controller: cuponField,
                       decoration: InputDecoration(
-                        labelText: 'Ingresa tu cupón',
+                        enabledBorder: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(8.0),
+                          borderSide: new BorderSide(
+                            color: Colors.orange,
+                          ),
+                        ),
+                        disabledBorder: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(8.0),
+                          borderSide: new BorderSide(
+                            color: Colors.green,
+                          ),
+                        ),
+                        labelText: discountPrice != 0.00
+                            ? 'Cupón aplicado'
+                            : 'Ingresa tu cupón',
                         labelStyle: TextStyle(color: Colors.black),
                         fillColor: Colors.white,
                         contentPadding: EdgeInsets.all(8.0),
@@ -451,12 +466,29 @@ class _CheckoutState extends State<Checkout> {
                           "Canjear",
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () async {
-                          final resDescuento =
-                              RealCuponDescRepo().getDescuento(cuponField.text);
+                        onPressed: discountPrice != 0.00
+                            ? null
+                            : () async {
+                                FocusScope.of(context).unfocus();
+                                final resDescuento = await RealCuponDescRepo()
+                                    .getDescuento(cuponField.text);
 
-                          SnackBar(content: Text('Error al aplicar el cupón'));
-                        }),
+                                if (resDescuento.success != "0") {
+                                  if (resDescuento.data[0].discountType ==
+                                      "percent") {
+                                    percetnDesc = resDescuento.data[0].amount;
+                                  } else {
+                                    discountPrice =
+                                        resDescuento.data[0].amount.toDouble();
+                                  }
+                                  setState(() {});
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              'Error al aplicar el cupón')));
+                                }
+                              }),
                   ),
                 ],
               )
@@ -469,7 +501,7 @@ class _CheckoutState extends State<Checkout> {
 
   Widget buildProductsList(List<Product> products, List list) {
     subtotalPrice = 0.0;
-    discountPrice = 0.0;
+    discountPrice = discountPrice;
     totalPrice = 0.0;
 
     for (int i = 0; i < products.length; i++) {
@@ -504,8 +536,16 @@ class _CheckoutState extends State<Checkout> {
       }
     }
 
-    totalPrice += (double.parse(widget.shippingTax) +
-        double.parse(widget.shippingService.rate.toString()));
+    if (percetnDesc == 0) {
+      totalPrice += (double.parse(widget.shippingTax) +
+          double.parse(widget.shippingService.rate.toString()) -
+          discountPrice);
+    } else {
+      discountPrice = (percetnDesc * totalPrice) / 100;
+      totalPrice += (double.parse(widget.shippingTax) +
+          double.parse(widget.shippingService.rate.toString()) -
+          discountPrice);
+    }
 
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),

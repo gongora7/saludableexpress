@@ -9,7 +9,7 @@ class RealCuponDescRepo extends CuponDescRepo {
   ApiProvider _apiProvider = ApiProvider();
 
   @override
-  Future<CuponResponse> getDescuento(String cupon) {
-    return _apiProvider.getDescuento(cupon);
+  Future<CuponResponse> getDescuento(String cupon) async {
+    return await _apiProvider.getDescuento(cupon);
   }
 }
