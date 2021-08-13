@@ -17,21 +17,23 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     if (event is PlaceOrder) {
       yield PlaceOrderLoading();
       try {
-        final stripeService = new StripeService();
-        final resp = await stripeService.realizarPago(
-          cardNumber: AppData.tarjetaCredito.cardNumber,
-          expMonth: "${AppData.tarjetaCredito.expiracyMonth}",
-          expYear: "${AppData.tarjetaCredito.expiracyYear}",
-          cvv: AppData.tarjetaCredito.cvv,
-          amount: '${(event.postOrder.totalPrice * 100).floor()}',
-          currency: event.postOrder.currency_code,
-        );
-        if (resp.status == "succeeded") {
-          event.postOrder.payment_sripe = "1";
-        } else {
-          event.postOrder.payment_sripe = "0";
+        if (event.postOrder.payment_method == "stripe") {
+          final stripeService = new StripeService();
+          final resp = await stripeService.realizarPago(
+            cardNumber: AppData.tarjetaCredito.cardNumber,
+            expMonth: "${AppData.tarjetaCredito.expiracyMonth}",
+            expYear: "${AppData.tarjetaCredito.expiracyYear}",
+            cvv: AppData.tarjetaCredito.cvv,
+            amount: '${(event.postOrder.totalPrice * 100).floor()}',
+            currency: event.postOrder.currency_code,
+          );
+          if (resp.status == "succeeded") {
+            event.postOrder.payment_sripe = "1";
+          } else {
+            event.postOrder.payment_sripe = "0";
+          }
         }
-        //Realiza pago block
+//Realiza pago block
         final addToOrderResponse =
             await checkoutRepo.placeOrder(event.postOrder);
         AppData.tarjetaCredito = null;

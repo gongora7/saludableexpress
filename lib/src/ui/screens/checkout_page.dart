@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/src/models/checkout/coupon.dart';
+import 'package:flutter_app1/src/models/cupon_response.dart';
 import 'package:flutter_app1/src/models/stripe/tarjeta_credito.dart';
 import 'package:flutter_app1/src/repositories/checkout_repo.dart';
 import 'package:flutter_app1/src/repositories/cupon_desc_repo.dart';
@@ -66,6 +68,7 @@ class _CheckoutState extends State<Checkout> {
   double discountPrice = 0.0;
   double totalPrice = 0.0;
   int percetnDesc = 0;
+  CuponResponse resDescuento;
 
   Box _box;
 
@@ -160,6 +163,8 @@ class _CheckoutState extends State<Checkout> {
                               }
                             }
                           } else if (state is PlaceOrderError) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('No se realizo el pago')));
                             Navigator.pop(context);
                           }
                         },
@@ -470,7 +475,7 @@ class _CheckoutState extends State<Checkout> {
                             ? null
                             : () async {
                                 FocusScope.of(context).unfocus();
-                                final resDescuento = await RealCuponDescRepo()
+                                resDescuento = await RealCuponDescRepo()
                                     .getDescuento(cuponField.text);
 
                                 if (resDescuento.success != "0") {
@@ -931,15 +936,23 @@ class _CheckoutState extends State<Checkout> {
 
     postOrder.comments = "";
 
-    postOrder.is_coupon_applied = "0";
-    postOrder.coupon_amount = "";
+    if (discountPrice == 0.00) {
+      postOrder.is_coupon_applied = 0;
+      postOrder.coupon_amount = "";
+    } else {
+      List<Datum> coupons = [resDescuento.data[0]];
+      postOrder.coupons = coupons;
+      postOrder.is_coupon_applied = 1;
+      postOrder.coupon_amount = "$discountPrice";
+    }
+
     //postOrder.coupons = "";
 
     postOrder.nonce = paymentMethodNonce;
     postOrder.payment_method = selectedPaymentMethod.paymentMethod;
 
     postOrder.productsTotal = subtotalPrice;
-    postOrder.totalPrice = totalPrice;
+    postOrder.totalPrice = totalPrice + discountPrice;
     postOrder.products =
         getPostProductList(widget.cartProducts, widget.cartEntries);
 

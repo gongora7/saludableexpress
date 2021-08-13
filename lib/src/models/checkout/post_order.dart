@@ -1,4 +1,5 @@
 import 'package:flutter_app1/src/models/checkout/post_product.dart';
+import 'package:flutter_app1/src/models/cupon_response.dart';
 
 import 'coupon.dart';
 
@@ -17,7 +18,7 @@ class PostOrder {
   String billing_zone_id;
   String comments;
   var coupon_amount;
-  List<Coupon> coupons;
+  List<Datum> coupons;
   String email;
   String customers_id;
   String customers_name;
@@ -36,7 +37,7 @@ class PostOrder {
   String delivery_zone_id;
   String delivery_cost;
   String delivery_time;
-  String is_coupon_applied;
+  int is_coupon_applied;
   String language_id;
   String latitude;
   String longitude;
@@ -124,9 +125,9 @@ class PostOrder {
     comments = json['comments'];
     coupon_amount = json['coupon_amount'];
     if (json['coupons'] != null) {
-      coupons = new List<Coupon>();
+      coupons = new List<Datum>();
       json['coupons'].forEach((v) {
-        coupons.add(new Coupon.fromJson(v));
+        coupons.add(new Datum.fromJson(v));
       });
     }
     email = json['email'];
@@ -188,9 +189,9 @@ class PostOrder {
     data['billing_zone_id'] = this.billing_zone_id;
     data['comments'] = this.comments;
     data['coupon_amount'] = this.coupon_amount;
-    if (this.coupons != null) {
-      data['coupons'] = this.coupons.map((e) => e.tojson()).toList();
-    }
+    // if (this.coupons != null) {
+    //   data['coupons'] = this.coupons.map((e) => e.tojson()).toList();
+    // }
     data['email'] = this.email;
     data['customers_id'] = this.customers_id;
     data['customers_name'] = this.customers_name;
