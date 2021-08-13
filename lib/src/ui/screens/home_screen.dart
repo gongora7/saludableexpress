@@ -109,9 +109,9 @@ class _HomeState extends State<Home> {
       //DrawerMenuItem("My Account", Icons.person),
       DrawerMenuItem("Mis Pedidos", Icons.assignment_sharp),
       DrawerMenuItem("Mis Direcciones", Icons.location_city),
-      /* DrawerMenuItem("My Favorites", Icons.favorite),
+      DrawerMenuItem("Mis Deseos", Icons.favorite),
 
-      DrawerMenuItem("Intro", Icons.integration_instructions),
+      /*  DrawerMenuItem("Intro", Icons.integration_instructions),
       DrawerMenuItem("News", Icons.web),
       DrawerMenuItem("Contact Us", Icons.message),
       DrawerMenuItem("About", Icons.info),
@@ -229,7 +229,7 @@ class _HomeState extends State<Home> {
   Widget buildDrawer() {
     return Drawer(
       child: ListView.builder(
-        padding: const EdgeInsets.all(0.0),
+        padding: EdgeInsets.zero,
         itemCount: AppData.data.length == 0 ? 1 : AppData.data.length + 1,
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) {
@@ -261,66 +261,71 @@ class _HomeState extends State<Home> {
           ),
           child: Stack(children: [
             DrawerHeader(
-              child: Row(
-                children: [
-                  new Container(
-                    width: 80.0,
-                    height: 80.0,
-                    decoration: new BoxDecoration(shape: BoxShape.circle),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50.0),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            "http://store.saludableexpress.com/images/media/2021/06/thumbnail1624495981v19jV23507.png",
-                        fit: BoxFit.fill,
-                        progressIndicatorBuilder:
-                            (context, url, downloadProgress) =>
-                                CircularProgressIndicator(
-                                    value: downloadProgress.progress),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+              child: Container(
+                child: Row(
+                  children: [
+                    new Container(
+                      width: 80.0,
+                      height: 80.0,
+                      decoration: new BoxDecoration(shape: BoxShape.circle),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(50.0),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              "http://store.saludableexpress.com/images/media/2021/06/thumbnail1624495981v19jV23507.png",
+                          fit: BoxFit.fill,
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) =>
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 14,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          (AppData.user != null)
-                              ? "Bienvenido " + AppData.user.firstName != null
-                                  ? AppData.user.firstName
-                                  : "" + " " + AppData.user.lastName != null
-                                      ? AppData.user.lastName
-                                      : ""
-                              : "Login & Registro",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          (AppData.user != null)
-                              ? AppData.user.email != null
-                                  ? AppData.user.email
-                                  : "" + "\n" + AppData.user.phone != null
-                                      ? AppData.user.phone
-                                      : ""
-                              : "Inicia Sesión ó crea una cuenta",
-                          style: new TextStyle(
-                              fontSize: 14.0,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.italic),
-                        ),
-                      ],
+                    SizedBox(
+                      width: 14,
                     ),
-                  )
-                ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            (AppData.user != null)
+                                ? "Bienvenido " + AppData.user.firstName != null
+                                    ? AppData.user.firstName
+                                    : "" + " " + AppData.user.lastName != null
+                                        ? AppData.user.lastName
+                                        : ""
+                                : "Login & Registro",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            (AppData.user != null)
+                                ? AppData.user.email != null
+                                    ? AppData.user.email
+                                    : "" + "\n" + AppData.user.phone != null
+                                        ? AppData.user.phone
+                                        : ""
+                                : "Inicia Sesión ó crea una cuenta",
+                            style: new TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             /* SafeArea(
@@ -432,7 +437,7 @@ class _HomeState extends State<Home> {
   Widget _buildTiles(DrawerMenuItem root) {
     if (root.children.isEmpty) {
       return ListTile(
-        leading: Icon(root.iconData, size: 30, color: Colors.orange.shade500),
+        leading: Icon(root.iconData, size: 30, color: Colors.red.shade500),
         title: Text(
           root.title.toUpperCase(),
           style: TextStyle(fontSize: 16),
@@ -698,7 +703,8 @@ class _HomeState extends State<Home> {
     return AppBar(
       backgroundColor: Color.fromRGBO(90, 0, 132, 1),
       //title: Text(AppLocalizations.of(context).translate('appname')),
-      title: Text('Easy Store'),
+      title:
+          Text('Easy Store', style: TextStyle(fontFamily: 'Montserrat-bold')),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search),

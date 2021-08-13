@@ -102,20 +102,22 @@ class _ProductsByCategoriesState extends State<ProductsByCategories>
         child: Column(
           children: [
             TabBar(
-                labelColor: Colors.orange[50],
-                labelStyle:
-                    TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                labelColor: Colors.grey.shade200,
+                labelStyle: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20,
+                    fontStyle: FontStyle.italic,
+                    fontFamily: 'Montserrat-regular'),
                 labelPadding:
                     EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                unselectedLabelColor: Colors.orange[200],
+                unselectedLabelColor: Colors.black12,
                 indicatorWeight: 20,
-                indicatorColor: Colors.orange[400],
+                indicatorColor: Colors.red[400],
                 indicator: BoxDecoration(
                     borderRadius: BorderRadius.only(
-                        /* topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10)*/
-                        ),
-                    color: Colors.orange.shade300),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)),
+                    color: Colors.red.shade300),
                 controller: _cardController,
                 isScrollable: true,
                 tabs: List.generate(

@@ -549,19 +549,25 @@ class _ProductsState extends State<Products>
                               horizontal: 7.0, vertical: 4.0),
                           margin: EdgeInsets.only(top: 4.0),
                           child: Text("$discount% OFF",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 13)),
-                          color: Colors.orangeAccent,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.italic)),
+                          color: Colors.redAccent.shade100,
                         ),
                       if (product.isFeature == 1)
                         Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 7.0, vertical: 4.0),
+                              horizontal: 9.0, vertical: 6.0),
                           margin: EdgeInsets.only(top: 4.0),
-                          child: Text("RECOMENDADO",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 13)),
-                          color: Colors.orange[600],
+                          child: Text("PROMOCIÓN",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.italic)),
+                          color: Colors.red[600],
                         ),
                     ],
                   ),
@@ -813,9 +819,12 @@ class _ProductsState extends State<Products>
                         padding: EdgeInsets.symmetric(
                             horizontal: 5.0, vertical: 2.0),
                         margin: EdgeInsets.only(top: 2.0),
-                        child: Text("RECOMENDADO",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 12)),
+                        child: Text("PROMOCIÓN",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic)),
                         color: Colors.blueAccent[400],
                       ),
                   ],

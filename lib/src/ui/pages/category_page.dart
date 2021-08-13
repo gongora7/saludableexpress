@@ -136,17 +136,18 @@ class _CategoryPageState extends State<CategoryPage> {
                       height: 140.0,
                       padding: const EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
-
-                          border: Border.all(color: Colors.blueGrey[200], width: 5.0),
-                          boxShadow: [BoxShadow(
-                            color: Colors.grey.withOpacity(0.4),
-                            spreadRadius: 2,
-                            blurRadius: 3,
-                            offset: Offset(0, 1),
-                          )],
-                          
-                          shape: BoxShape.circle, color: Colors.grey.shade300),
-
+                          border: Border.all(
+                              color: Colors.blueGrey[200], width: 5.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.4),
+                              spreadRadius: 2,
+                              blurRadius: 3,
+                              offset: Offset(0, 1),
+                            )
+                          ],
+                          shape: BoxShape.circle,
+                          color: Colors.grey.shade300),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(70.0),
                         child: CachedNetworkImage(
@@ -309,15 +310,13 @@ class _CategoryPageState extends State<CategoryPage> {
               children: [
                 Center(
                   child: Container(
-                   
-                    
                     width: 100.0,
                     height: 100.0,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle, color: Colors.white),
                     child: ClipRRect(
-                       borderRadius: BorderRadius.circular(16.0),
-                       child: CachedNetworkImage(
+                      borderRadius: BorderRadius.circular(16.0),
+                      child: CachedNetworkImage(
                         imageUrl:
                             ApiProvider.imageBaseUrl + categories[index].image,
                         fit: BoxFit.fill,
@@ -332,28 +331,22 @@ class _CategoryPageState extends State<CategoryPage> {
                 ),
                 SizedBox(
                   width: 40.0,
-                  
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(categories[index].categoriesName.toUpperCase(), 
-                  style:TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold
-                    
+                    Text(
+                      categories[index].categoriesName.toUpperCase(),
+                      style:
+                          TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,),
-                    Text(categories[index].totalProducts.toString() +
-                        " Productos", 
-                      style: 
-                      TextStyle(
-                        fontSize: 16,
-                    fontWeight: FontWeight.bold
-                    
+                    Text(
+                      categories[index].totalProducts.toString() + " Productos",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-),
                   ],
                 )
               ],
@@ -421,7 +414,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
   Widget buildCategory6(BuildContext context, List<Category> categories) {
     return ListView.builder(
-      padding: EdgeInsets.all(3.0),
+      padding: EdgeInsets.all(10.0),
       itemCount: categories.length,
       itemBuilder: (context, index) {
         return InkWell(
@@ -430,21 +423,25 @@ class _CategoryPageState extends State<CategoryPage> {
           },
           child: Container(
             padding: EdgeInsets.all(12.0),
-            color: Colors.black12,
-            margin: EdgeInsets.all(1.0),
+            color: Colors.grey.shade200,
+            margin: EdgeInsets.all(3.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   categories[index].categoriesName,
-                  style: TextStyle(color: Colors.black, fontSize: 21),
+                  style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 24,
+                      fontFamily: 'Montserrat-bold',
+                      fontWeight: FontWeight.bold),
                 ),
                 Expanded(child: SizedBox()),
                 Center(
                   child: Container(
-                    width: 40.0,
-                    height: 40.0,
+                    width: 100.0,
+                    height: 100.0,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle, color: Colors.white),
                     child: ClipRRect(

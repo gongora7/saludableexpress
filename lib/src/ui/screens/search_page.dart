@@ -118,16 +118,16 @@ class _SearchState extends State<Search> {
             if (products.isNotEmpty) {
               return ListTile(
                 leading: Container(
-                  width: 70.0,
-                  height: 70.0,
+                  width: 100.0,
+                  height: 100.0,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle, color: Colors.white),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(10.0),
                     child: CachedNetworkImage(
                       imageUrl: ApiProvider.imageBaseUrl +
                           products[index].productsImage,
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       progressIndicatorBuilder:
                           (context, url, downloadProgress) =>
                               CircularProgressIndicator(
@@ -189,15 +189,15 @@ class _SearchState extends State<Search> {
                         "newest", true, widget._toProductDetailPage)));
           },
           leading: Container(
-            width: 70.0,
-            height: 70.0,
+            width: 100.0,
+            height: 100.0,
             decoration:
                 BoxDecoration(shape: BoxShape.circle, color: Colors.white),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
               child: CachedNetworkImage(
                 imageUrl: ApiProvider.imageBaseUrl + categories[index].image,
-                fit: BoxFit.fill,
+                fit: BoxFit.contain,
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     CircularProgressIndicator(value: downloadProgress.progress),
                 errorWidget: (context, url, error) => Icon(Icons.error),

@@ -73,3 +73,14 @@ flutter:
     - assets/images/
     - assets/images/bgsplash.jpg
     - .env
+
+fonts:
+    - family: Montserrat-bold     
+      fonts:
+        - asset: assets/fonts/Montserrat-Bold.ttf
+    - family: Montserrat-regular    
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+  
+    
+ 

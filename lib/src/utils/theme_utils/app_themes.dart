@@ -10,7 +10,7 @@ enum AppTheme {
 final appThemeData = {
   AppTheme.GreenLight: ThemeData(
     brightness: Brightness.light,
-    primaryColor: Color.fromRGBO(102, 174, 39, 1.0),
+    primaryColor: Color.fromRGBO(90, 0, 132, 1),
   ),
   AppTheme.GreenDark: ThemeData(
     brightness: Brightness.light,
