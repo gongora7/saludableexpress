@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/app_data.dart';
 import 'package:flutter_app1/src/blocs/server_settings/server_settings_bloc.dart';
+import 'package:flutter_app1/src/ui/pages/intro.dart';
 import 'package:flutter_app1/src/ui/screens/home_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -31,7 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
         if (state is ServerSettingsLoaded) {
           AppData.settings = state.settingsResponse.data;
           Future.microtask(() => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (BuildContext context) => Home())));
+              MaterialPageRoute(
+                  builder: (BuildContext context) => IntroScreen())));
         }
       },
       child: ScreenUi(),

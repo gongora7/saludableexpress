@@ -629,10 +629,7 @@ class _HomeState extends State<Home> {
             MaterialPageRoute(
                 builder: (context) => MyFavorites(_toProductDetailPage)));
         break;
-      case "Intro":
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => IntroPage()));
-        break;
+
       case "News":
         Navigator.push(
           context,
