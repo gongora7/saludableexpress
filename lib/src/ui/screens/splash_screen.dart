@@ -54,8 +54,8 @@ class ScreenUi extends StatelessWidget {
             image: DecorationImage(
               image: AssetImage("assets/images/bgsplash.jpg"),
               fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                  Colors.orangeAccent.withOpacity(0.6), BlendMode.darken),
+              /* colorFilter: ColorFilter.mode(
+                  Colors.orangeAccent.withOpacity(0.6), BlendMode.darken),*/
             ),
           ),
           width: MediaQuery.of(context).size.width,
