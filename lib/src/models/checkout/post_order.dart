@@ -189,9 +189,9 @@ class PostOrder {
     data['billing_zone_id'] = this.billing_zone_id;
     data['comments'] = this.comments;
     data['coupon_amount'] = this.coupon_amount;
-    // if (this.coupons != null) {
-    //   data['coupons'] = this.coupons.map((e) => e.tojson()).toList();
-    // }
+    if (this.coupons != null) {
+      data['coupons'] = this.coupons.map((e) => e.toJson()).toList();
+    }
     data['email'] = this.email;
     data['customers_id'] = this.customers_id;
     data['customers_name'] = this.customers_name;

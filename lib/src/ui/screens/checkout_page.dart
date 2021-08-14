@@ -952,7 +952,7 @@ class _CheckoutState extends State<Checkout> {
     postOrder.payment_method = selectedPaymentMethod.paymentMethod;
 
     postOrder.productsTotal = subtotalPrice;
-    postOrder.totalPrice = totalPrice + discountPrice;
+    postOrder.totalPrice = totalPrice - discountPrice;
     postOrder.products =
         getPostProductList(widget.cartProducts, widget.cartEntries);
 
