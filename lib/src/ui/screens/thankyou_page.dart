@@ -23,17 +23,32 @@ class ThankYou extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(16.0),
                 child: IconTheme(
-                    data: IconThemeData(color: Colors.blueAccent[400]),
-                    child: Icon(Icons.check_circle, size: 100.0,)),
+                    data: IconThemeData(color: Color.fromRGBO(224, 49, 51, 1)),
+                    child: Icon(
+                      Icons.check_circle,
+                      size: 100.0,
+                    )),
               ),
-              Text("Gracias", style: TextStyle(fontSize: 21.0, fontWeight: FontWeight.bold),),
-              SizedBox(height: 10.0,),
-              Text("Gracias por Comprar con Nosotros!"),
-              SizedBox(height: 10.0,),
+              Text(
+                "¡Gracias!".toUpperCase(),
+                style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Text("Gracias por Comprar con Nosotros!",
+                  style:
+                      TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+              SizedBox(
+                height: 50.0,
+              ),
               FlatButton(
-                color: Colors.blueAccent[400],
+                color: Color.fromRGBO(90, 0, 132, 1),
                 height: 60.0,
-                child: Text("CONTINUA COMPRANDO", style: TextStyle(color: Colors.white),),
+                child: Text(
+                  "Regresar a Tienda",
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () {
                   popBackStackToHome(context);
                 },

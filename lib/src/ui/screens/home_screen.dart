@@ -634,7 +634,7 @@ class _HomeState extends State<Home> {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => MyAddresses()));
         break;
-      case "My Favorites":
+      case "Mis Deseos":
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -715,6 +715,42 @@ class _HomeState extends State<Home> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => Search(_toProductDetailPage)));
+          },
+        ),
+        IconButton(
+          icon: new Stack(
+            children: <Widget>[
+              new Icon(Icons.favorite_border_rounded, size: 30),
+              new Positioned(
+                right: 0,
+                child: new Container(
+                  padding: EdgeInsets.all(2),
+                  decoration: new BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  constraints: BoxConstraints(
+                    minWidth: 14,
+                    minHeight: 14,
+                  ),
+                  child: new Text(
+                    AppData.cartIds.length.toString(),
+                    style: new TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+            ],
+          ),
+          tooltip: 'Favoritos',
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MyFavorites(_toProductDetailPage)));
           },
         ),
         IconButton(

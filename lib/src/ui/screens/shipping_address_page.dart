@@ -147,7 +147,7 @@ class MyCustomFormState extends State<MyCustomForm> {
 
   Widget buildFormData(BuildContext context, MyAddress address) {
     return Container(
-      decoration: BoxDecoration(color: Colors.orange.shade50),
+      decoration: BoxDecoration(color: Colors.grey.shade200),
       padding: EdgeInsets.all(20.0),
       child: Column(
         children: [
@@ -568,7 +568,7 @@ class MyCustomFormState extends State<MyCustomForm> {
           Container(
             width: MediaQuery.of(context).size.width,
             child: FlatButton(
-              color: Colors.green[500],
+              color: Color.fromRGBO(224, 49, 51, 1),
               height: 60.0,
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onPressed: () {

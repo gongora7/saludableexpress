@@ -122,7 +122,7 @@ class _ShippingMethodsState extends State<ShippingMethods> {
             bottom: 0,
             width: MediaQuery.of(context).size.width,
             child: FlatButton(
-              color: Colors.green[500],
+              color: Color.fromRGBO(224, 49, 51, 1),
               height: 70.0,
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onPressed: () {

@@ -296,7 +296,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               ? Text("EN STOCK",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.green.shade600,
+                                      color: Color.fromRGBO(224, 49, 51, 1),
                                       fontSize: 18.0))
                               : Text("NO STOCK",
                                   style: TextStyle(
@@ -466,7 +466,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       color: (response.stock <= 0 &&
                               widget._product.productsType != 2)
                           ? Colors.orange.shade600
-                          : Colors.green.shade600,
+                          : Color.fromRGBO(224, 49, 51, 1),
                       child: Row(children: [
                         Expanded(
                           child: Text(

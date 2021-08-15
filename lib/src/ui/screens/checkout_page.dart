@@ -101,7 +101,7 @@ class _CheckoutState extends State<Checkout> {
       ),
       body: Container(
         padding: EdgeInsets.all(5.0),
-        color: Colors.orange.shade50,
+        color: Colors.grey.shade200,
         child: Column(
           children: [
             Expanded(
@@ -167,13 +167,14 @@ class _CheckoutState extends State<Checkout> {
                   Container(
                     child: Expanded(
                         child: FlatButton(
-                            color: Colors.orange[500],
+                            color: Color.fromRGBO(224, 49, 51, 1),
                             height: 70.0,
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,
                             child: Text(
                               "Cancelar",
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20.0),
                             ),
                             onPressed: () {
                               int count = 0;
@@ -185,8 +186,8 @@ class _CheckoutState extends State<Checkout> {
                   Expanded(
                       child: FlatButton(
                           color: (selectedPaymentMethod.name != null)
-                              ? Colors.green[500]
-                              : Colors.green[200],
+                              ? Color.fromRGBO(90, 0, 132, 1)
+                              : Color.fromRGBO(90, 0, 132, 0.5),
                           height: 70.0,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
@@ -194,10 +195,9 @@ class _CheckoutState extends State<Checkout> {
                             if (selectedPaymentMethod.name != null)
                               placeOrderNow();
                           },
-                          child: Text(
-                            "Confirmar",
-                            style: TextStyle(color: Colors.white),
-                          ))),
+                          child: Text("Confirmar",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20.0)))),
                 ],
               ),
             )
@@ -211,7 +211,7 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade400,
+        color: Color.fromRGBO(90, 0, 132, 0.2),
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -250,7 +250,7 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade300,
+        color: Color.fromRGBO(90, 0, 132, 0.3),
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -289,7 +289,7 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade200,
+        color: Color.fromRGBO(90, 0, 132, 0.2),
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -341,7 +341,7 @@ class _CheckoutState extends State<Checkout> {
             child: Card(
               margin: EdgeInsets.all(4.0),
               child: Container(
-                color: Colors.orange.shade100,
+                color: Color.fromRGBO(90, 0, 132, 0.4),
                 child: Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Row(
@@ -448,7 +448,7 @@ class _CheckoutState extends State<Checkout> {
         return Card(
           margin: EdgeInsets.all(4),
           child: Container(
-            color: Colors.orange.shade500,
+            color: Color.fromRGBO(90, 0, 132, 0.4),
             child: Row(children: [
               Container(
                 padding: EdgeInsets.all(3.0),
@@ -971,14 +971,17 @@ class _CheckoutState extends State<Checkout> {
           Row(children: [
             Text(
               "Total",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Expanded(child: SizedBox()),
             Text(
               "\$" + totalPrice.toStringAsFixed(2),
               style: TextStyle(
                   fontSize: 18,
-                  color: Colors.orange.shade600,
+                  color: Color.fromRGBO(224, 49, 51, 1),
                   fontWeight: FontWeight.bold),
               //fontSize: 18, color: Theme.of(context).primaryColor),
             ),

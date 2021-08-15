@@ -142,10 +142,10 @@ class _CartState extends State<Cart> {
                       Expanded(child: buildProductsList(data, list)),
                       Container(
                         decoration: new BoxDecoration(
-                            color: Colors.orange.shade50,
+                            color: Color.fromRGBO(90, 0, 132, 0.5),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.orange.withOpacity(0.3),
+                                color: Colors.purple.withOpacity(0.2),
                                 spreadRadius: 5,
                                 blurRadius: 7,
                                 offset: Offset(0, 3),
@@ -168,7 +168,7 @@ class _CartState extends State<Cart> {
                                     Text(
                                         "\$" + subtotalPrice.toStringAsFixed(2),
                                         style: TextStyle(
-                                            color: Colors.orange.shade800,
+                                            color: Colors.white70,
                                             fontSize: 22.0,
                                             fontWeight: FontWeight.bold)),
                                   ]),
@@ -185,7 +185,7 @@ class _CartState extends State<Cart> {
                                     Text(
                                       "\$" + discountPrice.toStringAsFixed(2),
                                       style: TextStyle(
-                                          color: Colors.orange.shade800,
+                                          color: Colors.white70,
                                           fontSize: 22.0,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -208,7 +208,7 @@ class _CartState extends State<Cart> {
                                       style: TextStyle(
                                           fontSize: 22.0,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.orange.shade800),
+                                          color: Colors.white70),
                                     ),
                                   ]),
                                 ],
@@ -217,7 +217,7 @@ class _CartState extends State<Cart> {
                             Container(
                               width: MediaQuery.of(context).size.width,
                               child: FlatButton(
-                                color: Colors.green[500],
+                                color: Color.fromRGBO(90, 0, 132, 1),
                                 height: 70.0,
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.shrinkWrap,
@@ -321,7 +321,7 @@ class _CartState extends State<Cart> {
 
   Widget buildProductsList(List<Product> products, List<CartEntry> list) {
     return Container(
-      color: Colors.orange.shade100,
+      color: Colors.grey.shade200,
       child: Padding(
         padding: EdgeInsets.all(8),
         child: ListView.builder(
@@ -346,7 +346,7 @@ class _CartState extends State<Cart> {
               });
 
               return Card(
-                color: Colors.orange.shade50,
+                color: Colors.grey.shade300,
                 margin: EdgeInsets.all(4),
                 child: Row(children: [
                   Container(
@@ -366,7 +366,7 @@ class _CartState extends State<Cart> {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.all(15),
+                      padding: EdgeInsets.all(25),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -402,9 +402,9 @@ class _CartState extends State<Cart> {
                                 },
                                 child: IconTheme(
                                     data: IconThemeData(
-                                        color: Colors.orange.shade600),
+                                        color: Colors.red.shade600),
                                     child: Icon(
-                                      Icons.delete_sweep_sharp,
+                                      Icons.delete,
                                       size: 50.0,
                                     )),
                               ),
@@ -442,7 +442,7 @@ class _CartState extends State<Cart> {
                                           style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.orange.shade600,
+                                            color: Colors.red.shade600,
                                           ),
                                         ),
                                       ],
@@ -517,7 +517,7 @@ class _CartState extends State<Cart> {
                                 child: IconTheme(
                                     data: IconThemeData(
                                         //color: Theme.of(context).primaryColor),
-                                        color: Colors.orange.shade800),
+                                        color: Colors.red.shade500),
                                     child:
                                         Icon(Icons.remove_circle, size: 30.0)),
                               ),
@@ -542,7 +542,7 @@ class _CartState extends State<Cart> {
                                 },
                                 child: IconTheme(
                                     data: IconThemeData(
-                                        color: Colors.orange.shade800),
+                                        color: Colors.red.shade500),
                                     child: Icon(Icons.add_circle, size: 30.0)),
                               ),
                             ]),
@@ -585,7 +585,7 @@ class _CartState extends State<Cart> {
                                                   .toStringAsFixed(2),
                                           style: TextStyle(
                                               //color: Theme.of(context).primaryColor),
-                                              color: Colors.orange.shade800,
+                                              color: Colors.red.shade500,
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -600,7 +600,7 @@ class _CartState extends State<Cart> {
                                               .toStringAsFixed(2),
                                       style: TextStyle(
                                           //color: Theme.of(context).primaryColor),
-                                          color: Colors.orange.shade800,
+                                          color: Colors.red.shade500,
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),

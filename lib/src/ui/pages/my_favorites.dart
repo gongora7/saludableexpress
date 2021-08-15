@@ -17,7 +17,7 @@ class _MyFavoritesState extends State<MyFavorites> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Favorites"),
+        title: Text("Lista de Deseos"),
       ),
       body: Products(
           "wishlist", "", false, false, true, widget._toProductDetailPage),
@@ -29,4 +29,3 @@ class _MyFavoritesState extends State<MyFavorites> {
     super.initState();
   }
 }
-

@@ -524,13 +524,14 @@ class _ProductsState extends State<Products>
                                     : (product.productsType != 0)
                                         ? "Ver Producto"
                                         : (product.defaultStock > 0)
-                                            ? "Agregado a bolsa"
+                                            ? "Agregar a bolsa"
                                             : "Sin Stock",
                                 style: TextStyle(color: Colors.white),
                               ),
                               materialTapTargetSize:
                                   MaterialTapTargetSize.shrinkWrap),
                           width: double.infinity,
+                          height: 55,
                         ),
                       ],
                     ),
