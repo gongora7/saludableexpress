@@ -642,7 +642,7 @@ class _HomeState extends State<Home> {
         break;
       case "Intro":
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => IntroPage()));
+            context, MaterialPageRoute(builder: (context) => IntroScreen()));
         break;
       case "News":
         Navigator.push(
