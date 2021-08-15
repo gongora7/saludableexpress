@@ -181,7 +181,7 @@ class _CheckoutState extends State<Checkout> {
                   Container(
                     child: Expanded(
                         child: FlatButton(
-                            color: Colors.orange[500],
+                            color: Color.fromRGBO(247, 121, 34, 1),
                             height: 70.0,
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,
@@ -199,8 +199,8 @@ class _CheckoutState extends State<Checkout> {
                   Expanded(
                       child: FlatButton(
                           color: (selectedPaymentMethod.name != null)
-                              ? Colors.green[500]
-                              : Colors.green[200],
+                              ? Color.fromRGBO(20, 137, 54, 1)
+                              : Color.fromRGBO(20, 137, 54, 1),
                           height: 70.0,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
@@ -427,13 +427,13 @@ class _CheckoutState extends State<Checkout> {
                         enabledBorder: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(8.0),
                           borderSide: new BorderSide(
-                            color: Colors.orange,
+                            color: Color.fromRGBO(247, 121, 34, 1),
                           ),
                         ),
                         disabledBorder: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(8.0),
                           borderSide: new BorderSide(
-                            color: Colors.green,
+                            color: Color.fromRGBO(20, 137, 54, 1),
                           ),
                         ),
                         labelText: discountPrice != 0.00
@@ -445,12 +445,12 @@ class _CheckoutState extends State<Checkout> {
                         border: new OutlineInputBorder(
                           borderRadius: new BorderRadius.circular(8.0),
                           borderSide: new BorderSide(
-                            color: Colors.orange,
+                            color: Color.fromRGBO(247, 121, 34, 1),
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Colors.orange,
+                            color: Color.fromRGBO(247, 121, 34, 1),
                           ),
                         ),
                       ),
@@ -577,7 +577,7 @@ class _CheckoutState extends State<Checkout> {
         return Card(
           margin: EdgeInsets.all(4),
           child: Container(
-            color: Colors.orange.shade600,
+            color: Color.fromRGBO(247, 121, 34, 0.1),
             child: Row(children: [
               Container(
                 padding: EdgeInsets.all(3.0),

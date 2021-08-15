@@ -104,7 +104,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             borderRadius: BorderRadius.circular(4.0),
             boxShadow: [
               BoxShadow(
-                color: Colors.lightGreen.withOpacity(0.5),
+                color: Color.fromRGBO(20, 137, 54, 1).withOpacity(0.5),
                 spreadRadius: 4,
                 blurRadius: 4,
                 offset: Offset(0, 0),

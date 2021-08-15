@@ -145,7 +145,8 @@ class _CartState extends State<Cart> {
                             color: Colors.orange.shade50,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.orange.withOpacity(0.3),
+                                color: Color.fromRGBO(247, 121, 34, 1)
+                                    .withOpacity(0.3),
                                 spreadRadius: 5,
                                 blurRadius: 7,
                                 offset: Offset(0, 3),
@@ -168,7 +169,8 @@ class _CartState extends State<Cart> {
                                     Text(
                                         "\$" + subtotalPrice.toStringAsFixed(2),
                                         style: TextStyle(
-                                            color: Colors.orange.shade800,
+                                            color:
+                                                Color.fromRGBO(247, 121, 34, 1),
                                             fontSize: 22.0,
                                             fontWeight: FontWeight.bold)),
                                   ]),
@@ -185,7 +187,8 @@ class _CartState extends State<Cart> {
                                     Text(
                                       "\$" + discountPrice.toStringAsFixed(2),
                                       style: TextStyle(
-                                          color: Colors.orange.shade800,
+                                          color:
+                                              Color.fromRGBO(247, 121, 34, 1),
                                           fontSize: 22.0,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -206,9 +209,10 @@ class _CartState extends State<Cart> {
                                     Text(
                                       "\$" + totalPrice.toStringAsFixed(2),
                                       style: TextStyle(
-                                          fontSize: 22.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.orange.shade800),
+                                        fontSize: 22.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromRGBO(247, 121, 34, 1),
+                                      ),
                                     ),
                                   ]),
                                 ],
@@ -217,7 +221,7 @@ class _CartState extends State<Cart> {
                             Container(
                               width: MediaQuery.of(context).size.width,
                               child: FlatButton(
-                                color: Colors.green[500],
+                                color: Color.fromRGBO(20, 137, 54, 1),
                                 height: 70.0,
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.shrinkWrap,
@@ -301,7 +305,7 @@ class _CartState extends State<Cart> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(2.0),
                       child: FlatButton(
-                        color: Colors.greenAccent[500],
+                        color: Color.fromRGBO(20, 137, 54, 1),
                         height: 50.0,
                         child: Text(
                           "Ver más productos saludables",
@@ -517,7 +521,7 @@ class _CartState extends State<Cart> {
                                 child: IconTheme(
                                     data: IconThemeData(
                                         //color: Theme.of(context).primaryColor),
-                                        color: Colors.orange.shade800),
+                                        color: Color.fromRGBO(247, 121, 34, 1)),
                                     child:
                                         Icon(Icons.remove_circle, size: 30.0)),
                               ),
@@ -542,7 +546,7 @@ class _CartState extends State<Cart> {
                                 },
                                 child: IconTheme(
                                     data: IconThemeData(
-                                        color: Colors.orange.shade800),
+                                        color: Color.fromRGBO(247, 121, 34, 1)),
                                     child: Icon(Icons.add_circle, size: 30.0)),
                               ),
                             ]),
@@ -585,7 +589,8 @@ class _CartState extends State<Cart> {
                                                   .toStringAsFixed(2),
                                           style: TextStyle(
                                               //color: Theme.of(context).primaryColor),
-                                              color: Colors.orange.shade800,
+                                              color: Color.fromRGBO(
+                                                  247, 121, 34, 1),
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -600,7 +605,8 @@ class _CartState extends State<Cart> {
                                               .toStringAsFixed(2),
                                       style: TextStyle(
                                           //color: Theme.of(context).primaryColor),
-                                          color: Colors.orange.shade800,
+                                          color:
+                                              Color.fromRGBO(247, 121, 34, 1),
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),

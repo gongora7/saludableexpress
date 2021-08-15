@@ -51,6 +51,7 @@ dependencies:
   onesignal_flutter: ^3.0.0
   stripe_payment: ^1.1.4
   introduction_screen: ^2.1.0
+  animated_splash_screen: ^1.1.0
 
   cupertino_icons: ^1.0.3
   flutter_localizations:
@@ -72,4 +73,7 @@ flutter:
     - assets/langs/
     - assets/images/
     - assets/images/bgsplash.jpg
+    - assets/images/intro-img1.png
+    - assets/images/intro-img2.png
+    - assets/images/intro-img3.png
     - .env

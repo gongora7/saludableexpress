@@ -101,9 +101,8 @@ class _HomePage7State extends State<HomePage7> {
                         "-  CATÁLOGO SALUDABLE  -".toUpperCase(),
                         style: TextStyle(
                           fontSize: 32,
-
                           fontWeight: FontWeight.bold,
-                          color: Colors.green[600],
+                          color: Color.fromRGBO(20, 137, 54, 1),
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -117,7 +116,6 @@ class _HomePage7State extends State<HomePage7> {
       },
       body: Container(
         padding: EdgeInsets.all(10.0),
-
         child: Products(
             "Newest", "", false, false, false, widget._toProductDetailPage),
       ),

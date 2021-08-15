@@ -110,7 +110,7 @@ class _ContactUsState extends State<ContactUs> {
                   Container(
                     width: double.maxFinite,
                     child: FlatButton(
-                        color: Colors.green[800],
+                        color: Color.fromRGBO(20, 137, 54, 1),
                         onPressed: () {},
                         child: Text(
                           "Send",

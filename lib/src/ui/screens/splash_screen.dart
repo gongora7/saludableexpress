@@ -72,17 +72,14 @@ class ScreenUi extends StatelessWidget {
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 120.0,
-                          height: 120.0,
-                          child: Positioned(
-                            top: 50.0,
-                            child: Image.asset(
-                              "assets/images/logose.png",
-                              fit: BoxFit.fill,
-                            ),
+                          width: 160.0,
+                          height: 160.0,
+                          child: Image.asset(
+                            "assets/images/logose.png",
+                            fit: BoxFit.fill,
                           ),
                         ),
 

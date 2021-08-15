@@ -6,7 +6,6 @@ import './bloc.dart';
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ThemeBloc(ThemeState initialState) : super(initialState);
 
-
   @override
   ThemeState get initialState =>
       ThemeState(themeData: appThemeData[AppTheme.GreenLight]);
