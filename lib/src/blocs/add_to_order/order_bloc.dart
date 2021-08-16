@@ -33,6 +33,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             event.postOrder.payment_sripe = "0";
           }
         }
+        if (event.postOrder.payment_method != "directbank") {
+          AppData.transferBankData = null;
+        }
 //Realiza pago block
         final addToOrderResponse =
             await checkoutRepo.placeOrder(event.postOrder);

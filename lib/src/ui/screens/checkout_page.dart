@@ -1141,8 +1141,23 @@ class _CheckoutState extends State<Checkout> {
     List<PaymentMethodObj> filteredPaymentMethods = List<PaymentMethodObj>();
 
     for (int i = 0; i < data.length; i++) {
-      if (data[i].method == "stripe" || data[i].method == "cod") {
+      if (data[i].method == "stripe" ||
+          data[i].method == "cod" ||
+          data[i].method == "directbank") {
         filteredPaymentMethods.add(data[i]);
+        if (data[i].method == "directbank") {
+          AppData.transferBankData = PaymentMethodObj(
+            method: data[i].method,
+            publicKey: data[i].publicKey,
+            authToken: data[i].authToken,
+            clientId: data[i].clientId,
+            clientSecret: data[i].clientSecret,
+            environment: data[i].environment,
+            name: data[i].name,
+            active: data[i].active,
+            paymentMethod: data[i].paymentMethod,
+          );
+        }
       }
     }
 
