@@ -32,6 +32,19 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           } else {
             event.postOrder.payment_sripe = "0";
           }
+        } else if (event.postOrder.payment_method == "paytm") {
+          final stripeService = new StripeService();
+          final resp = await stripeService.realizarPagoOxxo(
+            nombre: event.postOrder.customers_name,
+            email: event.postOrder.email,
+            amount: '${(event.postOrder.totalPrice * 100).floor()}',
+            currency: event.postOrder.currency_code,
+          );
+          if (resp.status == "succeeded") {
+            event.postOrder.payment_sripe = "1";
+          } else {
+            event.postOrder.payment_sripe = "0";
+          }
         }
         if (event.postOrder.payment_method != "directbank") {
           AppData.transferBankData = null;
