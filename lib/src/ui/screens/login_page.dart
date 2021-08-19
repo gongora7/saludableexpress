@@ -320,11 +320,11 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ), */
               ],
             ),
-            // SignInWithAppleButton(
-            //   text: 'Apple ID',
-            //   onPressed: AppleSignInService.signIn,
+            SignInWithAppleButton(
+              text: 'Apple ID',
+              onPressed: AppleSignInService.signIn,
               
-            // ),
+            ),
             SizedBox(
               height: 16.0,
             ),
