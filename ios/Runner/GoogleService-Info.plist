@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>877102355954-5kg43vnr22avq00cj65r8ajgkk92p90i.apps.googleusercontent.com</string>
+	<string>97224884708-fms4jb5i3grdh9k4vqm7vv1vk3mnl36q.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.877102355954-5kg43vnr22avq00cj65r8ajgkk92p90i</string>
+	<string>com.googleusercontent.apps.97224884708-fms4jb5i3grdh9k4vqm7vv1vk3mnl36q</string>
 	<key>API_KEY</key>
-	<string>AIzaSyC_PBJ4JlRNVl6StYv31KKvRBEW8pzfX_o</string>
+	<string>AIzaSyDPppEXohe0fsG1DWKiivRswsL6AsrPRnc</string>
 	<key>GCM_SENDER_ID</key>
-	<string>877102355954</string>
+	<string>97224884708</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.cosmonautas.saludableapp</string>
+	<string>com.appgoritmo.easystoremx</string>
 	<key>PROJECT_ID</key>
-	<string>saludable-express</string>
+	<string>easy-store-demo</string>
 	<key>STORAGE_BUCKET</key>
-	<string>saludable-express.appspot.com</string>
+	<string>easy-store-demo.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:877102355954:ios:81d1bd839eeb508a47c76b</string>
-	<key>DATABASE_URL</key>
-	<string>https://saludable-express.firebaseio.com</string>
+	<string>1:97224884708:ios:0394e7474d3e9ece4947f1</string>
 </dict>
 </plist>
