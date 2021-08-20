@@ -39,7 +39,7 @@ class ThankYou extends StatelessWidget {
               ),
               Text("Gracias por Comprar con Nosotros!"),
               SizedBox(
-                height: 10.0,
+                height: 30.0,
               ),
               AppData.transferBankData != null
                   ? Column(
@@ -51,8 +51,8 @@ class ThankYou extends StatelessWidget {
                     )
                   : Container(),
               FlatButton(
-                color: Colors.blueAccent[400],
-                height: 60.0,
+                color: Color.fromRGBO(20, 137, 54, 1),
+                height: 80.0,
                 child: Text(
                   "CONTINUA COMPRANDO",
                   style: TextStyle(color: Colors.white),
