@@ -1148,7 +1148,7 @@ class _CheckoutState extends State<Checkout> {
       if (data[i].method == "stripe" ||
           data[i].method == "cod" ||
           data[i].method == "directbank" ||
-          data[i].method == "paytm") {
+          data[i].method == "oxxo") {
         filteredPaymentMethods.add(data[i]);
         if (data[i].method == "directbank") {
           AppData.transferBankData = PaymentMethodObj(
