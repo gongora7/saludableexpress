@@ -203,7 +203,6 @@ class ApiProvider {
 
   Future<AddToOrderResponse> addToOrder(PostOrder postOrder) async {
     try {
-      final a = jsonEncode(postOrder.toJson());
       Response response = await _dio.post(
         _baseUrl + "addtoorder",
         data: jsonEncode(postOrder.toJson()),

@@ -40,7 +40,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             amount: '${(event.postOrder.totalPrice * 100).floor()}',
             currency: event.postOrder.currency_code,
           );
-          event.postOrder.payment_sripe = "1";
           event.postOrder.oxxo_payment_id = resp.id;
 
           AppData.comfirmOxxo = resp;
