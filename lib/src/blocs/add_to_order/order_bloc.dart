@@ -45,9 +45,13 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           } else {
             event.postOrder.payment_sripe = "0";
           }
+          AppData.comfirmOxxo = resp;
         }
         if (event.postOrder.payment_method != "directbank") {
           AppData.transferBankData = null;
+        }
+        if (event.postOrder.payment_method != "paytm") {
+          AppData.comfirmOxxo = null;
         }
 //Realiza pago block
         final addToOrderResponse =

@@ -66,6 +66,7 @@ class _CheckoutState extends State<Checkout> {
 
   double subtotalPrice = 0.0;
   double discountPrice = 0.0;
+  double discountPriceCupon = 0.0;
   double totalPrice = 0.0;
   int percetnDesc = 0;
   CuponResponse resDescuento;
@@ -421,7 +422,7 @@ class _CheckoutState extends State<Checkout> {
                   Expanded(
                     flex: 2,
                     child: TextFormField(
-                      enabled: discountPrice != 0.00 ? false : null,
+                      enabled: discountPriceCupon != 0.00 ? false : null,
                       controller: cuponField,
                       decoration: InputDecoration(
                         enabledBorder: new OutlineInputBorder(
@@ -436,7 +437,7 @@ class _CheckoutState extends State<Checkout> {
                             color: Color.fromRGBO(20, 137, 54, 1),
                           ),
                         ),
-                        labelText: discountPrice != 0.00
+                        labelText: discountPriceCupon != 0.00
                             ? 'Cupón aplicado'
                             : 'Ingresa tu cupón',
                         labelStyle: TextStyle(color: Colors.black),
@@ -471,7 +472,7 @@ class _CheckoutState extends State<Checkout> {
                           "Canjear",
                           style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: discountPrice != 0.00
+                        onPressed: discountPriceCupon != 0.00
                             ? null
                             : () async {
                                 FocusScope.of(context).unfocus();
@@ -483,7 +484,7 @@ class _CheckoutState extends State<Checkout> {
                                       "percent") {
                                     percetnDesc = resDescuento.data[0].amount;
                                   } else {
-                                    discountPrice =
+                                    discountPriceCupon =
                                         resDescuento.data[0].amount.toDouble();
                                   }
                                   setState(() {});
@@ -507,6 +508,7 @@ class _CheckoutState extends State<Checkout> {
   Widget buildProductsList(List<Product> products, List list) {
     subtotalPrice = 0.0;
     discountPrice = discountPrice;
+    discountPriceCupon = discountPriceCupon;
     totalPrice = 0.0;
 
     for (int i = 0; i < products.length; i++) {
@@ -530,7 +532,7 @@ class _CheckoutState extends State<Checkout> {
             ((double.parse(product.productsPrice.toString()) + attrsPrice) *
                 cartEntry.quantity);
         if (isDiscount != null && isDiscount != 0) {
-          discountPrice += (double.parse(product.productsPrice.toString()) -
+          discountPrice = (double.parse(product.productsPrice.toString()) -
                   double.parse(product.discountPrice.toString())) *
               cartEntry.quantity;
         }
@@ -544,9 +546,11 @@ class _CheckoutState extends State<Checkout> {
     if (percetnDesc == 0) {
       totalPrice += (double.parse(widget.shippingTax) +
           double.parse(widget.shippingService.rate.toString()) -
-          discountPrice);
+          discountPriceCupon);
+      discountPrice += discountPriceCupon;
     } else {
-      discountPrice = (percetnDesc * totalPrice) / 100;
+      discountPriceCupon = (percetnDesc * totalPrice) / 100;
+      discountPrice += discountPriceCupon;
       totalPrice += (double.parse(widget.shippingTax) +
           double.parse(widget.shippingService.rate.toString()) -
           discountPrice);
@@ -936,7 +940,7 @@ class _CheckoutState extends State<Checkout> {
 
     postOrder.comments = "";
 
-    if (discountPrice == 0.00) {
+    if (discountPriceCupon == 0.00) {
       postOrder.is_coupon_applied = 0;
       postOrder.coupon_amount = "";
     } else {
@@ -952,7 +956,7 @@ class _CheckoutState extends State<Checkout> {
     postOrder.payment_method = selectedPaymentMethod.paymentMethod;
 
     postOrder.productsTotal = subtotalPrice;
-    postOrder.totalPrice = totalPrice - discountPrice;
+    postOrder.totalPrice = totalPrice - discountPrice - discountPriceCupon;
     postOrder.products =
         getPostProductList(widget.cartProducts, widget.cartEntries);
 

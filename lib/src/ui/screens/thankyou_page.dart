@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/app_data.dart';
+import 'package:flutter_app1/src/ui/pages/web_view_oxxo.dart';
 
 class ThankYou extends StatelessWidget {
   @override
@@ -60,7 +61,28 @@ class ThankYou extends StatelessWidget {
                 onPressed: () {
                   popBackStackToHome(context);
                 },
-              )
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              AppData.comfirmOxxo == null
+                  ? Container()
+                  : FlatButton(
+                      color: Colors.red,
+                      height: 80.0,
+                      child: Text(
+                        "VER BOUNCHER DE PAGO",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WebViewExample(
+                                    url:
+                                        "${AppData.comfirmOxxo.nextAction.oxxoDisplayDetails.hostedVoucherUrl}")));
+                      },
+                    )
             ],
           ),
         ),
