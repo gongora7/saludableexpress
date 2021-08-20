@@ -69,7 +69,7 @@ class _LanguagesPageState extends State<LanguagesPage> {
             bottom: 0,
             width: MediaQuery.of(context).size.width,
             child: FlatButton(
-              color: Colors.green[800],
+              color: Color.fromRGBO(20, 137, 54, 1),
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onPressed: () {
                 BlocProvider.of<LanguageBloc>(context).add(LanguageSelected(

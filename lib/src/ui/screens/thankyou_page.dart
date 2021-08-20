@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/app_data.dart';
 
 class ThankYou extends StatelessWidget {
   @override
@@ -24,16 +25,38 @@ class ThankYou extends StatelessWidget {
                 padding: EdgeInsets.all(16.0),
                 child: IconTheme(
                     data: IconThemeData(color: Colors.blueAccent[400]),
-                    child: Icon(Icons.check_circle, size: 100.0,)),
+                    child: Icon(
+                      Icons.check_circle,
+                      size: 100.0,
+                    )),
               ),
-              Text("Gracias", style: TextStyle(fontSize: 21.0, fontWeight: FontWeight.bold),),
-              SizedBox(height: 10.0,),
+              Text(
+                "Gracias",
+                style: TextStyle(fontSize: 21.0, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
               Text("Gracias por Comprar con Nosotros!"),
-              SizedBox(height: 10.0,),
+              SizedBox(
+                height: 30.0,
+              ),
+              AppData.transferBankData != null
+                  ? Column(
+                      children: [
+                        Text(AppData.transferBankData.publicKey),
+                        Text(AppData.transferBankData.clientId),
+                        Text(AppData.transferBankData.clientSecret),
+                      ],
+                    )
+                  : Container(),
               FlatButton(
-                color: Colors.blueAccent[400],
-                height: 60.0,
-                child: Text("CONTINUA COMPRANDO", style: TextStyle(color: Colors.white),),
+                color: Color.fromRGBO(20, 137, 54, 1),
+                height: 80.0,
+                child: Text(
+                  "CONTINUA COMPRANDO",
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () {
                   popBackStackToHome(context);
                 },

@@ -7,11 +7,13 @@ import 'package:flutter_app1/src/blocs/user/login_bloc.dart';
 import 'package:flutter_app1/src/blocs/user/login_event.dart';
 import 'package:flutter_app1/src/blocs/user/login_state.dart';
 import 'package:flutter_app1/src/models/drawer_menu_item.dart';
+import 'package:flutter_app1/src/services/apple_signin_service.dart';
 import 'package:flutter_app1/src/ui/screens/register.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -104,7 +106,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             borderRadius: BorderRadius.circular(4.0),
             boxShadow: [
               BoxShadow(
-                color: Colors.lightGreen.withOpacity(0.5),
+                color: Color.fromRGBO(20, 137, 54, 1).withOpacity(0.5),
                 spreadRadius: 4,
                 blurRadius: 4,
                 offset: Offset(0, 0),
@@ -285,7 +287,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
+                /* IconButton(
                   icon: Image.asset(
                     "assets/images/login_with_google.png",
                     fit: BoxFit.fill,
@@ -308,7 +310,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ),
                 SizedBox(
                   width: 8.0,
-                ),
+                ),*/
                 /* IconButton(
                   icon: Image.asset(
                     "assets/images/login_with_phone.png",
@@ -318,6 +320,11 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ), */
               ],
             ),
+            /* SignInWithAppleButton(
+              text: 'Apple ID',
+              onPressed: AppleSignInService.signIn,
+              
+            ),*/
             SizedBox(
               height: 16.0,
             ),

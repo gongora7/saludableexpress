@@ -508,7 +508,7 @@ class _ProductsState extends State<Products>
                             color: (product.defaultStock <= 0 &&
                                     product.productsType == 0)
                                 ? Colors.orangeAccent[400]
-                                : Colors.greenAccent[400],
+                                : Color.fromRGBO(20, 137, 54, 1),
                             child: Text(
                               (widget.type == "wishlist")
                                   ? "Eliminar"
@@ -541,7 +541,7 @@ class _ProductsState extends State<Products>
                           child: Text("$discount% OFF",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 13)),
-                          color: Colors.orangeAccent,
+                          color: Color.fromRGBO(247, 121, 34, 1),
                         ),
                       if (product.isFeature == 1)
                         Container(
@@ -563,7 +563,7 @@ class _ProductsState extends State<Products>
                   margin: EdgeInsets.all(2.0),
                   child: Text("NUEVO",
                       style: TextStyle(color: Colors.white, fontSize: 12)),
-                  color: Colors.orange[800],
+                  color: Color.fromRGBO(247, 121, 34, 1),
                 ),
               if (AppData.cartIds.contains(product.productsId))
                 Opacity(
@@ -795,7 +795,7 @@ class _ProductsState extends State<Products>
                         child: Text("$discount% DESC",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 12)),
-                        color: Colors.green[800],
+                        color: Color.fromRGBO(20, 137, 54, 1),
                       ),
                     if (product.isFeature == 1)
                       Container(

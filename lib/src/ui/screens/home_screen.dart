@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/app_data.dart';
 import 'package:flutter_app1/constants.dart';
+import 'package:flutter_app1/src/blocs/user/login_bloc.dart';
 import 'package:flutter_app1/src/models/cart_entry.dart';
 import 'package:flutter_app1/src/models/product_models/product.dart';
 import 'package:flutter_app1/src/ui/pages/about.dart';
@@ -629,10 +630,7 @@ class _HomeState extends State<Home> {
             MaterialPageRoute(
                 builder: (context) => MyFavorites(_toProductDetailPage)));
         break;
-      case "Intro":
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => IntroPage()));
-        break;
+
       case "News":
         Navigator.push(
           context,
@@ -665,6 +663,18 @@ class _HomeState extends State<Home> {
         AppData.data.add(DrawerMenuItem(
             (AppData.user != null) ? "Cerrar Sesión" : "Iniciar Sesión",
             Icons.login_rounded));
+        break;
+      case "Logout":
+        _selectCurrentItem(0);
+        _userBox.delete("current_user");
+        AppData.user = null;
+        AppData.data.removeLast();
+        AppData.data.add(DrawerMenuItem(
+            (AppData.user != null) ? "Cerrar Sesión" : "Iniciar Sesión",
+            Icons.login_rounded));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Se ha cerrado sesión correctamente')));
+
         break;
 /*
       case "ProductDetailsPage":

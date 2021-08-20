@@ -16,7 +16,6 @@ class _RegisterState extends State<Register> {
         title: Text("Regístrate"),
       ),
       body: SingleChildScrollView(
-        
         child: Container(
           width: double.maxFinite,
           margin: EdgeInsets.all(16.0),
@@ -30,7 +29,7 @@ class _RegisterState extends State<Register> {
                       image: new DecorationImage(
                           fit: BoxFit.fill,
                           image: new NetworkImage(
-                              "https://store.saludableexpress.com/images/media/2021/06/thumbnail1622601274NjCig02302.png",
+                            "https://store.saludableexpress.com/images/media/2021/06/thumbnail1622601274NjCig02302.png",
                           )))),
               SizedBox(height: 16.0),
               /*Text(
@@ -89,22 +88,23 @@ class MyCustomFormState extends State<MyCustomForm> {
       child: Container(
         padding: EdgeInsets.all(60.0),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4.0),
-          boxShadow: [BoxShadow(
-                            color: Colors.lightGreen.withOpacity(0.5),
-                            spreadRadius: 4,
-                            blurRadius: 4,
-                            offset: Offset(0, 0),
-                          )],
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter, 
-            colors: [
-              const Color.fromRGBO(102, 174, 39, 0.2), 
-              const Color.fromRGBO(178, 239, 120, 0.4), 
-              const Color.fromRGBO(24, 167, 120, 0.7)] 
-            )
-            ),
+            borderRadius: BorderRadius.circular(4.0),
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromRGBO(20, 137, 54, 0.5).withOpacity(0.5),
+                spreadRadius: 4,
+                blurRadius: 4,
+                offset: Offset(0, 0),
+              )
+            ],
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  const Color.fromRGBO(102, 174, 39, 0.2),
+                  const Color.fromRGBO(178, 239, 120, 0.4),
+                  const Color.fromRGBO(24, 167, 120, 0.7)
+                ])),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,11 +113,12 @@ class MyCustomFormState extends State<MyCustomForm> {
               controller: _firstNameController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                prefixIcon: Padding(padding: EdgeInsets.all(1),
-                child: Icon(Icons.person),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(1),
+                  child: Icon(Icons.person),
                 ),
                 hintText: 'Nombre',
-                 hintStyle: TextStyle(color: Colors.black45),
+                hintStyle: TextStyle(color: Colors.black45),
                 fillColor: Colors.black87,
                 contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
@@ -141,8 +142,9 @@ class MyCustomFormState extends State<MyCustomForm> {
               controller: _lastNameController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                prefixIcon: Padding(padding: EdgeInsets.all(1),
-                child: Icon(Icons.people),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(1),
+                  child: Icon(Icons.people),
                 ),
                 hintText: 'Apellido',
                 hintStyle: TextStyle(color: Colors.black45),
@@ -169,8 +171,9 @@ class MyCustomFormState extends State<MyCustomForm> {
               controller: _phoneNumberController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                prefixIcon: Padding(padding: EdgeInsets.all(1),
-                child: Icon(Icons.phone_iphone),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(1),
+                  child: Icon(Icons.phone_iphone),
                 ),
                 hintText: 'Teléfono',
                 hintStyle: TextStyle(color: Colors.black45),
@@ -194,12 +197,12 @@ class MyCustomFormState extends State<MyCustomForm> {
               height: 16.0,
             ),
             TextFormField(
-              
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                prefixIcon: Padding(padding: EdgeInsets.all(1),
-                child: Icon(Icons.mail),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(1),
+                  child: Icon(Icons.mail),
                 ),
                 hintText: 'Email',
                 hintStyle: TextStyle(color: Colors.black45),
@@ -228,12 +231,12 @@ class MyCustomFormState extends State<MyCustomForm> {
               enableSuggestions: false,
               autocorrect: false,
               decoration: InputDecoration(
-                prefixIcon: Padding(padding: EdgeInsets.all(1),
-                child: Icon(Icons.security),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(1),
+                  child: Icon(Icons.security),
                 ),
-                
                 hintText: 'Password',
-                 hintStyle: TextStyle(color: Colors.black45),
+                hintStyle: TextStyle(color: Colors.black45),
                 fillColor: Colors.black87,
                 contentPadding: EdgeInsets.all(10.0),
                 enabledBorder: new OutlineInputBorder(
@@ -257,7 +260,8 @@ class MyCustomFormState extends State<MyCustomForm> {
               width: double.maxFinite,
               height: 40.0,
               child: FlatButton(
-                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(2.0)),
                   color: Colors.white60,
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
@@ -273,7 +277,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                   },
                   child: Text(
                     "Regístrate",
-                     style: TextStyle(color: Colors.black45, fontWeight: FontWeight.w700),
+                    style: TextStyle(
+                        color: Colors.black45, fontWeight: FontWeight.w700),
                   )),
             ),
             SizedBox(

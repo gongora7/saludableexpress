@@ -9,10 +9,8 @@ class CurrenciesPage extends StatefulWidget {
 }
 
 class _CurrenciesPageState extends State<CurrenciesPage> {
-
   LanguageData selectedLanguageData;
   List<LanguageData> languages = [];
-
 
   @override
   void initState() {
@@ -42,8 +40,6 @@ class _CurrenciesPageState extends State<CurrenciesPage> {
 
     languages.add(english);
     languages.add(arabic);
-
-
   }
 
   @override
@@ -56,9 +52,8 @@ class _CurrenciesPageState extends State<CurrenciesPage> {
     );
   }
 
-  Widget buildBody(
-      BuildContext context, List<LanguageData> languages) {
-    if(languages.isNotEmpty) {
+  Widget buildBody(BuildContext context, List<LanguageData> languages) {
+    if (languages.isNotEmpty) {
       selectedLanguageData = languages[0];
       return Stack(
         fit: StackFit.expand,
@@ -66,12 +61,9 @@ class _CurrenciesPageState extends State<CurrenciesPage> {
           RadioListBuilder(languages, languageSelected, selectedLanguageData),
           Positioned(
             bottom: 0,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
+            width: MediaQuery.of(context).size.width,
             child: FlatButton(
-              color: Colors.green[800],
+              color: Color.fromRGBO(20, 137, 54, 1),
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onPressed: () {
                 AppData.currencySymbol = selectedLanguageData.code;
@@ -79,7 +71,10 @@ class _CurrenciesPageState extends State<CurrenciesPage> {
                 AppData.banners = null;
                 RestartWidget.restartApp(context);
               },
-              child: Text("Proceed", style: TextStyle(color: Colors.white),),
+              child: Text(
+                "Proceed",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           )
         ],
@@ -87,7 +82,6 @@ class _CurrenciesPageState extends State<CurrenciesPage> {
     } else
       return buildLoading();
   }
-
 
   Widget buildLoading() {
     return Center(
@@ -98,8 +92,6 @@ class _CurrenciesPageState extends State<CurrenciesPage> {
   void languageSelected(LanguageData languageData) {
     this.selectedLanguageData = languageData;
   }
-
-
 }
 
 class RadioListBuilder extends StatefulWidget {
@@ -107,7 +99,8 @@ class RadioListBuilder extends StatefulWidget {
   final Function(LanguageData selectedLanguageData) languageSelected;
   final LanguageData selectedLanguageData;
 
-  const RadioListBuilder(this.languages, this.languageSelected, this.selectedLanguageData);
+  const RadioListBuilder(
+      this.languages, this.languageSelected, this.selectedLanguageData);
 
   @override
   RadioListBuilderState createState() {
@@ -117,7 +110,6 @@ class RadioListBuilder extends StatefulWidget {
 
 class RadioListBuilderState extends State<RadioListBuilder> {
   int value = 0;
-
 
   @override
   void initState() {
@@ -145,4 +137,3 @@ class RadioListBuilderState extends State<RadioListBuilder> {
     );
   }
 }
-

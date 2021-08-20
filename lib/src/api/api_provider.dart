@@ -22,6 +22,7 @@ import 'package:flutter_app1/src/api/responses/filters_response.dart';
 import 'package:flutter_app1/src/api/responses/zones_response.dart';
 import 'package:flutter_app1/src/models/address/address.dart';
 import 'package:flutter_app1/src/models/checkout/post_order.dart';
+import 'package:flutter_app1/src/models/cupon_response.dart';
 import 'package:flutter_app1/src/models/get_stock/get_stock_post.dart';
 import 'package:flutter_app1/src/models/product_models/product_post_model.dart';
 import 'package:flutter_app1/src/models/shipping_methods/get_rates_post_model.dart';
@@ -471,5 +472,18 @@ class ApiProvider {
 
   String generateMd5(String input) {
     return md5.convert(utf8.encode(input)).toString();
+  }
+
+  Future<CuponResponse> getDescuento(String cupon) async {
+    try {
+      Response response = await _dio.post(
+        _baseUrl + "getcoupon",
+        data: jsonEncode({"code": "$cupon"}),
+      );
+      return cuponResponseFromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return CuponResponse(success: "0");
+    }
   }
 }

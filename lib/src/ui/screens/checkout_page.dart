@@ -1,7 +1,12 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/src/models/checkout/coupon.dart';
+import 'package:flutter_app1/src/models/cupon_response.dart';
 import 'package:flutter_app1/src/models/stripe/tarjeta_credito.dart';
+import 'package:flutter_app1/src/repositories/checkout_repo.dart';
+import 'package:flutter_app1/src/repositories/cupon_desc_repo.dart';
 import 'package:flutter_app1/src/services/stripe_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app1/app_data.dart';
@@ -62,6 +67,8 @@ class _CheckoutState extends State<Checkout> {
   double subtotalPrice = 0.0;
   double discountPrice = 0.0;
   double totalPrice = 0.0;
+  int percetnDesc = 0;
+  CuponResponse resDescuento;
 
   Box _box;
 
@@ -120,6 +127,7 @@ class _CheckoutState extends State<Checkout> {
                       buildShippingAddressCard(widget.shippingAddress),
                       buildShippingMethodCard(widget.shippingService),
                       buildPaymentMethodsCard(),
+                      buildCuponCard(),
                       buildPriceList(),
                       BlocConsumer<OrderBloc, OrderState>(
                         builder: (BuildContext context, state) {
@@ -155,6 +163,8 @@ class _CheckoutState extends State<Checkout> {
                               }
                             }
                           } else if (state is PlaceOrderError) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('No se realizo el pago')));
                             Navigator.pop(context);
                           }
                         },
@@ -171,7 +181,7 @@ class _CheckoutState extends State<Checkout> {
                   Container(
                     child: Expanded(
                         child: FlatButton(
-                            color: Colors.orange[500],
+                            color: Color.fromRGBO(247, 121, 34, 1),
                             height: 70.0,
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,
@@ -189,8 +199,8 @@ class _CheckoutState extends State<Checkout> {
                   Expanded(
                       child: FlatButton(
                           color: (selectedPaymentMethod.name != null)
-                              ? Colors.green[500]
-                              : Colors.green[200],
+                              ? Color.fromRGBO(20, 137, 54, 1)
+                              : Color.fromRGBO(20, 137, 54, 1),
                           height: 70.0,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
@@ -215,7 +225,7 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade400,
+        color: Colors.orange.shade500,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -254,7 +264,7 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade300,
+        color: Colors.orange.shade400,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -293,7 +303,7 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade200,
+        color: Colors.orange.shade300,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -345,7 +355,7 @@ class _CheckoutState extends State<Checkout> {
             child: Card(
               margin: EdgeInsets.all(4.0),
               child: Container(
-                color: Colors.orange.shade100,
+                color: Colors.orange.shade200,
                 child: Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Row(
@@ -387,9 +397,116 @@ class _CheckoutState extends State<Checkout> {
     );
   }
 
+  //Felipe: Se agrega widget para capturar el cupon
+  Widget buildCuponCard() {
+    final cuponField = TextEditingController();
+
+    return Card(
+      margin: EdgeInsets.all(4.0),
+      child: Container(
+        color: Colors.orange.shade100,
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text("Cupón de descuento:",
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+              SizedBox(
+                height: 8.0,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(
+                      enabled: discountPrice != 0.00 ? false : null,
+                      controller: cuponField,
+                      decoration: InputDecoration(
+                        enabledBorder: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(8.0),
+                          borderSide: new BorderSide(
+                            color: Color.fromRGBO(247, 121, 34, 1),
+                          ),
+                        ),
+                        disabledBorder: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(8.0),
+                          borderSide: new BorderSide(
+                            color: Color.fromRGBO(20, 137, 54, 1),
+                          ),
+                        ),
+                        labelText: discountPrice != 0.00
+                            ? 'Cupón aplicado'
+                            : 'Ingresa tu cupón',
+                        labelStyle: TextStyle(color: Colors.black),
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.all(8.0),
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(8.0),
+                          borderSide: new BorderSide(
+                            color: Color.fromRGBO(247, 121, 34, 1),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromRGBO(247, 121, 34, 1),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: FlatButton(
+                        shape: new UnderlineInputBorder(
+                            borderRadius: new BorderRadius.circular(8.0),
+                            borderSide: new BorderSide()),
+                        color: Colors.orange[500],
+                        height: 45.0,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        child: Text(
+                          "Canjear",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: discountPrice != 0.00
+                            ? null
+                            : () async {
+                                FocusScope.of(context).unfocus();
+                                resDescuento = await RealCuponDescRepo()
+                                    .getDescuento(cuponField.text);
+
+                                if (resDescuento.success != "0") {
+                                  if (resDescuento.data[0].discountType ==
+                                      "percent") {
+                                    percetnDesc = resDescuento.data[0].amount;
+                                  } else {
+                                    discountPrice =
+                                        resDescuento.data[0].amount.toDouble();
+                                  }
+                                  setState(() {});
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              'Error al aplicar el cupón')));
+                                }
+                              }),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget buildProductsList(List<Product> products, List list) {
     subtotalPrice = 0.0;
-    discountPrice = 0.0;
+    discountPrice = discountPrice;
     totalPrice = 0.0;
 
     for (int i = 0; i < products.length; i++) {
@@ -424,8 +541,16 @@ class _CheckoutState extends State<Checkout> {
       }
     }
 
-    totalPrice += (double.parse(widget.shippingTax) +
-        double.parse(widget.shippingService.rate.toString()));
+    if (percetnDesc == 0) {
+      totalPrice += (double.parse(widget.shippingTax) +
+          double.parse(widget.shippingService.rate.toString()) -
+          discountPrice);
+    } else {
+      discountPrice = (percetnDesc * totalPrice) / 100;
+      totalPrice += (double.parse(widget.shippingTax) +
+          double.parse(widget.shippingService.rate.toString()) -
+          discountPrice);
+    }
 
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
@@ -452,7 +577,7 @@ class _CheckoutState extends State<Checkout> {
         return Card(
           margin: EdgeInsets.all(4),
           child: Container(
-            color: Colors.orange.shade500,
+            color: Color.fromRGBO(247, 121, 34, 0.1),
             child: Row(children: [
               Container(
                 padding: EdgeInsets.all(3.0),
@@ -811,15 +936,23 @@ class _CheckoutState extends State<Checkout> {
 
     postOrder.comments = "";
 
-    postOrder.is_coupon_applied = "0";
-    postOrder.coupon_amount = "";
+    if (discountPrice == 0.00) {
+      postOrder.is_coupon_applied = 0;
+      postOrder.coupon_amount = "";
+    } else {
+      List<Datum> coupons = [resDescuento.data[0]];
+      postOrder.coupons = coupons;
+      postOrder.is_coupon_applied = 1;
+      postOrder.coupon_amount = "$discountPrice";
+    }
+
     //postOrder.coupons = "";
 
     postOrder.nonce = paymentMethodNonce;
     postOrder.payment_method = selectedPaymentMethod.paymentMethod;
 
     postOrder.productsTotal = subtotalPrice;
-    postOrder.totalPrice = totalPrice;
+    postOrder.totalPrice = totalPrice - discountPrice;
     postOrder.products =
         getPostProductList(widget.cartProducts, widget.cartEntries);
 
@@ -1008,8 +1141,24 @@ class _CheckoutState extends State<Checkout> {
     List<PaymentMethodObj> filteredPaymentMethods = List<PaymentMethodObj>();
 
     for (int i = 0; i < data.length; i++) {
-      if (data[i].method == "stripe" || data[i].method == "cod") {
+      if (data[i].method == "stripe" ||
+          data[i].method == "cod" ||
+          data[i].method == "directbank" ||
+          data[i].method == "paytm") {
         filteredPaymentMethods.add(data[i]);
+        if (data[i].method == "directbank") {
+          AppData.transferBankData = PaymentMethodObj(
+            method: data[i].method,
+            publicKey: data[i].publicKey,
+            authToken: data[i].authToken,
+            clientId: data[i].clientId,
+            clientSecret: data[i].clientSecret,
+            environment: data[i].environment,
+            name: data[i].name,
+            active: data[i].active,
+            paymentMethod: data[i].paymentMethod,
+          );
+        }
       }
     }
 

@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/app_data.dart';
 import 'package:flutter_app1/src/blocs/server_settings/server_settings_bloc.dart';
+import 'package:flutter_app1/src/ui/pages/intro.dart';
 import 'package:flutter_app1/src/ui/screens/home_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -31,7 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
         if (state is ServerSettingsLoaded) {
           AppData.settings = state.settingsResponse.data;
           Future.microtask(() => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (BuildContext context) => Home())));
+              MaterialPageRoute(
+                  builder: (BuildContext context) => IntroScreen())));
         }
       },
       child: ScreenUi(),
@@ -54,8 +56,8 @@ class ScreenUi extends StatelessWidget {
             image: DecorationImage(
               image: AssetImage("assets/images/bgsplash.jpg"),
               fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                  Colors.orangeAccent.withOpacity(0.6), BlendMode.darken),
+              /* colorFilter: ColorFilter.mode(
+                  Colors.orangeAccent.withOpacity(0.6), BlendMode.darken),*/
             ),
           ),
           width: MediaQuery.of(context).size.width,
@@ -70,17 +72,14 @@ class ScreenUi extends StatelessWidget {
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 120.0,
-                          height: 120.0,
-                          child: Positioned(
-                            top: 50.0,
-                            child: Image.asset(
-                              "assets/images/logose.png",
-                              fit: BoxFit.fill,
-                            ),
+                          width: 160.0,
+                          height: 160.0,
+                          child: Image.asset(
+                            "assets/images/logose.png",
+                            fit: BoxFit.fill,
                           ),
                         ),
 

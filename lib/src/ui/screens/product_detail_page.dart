@@ -225,7 +225,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 5.0, vertical: 2.0),
                             margin: EdgeInsets.only(top: 4.0),
-                            child: Text("RECOMENDADO",
+                            child: Text("PROMOCIÓN",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12)),
                             color: Colors.redAccent[400],
@@ -296,12 +296,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               ? Text("EN STOCK",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.green.shade600,
+                                      color: Color.fromRGBO(20, 137, 54, 1),
                                       fontSize: 18.0))
                               : Text("NO STOCK",
                                   style: TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.orange.shade700,
+                                      color: Color.fromRGBO(247, 121, 34, 1),
                                       fontSize: 18.0)),
                       ],
                     ),
@@ -466,7 +466,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       color: (response.stock <= 0 &&
                               widget._product.productsType != 2)
                           ? Colors.orange.shade600
-                          : Colors.green.shade600,
+                          : Color.fromRGBO(20, 137, 54, 1),
                       child: Row(children: [
                         Expanded(
                           child: Text(
