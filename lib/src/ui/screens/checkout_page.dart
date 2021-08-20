@@ -1,6 +1,13 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app1/src/models/checkout/coupon.dart';
+import 'package:flutter_app1/src/models/cupon_response.dart';
+import 'package:flutter_app1/src/models/stripe/tarjeta_credito.dart';
+import 'package:flutter_app1/src/repositories/checkout_repo.dart';
+import 'package:flutter_app1/src/repositories/cupon_desc_repo.dart';
+import 'package:flutter_app1/src/services/stripe_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app1/app_data.dart';
 import 'package:flutter_app1/constants.dart';
@@ -35,6 +42,7 @@ class Checkout extends StatefulWidget {
   String shippingTax;
   ShippingService shippingService;
   double totalPrice;
+  CreditCard cardPayment;
 
   Checkout({
     this.cartEntries,
@@ -44,6 +52,7 @@ class Checkout extends StatefulWidget {
     this.shippingTax,
     this.shippingService,
     this.totalPrice,
+    this.cardPayment,
   });
 
   @override
@@ -57,7 +66,10 @@ class _CheckoutState extends State<Checkout> {
 
   double subtotalPrice = 0.0;
   double discountPrice = 0.0;
+  double discountPriceCupon = 0.0;
   double totalPrice = 0.0;
+  int percetnDesc = 0;
+  CuponResponse resDescuento;
 
   Box _box;
 
@@ -101,7 +113,7 @@ class _CheckoutState extends State<Checkout> {
       ),
       body: Container(
         padding: EdgeInsets.all(5.0),
-        color: Colors.grey.shade200,
+        color: Colors.orange.shade50,
         child: Column(
           children: [
             Expanded(
@@ -116,6 +128,7 @@ class _CheckoutState extends State<Checkout> {
                       buildShippingAddressCard(widget.shippingAddress),
                       buildShippingMethodCard(widget.shippingService),
                       buildPaymentMethodsCard(),
+                      buildCuponCard(),
                       buildPriceList(),
                       BlocConsumer<OrderBloc, OrderState>(
                         builder: (BuildContext context, state) {
@@ -151,6 +164,8 @@ class _CheckoutState extends State<Checkout> {
                               }
                             }
                           } else if (state is PlaceOrderError) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('No se realizo el pago')));
                             Navigator.pop(context);
                           }
                         },
@@ -167,14 +182,13 @@ class _CheckoutState extends State<Checkout> {
                   Container(
                     child: Expanded(
                         child: FlatButton(
-                            color: Color.fromRGBO(224, 49, 51, 1),
+                            color: Color.fromRGBO(247, 121, 34, 1),
                             height: 70.0,
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,
                             child: Text(
                               "Cancelar",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20.0),
+                              style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
                               int count = 0;
@@ -186,8 +200,8 @@ class _CheckoutState extends State<Checkout> {
                   Expanded(
                       child: FlatButton(
                           color: (selectedPaymentMethod.name != null)
-                              ? Color.fromRGBO(90, 0, 132, 1)
-                              : Color.fromRGBO(90, 0, 132, 0.5),
+                              ? Color.fromRGBO(20, 137, 54, 1)
+                              : Color.fromRGBO(20, 137, 54, 1),
                           height: 70.0,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
@@ -195,9 +209,10 @@ class _CheckoutState extends State<Checkout> {
                             if (selectedPaymentMethod.name != null)
                               placeOrderNow();
                           },
-                          child: Text("Confirmar",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20.0)))),
+                          child: Text(
+                            "Confirmar",
+                            style: TextStyle(color: Colors.white),
+                          ))),
                 ],
               ),
             )
@@ -211,7 +226,7 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Color.fromRGBO(90, 0, 132, 0.2),
+        color: Colors.orange.shade500,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -250,7 +265,7 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Color.fromRGBO(90, 0, 132, 0.3),
+        color: Colors.orange.shade400,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -289,7 +304,7 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Color.fromRGBO(90, 0, 132, 0.2),
+        color: Colors.orange.shade300,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -341,7 +356,7 @@ class _CheckoutState extends State<Checkout> {
             child: Card(
               margin: EdgeInsets.all(4.0),
               child: Container(
-                color: Color.fromRGBO(90, 0, 132, 0.4),
+                color: Colors.orange.shade200,
                 child: Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Row(
@@ -383,9 +398,117 @@ class _CheckoutState extends State<Checkout> {
     );
   }
 
+  //Felipe: Se agrega widget para capturar el cupon
+  Widget buildCuponCard() {
+    final cuponField = TextEditingController();
+
+    return Card(
+      margin: EdgeInsets.all(4.0),
+      child: Container(
+        color: Colors.orange.shade100,
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text("Cupón de descuento:",
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+              SizedBox(
+                height: 8.0,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: TextFormField(
+                      enabled: discountPriceCupon != 0.00 ? false : null,
+                      controller: cuponField,
+                      decoration: InputDecoration(
+                        enabledBorder: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(8.0),
+                          borderSide: new BorderSide(
+                            color: Color.fromRGBO(247, 121, 34, 1),
+                          ),
+                        ),
+                        disabledBorder: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(8.0),
+                          borderSide: new BorderSide(
+                            color: Color.fromRGBO(20, 137, 54, 1),
+                          ),
+                        ),
+                        labelText: discountPriceCupon != 0.00
+                            ? 'Cupón aplicado'
+                            : 'Ingresa tu cupón',
+                        labelStyle: TextStyle(color: Colors.black),
+                        fillColor: Colors.white,
+                        contentPadding: EdgeInsets.all(8.0),
+                        border: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(8.0),
+                          borderSide: new BorderSide(
+                            color: Color.fromRGBO(247, 121, 34, 1),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromRGBO(247, 121, 34, 1),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: FlatButton(
+                        shape: new UnderlineInputBorder(
+                            borderRadius: new BorderRadius.circular(8.0),
+                            borderSide: new BorderSide()),
+                        color: Colors.orange[500],
+                        height: 45.0,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        child: Text(
+                          "Canjear",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: discountPriceCupon != 0.00
+                            ? null
+                            : () async {
+                                FocusScope.of(context).unfocus();
+                                resDescuento = await RealCuponDescRepo()
+                                    .getDescuento(cuponField.text);
+
+                                if (resDescuento.success != "0") {
+                                  if (resDescuento.data[0].discountType ==
+                                      "percent") {
+                                    percetnDesc = resDescuento.data[0].amount;
+                                  } else {
+                                    discountPriceCupon =
+                                        resDescuento.data[0].amount.toDouble();
+                                  }
+                                  setState(() {});
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              'Error al aplicar el cupón')));
+                                }
+                              }),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget buildProductsList(List<Product> products, List list) {
     subtotalPrice = 0.0;
-    discountPrice = 0.0;
+    discountPrice = discountPrice;
+    discountPriceCupon = discountPriceCupon;
     totalPrice = 0.0;
 
     for (int i = 0; i < products.length; i++) {
@@ -409,7 +532,7 @@ class _CheckoutState extends State<Checkout> {
             ((double.parse(product.productsPrice.toString()) + attrsPrice) *
                 cartEntry.quantity);
         if (isDiscount != null && isDiscount != 0) {
-          discountPrice += (double.parse(product.productsPrice.toString()) -
+          discountPrice = (double.parse(product.productsPrice.toString()) -
                   double.parse(product.discountPrice.toString())) *
               cartEntry.quantity;
         }
@@ -420,8 +543,18 @@ class _CheckoutState extends State<Checkout> {
       }
     }
 
-    totalPrice += (double.parse(widget.shippingTax) +
-        double.parse(widget.shippingService.rate.toString()));
+    if (percetnDesc == 0) {
+      totalPrice += (double.parse(widget.shippingTax) +
+          double.parse(widget.shippingService.rate.toString()) -
+          discountPriceCupon);
+      discountPrice += discountPriceCupon;
+    } else {
+      discountPriceCupon = (percetnDesc * totalPrice) / 100;
+      discountPrice += discountPriceCupon;
+      totalPrice += (double.parse(widget.shippingTax) +
+          double.parse(widget.shippingService.rate.toString()) -
+          discountPrice);
+    }
 
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
@@ -448,7 +581,7 @@ class _CheckoutState extends State<Checkout> {
         return Card(
           margin: EdgeInsets.all(4),
           child: Container(
-            color: Color.fromRGBO(90, 0, 132, 0.4),
+            color: Color.fromRGBO(247, 121, 34, 0.1),
             child: Row(children: [
               Container(
                 padding: EdgeInsets.all(3.0),
@@ -807,22 +940,29 @@ class _CheckoutState extends State<Checkout> {
 
     postOrder.comments = "";
 
-    postOrder.is_coupon_applied = "0";
-    postOrder.coupon_amount = "";
+    if (discountPriceCupon == 0.00) {
+      postOrder.is_coupon_applied = 0;
+      postOrder.coupon_amount = "";
+    } else {
+      List<Datum> coupons = [resDescuento.data[0]];
+      postOrder.coupons = coupons;
+      postOrder.is_coupon_applied = 1;
+      postOrder.coupon_amount = "$discountPrice";
+    }
+
     //postOrder.coupons = "";
 
     postOrder.nonce = paymentMethodNonce;
     postOrder.payment_method = selectedPaymentMethod.paymentMethod;
 
     postOrder.productsTotal = subtotalPrice;
-    postOrder.totalPrice = totalPrice;
+    postOrder.totalPrice = totalPrice - discountPrice - discountPriceCupon;
     postOrder.products =
         getPostProductList(widget.cartProducts, widget.cartEntries);
 
     postOrder.transaction_id = "";
 
     postOrder.currency_code = "MXN";
-
     orderBloc.add(PlaceOrder(postOrder));
   }
 
@@ -971,17 +1111,14 @@ class _CheckoutState extends State<Checkout> {
           Row(children: [
             Text(
               "Total",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Expanded(child: SizedBox()),
             Text(
               "\$" + totalPrice.toStringAsFixed(2),
               style: TextStyle(
                   fontSize: 18,
-                  color: Color.fromRGBO(224, 49, 51, 1),
+                  color: Colors.orange.shade600,
                   fontWeight: FontWeight.bold),
               //fontSize: 18, color: Theme.of(context).primaryColor),
             ),
@@ -1008,8 +1145,24 @@ class _CheckoutState extends State<Checkout> {
     List<PaymentMethodObj> filteredPaymentMethods = List<PaymentMethodObj>();
 
     for (int i = 0; i < data.length; i++) {
-      if (data[i].method == "stripe" || data[i].method == "cod") {
+      if (data[i].method == "stripe" ||
+          data[i].method == "cod" ||
+          data[i].method == "directbank" ||
+          data[i].method == "paytm") {
         filteredPaymentMethods.add(data[i]);
+        if (data[i].method == "directbank") {
+          AppData.transferBankData = PaymentMethodObj(
+            method: data[i].method,
+            publicKey: data[i].publicKey,
+            authToken: data[i].authToken,
+            clientId: data[i].clientId,
+            clientSecret: data[i].clientSecret,
+            environment: data[i].environment,
+            name: data[i].name,
+            active: data[i].active,
+            paymentMethod: data[i].paymentMethod,
+          );
+        }
       }
     }
 
@@ -1104,43 +1257,43 @@ class FullScreenDialogState extends State<FullScreenDialog> {
     String cardExpiryYear,
     String cardCvc,
     String cardUserName,
-  ) {
-    final CreditCard testCard = CreditCard(
-      number: cardNumber,
-      expMonth: int.tryParse(cardExpiryMonth),
-      expYear: int.tryParse(cardExpiryYear),
+  ) async {
+    final TarjetaCredito testCard = TarjetaCredito(
+      cardNumber: cardNumber,
+      cvv: cardCvc,
+      expiracyMonth: int.tryParse(cardExpiryMonth),
+      expiracyYear: int.tryParse(cardExpiryYear),
       name: cardUserName,
-      cvc: cardCvc,
     );
+    AppData.tarjetaCredito = testCard;
+    // print("soy el pago ${testCard.number}");
 
-    print("soy el pago ${testCard.number}");
+    // StripePayment.createPaymentMethod(
+    //   PaymentMethodRequest(
+    //     card: testCard,
+    //   ),
+    // ).then((paymentMethod) {
+    //   print('correcto ${paymentMethod.billingDetails.email}');
+    //   print(JsonEncoder.withIndent(' ').convert(paymentMethod));
+    //   StripePayment.confirmPaymentIntent(PaymentIntent(
+    //     clientSecret:
+    //         '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',
+    //     // clientSecret: dotenv.env['STRIPE_SECRET'],
 
-    StripePayment.createPaymentMethod(
-      PaymentMethodRequest(
-        card: testCard,
-      ),
-    ).then((paymentMethod) {
-      print('correcto ${paymentMethod.billingDetails.email}');
-      print(JsonEncoder.withIndent(' ').convert(paymentMethod));
-      StripePayment.confirmPaymentIntent(PaymentIntent(
-        clientSecret:
-            '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',
-        // clientSecret: dotenv.env['STRIPE_SECRET'],
+    //     // clientSecret: AppConstants.STRIPE_SECRET,
+    //     paymentMethodId: paymentMethod.id,
+    //   )).then((paymentIntentResult) {
+    //     print(JsonEncoder.withIndent(' ').convert(paymentIntentResult));
+    //   }).catchError((e) {
+    //     print(e);
+    //   });
 
-        // clientSecret: AppConstants.STRIPE_SECRET,
-        paymentMethodId: paymentMethod.id,
-      )).then((paymentIntentResult) {
-        print(JsonEncoder.withIndent(' ').convert(paymentIntentResult));
-      }).catchError((e) {
-        print(e);
-      });
-
-      // paymentMethodNonce = paymentMethod.id;
-      // placeOrderNow();
-      //_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Received ${token.tokenId}')));
-    }).catchError((e) {
-      print(e);
-    });
+    //   // paymentMethodNonce = paymentMethod.id;
+    //   // placeOrderNow();
+    //   //_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Received ${token.tokenId}')));
+    // }).catchError((e) {
+    //   print(e);
+    // });
   }
 
   @override
@@ -1213,7 +1366,7 @@ class FullScreenDialogState extends State<FullScreenDialog> {
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(2.3),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       // widget._stripeExpiryYear = _cardExpiryYearController.text;
                       // widget._stripeExpiryMonth =
                       //     _cardExpiryMonthController.text;
@@ -1225,13 +1378,22 @@ class FullScreenDialogState extends State<FullScreenDialog> {
                         _cardCvcController.text,
                         _cardNameUserController.text,
                       );
-                      widget._onStripeDetailsAdded(
-                        _cardNumberController.text,
-                        _cardExpiryMonthController.text,
-                        _cardExpiryYearController.text,
-                        _cardCvcController.text,
-                        _cardNameUserController.text,
-                      );
+                      Navigator.pop(context);
+
+                      // onStripeDetailsAddeds(
+                      //   _cardNumberController.text,
+                      //   _cardExpiryMonthController.text,
+                      //   _cardExpiryYearController.text,
+                      //   _cardCvcController.text,
+                      //   _cardNameUserController.text,
+                      // );
+                      // widget._onStripeDetailsAdded(
+                      //   _cardNumberController.text,
+                      //   _cardExpiryMonthController.text,
+                      //   _cardExpiryYearController.text,
+                      //   _cardCvcController.text,
+                      //   _cardNameUserController.text,
+                      // );
                       // Navigator.pop(context);
                     },
                     child: new Text("Confirmar"),

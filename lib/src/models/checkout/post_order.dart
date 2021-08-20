@@ -1,4 +1,5 @@
 import 'package:flutter_app1/src/models/checkout/post_product.dart';
+import 'package:flutter_app1/src/models/cupon_response.dart';
 
 import 'coupon.dart';
 
@@ -17,7 +18,7 @@ class PostOrder {
   String billing_zone_id;
   String comments;
   var coupon_amount;
-  List<Coupon> coupons;
+  List<Datum> coupons;
   String email;
   String customers_id;
   String customers_name;
@@ -36,7 +37,7 @@ class PostOrder {
   String delivery_zone_id;
   String delivery_cost;
   String delivery_time;
-  String is_coupon_applied;
+  int is_coupon_applied;
   String language_id;
   String latitude;
   String longitude;
@@ -53,6 +54,7 @@ class PostOrder {
   var total_tax;
   String transaction_id;
   String guest_status;
+  String payment_sripe;
 
   PostOrder(
       {this.billing_city,
@@ -104,7 +106,8 @@ class PostOrder {
       this.totalPrice,
       this.total_tax,
       this.transaction_id,
-      this.guest_status});
+      this.guest_status,
+      this.payment_sripe});
 
   PostOrder.fromJson(Map<String, dynamic> json) {
     billing_city = json['billing_city'];
@@ -122,9 +125,9 @@ class PostOrder {
     comments = json['comments'];
     coupon_amount = json['coupon_amount'];
     if (json['coupons'] != null) {
-      coupons = new List<Coupon>();
+      coupons = new List<Datum>();
       json['coupons'].forEach((v) {
-        coupons.add(new Coupon.fromJson(v));
+        coupons.add(new Datum.fromJson(v));
       });
     }
     email = json['email'];
@@ -167,6 +170,7 @@ class PostOrder {
     total_tax = json['total_tax'];
     transaction_id = json['transaction_id'];
     guest_status = json['guest_status'];
+    payment_sripe = json['payment_sripe'];
   }
 
   Map<String, dynamic> toJson() {
@@ -186,7 +190,7 @@ class PostOrder {
     data['comments'] = this.comments;
     data['coupon_amount'] = this.coupon_amount;
     if (this.coupons != null) {
-      data['coupons'] = this.coupons.map((e) => e.tojson()).toList();
+      data['coupons'] = this.coupons.map((e) => e.toJson()).toList();
     }
     data['email'] = this.email;
     data['customers_id'] = this.customers_id;
@@ -225,6 +229,7 @@ class PostOrder {
     data['total_tax'] = this.total_tax;
     data['transaction_id'] = this.transaction_id;
     data['guest_status'] = this.guest_status;
+    data['payment_sripe'] = this.payment_sripe;
     return data;
   }
 }
