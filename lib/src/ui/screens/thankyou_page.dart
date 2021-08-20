@@ -51,6 +51,9 @@ class ThankYou extends StatelessWidget {
                       ],
                     )
                   : Container(),
+              SizedBox(
+                height: 30.0,
+              ),
               FlatButton(
                 color: Color.fromRGBO(20, 137, 54, 1),
                 height: 80.0,
