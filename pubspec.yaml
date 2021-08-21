@@ -57,7 +57,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_dotenv: ^5.0.0
-  sign_in_with_apple: ^3.0.0
+  sign_in_with_apple: ^2.5.2
   webview_flutter: ^2.0.12
 
 dev_dependencies:

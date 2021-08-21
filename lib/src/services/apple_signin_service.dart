@@ -1,9 +1,9 @@
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AppleSignInService {
-
-static String clientId ='com.cosmonautas.saludableappservice';
-static String redirectUri ='https://app.easystore.com.mx/api/appleregistration';
+  static String clientId = 'com.cosmonautas.saludableappservice';
+  static String redirectUri =
+      'https://apple-google-sign-in-anftech.herokuapp.com/callbacks/sign_in_with_apple';
 
   static void signIn() async {
     try {
@@ -18,6 +18,7 @@ static String redirectUri ='https://app.easystore.com.mx/api/appleregistration';
           ));
 
       print(credential);
+      print(credential.authorizationCode);
     } catch (e) {
       print(e);
     }
