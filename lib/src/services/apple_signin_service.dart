@@ -3,9 +3,9 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 class AppleSignInService {
   static String clientId = 'com.cosmonautas.saludableappservice';
   static String redirectUri =
-      'https://apple-google-sign-in-anftech.herokuapp.com/callbacks/sign_in_with_apple';
+      'https://app.easystore.com.mx/api/callback/sign_in_with_apple';
 
-  static void signIn() async {
+  Future<String> signIn() async {
     try {
       final credential = await SignInWithApple.getAppleIDCredential(
           scopes: [
@@ -16,11 +16,9 @@ class AppleSignInService {
             clientId: clientId,
             redirectUri: Uri.parse(redirectUri),
           ));
-
-      print(credential);
-      print(credential.authorizationCode);
+      return credential.authorizationCode;
     } catch (e) {
-      print(e);
+      return null;
     }
 
     // Now send the credential (especially `credential.authorizationCode`) to your server to create a session

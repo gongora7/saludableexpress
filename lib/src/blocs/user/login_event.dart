@@ -40,6 +40,16 @@ class ProcessLoginWithFacebook extends LoginEvent {
   List<Object> get props => [this.accessToken];
 
 }
+class ProcessLoginWithApple extends LoginEvent {
+
+  final String accessToken;
+
+  ProcessLoginWithApple(this.accessToken);
+
+  @override
+  List<Object> get props => [this.accessToken];
+
+}
 
 class ProcessRegistration extends LoginEvent {
   final String firstName;

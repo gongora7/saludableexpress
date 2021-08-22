@@ -81,6 +81,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } catch(e) {
         yield LoginError("Couldn't fetch response. Is the device online?");
       }
+    }else if (event is ProcessLoginWithApple) {
+      try {
+        yield LoginLoading();
+        LoginResponse loginResponse =
+        await userRepo.loginWithApple(event.accessToken);
+        if (loginResponse.success != "0" && loginResponse.data.isNotEmpty) {
+          yield LoginLoaded(loginResponse.data.first);
+        } else {
+          yield LoginError(loginResponse.message);
+        }
+      } catch(e) {
+        yield LoginError("Couldn't fetch response. Is the device online?");
+      }
     }
   }
 }
