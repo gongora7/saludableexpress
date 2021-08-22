@@ -75,6 +75,7 @@ class _CheckoutState extends State<Checkout> {
 
   String paymentMethodNonce = "";
   String brainTreeTokenizationKeys = "";
+  bool couponAplicado = false;
 
   @override
   void initState() {
@@ -507,7 +508,7 @@ class _CheckoutState extends State<Checkout> {
 
   Widget buildProductsList(List<Product> products, List list) {
     subtotalPrice = 0.0;
-    discountPrice = discountPrice;
+    discountPrice = 0.0;
     discountPriceCupon = discountPriceCupon;
     totalPrice = 0.0;
 
@@ -543,18 +544,14 @@ class _CheckoutState extends State<Checkout> {
       }
     }
 
-    if (percetnDesc == 0) {
-      totalPrice += (double.parse(widget.shippingTax) +
-          double.parse(widget.shippingService.rate.toString()) -
-          discountPriceCupon);
-      discountPrice += discountPriceCupon;
-    } else {
+    if (percetnDesc != 0) {
       discountPriceCupon = (percetnDesc * totalPrice) / 100;
-      discountPrice += discountPriceCupon;
-      totalPrice += (double.parse(widget.shippingTax) +
-          double.parse(widget.shippingService.rate.toString()) -
-          discountPrice);
     }
+    discountPrice = discountPrice + discountPriceCupon;
+    totalPrice = subtotalPrice -
+        discountPrice -
+        (double.parse(widget.shippingTax) -
+            double.parse(widget.shippingService.rate.toString()));
 
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
