@@ -5,7 +5,7 @@ class AppleSignInService {
   static String redirectUri =
       'https://app.easystore.com.mx/api/callback/sign_in_with_apple';
 
-  static void signIn() async {
+  Future<String> signIn() async {
     try {
       final credential = await SignInWithApple.getAppleIDCredential(
           scopes: [
@@ -16,11 +16,9 @@ class AppleSignInService {
             clientId: clientId,
             redirectUri: Uri.parse(redirectUri),
           ));
-
-      print(credential);
-      print(credential.authorizationCode);
+      return credential.authorizationCode;
     } catch (e) {
-      print(e);
+      return null;
     }
 
     // Now send the credential (especially `credential.authorizationCode`) to your server to create a session
