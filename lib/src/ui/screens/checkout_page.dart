@@ -1145,10 +1145,10 @@ class _CheckoutState extends State<Checkout> {
     List<PaymentMethodObj> filteredPaymentMethods = List<PaymentMethodObj>();
 
     for (int i = 0; i < data.length; i++) {
-      if (data[i].method == "stripe" ||
-          data[i].method == "cod" ||
-          data[i].method == "directbank" ||
-          data[i].method == "paytm") {
+      if (data[i].method == "stripe" || data[i].method == "directbank")
+      // data[i].method == "cod" ||
+      // data[i].method == "paytm")
+      {
         filteredPaymentMethods.add(data[i]);
         if (data[i].method == "directbank") {
           AppData.transferBankData = PaymentMethodObj(
