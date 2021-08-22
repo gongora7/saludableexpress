@@ -1,5 +1,6 @@
 import 'package:flutter_app1/src/api/responses/languages_response.dart';
 import 'package:flutter_app1/src/models/payment_methods/payment_method.dart';
+import 'package:flutter_app1/src/models/stripe/oxxo/payment_confirm_oxxo_response.dart';
 import 'package:flutter_app1/src/models/stripe/tarjeta_credito.dart';
 
 import 'src/api/responses/banners_response.dart';
@@ -19,4 +20,5 @@ class AppData {
   static String currencySymbol = "\$";
   static TarjetaCredito tarjetaCredito;
   static PaymentMethodObj transferBankData;
+  static PaymentConfirmOxxoResponse comfirmOxxo;
 }

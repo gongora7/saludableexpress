@@ -119,7 +119,7 @@ class StripeService {
       final data = {
         'amount': amount,
         'currency': currency,
-        'payment_method_types': [paymenyMethodType],
+        'payment_method_types[]': paymenyMethodType,
         'payment_method': paymentMethod
       };
 
