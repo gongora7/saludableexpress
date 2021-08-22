@@ -30,6 +30,7 @@ import 'package:flutter_app1/src/ui/pages/news.dart';
 import 'package:flutter_app1/src/ui/pages/shop.dart';
 import 'package:flutter_app1/src/ui/screens/product_detail_page.dart';
 import 'package:flutter_app1/src/ui/screens/search_page.dart';
+import 'package:flutter_app1/src/ui/widgets/curved_animation_bar.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:share/share.dart';
@@ -41,8 +42,9 @@ import '../pages/home_page_1.dart';
 import '../pages/home_page_2.dart';
 import '../pages/home_page_4.dart';
 
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-int _page = 0;
 
 class Home extends StatefulWidget {
   @override
@@ -182,34 +184,46 @@ class _HomeState extends State<Home> {
                             primaryColor: Colors.white,
                             textTheme: Theme.of(context).textTheme.copyWith(
                                 caption: TextStyle(color: Colors.white70))),
-                        child: BottomNavigationBar(
-                          selectedItemColor: Colors.redAccent,
-                          unselectedItemColor: Colors.grey,
-                          type: BottomNavigationBarType.fixed,
-                          currentIndex: _selectedIndex,
-                          onTap: (value) {
-                            _selectCurrentItem(value);
-                          },
-                          items: [
-                            BottomNavigationBarItem(
-                              label: "Home",
-                              icon: Icon(Icons.home_rounded),
-                              activeIcon: Icon(Icons.home_filled,
-                                  color: Color.fromRGBO(224, 49, 51, 1)),
-                            ),
-                            BottomNavigationBarItem(
-                              label: "Categorías",
-                              icon: Icon(Icons.card_travel_outlined),
-                              activeIcon: Icon(Icons.card_travel_sharp,
-                                  color: Color.fromRGBO(224, 49, 51, 1)),
-                            ),
-                            BottomNavigationBarItem(
-                              label: "Tienda",
-                              icon: Icon(Icons.shop_outlined),
-                              activeIcon: Icon(Icons.shop_sharp,
-                                  color: Color.fromRGBO(224, 49, 51, 1)),
-                            ),
-                            /* BottomNavigationBarItem(
+                        child: bottomNavBar(),
+                        //child: BottomNavBar(),
+                        //child: animationBottomBar()
+                      ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget bottomNavBar() {
+    return Container(
+      child: BottomNavigationBar(
+        selectedItemColor: Colors.redAccent,
+        unselectedItemColor: Colors.grey,
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        onTap: (value) {
+          _selectCurrentItem(value);
+        },
+        items: [
+          BottomNavigationBarItem(
+            label: "Inicio",
+            icon: Icon(Icons.home_rounded),
+            activeIcon:
+                Icon(Icons.home_filled, color: Color.fromRGBO(224, 49, 51, 1)),
+          ),
+          BottomNavigationBarItem(
+            label: "Categorías",
+            icon: Icon(Icons.card_travel_outlined),
+            activeIcon: Icon(Icons.card_travel_sharp,
+                color: Color.fromRGBO(224, 49, 51, 1)),
+          ),
+          BottomNavigationBarItem(
+            label: "Tienda",
+            icon: Icon(Icons.shop_outlined),
+            activeIcon:
+                Icon(Icons.shop_sharp, color: Color.fromRGBO(224, 49, 51, 1)),
+          ),
+          /* BottomNavigationBarItem(
                             label: "News",
                             icon: Icon(Icons.library_books),
                           ),
@@ -217,11 +231,7 @@ class _HomeState extends State<Home> {
                             label: "Me",
                             icon: Icon(Icons.account_box),
                           ), */
-                          ],
-                        ),
-                      ),
-          );
-        },
+        ],
       ),
     );
   }
