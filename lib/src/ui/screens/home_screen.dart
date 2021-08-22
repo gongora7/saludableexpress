@@ -677,6 +677,18 @@ class _HomeState extends State<Home> {
             (AppData.user != null) ? "Cerrar Sesión" : "Iniciar Sesión",
             Icons.login_rounded));
         break;
+      case "Logout":
+        _selectCurrentItem(0);
+        _userBox.delete("current_user");
+        AppData.user = null;
+        AppData.data.removeLast();
+        AppData.data.add(DrawerMenuItem(
+            (AppData.user != null) ? "Cerrar Sesión" : "Iniciar Sesión",
+            Icons.login_rounded));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Se ha cerrado sesión correctamente')));
+
+        break;
 /*
       case "ProductDetailsPage":
         Navigator.push(

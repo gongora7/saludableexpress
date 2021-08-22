@@ -85,7 +85,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         yield LoginLoading();
         LoginResponse loginResponse =
-        await userRepo.loginWithApple(event.accessToken);
+        await userRepo.loginWithApple(event.accessToken, event.code);
         if (loginResponse.success != "0" && loginResponse.data.isNotEmpty) {
           yield LoginLoaded(loginResponse.data.first);
         } else {

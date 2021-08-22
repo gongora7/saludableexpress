@@ -14,7 +14,7 @@ abstract class UserRepo {
 
   Future<LoginResponse> loginWithFacebook(String accessToken);
 
-  Future<LoginResponse> loginWithApple(String accessToken);
+  Future<LoginResponse> loginWithApple(String accessToken, String code);
 
   Future<LoginResponse> registration(String firstName, String lastName,
       String email, String password, String countryCode, String phone);
@@ -52,8 +52,8 @@ class RealUserRepo extends UserRepo {
     return _apiProvider.processLoginWithFacebook(accessToken);
   }
   @override
-  Future<LoginResponse> loginWithApple(String accessToken) {
-    return _apiProvider.processLoginWithApple(accessToken);
+  Future<LoginResponse> loginWithApple(String accessToken, String code) {
+    return _apiProvider.processLoginWithApple(accessToken, code);
   }
 }
 
@@ -84,7 +84,7 @@ class FakeUserRepo extends UserRepo {
     throw UnimplementedError();
   }
   @override
-  Future<LoginResponse> loginWithApple(String accessToken) {
+  Future<LoginResponse> loginWithApple(String accessToken, String code) {
     throw UnimplementedError();
   }
 }

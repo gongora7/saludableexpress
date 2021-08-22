@@ -5,7 +5,7 @@ class AppleSignInService {
   static String redirectUri =
       'https://app.easystore.com.mx/api/callback/sign_in_with_apple';
 
-  Future<String> signIn() async {
+  Future<AuthorizationCredentialAppleID> signIn() async {
     try {
       final credential = await SignInWithApple.getAppleIDCredential(
           scopes: [
@@ -16,7 +16,7 @@ class AppleSignInService {
             clientId: clientId,
             redirectUri: Uri.parse(redirectUri),
           ));
-      return credential.authorizationCode;
+      return credential;
     } catch (e) {
       return null;
     }

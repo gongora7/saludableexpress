@@ -43,8 +43,9 @@ class ProcessLoginWithFacebook extends LoginEvent {
 class ProcessLoginWithApple extends LoginEvent {
 
   final String accessToken;
+  final String code;
 
-  ProcessLoginWithApple(this.accessToken);
+  ProcessLoginWithApple(this.accessToken, this.code);
 
   @override
   List<Object> get props => [this.accessToken];
