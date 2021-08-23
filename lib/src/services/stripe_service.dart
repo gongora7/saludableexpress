@@ -12,7 +12,7 @@ class StripeService {
   String _paymentMethodUrl = 'https://api.stripe.com/v1/payment_methods';
   // static String _secretKey ='sk_test_51J8s7PGVQVIvsbeUtIHhIsI53pDXZ25QETcC6WzYOPIKAOwICEhp6RO5WydeZyxN3dK52XQHXwDEbEEFOq7A6f4C00LquonQNw';
   static String _secretKey =
-      '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';
+      "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";
   final headerOptions = new Options(
       contentType: Headers.formUrlEncodedContentType,
       headers: {'Authorization': 'Bearer ${StripeService._secretKey}'});
@@ -180,8 +180,7 @@ class StripeService {
   }) async {
     try {
       //Obtenemos el metodo de pago
-      final paymentMethodOxxo = await _crearPaymentMethodOxxo(
-         nombre, email);
+      final paymentMethodOxxo = await _crearPaymentMethodOxxo(nombre, email);
       //Validamos si nos regreso el metodo de pago
       if (paymentMethodOxxo != null) {
         //Se crea el intent pasandole el metodo de pago generado anteriormente
