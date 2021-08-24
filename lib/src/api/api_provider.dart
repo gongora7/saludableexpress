@@ -266,6 +266,20 @@ class ApiProvider {
     }
   }
 
+  Future<LoginResponse> processLoginWithApple(
+      String accessToken, String code) async {
+    try {
+      Response response = await _dio.post(
+        _baseUrl + "appleregistration",
+        data: jsonEncode({"id_token": accessToken, "code": code}),
+      );
+      return LoginResponse.fromJson(json.decode(response.data));
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return LoginResponse.withError(error);
+    }
+  }
+
   Future<ForgotPasswordResponse> forgotPassword(String email) async {
     try {
       Response response = await _dio.post(

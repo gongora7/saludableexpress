@@ -31,14 +31,22 @@ class ProcessLoginWithGmail extends LoginEvent {
 }
 
 class ProcessLoginWithFacebook extends LoginEvent {
-
   final String accessToken;
 
   ProcessLoginWithFacebook(this.accessToken);
 
   @override
   List<Object> get props => [this.accessToken];
+}
 
+class ProcessLoginWithApple extends LoginEvent {
+  final String accessToken;
+  final String code;
+
+  ProcessLoginWithApple(this.accessToken, this.code);
+
+  @override
+  List<Object> get props => [this.accessToken];
 }
 
 class ProcessRegistration extends LoginEvent {

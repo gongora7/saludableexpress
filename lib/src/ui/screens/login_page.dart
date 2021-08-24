@@ -320,11 +320,20 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ), */
               ],
             ),
-            /* SignInWithAppleButton(
+            SignInWithAppleButton(
               text: 'Apple ID',
-              onPressed: AppleSignInService.signIn,
-              
-            ),*/
+              onPressed: () async {
+                AppleSignInService appleSignInService = AppleSignInService();
+                final credential = await appleSignInService.signIn();
+                if (credential != null) {
+                  loginBloc.add(ProcessLoginWithApple(
+                      credential.identityToken, credential.authorizationCode));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Error al autenticarse')));
+                }
+              },
+            ),
             SizedBox(
               height: 16.0,
             ),
