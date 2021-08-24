@@ -5,14 +5,12 @@ import 'package:flutter_app1/src/api/responses/login_response.dart';
 abstract class UserRepo {
   Future<LoginResponse> login(String email, String password);
 
-  Future<LoginResponse> loginWithGmail(String idToken,
-      String customerId,
-      String givenName,
-      String familyName,
-      String email,
-      String imageUrl);
+  Future<LoginResponse> loginWithGmail(String idToken, String customerId,
+      String givenName, String familyName, String email, String imageUrl);
 
   Future<LoginResponse> loginWithFacebook(String accessToken);
+
+  Future<LoginResponse> loginWithApple(String accessToken, String code);
 
   Future<LoginResponse> registration(String firstName, String lastName,
       String email, String password, String countryCode, String phone);
@@ -41,13 +39,20 @@ class RealUserRepo extends UserRepo {
   }
 
   @override
-  Future<LoginResponse> loginWithGmail(String idToken, String customerId, String givenName, String familyName, String email, String imageUrl) {
-    return _apiProvider.processLoginWithGoogle(idToken, customerId, givenName, familyName, email, imageUrl);
+  Future<LoginResponse> loginWithGmail(String idToken, String customerId,
+      String givenName, String familyName, String email, String imageUrl) {
+    return _apiProvider.processLoginWithGoogle(
+        idToken, customerId, givenName, familyName, email, imageUrl);
   }
 
   @override
   Future<LoginResponse> loginWithFacebook(String accessToken) {
     return _apiProvider.processLoginWithFacebook(accessToken);
+  }
+
+  @override
+  Future<LoginResponse> loginWithApple(String accessToken, String code) {
+    return _apiProvider.processLoginWithApple(accessToken, code);
   }
 }
 
@@ -69,12 +74,18 @@ class FakeUserRepo extends UserRepo {
   }
 
   @override
-  Future<LoginResponse> loginWithGmail(String idToken, String customerId, String givenName, String familyName, String email, String imageUrl) {
+  Future<LoginResponse> loginWithGmail(String idToken, String customerId,
+      String givenName, String familyName, String email, String imageUrl) {
     throw UnimplementedError();
   }
 
   @override
   Future<LoginResponse> loginWithFacebook(String accessToken) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<LoginResponse> loginWithApple(String accessToken, String code) {
     throw UnimplementedError();
   }
 }

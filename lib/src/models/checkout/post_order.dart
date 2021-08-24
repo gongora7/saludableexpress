@@ -55,6 +55,7 @@ class PostOrder {
   String transaction_id;
   String guest_status;
   String payment_sripe;
+  String oxxo_payment_id;
 
   PostOrder(
       {this.billing_city,
@@ -230,6 +231,7 @@ class PostOrder {
     data['transaction_id'] = this.transaction_id;
     data['guest_status'] = this.guest_status;
     data['payment_sripe'] = this.payment_sripe;
+    data['oxxo_payment_id'] = this.oxxo_payment_id;
     return data;
   }
 }
