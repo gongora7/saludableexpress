@@ -26,7 +26,8 @@ class PaymentMethodObj {
   PaymentMethodObj.fromJson(Map<String, dynamic> json) {
     authToken = json['auth_token'];
     clientId = json['client_id'];
-    clientSecret = dotenv.env['STRIPE_SECRET'];
+    // clientSecret = dotenv.env['STRIPE_SECRET'];
+    clientSecret = json['client_secret'];
     environment = json['environment'];
     name = json['name'];
     publicKey = json['public_key'];
