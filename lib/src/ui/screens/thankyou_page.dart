@@ -71,7 +71,7 @@ class ThankYou extends StatelessWidget {
                       color: Colors.red,
                       height: 80.0,
                       child: Text(
-                        "VER BOUNCHER DE PAGO",
+                        "VER VOUNCHER DE PAGO",
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () {
