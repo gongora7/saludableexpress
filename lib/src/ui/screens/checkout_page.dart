@@ -1143,8 +1143,8 @@ class _CheckoutState extends State<Checkout> {
 
     for (int i = 0; i < data.length; i++) {
       if (data[i].method == "stripe" ||
-          data[i].method == "directbank" ||
-          data[i].method == "oxxo")
+          data[i].method == "directbank")
+          // data[i].method == "oxxo")
       // data[i].method == "cod" ||
       // data[i].method == "paytm")
       {
@@ -1265,34 +1265,7 @@ class FullScreenDialogState extends State<FullScreenDialog> {
       name: cardUserName,
     );
     AppData.tarjetaCredito = testCard;
-    // print("soy el pago ${testCard.number}");
-
-    // StripePayment.createPaymentMethod(
-    //   PaymentMethodRequest(
-    //     card: testCard,
-    //   ),
-    // ).then((paymentMethod) {
-    //   print('correcto ${paymentMethod.billingDetails.email}');
-    //   print(JsonEncoder.withIndent(' ').convert(paymentMethod));
-    //   StripePayment.confirmPaymentIntent(PaymentIntent(
-    //     clientSecret:
-    //         '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',
-    //     // clientSecret: dotenv.env['STRIPE_SECRET'],
-
-    //     // clientSecret: AppConstants.STRIPE_SECRET,
-    //     paymentMethodId: paymentMethod.id,
-    //   )).then((paymentIntentResult) {
-    //     print(JsonEncoder.withIndent(' ').convert(paymentIntentResult));
-    //   }).catchError((e) {
-    //     print(e);
-    //   });
-
-    //   // paymentMethodNonce = paymentMethod.id;
-    //   // placeOrderNow();
-    //   //_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Received ${token.tokenId}')));
-    // }).catchError((e) {
-    //   print(e);
-    // });
+    
   }
 
   @override
