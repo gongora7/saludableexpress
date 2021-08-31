@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Easy Store Demo</string>
+    <string name="app_name">enelviaje.mx</string>
 
-    <string name="facebook_app_id">245035473709705</string>
-    <string name="fb_login_protocol_scheme">fb245035473709705</string>
+    <string name="facebook_app_id">332159097262524</string> 
+    <string name="fb_login_protocol_scheme">fb332159097262524</string>
 
 </resources>

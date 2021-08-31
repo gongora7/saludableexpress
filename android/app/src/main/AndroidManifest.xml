@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.appgoritmo.easystoremx">
+    package="com.appgoritmo.enelviajemx">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -16,7 +16,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:icon="@mipmap/ic_launcher"
-        android:label="Easy Store"
+        android:label="enelviaje.mx"
         tools:replace="android:label">
 
             <!-- Set up the Sign in with Apple activity, such that it's callable from the browser-redirect -->

@@ -1,4 +1,4 @@
-package com.appgoritmo.easystoremx
+package com.appgoritmo.enelviajemx
 
 
 import io.flutter.embedding.android.FlutterActivity

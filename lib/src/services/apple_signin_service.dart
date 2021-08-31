@@ -3,7 +3,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 class AppleSignInService {
   static String clientId = 'com.cosmonautas.saludableappservice';
   static String redirectUri =
-      'https://app.easystore.com.mx/api/callback/sign_in_with_apple';
+      'https://app.enelviaje.mx/api/callback/sign_in_with_apple';
 
   Future<AuthorizationCredentialAppleID> signIn() async {
     try {

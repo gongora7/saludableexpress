@@ -716,7 +716,7 @@ class _HomeState extends State<Home> {
       backgroundColor: Color.fromRGBO(90, 0, 132, 1),
       //title: Text(AppLocalizations.of(context).translate('appname')),
       title:
-          Text('Easy Store', style: TextStyle(fontFamily: 'Montserrat-bold')),
+          Text('enelviaje.mx', style: TextStyle(fontFamily: 'Montserrat-bold')),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search),

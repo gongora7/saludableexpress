@@ -64,7 +64,7 @@ class _LoginState extends State<Login> {
                             ))),
                 SizedBox(height: 16.0),
                 /* Text(
-                  "Bienvenido a Easy Store",
+                  "Bienvenido a enelviaje.mx",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
                 ),*/
                 SizedBox(

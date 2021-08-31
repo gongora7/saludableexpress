@@ -1,40 +1,41 @@
 {
   "project_info": {
-    "project_number": "97224884708",
-    "project_id": "easy-store-demo",
-    "storage_bucket": "easy-store-demo.appspot.com"
+    "project_number": "859051142862",
+    "firebase_url": "https://enelviajeapp.firebaseio.com",
+    "project_id": "enelviajeapp",
+    "storage_bucket": "enelviajeapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:97224884708:android:8e6777949311bf614947f1",
+        "mobilesdk_app_id": "1:859051142862:android:dcdaf5e17cac87b708aa9f",
         "android_client_info": {
-          "package_name": "com.appgoritmo.easystoremx"
+          "package_name": "com.appgoritmo.enelviajemx"
         }
       },
       "oauth_client": [
         {
-          "client_id": "97224884708-vi8bsddbkoap31crpcpbqtammg00tiem.apps.googleusercontent.com",
+          "client_id": "859051142862-nnq75tsj2c1qf9t6fdoe13kv59l3nbkc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB17UtrXHsdFQC5ATEHvPnPZK0V15s5LfU"
+          "current_key": "AIzaSyCF_vEdgJVJ4VedYv3O92O7z1l9nmLeM2o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "97224884708-vi8bsddbkoap31crpcpbqtammg00tiem.apps.googleusercontent.com",
+              "client_id": "859051142862-nnq75tsj2c1qf9t6fdoe13kv59l3nbkc.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "97224884708-fms4jb5i3grdh9k4vqm7vv1vk3mnl36q.apps.googleusercontent.com",
+              "client_id": "859051142862-iek2qf1vhu9q6mfdiut20ioj3babfajc.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.appgoritmo.easystoremx"
+                "bundle_id": "com.appgoritmo.enelviajemx"
               }
             }
           ]

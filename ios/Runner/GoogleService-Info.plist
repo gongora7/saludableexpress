@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>97224884708-fms4jb5i3grdh9k4vqm7vv1vk3mnl36q.apps.googleusercontent.com</string>
+	<string>859051142862-iek2qf1vhu9q6mfdiut20ioj3babfajc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.97224884708-fms4jb5i3grdh9k4vqm7vv1vk3mnl36q</string>
+	<string>com.googleusercontent.apps.859051142862-iek2qf1vhu9q6mfdiut20ioj3babfajc</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDPppEXohe0fsG1DWKiivRswsL6AsrPRnc</string>
+	<string>AIzaSyCpbChxmRawV1KRLEi0gpkwUOBbmRVNz3c</string>
 	<key>GCM_SENDER_ID</key>
-	<string>97224884708</string>
+	<string>859051142862</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.appgoritmo.easystoremx</string>
+	<string>com.appgoritmo.enelviajemx</string>
 	<key>PROJECT_ID</key>
-	<string>easy-store-demo</string>
+	<string>enelviajeapp</string>
 	<key>STORAGE_BUCKET</key>
-	<string>easy-store-demo.appspot.com</string>
+	<string>enelviajeapp.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:97224884708:ios:0394e7474d3e9ece4947f1</string>
+	<string>1:859051142862:ios:61fbae2bd72f2a0408aa9f</string>
+	<key>DATABASE_URL</key>
+	<string>https://enelviajeapp.firebaseio.com</string>
 </dict>
 </plist>

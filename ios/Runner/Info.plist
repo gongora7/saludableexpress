@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Easy Store</string>
+	<string>enelviaje.mx</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Easy Store</string>
+	<string>enelviaje.mx</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.appgoritmo.easystoremx</string>
+				<string>com.appgoritmo.enelviajemx</string>
 			</array>
 		</dict>
 		<dict>
@@ -49,18 +49,18 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb245035473709705</string>
+				<string>fb332159097262524</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
-	<string>245035473709705</string>
+	<string>332159097262524</string>
 	<key>FacebookClientToken</key>
-	<string>Easy Store</string>
+	<string>enelviaje.mx</string>
 	<key>FacebookDisplayName</key>
-	<string>Easy Store</string>
+	<string>enelviaje.mx</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
