@@ -24,6 +24,7 @@ import 'package:flutter_app1/src/models/address/address.dart';
 import 'package:flutter_app1/src/models/checkout/post_order.dart';
 import 'package:flutter_app1/src/models/cupon_response.dart';
 import 'package:flutter_app1/src/models/get_stock/get_stock_post.dart';
+import 'package:flutter_app1/src/models/news_details.dart';
 import 'package:flutter_app1/src/models/product_models/product_post_model.dart';
 import 'package:flutter_app1/src/models/shipping_methods/get_rates_post_model.dart';
 
@@ -266,7 +267,8 @@ class ApiProvider {
     }
   }
 
-  Future<LoginResponse> processLoginWithApple(String accessToken, String code) async {
+  Future<LoginResponse> processLoginWithApple(
+      String accessToken, String code) async {
     try {
       Response response = await _dio.post(
         _baseUrl + "appleregistration",
@@ -435,16 +437,13 @@ class ApiProvider {
     }
   }
 
-    Future getNewsDetails(
-      int newsId) async {
+  Future<NewsDetailsResponse> getNewsDetails(int newsId) async {
     try {
       Response response = await _dio.post(
-        _baseUrl + "getallnews",
-        data: jsonEncode({
-          "news_id": newsId
-        }),
+        _baseUrl + "new",
+        data: jsonEncode({"language_id": "1", "post_id": newsId}),
       );
-      return response.data;
+      return NewsDetailsResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
       return error;

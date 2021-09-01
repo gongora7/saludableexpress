@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app1/src/api/api_provider.dart';
 import 'package:flutter_app1/src/api/responses/news_response.dart';
 import 'package:flutter_app1/src/blocs/news/news_bloc.dart';
+import 'package:flutter_app1/src/models/news_details.dart';
 import 'package:flutter_app1/src/repositories/news_repo.dart';
 import 'package:flutter_app1/src/ui/pages/news_details.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -68,28 +69,32 @@ class _NewsAllState extends State<NewsAll>
         return ListTile(
           onTap: () async {
             ApiProvider _apiProvider = ApiProvider();
-            final resp =
+            final NewsDetailsResponse newsDetailsResponse =
                 await _apiProvider.getNewsDetails(data.newsData[index].newsId);
-            print(data.newsData[index].newsId);
+
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      NewsDetails(idNews: data.newsData[index].newsId),
+                  builder: (context) => NewsDetails(
+                    newsDetailsResponse: newsDetailsResponse,
+                  ),
                 ));
           },
           leading: Container(
             width: 100,
             height: 90,
-            child: CachedNetworkImage(
-              imageUrl:
-                  ApiProvider.imageBaseUrl + data.newsData[index].newsImage,
-              fit: BoxFit.cover,
-              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  Center(
-                      child: CircularProgressIndicator(
-                          value: downloadProgress.progress)),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+            child: Hero(
+              tag: data.newsData[index].newsId,
+              child: CachedNetworkImage(
+                imageUrl:
+                    ApiProvider.imageBaseUrl + data.newsData[index].newsImage,
+                fit: BoxFit.cover,
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Center(
+                        child: CircularProgressIndicator(
+                            value: downloadProgress.progress)),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),
             ),
           ),
           title: Text(
