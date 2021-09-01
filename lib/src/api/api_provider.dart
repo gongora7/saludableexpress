@@ -435,6 +435,22 @@ class ApiProvider {
     }
   }
 
+    Future getNewsDetails(
+      int newsId) async {
+    try {
+      Response response = await _dio.post(
+        _baseUrl + "getallnews",
+        data: jsonEncode({
+          "news_id": newsId
+        }),
+      );
+      return response.data;
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return error;
+    }
+  }
+
   String _handleError(Error error) {
     String errorDescription = "";
     if (error is DioError) {

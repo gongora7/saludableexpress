@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/src/api/api_provider.dart';
 import 'package:flutter_app1/src/api/responses/news_response.dart';
 import 'package:flutter_app1/src/blocs/news/news_bloc.dart';
 import 'package:flutter_app1/src/repositories/news_repo.dart';
+import 'package:flutter_app1/src/ui/pages/news_details.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 class NewsAll extends StatefulWidget {
@@ -63,26 +66,46 @@ class _NewsAllState extends State<NewsAll>
       itemCount: data.newsData.length,
       itemBuilder: (context, index) {
         return ListTile(
-            leading: Container(
-              width: 100,
-              height: 90,
-              child: CachedNetworkImage(
-                imageUrl: ApiProvider.imageBaseUrl +
-                    data.newsData[index].newsImage,
-                fit: BoxFit.cover,
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    Center(
-                        child: CircularProgressIndicator(
-                            value: downloadProgress.progress)),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
+          onTap: () async {
+            ApiProvider _apiProvider = ApiProvider();
+            final resp =
+                await _apiProvider.getNewsDetails(data.newsData[index].newsId);
+            print(data.newsData[index].newsId);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      NewsDetails(idNews: data.newsData[index].newsId),
+                ));
+          },
+          leading: Container(
+            width: 100,
+            height: 90,
+            child: CachedNetworkImage(
+              imageUrl:
+                  ApiProvider.imageBaseUrl + data.newsData[index].newsImage,
+              fit: BoxFit.cover,
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  Center(
+                      child: CircularProgressIndicator(
+                          value: downloadProgress.progress)),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             ),
-            title: Text(data.newsData[index].newsName, overflow: TextOverflow.ellipsis,),
-            subtitle: Html(data: data.newsData[index].newsDescription.substring(0, 60)+" ..."),
+          ),
+          title: Text(
+            data.newsData[index].newsName,
+            overflow: TextOverflow.ellipsis,
+          ),
+          subtitle: Html(
+              data: data.newsData[index].newsDescription.substring(0, 60) +
+                  " ..."),
         );
-      }, separatorBuilder: (BuildContext context, int index) { return SizedBox(
-      height: 8,
-    );  },
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return SizedBox(
+          height: 8,
+        );
+      },
     );
   }
 

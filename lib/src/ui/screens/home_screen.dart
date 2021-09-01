@@ -209,6 +209,10 @@ class _HomeState extends State<Home> {
                               activeIcon: Icon(Icons.shop_sharp,
                                   color: Color.fromRGBO(224, 49, 51, 1)),
                             ),
+                            BottomNavigationBarItem(
+                              label: "News",
+                              icon: Icon(Icons.library_books),
+                            ),
                             /* BottomNavigationBarItem(
                             label: "News",
                             icon: Icon(Icons.library_books),
