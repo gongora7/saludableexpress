@@ -54,7 +54,7 @@ class ScreenUi extends StatelessWidget {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/bgsplash.jpg"),
+              image: AssetImage("assets/images/splasheev.jpg"),
               fit: BoxFit.cover,
               /* colorFilter: ColorFilter.mode(
                   Colors.redAccent.withOpacity(0.6), BlendMode.darken),*/
@@ -75,12 +75,12 @@ class ScreenUi extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: 120.0,
-                          height: 120.0,
+                          width: 180.0,
+                          height: 180.0,
                           child: Positioned(
-                            top: 50.0,
+                            top: 80.0,
                             child: Image.asset(
-                              "assets/images/logose.png",
+                              "assets/images/logoeev.png",
                               fit: BoxFit.fill,
                             ),
                           ),
