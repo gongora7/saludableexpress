@@ -349,19 +349,21 @@ class MyCustomFormState extends State<MyCustomForm> {
                 SizedBox(
                   width: 8.0,
                 ),
-                /* IconButton(
+                IconButton(
+                  iconSize: 50,
                   icon: Image.asset(
-                    "assets/images/login_with_phone.png",
+                    "assets/images/login_with_apple.png",
                     fit: BoxFit.fill,
                   ),
-                  onPressed: () {},
-                ), */
+                  //onPressed: () {},
+                  onPressed: AppleSignInService.signIn,
+                ),
               ],
             ),
-            SignInWithAppleButton(
+            /* SignInWithAppleButton(
               text: 'Apple ID',
               onPressed: AppleSignInService.signIn,
-            ),
+            ), */
             SizedBox(
               height: 16.0,
             ),

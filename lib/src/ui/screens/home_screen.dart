@@ -75,39 +75,9 @@ class _HomeState extends State<Home> {
     AppData.user = _userBox.get("current_user");
 
     AppData.data = <DrawerMenuItem>[
-      AppConstants.isDemoMode
-          ? DrawerMenuItem('Inicio', Icons.home, <DrawerMenuItem>[
-              DrawerMenuItem('Home 1', Icons.home),
-              DrawerMenuItem('Home 2', Icons.home),
-              DrawerMenuItem('Home 3', Icons.home),
-              DrawerMenuItem('Home 4', Icons.home),
-              DrawerMenuItem('Home 5', Icons.home),
-              DrawerMenuItem('Home 6', Icons.home),
-              DrawerMenuItem('Home 7', Icons.home),
-              DrawerMenuItem('Home 8', Icons.home),
-              DrawerMenuItem('Home 9', Icons.home),
-              DrawerMenuItem('Home 10', Icons.home),
-            ])
-          : DrawerMenuItem("Inicio", Icons.home),
-      AppConstants.isDemoMode
-          ? DrawerMenuItem('Categorías', Icons.card_travel, <DrawerMenuItem>[
-              DrawerMenuItem('Category 1', Icons.card_travel),
-              DrawerMenuItem('Category 2', Icons.card_travel),
-              DrawerMenuItem('Category 3', Icons.card_travel),
-              DrawerMenuItem('Category 4', Icons.card_travel),
-              DrawerMenuItem('Category 5', Icons.card_travel),
-              DrawerMenuItem('Category 6', Icons.card_travel),
-            ])
-          : DrawerMenuItem("Categorías", Icons.card_travel),
-      AppConstants.isDemoMode
-          ? DrawerMenuItem('Tienda', Icons.shopping_basket, <DrawerMenuItem>[
-              DrawerMenuItem('Newest', Icons.store),
-              DrawerMenuItem('Top Sellers', Icons.shopping_basket),
-              DrawerMenuItem('Super Deals', Icons.shopping_basket),
-              DrawerMenuItem('Most Liked', Icons.shopping_basket),
-              DrawerMenuItem('Flash Sale', Icons.shopping_basket),
-            ])
-          : DrawerMenuItem("Tienda", Icons.shopping_basket),
+      DrawerMenuItem("Inicio", Icons.home),
+      DrawerMenuItem("Categorías", Icons.card_travel),
+      DrawerMenuItem("Tienda", Icons.shopping_basket),
       //DrawerMenuItem("My Account", Icons.person),
       DrawerMenuItem("Mis Pedidos", Icons.assignment_sharp),
       DrawerMenuItem("Mis Direcciones", Icons.location_city),
@@ -184,8 +154,8 @@ class _HomeState extends State<Home> {
                             primaryColor: Colors.white,
                             textTheme: Theme.of(context).textTheme.copyWith(
                                 caption: TextStyle(color: Colors.white70))),
-                        child: bottomNavBar(),
-                        //child: BottomNavBar(),
+                        //child: bottomNavBar(),
+                        child: BottomNavBar(),
                         //child: animationBottomBar()
                       ),
           );
