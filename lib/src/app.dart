@@ -37,12 +37,16 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
         providers: [
           //BlocProvider(create: (context) => BannersBloc(RealBannersRepo())),
+          BlocProvider(create: (context) => LoginBloc(RealUserRepo())),
           BlocProvider(
-              create: (context) =>
-                  LoginBloc(RealUserRepo())),
-          BlocProvider(create: (context) => MyAddressBloc(RealAddressRepo()),),
-          BlocProvider(create: (context) => SearchBloc(RealSearchRepo()),),
-          BlocProvider(create: (context) => MyOrdersBloc(RealOrdersRepo()),),
+            create: (context) => MyAddressBloc(RealAddressRepo()),
+          ),
+          BlocProvider(
+            create: (context) => SearchBloc(RealSearchRepo()),
+          ),
+          BlocProvider(
+            create: (context) => MyOrdersBloc(RealOrdersRepo()),
+          ),
           BlocProvider(
               create: (context) =>
                   ShippingMethodsBloc(RealShippingMethodsRepo())),
@@ -54,7 +58,7 @@ class _MyAppState extends State<MyApp> {
               create: (context) => LanguageBloc()..add(LanguageLoadStarted())),
           BlocProvider(
               create: (context) => ThemeBloc(
-                  ThemeState(themeData: appThemeData[AppTheme.GreenLight])))
+                  ThemeState(themeData: appThemeData[AppTheme.EEVDark])))
         ],
         child: BlocBuilder<LanguageBloc, LanguageState>(
           builder: _buildWithLanguage,

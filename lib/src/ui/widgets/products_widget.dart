@@ -17,6 +17,7 @@ import 'package:flutter_app1/src/models/product_models/product_post_filter.dart'
 import 'package:flutter_app1/src/models/product_models/product_post_model.dart';
 import 'package:flutter_app1/src/models/product_models/product_post_price.dart';
 import 'package:flutter_app1/src/repositories/products_repo.dart';
+import 'package:flutter_app1/src/utils/theme_utils/app_themes.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
@@ -337,7 +338,8 @@ class _ProductsState extends State<Products>
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         return Container(
-          width: 160,
+          width: 220,
+          height: 220,
           child: myCard(data.productData[index]),
         );
       },
@@ -364,14 +366,15 @@ class _ProductsState extends State<Products>
                 children: <Widget>[
                   Expanded(
                     child: Container(
-                      decoration: BoxDecoration(color: Colors.white),
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade900.withOpacity(0.5)),
                       child: Center(
                         //child: Hero(
                         // tag: product.productsId,
                         child: CachedNetworkImage(
                           imageUrl:
                               ApiProvider.imageBaseUrl + product.productsImage,
-                          fit: BoxFit.contain,
+                          fit: BoxFit.cover,
                           progressIndicatorBuilder:
                               (context, url, downloadProgress) =>
                                   CircularProgressIndicator(
@@ -400,9 +403,10 @@ class _ProductsState extends State<Products>
                               Text(product.productsName,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      color: Colors.grey[600],
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15)),
+                                    color: Colors.grey[600],
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  )),
                               Row(
                                 children: [
                                   Expanded(
@@ -516,8 +520,8 @@ class _ProductsState extends State<Products>
                               },
                               color: (product.defaultStock <= 0 &&
                                       product.productsType == 0)
-                                  ? Color.fromRGBO(224, 49, 51, 1.0)
-                                  : Color.fromRGBO(90, 0, 132, 1.0),
+                                  ? Color.fromRGBO(229, 227, 227, 1)
+                                  : Color.fromRGBO(229, 227, 227, 0.3),
                               child: Text(
                                 (widget.type == "wishlist")
                                     ? "Eliminar"
@@ -619,7 +623,7 @@ class _ProductsState extends State<Products>
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
-                  width: 140,
+                  width: 200,
                   decoration: BoxDecoration(color: Colors.white),
                   child: Center(
                     //child: Hero(

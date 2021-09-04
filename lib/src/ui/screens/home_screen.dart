@@ -28,6 +28,7 @@ import 'package:flutter_app1/src/ui/screens/login_page.dart';
 import 'package:flutter_app1/src/ui/screens/my_account_screen.dart';
 import 'package:flutter_app1/src/ui/pages/news.dart';
 import 'package:flutter_app1/src/ui/pages/shop.dart';
+import 'package:flutter_app1/src/ui/screens/podcast_screen.dart';
 import 'package:flutter_app1/src/ui/screens/product_detail_page.dart';
 import 'package:flutter_app1/src/ui/screens/search_page.dart';
 import 'package:hive/hive.dart';
@@ -73,51 +74,12 @@ class _HomeState extends State<Home> {
     AppData.user = _userBox.get("current_user");
 
     AppData.data = <DrawerMenuItem>[
-      AppConstants.isDemoMode
-          ? DrawerMenuItem('Inicio', Icons.home, <DrawerMenuItem>[
-              DrawerMenuItem('Home 1', Icons.home),
-              DrawerMenuItem('Home 2', Icons.home),
-              DrawerMenuItem('Home 3', Icons.home),
-              DrawerMenuItem('Home 4', Icons.home),
-              DrawerMenuItem('Home 5', Icons.home),
-              DrawerMenuItem('Home 6', Icons.home),
-              DrawerMenuItem('Home 7', Icons.home),
-              DrawerMenuItem('Home 8', Icons.home),
-              DrawerMenuItem('Home 9', Icons.home),
-              DrawerMenuItem('Home 10', Icons.home),
-            ])
-          : DrawerMenuItem("Inicio", Icons.home),
-      AppConstants.isDemoMode
-          ? DrawerMenuItem('Categorías', Icons.card_travel, <DrawerMenuItem>[
-              DrawerMenuItem('Category 1', Icons.card_travel),
-              DrawerMenuItem('Category 2', Icons.card_travel),
-              DrawerMenuItem('Category 3', Icons.card_travel),
-              DrawerMenuItem('Category 4', Icons.card_travel),
-              DrawerMenuItem('Category 5', Icons.card_travel),
-              DrawerMenuItem('Category 6', Icons.card_travel),
-            ])
-          : DrawerMenuItem("Categorías", Icons.card_travel),
-      AppConstants.isDemoMode
-          ? DrawerMenuItem('Tienda', Icons.shopping_basket, <DrawerMenuItem>[
-              DrawerMenuItem('Newest', Icons.store),
-              DrawerMenuItem('Top Sellers', Icons.shopping_basket),
-              DrawerMenuItem('Super Deals', Icons.shopping_basket),
-              DrawerMenuItem('Most Liked', Icons.shopping_basket),
-              DrawerMenuItem('Flash Sale', Icons.shopping_basket),
-            ])
-          : DrawerMenuItem("Tienda", Icons.shopping_basket),
-      //DrawerMenuItem("My Account", Icons.person),
+      DrawerMenuItem("Inicio", Icons.home),
+      DrawerMenuItem("Categorías", Icons.card_travel),
+      DrawerMenuItem("Tienda", Icons.shopping_basket),
       DrawerMenuItem("Mis Pedidos", Icons.assignment_sharp),
       DrawerMenuItem("Mis Direcciones", Icons.location_city),
       DrawerMenuItem("Mis Deseos", Icons.favorite),
-
-      /*  DrawerMenuItem("Intro", Icons.integration_instructions),
-      DrawerMenuItem("News", Icons.web),
-      DrawerMenuItem("Contact Us", Icons.message),
-      DrawerMenuItem("About", Icons.info),
-      DrawerMenuItem("Share App", Icons.share),
-      DrawerMenuItem("Rate & Review", Icons.rate_review),
-      DrawerMenuItem("Settings", Icons.settings),*/
       DrawerMenuItem(
           (AppData.user != null) ? "Cerrar Sesión" : "Iniciar Sesión",
           Icons.login)
@@ -171,59 +133,59 @@ class _HomeState extends State<Home> {
             ),
             drawer: (navigationStyle != "side" && navigationStyle != "both")
                 ? null
-                : buildDrawer(),
-            bottomNavigationBar:
-                (navigationStyle != "bottom" && navigationStyle != "both")
-                    ? null
-                    : Theme(
-                        data: Theme.of(context).copyWith(
-                            // canvasColor: Theme.of(context).primaryColor,
-                            canvasColor: Colors.white,
-                            primaryColor: Colors.white,
-                            textTheme: Theme.of(context).textTheme.copyWith(
-                                caption: TextStyle(color: Colors.white70))),
-                        child: BottomNavigationBar(
-                          selectedItemColor: Colors.redAccent,
-                          unselectedItemColor: Colors.grey,
-                          type: BottomNavigationBarType.fixed,
-                          currentIndex: _selectedIndex,
-                          onTap: (value) {
-                            _selectCurrentItem(value);
-                          },
-                          items: [
-                            BottomNavigationBarItem(
-                              label: "Home",
-                              icon: Icon(Icons.home_rounded),
-                              activeIcon: Icon(Icons.home_filled,
-                                  color: Color.fromRGBO(224, 49, 51, 1)),
-                            ),
-                            BottomNavigationBarItem(
-                              label: "Categorías",
-                              icon: Icon(Icons.card_travel_outlined),
-                              activeIcon: Icon(Icons.card_travel_sharp,
-                                  color: Color.fromRGBO(224, 49, 51, 1)),
-                            ),
-                            BottomNavigationBarItem(
-                              label: "Tienda",
-                              icon: Icon(Icons.shop_outlined),
-                              activeIcon: Icon(Icons.shop_sharp,
-                                  color: Color.fromRGBO(224, 49, 51, 1)),
-                            ),
-                            BottomNavigationBarItem(
-                              label: "News",
-                              icon: Icon(Icons.library_books),
-                            ),
-                            /* BottomNavigationBarItem(
-                            label: "News",
-                            icon: Icon(Icons.library_books),
-                          ),
-                          BottomNavigationBarItem(
-                            label: "Me",
-                            icon: Icon(Icons.account_box),
-                          ), */
-                          ],
+                : Container(width: 350, child: buildDrawer()),
+            bottomNavigationBar: (navigationStyle != "bottom" &&
+                    navigationStyle != "both")
+                ? null
+                : Theme(
+                    data: Theme.of(context).copyWith(
+                        // canvasColor: Theme.of(context).primaryColor,
+                        canvasColor: Color.fromRGBO(40, 35, 34, 1),
+                        primaryColor: Colors.white,
+                        textTheme: Theme.of(context)
+                            .textTheme
+                            .copyWith(caption: TextStyle(color: Colors.white))),
+                    child: BottomNavigationBar(
+                      selectedItemColor: Colors.redAccent,
+                      unselectedItemColor: Colors.grey,
+                      type: BottomNavigationBarType.fixed,
+                      currentIndex: _selectedIndex,
+                      onTap: (value) {
+                        _selectCurrentItem(value);
+                      },
+                      items: [
+                        BottomNavigationBarItem(
+                          label: "Home",
+                          icon: Icon(Icons.home_rounded, size: 20),
+                          activeIcon: Icon(Icons.home_filled,
+                              size: 30, color: Color.fromRGBO(224, 49, 51, 1)),
                         ),
-                      ),
+                        BottomNavigationBarItem(
+                          label: "Categorías",
+                          icon: Icon(Icons.card_travel_outlined, size: 20),
+                          activeIcon: Icon(Icons.card_travel_sharp,
+                              size: 30, color: Color.fromRGBO(224, 49, 51, 1)),
+                        ),
+                        BottomNavigationBarItem(
+                          label: "Tienda",
+                          icon: Icon(Icons.shop_outlined, size: 20),
+                          activeIcon: Icon(Icons.shop_sharp,
+                              size: 30, color: Color.fromRGBO(224, 49, 51, 1)),
+                        ),
+                        BottomNavigationBarItem(
+                          label: "Blog",
+                          icon: Icon(Icons.library_books, size: 20),
+                        ),
+                        BottomNavigationBarItem(
+                          label: "Podcast",
+                          icon: Icon(
+                            Icons.mic_none_rounded,
+                            size: 30,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
           );
         },
       ),
@@ -232,15 +194,37 @@ class _HomeState extends State<Home> {
 
   Widget buildDrawer() {
     return Drawer(
-      child: ListView.builder(
-        padding: EdgeInsets.zero,
-        itemCount: AppData.data.length == 0 ? 1 : AppData.data.length + 1,
-        itemBuilder: (BuildContext context, int index) {
-          if (index == 0) {
-            return _buildDrawerHeader(context);
-          }
-          return _buildTiles(AppData.data[index - 1]);
-        },
+      child: Container(
+        //color: Color.fromRGBO(31, 34, 40, 1),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            tileMode: TileMode.clamp,
+            colors: [
+              Color.fromRGBO(31, 34, 40, 1),
+              Color.fromRGBO(31, 34, 40, 1),
+              Color.fromRGBO(31, 34, 40, 1),
+              Color.fromRGBO(31, 34, 40, 1),
+              Color.fromRGBO(31, 34, 40, 1),
+              Color.fromRGBO(255, 88, 56, 1),
+            ],
+          ),
+          /* image: DecorationImage(
+              image: AssetImage("assets/images/bgdrawer.jpg"),
+              fit: BoxFit.cover,
+              alignment: Alignment.bottomRight),*/
+        ),
+        child: ListView.builder(
+          padding: EdgeInsets.zero,
+          itemCount: AppData.data.length == 0 ? 1 : AppData.data.length + 1,
+          itemBuilder: (BuildContext context, int index) {
+            if (index == 0) {
+              return _buildDrawerHeader(context);
+            }
+            return _buildTiles(AppData.data[index - 1]);
+          },
+        ),
       ),
     );
   }
@@ -261,12 +245,18 @@ class _HomeState extends State<Home> {
       },
       child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
+            //color: Theme.of(context).primaryColor,
+            color: Colors.red,
+            image: DecorationImage(
+              image: AssetImage('assets/images/bgheader.jpg'),
+              fit: BoxFit.cover,
+              alignment: Alignment.bottomRight,
+            ),
           ),
           child: Stack(children: [
             DrawerHeader(
-              child: Container(
-                child: Row(
+              child: Center(
+                child: Column(
                   children: [
                     new Container(
                       width: 80.0,
@@ -288,7 +278,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     SizedBox(
-                      width: 14,
+                      width: 20,
                     ),
                     Expanded(
                       child: Column(
@@ -410,7 +400,7 @@ class _HomeState extends State<Home> {
               _toShopFromCategory),
           Shop(0, "nuevos", false, _toProductDetailPage),
           News(false),
-          Me(mapSelectedItem),
+          Podcast(),
         ].elementAt(index);
       },
     };
@@ -717,10 +707,9 @@ class _HomeState extends State<Home> {
 
   AppBar getAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Color.fromRGBO(90, 0, 132, 1),
+      backgroundColor: Color.fromRGBO(255, 88, 56, 1),
       //title: Text(AppLocalizations.of(context).translate('appname')),
-      title:
-          Text('enelviaje.mx', style: TextStyle(fontFamily: 'Montserrat-bold')),
+      title: Text('enelviaje.mx', style: TextStyle(fontFamily: 'Poppins-bold')),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search),
@@ -731,6 +720,40 @@ class _HomeState extends State<Home> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => Search(_toProductDetailPage)));
+          },
+        ),
+        IconButton(
+          icon: new Stack(
+            children: <Widget>[
+              new Icon(Icons.mic_none_rounded, size: 30),
+              new Positioned(
+                right: 0,
+                child: new Container(
+                  padding: EdgeInsets.all(2),
+                  /*decoration: new BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(8),
+                  ),*/
+                  constraints: BoxConstraints(
+                    minWidth: 14,
+                    minHeight: 14,
+                  ),
+                  /* child: new Text(
+                    AppData.cartIds.length.toString(),
+                    style: new TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),*/
+                ),
+              )
+            ],
+          ),
+          tooltip: 'Podcast',
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Podcast()));
           },
         ),
         IconButton(

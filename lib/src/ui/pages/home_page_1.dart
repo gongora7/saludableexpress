@@ -191,7 +191,7 @@ class _HomePage1State extends State<HomePage1> {
           RaisedButton(
             onPressed: () {
               BlocProvider.of<ThemeBloc>(context)
-                  .add(ThemeChanged(theme: AppTheme.GreenLight));
+                  .add(ThemeChanged(theme: AppTheme.EEVLight));
             },
             child: Text("Light theme"),
           ),

@@ -56,79 +56,110 @@ class _HomePage8State extends State<HomePage8> {
   }
 
   Widget buildSingleChildScrollView(BuildContext context) {
-    return NestedScrollView(
-      headerSliverBuilder: (context, innerBoxIsScrolled) {
-        return [
-          SliverToBoxAdapter(
-              child: StreamBuilder(
-                  stream: _bannersBloc.banners_stream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      if (snapshot.data != null) {
-                        return buildColumnWithData(
-                            context, snapshot.data as BannersResponse);
+    return Container(
+      child: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverToBoxAdapter(
+                child: StreamBuilder(
+                    stream: _bannersBloc.banners_stream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        if (snapshot.data != null) {
+                          return buildColumnWithData(
+                              context, snapshot.data as BannersResponse);
+                        } else {
+                          return buildLoading();
+                        }
                       } else {
                         return buildLoading();
                       }
-                    } else {
-                      return buildLoading();
-                    }
-                  })),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                buildUI(),
-                Container(
-                  padding: new EdgeInsets.all(14.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Top Sellers",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ],
+                    })),
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(top: 45.0), child: buildUI()),
+                  SizedBox(height: 50),
+                  Divider(
+                    height: 2,
+                    thickness: 40.0,
                   ),
-                ),
-                Container(
-                    height: 220,
-                    child: Products("top seller", "", true, false, false,
-                        widget._toProductDetailPage)),
-                Container(
-                  padding: new EdgeInsets.all(14.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Most Liked",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ],
+                  Container(
+                    padding: new EdgeInsets.all(20.0),
+                    child: Stack(
+                      children: [
+                        Container(
+                          child: Text(
+                            "Promociones",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 32,
+                                fontFamily: 'Poppins-Bold',
+                                fontWeight: FontWeight.w800),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                    height: 220,
-                    child: Products("most liked", "", true, false, false,
-                        widget._toProductDetailPage)),
-                Container(
-                  padding: new EdgeInsets.all(14.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "All Products",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ],
+                  Container(
+                      height: 220,
+                      child: Products("specials", "", true, false, false,
+                          widget._toProductDetailPage)),
+                  /*  Container(
+                    padding: new EdgeInsets.all(14.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Most Liked",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Container(
+                      height: 220,
+                      child: Products("most liked", "", true, false, false,
+                          widget._toProductDetailPage)), */
+                  SizedBox(height: 50),
+                  Divider(
+                    height: 2,
+                    thickness: 20.0,
+                  ),
+                  SizedBox(height: 50),
+                  Container(
+                    child: Center(
+                      child: Stack(
+                        children: [
+                          Text(
+                            "Panorámicas",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 32,
+                                fontFamily: 'Poppins-Bold',
+                                fontWeight: FontWeight.w800),
+                          ),
+                          SizedBox(height: 50),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ];
-      },
-      body: Products(
-          "Newest", "", false, false, false, widget._toProductDetailPage),
+          ];
+        },
+        body: Container(
+          margin: EdgeInsets.all(12),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24.0),
+              color: Color.fromRGBO(229, 227, 227, 0.3)),
+          padding: EdgeInsets.all(20.0),
+          child: Products(
+              "Newest", "59", false, false, false, widget._toProductDetailPage),
+        ),
+      ),
     );
   }
 
@@ -167,14 +198,14 @@ class _HomePage8State extends State<HomePage8> {
                           "newest", true, widget._toProductDetailPage)));
             },
             child: Container(
-              width: 120,
-              margin: EdgeInsets.all(2.0),
+              width: 180,
+              margin: EdgeInsets.all(4.0),
               child: Column(
                 children: [
                   Center(
                     child: Container(
-                      width: 100.0,
-                      height: 100.0,
+                      width: 140.0,
+                      height: 140.0,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle, color: Colors.white),
                       child: ClipRRect(
@@ -193,9 +224,16 @@ class _HomePage8State extends State<HomePage8> {
                       ),
                     ),
                   ),
-                  Text(categories[index].categoriesName),
                   Text(
-                      categories[index].totalProducts.toString() + " Products"),
+                    categories[index].categoriesName.toUpperCase(),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w500, fontSize: 16.0),
+                  ),
+                  Text(
+                      categories[index].totalProducts.toString() +
+                          " fotos".toUpperCase(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 16.0)),
                 ],
               ),
             ),
@@ -209,18 +247,19 @@ class _HomePage8State extends State<HomePage8> {
       BuildContext context, BannersResponse bannersResponse) {
     return CarouselSlider.builder(
         options: CarouselOptions(
-          viewportFraction: 1,
+          viewportFraction: 3,
+          height: 160.0,
           initialPage: 0,
           enableInfiniteScroll:
-              bannersResponse.bannersData.length > 1 ? false : false,
+              bannersResponse.bannersData.length > 1 ? true : true,
           reverse: false,
           autoPlay: true,
           autoPlayInterval: Duration(seconds: 3),
-          autoPlayAnimationDuration: Duration(milliseconds: 600),
+          autoPlayAnimationDuration: Duration(milliseconds: 1200),
           autoPlayCurve: Curves.linear,
           enlargeCenterPage: false,
           onPageChanged: (index, reason) {},
-          scrollDirection: Axis.horizontal,
+          scrollDirection: Axis.vertical,
         ),
         itemCount: bannersResponse.bannersData.length,
         itemBuilder: (BuildContext context, int itemIndex, _) {

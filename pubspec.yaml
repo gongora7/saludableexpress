@@ -3,7 +3,7 @@ description: A new Flutter application.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -19,7 +19,7 @@ version: 2.0.11+1
 
 analyzer:
   enable-experiment:
-  - non-nullable
+    - non-nullable
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -42,16 +42,23 @@ dependencies:
 
   flutter_rating_bar: ^4.0.0
   flutter_html: ^2.1.0
-  cached_network_image: ^3.0.0
+  cached_network_image: ^3.1.0
   google_sign_in: ^5.0.4
   flutter_login_facebook: ^1.0.1
-  
+
+  firebase_core: ^1.6.0
+  url_launcher: ^6.0.9
+  cool_alert: ^1.1.0
+  audioplayers: ^0.19.1
+  firebase_messaging: ^10.0.6
+  cloud_firestore: ^2.5.1
+  flutter_spinkit: ^5.1.0
+
   share: ^2.0.4
-  
+
   onesignal_flutter: ^3.0.0
   stripe_payment: ^1.1.4
   introduction_screen: ^2.1.0
-
 
   cupertino_icons: ^1.0.3
   flutter_localizations:
@@ -67,7 +74,6 @@ dev_dependencies:
   build_runner: ^2.0.5
 
 flutter:
-
   uses-material-design: true
 
   assets:
@@ -77,12 +83,21 @@ flutter:
     - .env
 
 fonts:
-    - family: Montserrat-bold     
-      fonts:
-        - asset: assets/fonts/Montserrat-Bold.ttf
-    - family: Montserrat-regular    
-      fonts:
-        - asset: assets/fonts/Montserrat-Regular.ttf
-  
-    
- 
+  - family: Montserrat-bold
+    fonts:
+      - asset: assets/fonts/Montserrat-Bold.ttf
+  - family: Montserrat-regular
+    fonts:
+      - asset: assets/fonts/Montserrat-Regular.ttf
+  - family: Poppins-Black
+    fonts:
+      - asset: fonts/Poppins-Black.ttf
+  - family: Poppins-Bold
+    fonts:
+      - asset: fonts/Poppins-Bold.ttf
+  - family: Poppins
+    fonts:
+      - asset: fonts/Poppins-Medium.ttf
+  - family: Poppins-Italia
+    fonts:
+      - asset: fonts/Poppins-MediumItalic.ttf

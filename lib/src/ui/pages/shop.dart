@@ -16,7 +16,7 @@ class Shop extends StatelessWidget {
     return isHeaderVisible
         ? Scaffold(
             appBar: AppBar(
-              title: Text("Nuevos Productos"),
+              title: Text("Galerías"),
             ),
             body: buildUI(),
           )

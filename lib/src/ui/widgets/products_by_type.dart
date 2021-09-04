@@ -12,7 +12,8 @@ class ProductsByType extends StatefulWidget {
   ProductsByType(this._toProductDetailPage);
 
   @override
-  _ProductsByTypeState createState() => _ProductsByTypeState(_toProductDetailPage);
+  _ProductsByTypeState createState() =>
+      _ProductsByTypeState(_toProductDetailPage);
 }
 
 class _ProductsByTypeState extends State<ProductsByType>
@@ -33,48 +34,40 @@ class _ProductsByTypeState extends State<ProductsByType>
       child: Column(
         children: [
           TabBar(
-             unselectedLabelColor: Colors.lightGreen[100],
-             labelColor: Colors.green[600],
-             indicatorWeight: 2,
-             indicatorColor: Colors.green[600],
-            
-            tabs: [
-              Tab(
-                
-                child: (
-                  Text(
-                    "Nuevos Productos".toUpperCase(), 
-                    style: TextStyle(
-                      fontSize: 22, 
-                      fontWeight: FontWeight.bold
-                      ), 
-                      textAlign: TextAlign.center,
-                      
-                      )
-               ),
-              
-            ),
+              unselectedLabelColor: Colors.lightGreen[100],
+              labelColor: Colors.green[600],
+              indicatorWeight: 2,
+              indicatorColor: Colors.green[600],
+              tabs: [
+                Tab(
+                  child: (Text(
+                    "Nuevos Productos".toUpperCase(),
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  )),
+                ),
 
-            /*Tab(
+                /*Tab(
               text: "Top Seller",
             ),*/
-            
-           /* Tab(
+
+                /* Tab(
               text: "Most Liked",
             ),*/
-          ]),
+              ]),
           Container(
             height: 250,
-            
             child: TabBarView(children: [
 /*
               Center(child: Text("Top Sellers")),
               Center(child: Text("Super Deals")),
               Center(child: Text("Most Liked")),
 */
-             Products("special", "", true, false, false, _toProductDetailPage),
-             /*Products("top seller", "", true, false, false, _toProductDetailPage),*/
-             
+              Container(
+                  child: Products(
+                      "special", "", true, false, false, _toProductDetailPage)),
+              /*Products("top seller", "", true, false, false, _toProductDetailPage),*/
+
               /* Products("most liked", "", true, false, false, _toProductDetailPage),*/
             ]),
           ),

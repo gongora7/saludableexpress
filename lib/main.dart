@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app1/constants.dart';
@@ -43,7 +44,7 @@ Future<void> main() async {
 // The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
   await OneSignal.shared
       .promptUserForPushNotificationPermission(fallbackToSettings: true);
-
+  await Firebase.initializeApp();
   runApp(RestartWidget(child: MyApp()));
 }
 
@@ -71,9 +72,13 @@ class _RestartWidgetState extends State<RestartWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return KeyedSubtree(
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: 'Poppins'),
+        home: KeyedSubtree(child: widget.child, key: key));
+    /* return KeyedSubtree(
       key: key,
       child: widget.child,
-    );
+    );*/
   }
 }
