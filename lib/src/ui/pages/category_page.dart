@@ -267,7 +267,7 @@ class _CategoryPageState extends State<CategoryPage> {
                       width: 100.0,
                       height: 120.0,
                       decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.white),
+                          shape: BoxShape.circle, color: Colors.grey),
                       // child: Hero(
                       //   tag: categories[index].categoriesId,
                       child: CachedNetworkImage(

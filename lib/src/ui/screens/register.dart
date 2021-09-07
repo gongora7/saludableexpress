@@ -13,15 +13,26 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(224, 49, 51, 1),
+          backgroundColor: Color.fromRGBO(255, 88, 56, 1),
           title: Text("Regístrate"),
         ),
         body: Container(
-          padding: EdgeInsets.all(40.0),
+          padding: EdgeInsets.all(10.0),
           decoration: BoxDecoration(
-              image: DecorationImage(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              tileMode: TileMode.clamp,
+              colors: [
+                Color.fromRGBO(255, 88, 56, 1),
+                Color.fromRGBO(255, 88, 56, 1),
+                Color.fromRGBO(31, 34, 40, 1),
+              ],
+            ),
+            /* image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: new AssetImage("assets/images/bglogin.png"))),
+                  image: new AssetImage("assets/images/bglogin.png"))*/
+          ),
           child: SingleChildScrollView(
             child: Container(
               width: double.maxFinite,
@@ -35,16 +46,16 @@ class _RegisterState extends State<Register> {
                           borderRadius: BorderRadius.circular(80),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.white.withOpacity(0.6),
-                              spreadRadius: 5,
-                              blurRadius: 10,
+                              color: Colors.white.withOpacity(0.3),
+                              spreadRadius: 3,
+                              blurRadius: 20,
                               offset: Offset(0, 5),
                             )
                           ],
                           shape: BoxShape.rectangle,
                           image: new DecorationImage(
                               fit: BoxFit.fill,
-                              image: AssetImage("assets/images/logoes.png")
+                              image: AssetImage("assets/images/logoeev.png")
                               /* image: new NetworkImage(
                               "https://store.saludableexpress.com/images/media/2021/06/thumbnail1622601274NjCig02302.png",
                             )*/
@@ -55,7 +66,7 @@ class _RegisterState extends State<Register> {
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black54),
               ),*/
                   SizedBox(
-                    height: 40.0,
+                    height: 20.0,
                   ),
                   MyCustomForm(),
                 ],

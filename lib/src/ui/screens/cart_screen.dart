@@ -49,6 +49,7 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(255, 88, 56, 1),
         title: Text("Carrito"),
         actions: <Widget>[
           IconButton(
@@ -142,26 +143,26 @@ class _CartState extends State<Cart> {
                       Expanded(child: buildProductsList(data, list)),
                       Container(
                         decoration: new BoxDecoration(
-                            color: Color.fromRGBO(90, 0, 132, 0.5),
+                            color: Color.fromRGBO(31, 34, 40, 1),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.purple.withOpacity(0.2),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: Offset(0, 3),
+                                color: Colors.grey.shade300.withOpacity(0.1),
+                                spreadRadius: 9,
+                                blurRadius: 3,
+                                offset: Offset(0, 6),
                               )
                             ]),
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(25),
+                              padding: EdgeInsets.all(10),
                               child: Column(
                                 children: [
                                   Row(children: [
                                     Text(
                                       "Subtotal".toUpperCase(),
                                       style: TextStyle(
-                                          fontSize: 20.0,
+                                          fontSize: 18.0,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Expanded(child: SizedBox()),
@@ -169,7 +170,7 @@ class _CartState extends State<Cart> {
                                         "\$" + subtotalPrice.toStringAsFixed(2),
                                         style: TextStyle(
                                             color: Colors.white70,
-                                            fontSize: 22.0,
+                                            fontSize: 18.0,
                                             fontWeight: FontWeight.bold)),
                                   ]),
                                   SizedBox(
@@ -179,14 +180,14 @@ class _CartState extends State<Cart> {
                                   Row(children: [
                                     Text("Descuento".toUpperCase(),
                                         style: TextStyle(
-                                            fontSize: 20.0,
+                                            fontSize: 18.0,
                                             fontWeight: FontWeight.bold)),
                                     Expanded(child: SizedBox()),
                                     Text(
                                       "\$" + discountPrice.toStringAsFixed(2),
                                       style: TextStyle(
                                           color: Colors.white70,
-                                          fontSize: 22.0,
+                                          fontSize: 18.0,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ]),
@@ -198,7 +199,7 @@ class _CartState extends State<Cart> {
                                     Text(
                                       "Total".toUpperCase(),
                                       style: TextStyle(
-                                        fontSize: 20.0,
+                                        fontSize: 18.0,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -206,7 +207,7 @@ class _CartState extends State<Cart> {
                                     Text(
                                       "\$" + totalPrice.toStringAsFixed(2),
                                       style: TextStyle(
-                                          fontSize: 22.0,
+                                          fontSize: 18.0,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white70),
                                     ),
@@ -217,12 +218,12 @@ class _CartState extends State<Cart> {
                             Container(
                               width: MediaQuery.of(context).size.width,
                               child: FlatButton(
-                                color: Color.fromRGBO(90, 0, 132, 1),
-                                height: 70.0,
+                                color: Color.fromRGBO(255, 88, 56, 1),
+                                height: 60.0,
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.shrinkWrap,
                                 child: Text(
-                                  "Proceder al pago",
+                                  "Ir a pagar".toUpperCase(),
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 18.0),
                                 ),
@@ -321,7 +322,6 @@ class _CartState extends State<Cart> {
 
   Widget buildProductsList(List<Product> products, List<CartEntry> list) {
     return Container(
-      color: Colors.grey.shade200,
       child: Padding(
         padding: EdgeInsets.all(8),
         child: ListView.builder(
@@ -346,17 +346,17 @@ class _CartState extends State<Cart> {
               });
 
               return Card(
-                color: Colors.grey.shade300,
-                margin: EdgeInsets.all(4),
+                color: Colors.grey.shade100.withOpacity(0.7),
+                margin: EdgeInsets.all(6),
                 child: Row(children: [
                   Container(
                     padding: EdgeInsets.all(4.0),
-                    width: 150,
-                    height: 150,
+                    width: 120,
+                    height: 120,
                     child: CachedNetworkImage(
                       imageUrl:
                           ApiProvider.imageBaseUrl + product.productsImage,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.cover,
                       progressIndicatorBuilder:
                           (context, url, downloadProgress) =>
                               CircularProgressIndicator(
@@ -366,9 +366,9 @@ class _CartState extends State<Cart> {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.all(25),
+                      padding: EdgeInsets.all(10),
                       child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(children: [
                               Expanded(
@@ -379,8 +379,10 @@ class _CartState extends State<Cart> {
                                       Text(
                                         product.productsName,
                                         style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.w600),
+                                            fontSize: 17.0,
+                                            color:
+                                                Color.fromRGBO(31, 34, 40, 1),
+                                            fontWeight: FontWeight.w900),
                                       ),
                                       SizedBox(height: 5.0),
                                       //Divider(height: 3.0, color: Colors.white),
@@ -388,9 +390,11 @@ class _CartState extends State<Cart> {
                                         Text(
                                           product.categories[0].categoriesName,
                                           style: TextStyle(
-                                              fontSize: 16,
-                                              fontStyle: FontStyle.italic,
-                                              color: Colors.black45),
+                                            fontSize: 16,
+                                            fontStyle: FontStyle.italic,
+                                            color:
+                                                Color.fromRGBO(31, 34, 40, 1),
+                                          ),
                                         ),
                                     ]),
                               ),
@@ -402,10 +406,11 @@ class _CartState extends State<Cart> {
                                 },
                                 child: IconTheme(
                                     data: IconThemeData(
-                                        color: Colors.red.shade600),
+                                      color: Color.fromRGBO(255, 88, 56, 1),
+                                    ),
                                     child: Icon(
-                                      Icons.delete,
-                                      size: 50.0,
+                                      Icons.delete_forever_sharp,
+                                      size: 40.0,
                                     )),
                               ),
                             ]),
@@ -413,10 +418,10 @@ class _CartState extends State<Cart> {
                             Row(children: [
                               Expanded(
                                   child: Text(
-                                "Precio".toUpperCase(),
+                                "Precio:",
                                 style: TextStyle(
-                                    fontSize: 18.0,
-                                    color: Colors.black45,
+                                    fontSize: 17.0,
+                                    color: Color.fromRGBO(31, 34, 40, 1),
                                     fontWeight: FontWeight.bold),
                               )),
                               (discount != null && discount != 0)
@@ -428,8 +433,9 @@ class _CartState extends State<Cart> {
                                                       .toString())
                                                   .toStringAsFixed(2),
                                           style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.black45,
+                                              fontSize: 17,
+                                              color:
+                                                  Color.fromRGBO(31, 34, 40, 1),
                                               decoration:
                                                   TextDecoration.lineThrough),
                                         ),
@@ -440,9 +446,10 @@ class _CartState extends State<Cart> {
                                                       .toString())
                                                   .toStringAsFixed(2),
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.red.shade600,
+                                            color:
+                                                Color.fromRGBO(255, 88, 56, 1),
                                           ),
                                         ),
                                       ],
@@ -453,7 +460,7 @@ class _CartState extends State<Cart> {
                                                   .toString())
                                               .toStringAsFixed(2),
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: Color.fromRGBO(31, 34, 40, 1),
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -468,14 +475,18 @@ class _CartState extends State<Cart> {
                                       child: Text(
                                     cartProductAttributes[index].option.name,
                                     style: TextStyle(
-                                        fontSize: 14, color: Colors.black54),
+                                      fontSize: 14,
+                                      color: Color.fromRGBO(31, 34, 40, 1),
+                                    ),
                                   )),
                                   Text(
                                     cartProductAttributes[index]
                                         .values[0]
                                         .value,
                                     style: TextStyle(
-                                        fontSize: 14, color: Colors.black54),
+                                      fontSize: 14,
+                                      color: Color.fromRGBO(31, 34, 40, 1),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -499,10 +510,10 @@ class _CartState extends State<Cart> {
                             Row(children: [
                               Expanded(
                                   child: Text(
-                                "Cantidad".toUpperCase(),
+                                "Cantidad:",
                                 style: TextStyle(
-                                    fontSize: 18.0,
-                                    color: Colors.black45,
+                                    fontSize: 17.0,
+                                    color: Color.fromRGBO(31, 34, 40, 1),
                                     fontWeight: FontWeight.bold),
                               )),
                               GestureDetector(
@@ -516,10 +527,11 @@ class _CartState extends State<Cart> {
                                 },
                                 child: IconTheme(
                                     data: IconThemeData(
-                                        //color: Theme.of(context).primaryColor),
-                                        color: Colors.red.shade500),
+                                      //color: Theme.of(context).primaryColor),
+                                      color: Color.fromRGBO(255, 88, 56, 1),
+                                    ),
                                     child:
-                                        Icon(Icons.remove_circle, size: 30.0)),
+                                        Icon(Icons.remove_circle, size: 25.0)),
                               ),
                               SizedBox(
                                 width: 8,
@@ -542,8 +554,8 @@ class _CartState extends State<Cart> {
                                 },
                                 child: IconTheme(
                                     data: IconThemeData(
-                                        color: Colors.red.shade500),
-                                    child: Icon(Icons.add_circle, size: 30.0)),
+                                        color: Color.fromRGBO(255, 88, 56, 1)),
+                                    child: Icon(Icons.add_circle, size: 25.0)),
                               ),
                             ]),
 
@@ -551,10 +563,10 @@ class _CartState extends State<Cart> {
                             Row(children: [
                               Expanded(
                                   child: Text(
-                                "Total".toUpperCase(),
+                                "Total:",
                                 style: TextStyle(
-                                    fontSize: 18.0,
-                                    color: Colors.black45,
+                                    fontSize: 17.0,
+                                    color: Color.fromRGBO(31, 34, 40, 1),
                                     fontWeight: FontWeight.bold),
                               )),
                               (discount != null && discount != 0)

@@ -247,7 +247,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       height: 200,
                       imageUrl: data["coverArt"],
                       placeholder: (context, url) => Image(
-                        image: AssetImage("assets/placeholder.png"),
+                        image: AssetImage("assets/images/placeholder.png"),
                         fit: BoxFit.cover,
                         width: 200,
                         height: 200,
@@ -352,8 +352,12 @@ class _PlayerScreenState extends State<PlayerScreen> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: gradient,
+                        gradient: RadialGradient(
+                          colors: [
+                            Color.fromRGBO(31, 34, 40, 1),
+                            Color.fromRGBO(31, 34, 40, 1),
+                            Color.fromRGBO(255, 88, 56, 1),
+                          ],
                         ),
                         borderRadius: BorderRadius.circular(50),
                       ),

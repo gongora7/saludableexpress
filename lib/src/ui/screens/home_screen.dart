@@ -264,7 +264,9 @@ class _HomeState extends State<Home> {
                       decoration: new BoxDecoration(shape: BoxShape.circle),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(50.0),
-                        child: CachedNetworkImage(
+                        child: Image.asset('assets/images/traveller.png'),
+
+                        /*CachedNetworkImage(
                           imageUrl:
                               "http://store.saludableexpress.com/images/media/2021/06/thumbnail1624495981v19jV23507.png",
                           fit: BoxFit.fill,
@@ -274,7 +276,7 @@ class _HomeState extends State<Home> {
                                       value: downloadProgress.progress),
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
-                        ),
+                        ),*/
                       ),
                     ),
                     SizedBox(
@@ -282,8 +284,8 @@ class _HomeState extends State<Home> {
                     ),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
                             (AppData.user != null)

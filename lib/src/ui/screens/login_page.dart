@@ -25,19 +25,32 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(90, 0, 132, 1),
+        backgroundColor: Color.fromRGBO(31, 34, 40, 1),
         title: Text("Inicia Sesión"),
       ),
       body: Container(
-        padding: EdgeInsets.all(40.0),
+        padding: EdgeInsets.all(20.0),
+
+        //color: Color.fromRGBO(255, 88, 56, 1),
         decoration: BoxDecoration(
-            image: DecorationImage(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            tileMode: TileMode.clamp,
+            colors: [
+              Color.fromRGBO(31, 34, 40, 1),
+              Color.fromRGBO(31, 34, 40, 1),
+              Color.fromRGBO(255, 88, 56, 1),
+            ],
+          ),
+          /*image: DecorationImage(
                 fit: BoxFit.cover,
-                image: new AssetImage("assets/images/bglogin.png"))),
+                image: new AssetImage("assets/images/bglogin.png"))
+                */
+        ),
         child: SingleChildScrollView(
           child: Container(
             width: double.maxFinite,
-            height: double.maxFinite,
             margin: EdgeInsets.all(20.0),
             child: Column(
               children: [
@@ -48,27 +61,26 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.circular(80),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.white.withOpacity(0.6),
-                            spreadRadius: 5,
-                            blurRadius: 10,
+                            color: Colors.white.withOpacity(0.3),
+                            spreadRadius: 3,
+                            blurRadius: 20,
                             offset: Offset(0, 5),
                           )
                         ],
-                        shape: BoxShape.rectangle,
                         image: new DecorationImage(
                             fit: BoxFit.fill,
-                            image: AssetImage("assets/images/logoes.png")
+                            image: AssetImage("assets/images/logoeev.png")
                             /* image: new NetworkImage(
                               "https://store.saludableexpress.com/images/media/2021/06/thumbnail1622601274NjCig02302.png",
                             )*/
                             ))),
-                SizedBox(height: 16.0),
+                SizedBox(height: 8.0),
                 /* Text(
                   "Bienvenido a enelviaje.mx",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
                 ),*/
                 SizedBox(
-                  height: 80.0,
+                  height: 40.0,
                 ),
                 MyCustomForm(),
               ],
@@ -349,28 +361,27 @@ class MyCustomFormState extends State<MyCustomForm> {
                 SizedBox(
                   width: 8.0,
                 ),
-                /* IconButton(
+                IconButton(
+                  iconSize: 45,
                   icon: Image.asset(
-                    "assets/images/login_with_phone.png",
+                    "assets/images/applelogo.png",
                     fit: BoxFit.fill,
                   ),
-                  onPressed: () {},
-                ), */
+                  onPressed: () async {
+                    AppleSignInService appleSignInService =
+                        AppleSignInService();
+                    final credential = await appleSignInService.signIn();
+                    if (credential != null) {
+                      loginBloc.add(ProcessLoginWithApple(
+                          credential.identityToken,
+                          credential.authorizationCode));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error al autenticarse')));
+                    }
+                  },
+                ),
               ],
-            ),
-            SignInWithAppleButton(
-              text: 'Apple ID',
-              onPressed: () async {
-                AppleSignInService appleSignInService = AppleSignInService();
-                final credential = await appleSignInService.signIn();
-                if (credential != null) {
-                  loginBloc.add(ProcessLoginWithApple(
-                      credential.identityToken, credential.authorizationCode));
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Error al autenticarse')));
-                }
-              },
             ),
             SizedBox(
               height: 16.0,

@@ -206,10 +206,9 @@ class _HomePage8State extends State<HomePage8> {
                     child: Container(
                       width: 140.0,
                       height: 140.0,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.white),
+                      decoration: BoxDecoration(shape: BoxShape.circle),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50.0),
+                        borderRadius: BorderRadius.circular(40.0),
                         child: CachedNetworkImage(
                           imageUrl: ApiProvider.imageBaseUrl +
                               categories[index].image,

@@ -210,7 +210,8 @@ class _FavoriteTabState extends State<FavoriteTab> {
                               child: CachedNetworkImage(
                                 imageUrl: data["coverArt"],
                                 placeholder: (context, url) => Image(
-                                  image: AssetImage("assets/placeholder.png"),
+                                  image: AssetImage(
+                                      "assets/images/placeholder.png"),
                                   fit: BoxFit.cover,
                                 ),
                                 fit: BoxFit.cover,
@@ -233,9 +234,9 @@ class _FavoriteTabState extends State<FavoriteTab> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Image(
-                image: AssetImage("assets/images/empty.png"),
+                image: AssetImage("assets/images/bgfavorites.png"),
               ),
-              Text("Add your favorites, to see here"),
+              Text("Agrega favoritos, para ver aquí"),
             ],
           ),
         );

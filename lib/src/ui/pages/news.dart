@@ -78,14 +78,14 @@ class _NewsState extends State<News> with TickerProviderStateMixin {
         length: 2,
         child: Column(
           children: [
-            TabBar(tabs: [
+            /* TabBar(tabs: [
               Tab(
-                text: "All",
+                text: "Todo",
               ),
               Tab(
-                text: "News Category",
+                text: "Categorias",
               ),
-            ]),
+            ]),*/
             Expanded(
               child: Container(
                 child: TabBarView(children: [

@@ -108,7 +108,6 @@ class MyCustomFormState extends State<MyCustomForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.grey.shade200),
       padding: EdgeInsets.all(20.0),
       child: Form(
         key: _formKey,
@@ -122,20 +121,14 @@ class MyCustomFormState extends State<MyCustomForm> {
                   decoration: new BoxDecoration(
                       shape: BoxShape.rectangle,
                       image: new DecorationImage(
-                          fit: BoxFit.fill,
-                          image: new NetworkImage(
-                            "http://store.saludableexpress.com/images/media/2021/06/thumbnail1624475805czSYz23302.png",
-                          )))),
-              SizedBox(height: 16.0),
-              Text(
-                '¿Dónde facturamos tu pedido?',
-                style: TextStyle(fontSize: 16.0),
-              ),
+                        fit: BoxFit.fill,
+                        image: AssetImage("assets/images/billing.png"),
+                      ))),
               SizedBox(height: 16.0),
               Container(
                 child: Expanded(
                   child: SingleChildScrollView(
-                    padding: EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(20.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,11 +140,11 @@ class MyCustomFormState extends State<MyCustomForm> {
                             prefixIcon: Padding(
                                 padding: EdgeInsets.all(1),
                                 child: Icon(Icons.person)),
-                            labelText: 'Nombre'.toUpperCase(),
+                            labelText: 'Nombre',
                             fillColor: Colors.white,
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: EdgeInsets.all(20.0),
                             border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(2.0),
+                              borderRadius: new BorderRadius.circular(8.0),
                               borderSide: new BorderSide(
                                 color: Colors.black45,
                               ),
@@ -174,11 +167,11 @@ class MyCustomFormState extends State<MyCustomForm> {
                             prefixIcon: Padding(
                                 padding: EdgeInsets.all(1),
                                 child: Icon(Icons.people)),
-                            labelText: 'Apellido'.toUpperCase(),
+                            labelText: 'Apellido',
                             fillColor: Colors.white,
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: EdgeInsets.all(20.0),
                             border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(2.0),
+                              borderRadius: new BorderRadius.circular(8.0),
                               borderSide: new BorderSide(),
                             ),
                           ),
@@ -199,11 +192,11 @@ class MyCustomFormState extends State<MyCustomForm> {
                             prefixIcon: Padding(
                                 padding: EdgeInsets.all(1),
                                 child: Icon(Icons.location_history)),
-                            labelText: 'Dirección'.toUpperCase(),
+                            labelText: 'Dirección',
                             fillColor: Colors.white,
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: EdgeInsets.all(20.0),
                             border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(2.0),
+                              borderRadius: new BorderRadius.circular(8.0),
                               borderSide: new BorderSide(),
                             ),
                           ),
@@ -227,12 +220,12 @@ class MyCustomFormState extends State<MyCustomForm> {
                                       prefixIcon: Padding(
                                           padding: EdgeInsets.all(1),
                                           child: Icon(Icons.flag)),
-                                      labelText: 'País'.toUpperCase(),
+                                      labelText: 'País',
                                       fillColor: Colors.white,
-                                      contentPadding: EdgeInsets.all(10.0),
+                                      contentPadding: EdgeInsets.all(20.0),
                                       border: new OutlineInputBorder(
                                         borderRadius:
-                                            new BorderRadius.circular(2.0),
+                                            new BorderRadius.circular(8.0),
                                         borderSide: new BorderSide(),
                                       ),
                                     ),
@@ -259,7 +252,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                                             decoration: InputDecoration(
                                               fillColor: Colors.white,
                                               contentPadding:
-                                                  EdgeInsets.all(8.0),
+                                                  EdgeInsets.all(20.0),
                                               border: new OutlineInputBorder(
                                                 borderRadius:
                                                     new BorderRadius.circular(
@@ -303,12 +296,12 @@ class MyCustomFormState extends State<MyCustomForm> {
                                       prefixIcon: Padding(
                                           padding: EdgeInsets.all(1),
                                           child: Icon(Icons.pin_drop)),
-                                      labelText: 'Estado'.toUpperCase(),
+                                      labelText: 'Estado',
                                       fillColor: Colors.white,
-                                      contentPadding: EdgeInsets.all(10.0),
+                                      contentPadding: EdgeInsets.all(20.0),
                                       border: new OutlineInputBorder(
                                         borderRadius:
-                                            new BorderRadius.circular(2.0),
+                                            new BorderRadius.circular(8.0),
                                         borderSide: new BorderSide(
                                           color: Colors.black45,
                                         ),
@@ -337,7 +330,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                                             decoration: InputDecoration(
                                               fillColor: Colors.white,
                                               contentPadding:
-                                                  EdgeInsets.all(8.0),
+                                                  EdgeInsets.all(20.0),
                                               border: new OutlineInputBorder(
                                                 borderRadius:
                                                     new BorderRadius.circular(
@@ -374,9 +367,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                             prefixIcon: Padding(
                                 padding: EdgeInsets.all(1),
                                 child: Icon(Icons.pin_drop)),
-                            labelText: 'Ciudad'.toUpperCase(),
+                            labelText: 'Ciudad',
                             fillColor: Colors.white,
-                            contentPadding: EdgeInsets.all(8.0),
+                            contentPadding: EdgeInsets.all(20.0),
                             border: new OutlineInputBorder(
                               borderRadius: new BorderRadius.circular(8.0),
                               borderSide: new BorderSide(
@@ -401,11 +394,11 @@ class MyCustomFormState extends State<MyCustomForm> {
                             prefixIcon: Padding(
                                 padding: EdgeInsets.all(1),
                                 child: Icon(Icons.album)),
-                            labelText: 'Código Postal'.toUpperCase(),
+                            labelText: 'Código Postal',
                             fillColor: Colors.white,
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: EdgeInsets.all(20.0),
                             border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(2.0),
+                              borderRadius: new BorderRadius.circular(8.0),
                               borderSide: new BorderSide(
                                 color: Colors.black45,
                               ),
@@ -428,11 +421,11 @@ class MyCustomFormState extends State<MyCustomForm> {
                             prefixIcon: Padding(
                                 padding: EdgeInsets.all(1),
                                 child: Icon(Icons.phone)),
-                            labelText: 'Teléfono'.toUpperCase(),
+                            labelText: 'Teléfono',
                             fillColor: Colors.white,
-                            contentPadding: EdgeInsets.all(10.0),
+                            contentPadding: EdgeInsets.all(20.0),
                             border: new OutlineInputBorder(
-                              borderRadius: new BorderRadius.circular(2.0),
+                              borderRadius: new BorderRadius.circular(8.0),
                               borderSide: new BorderSide(),
                             ),
                           ),
@@ -494,7 +487,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: FlatButton(
-                  color: Color.fromRGBO(224, 49, 51, 1),
+                  color: Color.fromRGBO(255, 88, 56, 1),
                   height: 60.0,
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   onPressed: () {

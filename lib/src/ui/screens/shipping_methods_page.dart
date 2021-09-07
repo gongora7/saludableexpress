@@ -122,8 +122,8 @@ class _ShippingMethodsState extends State<ShippingMethods> {
             bottom: 0,
             width: MediaQuery.of(context).size.width,
             child: FlatButton(
-              color: Color.fromRGBO(224, 49, 51, 1),
-              height: 70.0,
+              color: Color.fromRGBO(255, 88, 56, 1),
+              height: 60.0,
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onPressed: () {
                 Navigator.push(

@@ -113,7 +113,6 @@ class _CheckoutState extends State<Checkout> {
       ),
       body: Container(
         padding: EdgeInsets.all(5.0),
-        color: Colors.orange.shade50,
         child: Column(
           children: [
             Expanded(
@@ -182,13 +181,14 @@ class _CheckoutState extends State<Checkout> {
                   Container(
                     child: Expanded(
                         child: FlatButton(
-                            color: Color.fromRGBO(247, 121, 34, 1),
+                            color: Color.fromRGBO(255, 255, 255, 1),
                             height: 70.0,
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,
                             child: Text(
                               "Cancelar",
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(
+                                  color: Color.fromRGBO(31, 34, 40, 1)),
                             ),
                             onPressed: () {
                               int count = 0;
@@ -200,8 +200,8 @@ class _CheckoutState extends State<Checkout> {
                   Expanded(
                       child: FlatButton(
                           color: (selectedPaymentMethod.name != null)
-                              ? Color.fromRGBO(20, 137, 54, 1)
-                              : Color.fromRGBO(20, 137, 54, 1),
+                              ? Color.fromRGBO(255, 86, 55, 1)
+                              : Color.fromRGBO(255, 154, 141, 1),
                           height: 70.0,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
@@ -226,7 +226,6 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade500,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -234,25 +233,25 @@ class _CheckoutState extends State<Checkout> {
             children: [
               Text("Dirección de Facturación:",
                   style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
               SizedBox(
                 height: 8.0,
               ),
               Text(
-                billingAddress.deliveryFirstName.toUpperCase() +
+                billingAddress.deliveryFirstName +
                     " " +
-                    billingAddress.deliveryLastName.toUpperCase(),
-                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+                    billingAddress.deliveryLastName,
+                style: TextStyle(color: Colors.white, fontSize: 18.0),
               ),
               Text(
-                billingAddress.deliveryStreetAddress.toUpperCase() +
+                billingAddress.deliveryStreetAddress +
                     ", " +
-                    billingAddress.deliveryCity.toUpperCase(),
-                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+                    billingAddress.deliveryCity,
+                style: TextStyle(color: Colors.white, fontSize: 18.0),
               ),
               Text(
                 billingAddress.deliveryPhone,
-                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+                style: TextStyle(color: Colors.white, fontSize: 18.0),
               ),
             ],
           ),
@@ -265,7 +264,6 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade400,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -273,25 +271,25 @@ class _CheckoutState extends State<Checkout> {
             children: [
               Text("Dirección de Envío:",
                   style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
               SizedBox(
                 height: 8.0,
               ),
               Text(
-                shippingAddress.deliveryFirstName.toUpperCase() +
+                shippingAddress.deliveryFirstName +
                     " " +
-                    shippingAddress.deliveryLastName.toUpperCase(),
-                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+                    shippingAddress.deliveryLastName,
+                style: TextStyle(color: Colors.white, fontSize: 18.0),
               ),
               Text(
-                shippingAddress.deliveryStreetAddress.toUpperCase() +
+                shippingAddress.deliveryStreetAddress +
                     ", " +
-                    shippingAddress.deliveryCity.toUpperCase(),
-                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+                    shippingAddress.deliveryCity,
+                style: TextStyle(color: Colors.white, fontSize: 18.0),
               ),
               Text(
                 shippingAddress.deliveryPhone,
-                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+                style: TextStyle(color: Colors.white, fontSize: 18.0),
               ),
             ],
           ),
@@ -304,7 +302,6 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade300,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -312,13 +309,13 @@ class _CheckoutState extends State<Checkout> {
             children: [
               Text("Método de Envío:",
                   style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
               SizedBox(
                 height: 8.0,
               ),
               Text(
-                shippingService.shippingMethod.toUpperCase(),
-                style: TextStyle(color: Colors.black54, fontSize: 16.0),
+                shippingService.shippingMethod,
+                style: TextStyle(color: Colors.white, fontSize: 18.0),
               ),
             ],
           ),
@@ -356,7 +353,6 @@ class _CheckoutState extends State<Checkout> {
             child: Card(
               margin: EdgeInsets.all(4.0),
               child: Container(
-                color: Colors.orange.shade200,
                 child: Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Row(
@@ -368,16 +364,16 @@ class _CheckoutState extends State<Checkout> {
                             Text("Métodos de Pago",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16.0)),
+                                    fontSize: 20.0)),
                             SizedBox(
                               height: 8.0,
                             ),
                             Text(
                               selectedPaymentMethod.name == null
-                                  ? "Elegir un método de pago".toUpperCase()
-                                  : selectedPaymentMethod.name.toUpperCase(),
+                                  ? "Elegir un método de pago"
+                                  : selectedPaymentMethod.name,
                               style: TextStyle(
-                                  color: Colors.black54, fontSize: 16.0),
+                                  color: Colors.white, fontSize: 18.0),
                             )
                           ],
                         ),
@@ -405,7 +401,6 @@ class _CheckoutState extends State<Checkout> {
     return Card(
       margin: EdgeInsets.all(4.0),
       child: Container(
-        color: Colors.orange.shade100,
         child: Padding(
           padding: EdgeInsets.all(12.0),
           child: Column(
@@ -413,7 +408,7 @@ class _CheckoutState extends State<Checkout> {
             children: [
               Text("Cupón de descuento:",
                   style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
               SizedBox(
                 height: 8.0,
               ),
@@ -440,7 +435,7 @@ class _CheckoutState extends State<Checkout> {
                         labelText: discountPriceCupon != 0.00
                             ? 'Cupón aplicado'
                             : 'Ingresa tu cupón',
-                        labelStyle: TextStyle(color: Colors.black),
+                        labelStyle: TextStyle(color: Colors.white),
                         fillColor: Colors.white,
                         contentPadding: EdgeInsets.all(8.0),
                         border: new OutlineInputBorder(
@@ -575,9 +570,9 @@ class _CheckoutState extends State<Checkout> {
         });
 
         return Card(
-          margin: EdgeInsets.all(4),
+          margin: EdgeInsets.all(6),
           child: Container(
-            color: Color.fromRGBO(247, 121, 34, 0.1),
+            color: Colors.grey.shade100.withOpacity(0.7),
             child: Row(children: [
               Container(
                 padding: EdgeInsets.all(3.0),
@@ -602,30 +597,28 @@ class _CheckoutState extends State<Checkout> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(product.productsName.toUpperCase(),
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(31, 34, 40, 1),
+                                  )),
                               if (product.categories.length > 0)
                                 Text(
-                                  product.categories[0].categoriesName
-                                      .toUpperCase(),
+                                  product.categories[0].categoriesName,
                                   style: TextStyle(
                                       fontSize: 14,
-                                      color: Colors.black54,
+                                      color: Color.fromRGBO(31, 34, 40, 1),
                                       fontStyle: FontStyle.italic),
                                 ),
                             ]),
-                        Divider(
-                          height: 20.0,
-                          color: Colors.orange.shade400,
-                        ),
+                        SizedBox(height: 16.0),
                         Row(children: [
                           Expanded(
                               child: Text(
                             "Precio",
                             style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.black54,
-                                fontWeight: FontWeight.bold),
+                                color: Color.fromRGBO(31, 34, 40, 1),
+                                fontWeight: FontWeight.w900),
                           )),
                           (discount != null && discount != 0)
                               ? Row(
@@ -637,7 +630,7 @@ class _CheckoutState extends State<Checkout> {
                                               .toStringAsFixed(2),
                                       style: TextStyle(
                                           fontSize: 16,
-                                          color: Colors.black54,
+                                          color: Color.fromRGBO(31, 34, 40, 1),
                                           decoration:
                                               TextDecoration.lineThrough),
                                     ),
@@ -653,8 +646,10 @@ class _CheckoutState extends State<Checkout> {
                                       double.parse(
                                               product.productsPrice.toString())
                                           .toStringAsFixed(2),
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromRGBO(31, 34, 40, 1),
+                                  )),
                         ]),
                         ListView.builder(
                           shrinkWrap: true,
@@ -666,12 +661,16 @@ class _CheckoutState extends State<Checkout> {
                                   child: Text(
                                 cartProductAttributes[index].option.name,
                                 style: TextStyle(
-                                    fontSize: 16, color: Colors.black54),
+                                  fontSize: 16,
+                                  color: Color.fromRGBO(31, 34, 40, 1),
+                                ),
                               )),
                               Text(
                                 cartProductAttributes[index].values[0].value,
                                 style: TextStyle(
-                                    fontSize: 16, color: Colors.black54),
+                                  fontSize: 16,
+                                  color: Color.fromRGBO(31, 34, 40, 1),
+                                ),
                               ),
                               SizedBox(
                                 width: 8,
@@ -694,24 +693,24 @@ class _CheckoutState extends State<Checkout> {
                             "Cantidad",
                             style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.black54,
+                                color: Color.fromRGBO(31, 34, 40, 1),
                                 fontWeight: FontWeight.bold),
                           )),
                           Text(
                             " x " + product.customerBasketQuantity.toString(),
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(31, 34, 40, 1),
+                            ),
                           ),
                         ]),
-                        Divider(
-                          color: Colors.black45,
-                        ),
                         Row(children: [
                           Expanded(
                               child: Text(
                             "Precio Total",
                             style: TextStyle(
                               fontSize: 16,
-                              color: Colors.black54,
+                              color: Color.fromRGBO(31, 34, 40, 1),
                               fontWeight: FontWeight.bold,
                             ),
                           )),
@@ -727,7 +726,7 @@ class _CheckoutState extends State<Checkout> {
                                               .toStringAsFixed(2),
                                       style: TextStyle(
                                         fontSize: 16,
-                                        color: Colors.black54,
+                                        color: Color.fromRGBO(31, 34, 40, 1),
                                         decoration: TextDecoration.lineThrough,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -742,7 +741,7 @@ class _CheckoutState extends State<Checkout> {
                                               .toStringAsFixed(2),
                                       style: TextStyle(
                                           //color: Theme.of(context).primaryColor),
-                                          color: Colors.black45,
+                                          color: Color.fromRGBO(31, 34, 40, 1),
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
@@ -756,7 +755,7 @@ class _CheckoutState extends State<Checkout> {
                                           .toStringAsFixed(2),
                                   style: TextStyle(
                                       //color: Theme.of(context).primaryColor),
-                                      color: Colors.black45,
+                                      color: Color.fromRGBO(31, 34, 40, 1),
                                       fontWeight: FontWeight.bold),
                                 ),
                         ])

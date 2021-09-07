@@ -62,53 +62,61 @@ class _NewsAllState extends State<NewsAll>
 
   Widget buildList(BuildContext context, NewsResponse data) {
     return ListView.separated(
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(10.0),
       shrinkWrap: true,
       itemCount: data.newsData.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          onTap: () async {
-            ApiProvider _apiProvider = ApiProvider();
-            final NewsDetailsResponse newsDetailsResponse =
-                await _apiProvider.getNewsDetails(data.newsData[index].newsId);
+        return Container(
+          child: ListTile(
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+            onTap: () async {
+              ApiProvider _apiProvider = ApiProvider();
+              final NewsDetailsResponse newsDetailsResponse = await _apiProvider
+                  .getNewsDetails(data.newsData[index].newsId);
 
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NewsDetails(
-                    newsDetailsResponse: newsDetailsResponse,
-                  ),
-                ));
-          },
-          leading: Container(
-            width: 100,
-            height: 90,
-            child: Hero(
-              tag: data.newsData[index].newsId,
-              child: CachedNetworkImage(
-                imageUrl:
-                    ApiProvider.imageBaseUrl + data.newsData[index].newsImage,
-                fit: BoxFit.cover,
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    Center(
-                        child: CircularProgressIndicator(
-                            value: downloadProgress.progress)),
-                errorWidget: (context, url, error) => Icon(Icons.error),
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NewsDetails(
+                      newsDetailsResponse: newsDetailsResponse,
+                    ),
+                  ));
+            },
+            leading: Container(
+              width: 130,
+              child: Hero(
+                tag: data.newsData[index].newsId,
+                child: CachedNetworkImage(
+                  width: 130.0,
+                  imageUrl:
+                      ApiProvider.imageBaseUrl + data.newsData[index].newsImage,
+                  fit: BoxFit.cover,
+                  alignment: Alignment.center,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(
+                          child: CircularProgressIndicator(
+                              value: downloadProgress.progress)),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
               ),
             ),
+            title: Text(
+              data.newsData[index].newsName,
+              overflow: TextOverflow.fade,
+              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text('Leer más'),
+            /* subtitle: Html(
+                data: data.newsData[index].newsDescription.substring(0, 60) +
+                    " ..."),*/
+            trailing: Icon(Icons.arrow_forward_ios),
           ),
-          title: Text(
-            data.newsData[index].newsName,
-            overflow: TextOverflow.ellipsis,
-          ),
-          subtitle: Html(
-              data: data.newsData[index].newsDescription.substring(0, 60) +
-                  " ..."),
         );
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(
-          height: 8,
+          height: 12,
         );
       },
     );

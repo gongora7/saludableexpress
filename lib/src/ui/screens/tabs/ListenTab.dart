@@ -14,7 +14,7 @@ class ListenTab extends StatefulWidget {
 class _ListenTabState extends State<ListenTab> {
   List<DocumentSnapshot> uploads;
   bool _isLoading = true;
-  int limit = 10;
+  int limit = 50;
 
   DocumentSnapshot lastSnapshot;
 
@@ -111,6 +111,7 @@ class _ListenTabState extends State<ListenTab> {
             crossAxisCount: 2,
             children: uploads.map((item) {
               Map<String, dynamic> data = item.data() as Map<String, dynamic>;
+
               return InkWell(
                 onTap: () {
                   Navigator.push(
@@ -135,7 +136,8 @@ class _ListenTabState extends State<ListenTab> {
                               child: CachedNetworkImage(
                                 imageUrl: data["coverArt"],
                                 placeholder: (context, url) => Image(
-                                  image: AssetImage("assets/placeholder.png"),
+                                  image: AssetImage(
+                                      "assets/images/placeholder.png"),
                                   fit: BoxFit.cover,
                                 ),
                                 fit: BoxFit.cover,
