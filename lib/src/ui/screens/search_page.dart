@@ -236,7 +236,7 @@ class _SearchState extends State<Search> {
   }
 
   List<Widget> _buildActions() {
-    if (_isSearching) {
+    /*if (_isSearching) {
       return <Widget>[
         IconButton(
           icon: const Icon(Icons.clear),
@@ -257,7 +257,7 @@ class _SearchState extends State<Search> {
         icon: const Icon(Icons.search),
         onPressed: _startSearch,
       ),
-    ];
+    ];*/
   }
 
   void _startSearch() {
