@@ -287,7 +287,8 @@ class MyCustomFormState extends State<MyCustomForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                /* IconButton(
+                IconButton(
+                  iconSize: 50,
                   icon: Image.asset(
                     "assets/images/login_with_google.png",
                     fit: BoxFit.fill,
@@ -300,6 +301,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   width: 8.0,
                 ),
                 IconButton(
+                  iconSize: 50,
                   icon: Image.asset(
                     "assets/images/login_with_fb.png",
                     fit: BoxFit.fill,
@@ -310,14 +312,27 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ),
                 SizedBox(
                   width: 8.0,
-                ),*/
-                /* IconButton(
+                ),
+                IconButton(
+                  iconSize: 50,
                   icon: Image.asset(
-                    "assets/images/login_with_phone.png",
+                    "assets/images/applelogo.png",
                     fit: BoxFit.fill,
                   ),
-                  onPressed: () {},
-                ), */
+                  onPressed: () async {
+                    AppleSignInService appleSignInService =
+                        AppleSignInService();
+                    final credential = await appleSignInService.signIn();
+                    if (credential != null) {
+                      loginBloc.add(ProcessLoginWithApple(
+                          credential.identityToken,
+                          credential.authorizationCode));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error al autenticarse')));
+                    }
+                  },
+                ),
               ],
             ),
             // SignInWithAppleButton(
