@@ -28,6 +28,8 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.cosmonautas.saludableapp</string>
+				<key>REVERSED_CLIENT_ID</key>
+	            <string>com.googleusercontent.apps.877102355954-5kg43vnr22avq00cj65r8ajgkk92p90i</string>
 			</array>
 		</dict>
 		<dict>
