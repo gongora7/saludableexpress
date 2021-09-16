@@ -6,14 +6,16 @@ import 'package:flutter_app1/src/models/user.dart';
 import 'package:hive/hive.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'src/app.dart';
 
 Box cartEntriesBox;
 Box userBox;
 
 Future<void> main() async {
-  await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await dotenv.load(fileName: ".env");
 
   var appDocumentDir = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
