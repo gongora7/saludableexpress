@@ -59,21 +59,17 @@ class _LoginState extends State<Login> {
                     height: 130.0,
                     decoration: new BoxDecoration(
                         borderRadius: BorderRadius.circular(80),
-                        boxShadow: [
+                        /* boxShadow: [
                           BoxShadow(
                             color: Colors.white.withOpacity(0.3),
                             spreadRadius: 3,
                             blurRadius: 20,
                             offset: Offset(0, 5),
                           )
-                        ],
+                        ],*/
                         image: new DecorationImage(
                             fit: BoxFit.fill,
-                            image: AssetImage("assets/images/logoeev.png")
-                            /* image: new NetworkImage(
-                              "https://store.saludableexpress.com/images/media/2021/06/thumbnail1622601274NjCig02302.png",
-                            )*/
-                            ))),
+                            image: AssetImage("assets/images/logoeev.png")))),
                 SizedBox(height: 8.0),
                 /* Text(
                   "Bienvenido a enelviaje.mx",
