@@ -72,13 +72,13 @@ class _RestartWidgetState extends State<RestartWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: 'Poppins'),
-        home: KeyedSubtree(child: widget.child, key: key));
-    /* return KeyedSubtree(
+    // return MaterialApp(
+    //     debugShowCheckedModeBanner: false,
+    //     theme: ThemeData(fontFamily: 'Poppins'),
+    //     home: KeyedSubtree(child: widget.child, key: key));
+    return KeyedSubtree(
       key: key,
       child: widget.child,
-    );*/
+    );
   }
 }
