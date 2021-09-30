@@ -34,6 +34,8 @@ import 'package:flutter_app1/src/ui/screens/search_page.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:share/share.dart';
+import 'package:footer/footer.dart';
+import 'package:footer/footer_view.dart';
 
 import '../../models/drawer_menu_item.dart';
 import '../../utils/locale_utils/app_localization.dart';
@@ -168,6 +170,8 @@ class _HomeState extends State<Home> {
                 _buildOffstageNavigator(2),
                 _buildOffstageNavigator(3),
                 _buildOffstageNavigator(4),
+
+                //default flex is 2
               ],
             ),
             drawer: (navigationStyle != "side" && navigationStyle != "both")
