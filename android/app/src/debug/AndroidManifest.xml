@@ -7,6 +7,19 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.USER_SENSIBLE_DATA" />
+
+
+    <permission
+      android:name="com.cosmonautas.saludableapp.permission.USER_SENSIBLE_DATA"
+      android:label="@string/user_data_label"
+      android:description="@string/user_data_description"
+      android:permissionGroup="android.permission-group.INTERNET"
+       />
+    
+
+
+   
 
 
 </manifest>

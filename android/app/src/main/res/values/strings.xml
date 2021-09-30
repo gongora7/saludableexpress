@@ -5,4 +5,6 @@
     <string name="facebook_app_id">482196956216405</string>
     <string name="fb_login_protocol_scheme">fb482196956216405</string>
 
+      <string name="user_data_description">Esta app requiere el uso de tu número de teléfono y tu email solo para fines de registro, no se comparten con externos</string>
+     <string name="user_data_label">Permisos para App</string>
 </resources>

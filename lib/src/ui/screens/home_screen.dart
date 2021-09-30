@@ -164,29 +164,12 @@ class _HomeState extends State<Home> {
             key: scaffoldKey,
             appBar: getAppBar(context),
             body: Stack(
-              children: [
-                new FooterView(
-                  children: <Widget>[
-                    _buildOffstageNavigator(0),
-                    _buildOffstageNavigator(1),
-                    _buildOffstageNavigator(2),
-                    _buildOffstageNavigator(3),
-                    _buildOffstageNavigator(4),
-                    new Padding(
-                      padding: new EdgeInsets.only(top: 200.0),
-                      child: Center(
-                        child: new Text('Scrollable View'),
-                      ),
-                    ),
-                  ],
-                  footer: new Footer(
-                    child: Padding(
-                        padding: new EdgeInsets.all(10.0),
-                        child: Text(
-                            '"Esta App solo requiere Email, Nombre para identificarte". Los datos de pago se utilizan con Stripe para compras en la app')),
-                  ),
-                  flex: 1, //default flex is 2
-                ),
+              children: <Widget>[
+                _buildOffstageNavigator(0),
+                _buildOffstageNavigator(1),
+                _buildOffstageNavigator(2),
+                _buildOffstageNavigator(3),
+                _buildOffstageNavigator(4),
               ],
             ),
             drawer: (navigationStyle != "side" && navigationStyle != "both")
