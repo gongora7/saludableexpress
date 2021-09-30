@@ -34,6 +34,8 @@ import 'package:flutter_app1/src/ui/screens/search_page.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:share/share.dart';
+import 'package:footer/footer.dart';
+import 'package:footer/footer_view.dart';
 
 import '../../models/drawer_menu_item.dart';
 import '../../utils/locale_utils/app_localization.dart';
@@ -163,11 +165,28 @@ class _HomeState extends State<Home> {
             appBar: getAppBar(context),
             body: Stack(
               children: [
-                _buildOffstageNavigator(0),
-                _buildOffstageNavigator(1),
-                _buildOffstageNavigator(2),
-                _buildOffstageNavigator(3),
-                _buildOffstageNavigator(4),
+                new FooterView(
+                  children: <Widget>[
+                    _buildOffstageNavigator(0),
+                    _buildOffstageNavigator(1),
+                    _buildOffstageNavigator(2),
+                    _buildOffstageNavigator(3),
+                    _buildOffstageNavigator(4),
+                    new Padding(
+                      padding: new EdgeInsets.only(top: 200.0),
+                      child: Center(
+                        child: new Text('Scrollable View'),
+                      ),
+                    ),
+                  ],
+                  footer: new Footer(
+                    child: Padding(
+                        padding: new EdgeInsets.all(10.0),
+                        child: Text(
+                            '"Esta App solo requiere Email, Nombre para identificarte". Los datos de pago se utilizan con Stripe para compras en la app')),
+                  ),
+                  flex: 1, //default flex is 2
+                ),
               ],
             ),
             drawer: (navigationStyle != "side" && navigationStyle != "both")

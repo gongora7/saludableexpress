@@ -7,6 +7,9 @@ import 'package:hive/hive.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:footer/footer.dart';
+import 'package:footer/footer_view.dart';
+
 import 'src/app.dart';
 
 Box cartEntriesBox;
