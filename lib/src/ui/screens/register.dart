@@ -57,6 +57,7 @@ class MyCustomForm extends StatefulWidget {
 }
 
 class MyCustomFormState extends State<MyCustomForm> {
+  bool isChecked = false;
   final _formKey = GlobalKey<FormState>();
 
   final _firstNameController = TextEditingController();
@@ -256,6 +257,31 @@ class MyCustomFormState extends State<MyCustomForm> {
             SizedBox(
               height: 16.0,
             ),
+            (
+                /* Inicia Checkbox */
+                Container(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: CheckboxListTile(
+                        title: Text(
+                            'Acepto que Saludable Express guarde mis datos para compras en la app'),
+                        value: this.isChecked,
+                        onChanged: (bool isChecked) {
+                          print(this.isChecked);
+                          setState(() {
+                            this.isChecked = true;
+                            print('La variable cambió');
+                            print(this.isChecked);
+                          });
+                        }),
+                  ),
+                ],
+              ),
+            )),
+
+/* Finaliza Checkbox */
+
             Container(
               width: double.maxFinite,
               height: 40.0,
@@ -264,7 +290,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                       borderRadius: BorderRadius.circular(2.0)),
                   color: Colors.white60,
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {
+                    if (_formKey.currentState.validate() &&
+                        this.isChecked == true) {
                       loginBloc.add(ProcessRegistration(
                           _firstNameController.text,
                           _lastNameController.text,
@@ -273,6 +300,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                           "92",
                           _phoneNumberController.text));
                       Navigator.pop(context);
+                    } else {
+                      print('No se puede acceder');
                     }
                   },
                   child: Text(

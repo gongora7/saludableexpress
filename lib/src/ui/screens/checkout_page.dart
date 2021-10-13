@@ -1142,9 +1142,8 @@ class _CheckoutState extends State<Checkout> {
     List<PaymentMethodObj> filteredPaymentMethods = List<PaymentMethodObj>();
 
     for (int i = 0; i < data.length; i++) {
-      if (data[i].method == "stripe" ||
-          data[i].method == "directbank")
-          // data[i].method == "oxxo")
+      if (data[i].method == "stripe" || data[i].method == "directbank")
+      // data[i].method == "oxxo")
       // data[i].method == "cod" ||
       // data[i].method == "paytm")
       {
@@ -1242,6 +1241,7 @@ class FullScreenDialog extends StatefulWidget {
 }
 
 class FullScreenDialogState extends State<FullScreenDialog> {
+  bool isChecked = false;
   TextEditingController _cardNameUserController = new TextEditingController();
   TextEditingController _cardCvcController = new TextEditingController();
   TextEditingController _cardNumberController = new TextEditingController();
@@ -1265,7 +1265,6 @@ class FullScreenDialogState extends State<FullScreenDialog> {
       name: cardUserName,
     );
     AppData.tarjetaCredito = testCard;
-    
   }
 
   @override
@@ -1323,7 +1322,7 @@ class FullScreenDialogState extends State<FullScreenDialog> {
               new TextField(
                 keyboardType: TextInputType.number,
                 decoration: new InputDecoration.collapsed(
-                  hintText: 'CVC',
+                  hintText: 'CVV',
                 ),
                 maxLength: 3,
                 controller: _cardCvcController,
@@ -1331,6 +1330,29 @@ class FullScreenDialogState extends State<FullScreenDialog> {
               SizedBox(
                 height: 16.0,
               ),
+              /* Inicia Checkbox */
+              Container(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CheckboxListTile(
+                          title: Text(
+                              'Acepto que stripe use mis datos personales para procesar la validación del pago'),
+                          value: this.isChecked,
+                          onChanged: (bool isChecked) {
+                            print(this.isChecked);
+                            setState(() {
+                              this.isChecked = true;
+                              print('La variable cambió');
+                              print(this.isChecked);
+                            });
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+
+/* Finaliza Checkbox */
               new Row(
                 children: <Widget>[
                   new Expanded(
