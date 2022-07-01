@@ -28,7 +28,7 @@ import 'package:flutter_app1/src/models/payment_methods/payment_method.dart';
 import 'package:flutter_app1/src/models/product_models/product.dart';
 import 'package:flutter_app1/src/models/product_models/product_attributes.dart';
 import 'package:flutter_app1/src/models/shipping_methods/shipping_service.dart';
-import 'package:stripe_payment/stripe_payment.dart';
+/**** import 'package:stripe_payment/stripe_payment.dart'; */
 import 'package:flutter_app1/src/ui/screens/thankyou_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:convert';
@@ -42,7 +42,7 @@ class Checkout extends StatefulWidget {
   String shippingTax;
   ShippingService shippingService;
   double totalPrice;
-  CreditCard cardPayment;
+  /**** CreditCard cardPayment; */
 
   Checkout({
     this.cartEntries,
@@ -52,7 +52,7 @@ class Checkout extends StatefulWidget {
     this.shippingTax,
     this.shippingService,
     this.totalPrice,
-    this.cardPayment,
+    /**** this.cardPayment, */
   });
 
   @override
@@ -797,18 +797,18 @@ class _CheckoutState extends State<Checkout> {
     String cardCvc,
     String cardUserName,
   ) {
-    final CreditCard testCard = CreditCard(
+    /**** final CreditCard testCard = CreditCard(
       number: cardNumber,
       expMonth: int.tryParse(cardExpiryMonth),
       expYear: int.tryParse(cardExpiryYear),
       cvc: cardCvc,
       name: cardUserName,
       brand: 'visa',
-    );
+    );*/
 
     // print("soy el pago");
 
-    StripePayment.createPaymentMethod(
+    /**** StripePayment.createPaymentMethod(
       PaymentMethodRequest(
         card: testCard,
       ),
@@ -817,7 +817,7 @@ class _CheckoutState extends State<Checkout> {
       paymentMethodNonce = paymentMethod.id;
       placeOrderNow();
       //_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Received ${token.tokenId}')));
-    }).catchError(setError);
+    }).catchError(setError);*/
   }
 
   void showStripeCardDialog(PaymentMethodObj stripe) {
@@ -1131,8 +1131,8 @@ class _CheckoutState extends State<Checkout> {
         brainTreeTokenizationKeys = selectedPaymentMethod.publicKey;
       }
       if (paymentMethods[i].method == "stripe") {
-        StripePayment.setOptions(
-            StripeOptions(publishableKey: paymentMethods[i].publicKey));
+        /**** StripePayment.setOptions(
+            StripeOptions(publishableKey: paymentMethods[i].publicKey)); */
       }
     }
   }
