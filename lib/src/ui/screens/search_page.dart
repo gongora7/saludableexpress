@@ -32,7 +32,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   TextEditingController _searchQueryController = TextEditingController();
-  bool _isSearching = false;
+  bool _isSearching = true;
   String searchQuery = "Search query";
 
   SearchBloc searchBloc;
