@@ -779,7 +779,8 @@ class _CheckoutState extends State<Checkout> {
     if (selectedPaymentMethod.method == "braintree_card") {
       brainTreeTokenizationKeys = selectedPaymentMethod.publicKey;
     }
-    if (selectedPaymentMethod.method == "stripe") {
+    ///TODO: STRIPE
+    /*if (selectedPaymentMethod.method == "stripe") {
       FullScreenDialog _myDialog = new FullScreenDialog(_onStripeDetailsAdded);
       Navigator.push(
           context,
@@ -787,7 +788,7 @@ class _CheckoutState extends State<Checkout> {
             builder: (BuildContext context) => _myDialog,
             fullscreenDialog: true,
           ));
-    }
+    }*/
   }
 
   void _onStripeDetailsAdded(
